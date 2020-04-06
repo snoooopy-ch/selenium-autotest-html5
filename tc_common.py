@@ -23,51 +23,60 @@ import os
 import subprocess
 import traceback
 
-import urllib2
 from lxml import etree
 
 import logging
 
 LOG_LEVEL = logging.INFO
 
+logging.basicConfig()
 logger = logging.getLogger("")
 formatter = logging.Formatter(
     fmt="[%(asctime)s] %(levelname)s [%(threadName)s] [%(name)s/%(funcName)s() at line %(lineno)d]: %(message)s", datefmt="%Y-%m-%d %H:%M:%S")
 
 logger.setLevel(LOG_LEVEL)
 
-BASE_URL = 'http://dataq-frontend.s3-website.us-east-2.amazonaws.com/'
-WAITS = 1
-WAITM = 3
-WAITL = 5
+WAITS =                     1
+WAITM =                     3
+WAITL =                     5
 
-user_xpath          = '//div[@id="root"]/div/div/div/div/div/div/input'
-pass_xpath          = '//div[@id="root"]/div/div/div/div/div[2]/div/input'
-loginbtn_xpath      ="//button[@class='MuiButtonBase-root MuiButton-root jss13 MuiButton-contained MuiButton-containedSecondary']"
-open_xpath          = '//button[@class="MuiButtonBase-root MuiFab-root MuiFab-sizeSmall MuiFab-primary"]'
-input_xpath         = '//div[@id="component0"]/img'
-container_xpath     = '//*[@id="root"]/div/div[1]/div/div/div/div/div/div[2]/div'
-selectcolumn_xpath  = '//div[@id="component2"]/img'
-select_all_xpath    = '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div[2]/div[1]/div[4]/button/span[1]'
-selecttype_xpath    = '//div[@id="component3"]/img'
-btn_addSelected     = '//div[@id="top_panel"]/div/div[2]/div[2]/div[2]/div[2]/div[1]/div[2]/button'
-compare_xpath       = '//div[@id="component1"]/img'
-removeDup_xpath     = '//div[@id="component4"]/img'
-tabmapping_xpath    = '//*[@id="simple-tab-1"]'
-table1_xpath        = '//*[@id="top_panel"]/div/div[2]/div[3]/div/div[1]/div[2]/div[1]/div/div'
-table1_val_xpath    = '//*[@id="top_panel"]/div/div[2]/div[3]/div/div[1]/div[2]/div[1]/div/div[2]/div'
-table2_xpath        = '//*[@id="top_panel"]/div/div[2]/div[3]/div/div[1]/div[2]/div[2]/div/div'
-table2_val_xpath    = '//*[@id="top_panel"]/div/div[2]/div[3]/div/div[1]/div[2]/div[2]/div/div[2]/div'
-table_sc_xpath      = '//*[@id="top_panel"]/div/div[2]/div[1]/div/div[1]/div/div/div[1]'
-table_sc_val_xpath  = '//*[@id="top_panel"]/div/div[2]/div[1]/div/div[1]/div/div[2]/div/div'
-done_sc_xapth       = '//*[@id="top_panel"]/div/div[1]/header/div/button'
-mapplus_xpath       = '//*[@id="top_panel"]/div/div[2]/div[3]/div/div[1]/div[2]/div[3]'
-name_xpath          = '//div[@id="root"]/div/div[1]/div/div/div/div/div/div[1]/header/div/div/div/input'
-save_xpath          = '//div[@id="root"]/div/div[1]/div/div/div/div/div/div[1]/header/div/button[1]'
-excute_xpath        = '//div[@id="root"]/div/div[1]/div/div/div/div/div/div[1]/header/div/button[2]'
-result_xpath        = '//div[@id="root"]/div/div[1]/div/div/div/div/div/div[1]/header/div/button[3]'
-result_txt_xpath    = '/html/body/div[2]/div[3]/div/div/div/table/tr[7]/span'
-
+user_xpath                  = '//div[@id="root"]/div/div/div/div/div/div/input'
+pass_xpath                  = '//div[@id="root"]/div/div/div/div/div[2]/div/input'
+loginbtn_xpath              ="//button[@class='MuiButtonBase-root MuiButton-root jss13 MuiButton-contained MuiButton-containedSecondary']"
+open_xpath                  = '//button[@class="MuiButtonBase-root MuiFab-root MuiFab-sizeSmall MuiFab-primary"]'
+input_xpath                 = '//div[@id="component0"]/img'
+container_xpath             = '//*[@id="root"]/div/div[1]/div/div/div/div/div/div[2]/div'
+selectcolumn_xpath          = '//div[@id="component2"]/img'
+select_all_xpath            = '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div[2]/div[1]/div[4]/button/span[1]'
+selecttype_xpath            = '//div[@id="component3"]/img'
+btn_addSelected             = '//div[@id="top_panel"]/div/div[2]/div[2]/div[2]/div[2]/div[1]/div[2]/button'
+compare_xpath               = '//div[@id="component1"]/img'
+removeDup_xpath             = '//div[@id="component4"]/img'
+data_quality_xpath          = '//div[@id="component6"]/img'
+data_profile_xpath          = '//div[@id="component7"]/img'
+tabmapping_xpath            = '//*[@id="simple-tab-1"]'
+table1_xpath                = '//*[@id="top_panel"]/div/div[2]/div[3]/div/div[1]/div[2]/div[1]/div/div'
+table1_val_xpath            = '//*[@id="top_panel"]/div/div[2]/div[3]/div/div[1]/div[2]/div[1]/div/div[2]/div'
+table2_xpath                = '//*[@id="top_panel"]/div/div[2]/div[3]/div/div[1]/div[2]/div[2]/div/div'
+table2_val_xpath            = '//*[@id="top_panel"]/div/div[2]/div[3]/div/div[1]/div[2]/div[2]/div/div[2]/div'
+table_sc_xpath              = '//*[@id="top_panel"]/div/div[2]/div[1]/div/div[1]/div/div/div[1]'
+table_sc_val_xpath          = '//*[@id="top_panel"]/div/div[2]/div[1]/div/div[1]/div/div[2]/div/div'
+done_sc_xapth               = '//*[@id="top_panel"]/div/div[1]/header/div/button'
+mapplus_xpath               = '//*[@id="top_panel"]/div/div[2]/div[3]/div/div[1]/div[2]/div[3]'
+name_xpath                  = '//div[@id="root"]/div/div[1]/div/div/div/div/div/div[1]/header/div/div/div/input'
+save_xpath                  = '//div[@id="root"]/div/div[1]/div/div/div/div/div/div[1]/header/div/button[1]'
+excute_xpath                = '//div[@id="root"]/div/div[1]/div/div/div/div/div/div[1]/header/div/button[2]'
+result_xpath                = '//div[@id="root"]/div/div[1]/div/div/div/div/div/div[1]/header/div/button[3]'
+result_txt_xpath            = '/html/body/div[2]/div[3]/div/div/div/table/tr[7]/span'
+random_input_xpath          = '//*[@id="top_panel"]/div/div[2]/div[2]/div/div[2]/div/div/input'
+open_dashboard_xpath        = '//*[@id="root"]/div/div[1]/div/div/header/div/div[2]/div/div/div/button[1]'
+searchbox_dashboard_xpath   = '//*[@id="root"]/div/div[1]/div/div/div/div/div/div[2]/div[1]/div/div/input'
+search_recod_xpath          = '//*[@id="root"]/div/div[1]/div/div/div/div/div/div[3]/div/div[1]/div[2]/div'
+notification_xpath          = '//*[@id="root"]/div/div[1]/div/div/div/div/div/div[1]/header/div/button[3]'
+notification_button_xpath   = '//*[@id="root"]/div/div[1]/div/div/div/div/div/div[2]/div/div[2]/div[1]/div/div'
+start_at_xapth              = '//*[@id="root"]/div/div[1]/div/div/div/div/div/div[2]/div/div[2]/div[5]/div/div[1]/div/div[2]/div/div[2]/div/div/span/span[1]/input'
+notification_create_xpath   = '//*[@id="root"]/div/div[1]/div/div/div/div/div/div[2]/div/div[2]/div[5]/div/div[3]/div[1]/button'
+notification_close_xpath    = '//*[@id="root"]/div/div[1]/div/div/div/div/div/div[2]/div/div[1]/header/div/div'
 
 
 def init_selenium():
@@ -101,7 +110,6 @@ def login(driver, login_user, login_pass):
         time.sleep(WAITL)
 
         print('login')
-
     except Exception as e:
         print(e)
         ret = 0
@@ -126,6 +134,20 @@ def open_workspace(driver):
         pass
 
     return ret
+
+# action to open a dashboard
+def open_dashboard(driver):
+    ret = 1
+    try:
+        btn_dashboard = driver.find_element_by_xpath(open_dashboard_xpath)
+        btn_dashboard.click()
+        tiem.sleep(10)
+
+        print('open dashboard')
+    except Exception as e:
+        print(e)
+        ret = 0
+    return
 
 # action to move element
 def drop_element_to_position(driver, js, xpath, x, y):
@@ -334,19 +356,113 @@ def select_key_for_table_item(driver, index):
     time.sleep(WAITS)
 
     print('select key for table item')
-    return;
+    return
 
 # action to click done
 def click_sc_done(driver):
     btn_done = driver.find_element_by_xpath(done_sc_xapth)
     btn_done.click()
     print('click done')
-    return;    
+    return    
 
+# action to input random on data compare
+def input_random_sample_on_data_compare(driver, value):
+    input_random = driver.find_element_by_xpath(random_input_xpath)
+    input_random.send_keys(value)
+    return
+
+# select rule on data quality
+def select_rule_on_dataquality(driver, index):
+    select_rule = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div[1]/div[1]/div/div/div[1]')
+    select_rule.click()
+
+    select_rule_item = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div[1]/div[1]/div/div[2]/div/div[' + str(index) + ']')
+    select_rule_item.click()
+    print('select rule on data quality')
+    return
+
+# select table on data quality
+def select_table_on_dataquality(driver, index):
+    select_table = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div[1]/div[2]/div[1]/div/div/div[1]')
+    select_table.click()
+
+    select_table_item = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div[1]/div[2]/div[1]/div/div[2]/div/div[' + str(index) + ']')
+    select_table_item.click()
+    print('select table on data quality')
+    return
+
+# select column on data quality
+def select_column_on_dataquality(driver, index):
+    select_column = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div[1]/div[2]/div[2]/div/div/div[1]')
+    select_column.click()
+
+    select_column_item = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div[1]/div[2]/div[2]/div/div[2]/div/div[' + str(index) + ']')
+    select_column_item.click()
+    print('select column on data quality')
+    return
+
+# select operator on data quality
+def select_operator_on_dataquality(driver, index):
+    select_operator = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div[1]/div[3]/div/div/div[1]')
+    select_operator.click()
+
+    select_operator_item = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div[1]/div[3]/div/div[2]/div/div[' + str(index) + ']')
+    select_operator_item.click()
+    print('select operator on data quality')
+    return
+
+# insert rule value on data quality
+def insert_rulevalue_on_dataquality(driver, value):
+    rule_value = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div[1]/input')
+    rule_value.send_keys(value)
+    print('insert value on data quality')
+    return
+
+# apply button on data quality
+def apply_button_on_dataquality(driver):
+    apply_button = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div[1]/div[5]/button')
+    apply_button.click()
+    print('apply on data quality')
+    return
+
+# initialize on data quality
+def initialize_on_dataquality(driver, index1, index2, index3, index4, value):
+    select_rule_on_dataquality(driver, index1)
+    select_table_on_dataquality(driver, index2)
+    select_column_on_dataquality(driver, index3)
+    select_operator_on_dataquality(driver, index4)    
+    apply_button_on_dataquality(driver)
+    time.sleep(WAITM)
+    return
+
+# initialize on data quality
+def initialize_on_dataquality_for_select_rule(driver, index1, index2, index3, value):
+    # only TABLE_SIZE value for Select Rule
+    select_rule_on_dataquality(driver, index1)
+    select_table_on_dataquality(driver, index2)
+    select_operator_on_dataquality(driver, index3)    
+    apply_button_on_dataquality(driver)
+    time.sleep(WAITM)
+    return
+
+# insert sql on data quality
+def insert_sql_on_dataquality(driver, sql):
+    sql_rule = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div[1]/div[2]/textarea[1]')
+    sql_rule.send_keys(sql)
+
+# action sql on data quality
+def add_sql_on_dataquality(driver, index, sql, job):
+    select_rule_on_dataquality(driver, index)
+    insert_sql_on_dataquality(driver, sql)
+    job_name = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div[1]/input')
+    job_name.send_keys(job)
+    apply = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div[1]/div[4]/button')
+    apply.click()
+    
 # save and excute workflow
-def save_excute_workflow(driver):
+def save_excute_workflow(driver, flow_name):
     name_field = driver.find_element_by_xpath(name_xpath);
-    name_field.send_keys('ALEX')
+    name_field.send_keys(flow_name)
 
     btn_save = driver.find_element_by_xpath(save_xpath)
     btn_save.click()
@@ -437,10 +553,51 @@ def check_summary_in_fianl_mismatched_count(driver, summary_xpath):
         pass
 
     time.sleep(10)
-    return;
-            
+    return
 
-            
-        
-        
+# action to search on dashboard
+def input_searchbox_on_dashboard(driver, value):
+    searchbox = self.driver.find_element_by_xpath(searchbox_dashboard_xpath)
+    searchbox.send_keys(value)
+    time.sleep(5)
+
+    try:
+        records = self.driver.find_elements_by_xpath(search_recod_xpath)
+    except Exception as e:
+        records = []
     
+    return len(records)
+
+# action to click editview on first record
+def click_editview_firstrecord_on_dashboard(driver):
+    try:
+        records = self.driver.find_elements_by_xpath(search_recod_xpath)
+        editview = records[0].find_element_by_xpath('./div/div[8]/div/svg')        
+    except Exception as e:
+        records = []
+    return
+
+# action to click notification on dashboard()
+def click_notification(driver):
+    notification = self.driver.find_element_by_xpath(notification_xpath)
+    notification.click()
+    return
+
+# action to click tab on notification board
+def click_tab_on_notification_board(driver, index):
+    button = self.driver.find_element_by_xpath(notification_button_xpath + '/button[' + index + ']')
+    button.click()
+    return
+
+# action to set start time    
+def set_start_time_with10(driver):
+    self.driver.find_element_by_xpath(start_at_xapth).click()
+    now = datetime.datetime.now()
+    now_plus_10 = now + datetime.timedelta(seconds = 10)
+    current_min = now_plus_10.minute
+    current_sec = now_plus_10.second
+    self.driver.find_element_by_xpath('//*[@id="root"]/div/div[1]/div/div/div/div/div/div[2]/div/div[2]/div[5]/div/div[1]/div/div[2]/div/div[2]/div/div/div[1]/div/select/option[@id=["' + current_min + '"]]')
+    self.driver.find_element_by_xpath('//*[@id="root"]/div/div[1]/div/div/div/div/div/div[2]/div/div[2]/div[5]/div/div[1]/div/div[2]/div/div[2]/div/div/div[2]/div/select/option[@id=["' + current_min + '"]]')
+    self.drvier.find_element_by_xpath(notification_create_xpath).click()
+    self.driver.find_element_by_xpath(notification_close_xpath).click()
+    return

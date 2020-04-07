@@ -44,7 +44,7 @@ class TC002:
             if (qcd.open_workspace(self.driver) != 1):
                 raise Exception('fail to open workspace')
         except Exception as e:
-            logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
+            qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
             print("exception:{}".format(e))
             pass
 
@@ -109,7 +109,8 @@ class TC002:
 
     def check_result(self):
         try:
-            qcd.check_summary_in_final_result(self.driver, '')
+            qcd.check_summary_in_final_result(self.driver, self.__class__.__name__, '')
+            qcd.click_result_close(self.driver)
         except Exception as e:
             qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
             print("exception:{}".format(e))

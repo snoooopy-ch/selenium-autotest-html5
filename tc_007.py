@@ -30,6 +30,8 @@ class TC007:
     def test(self):
         try:
             self.open_workspace()
+            admin_url = 'http://dataq-automation-alb-1598668034.us-east-1.elb.amazonaws.com:9000/#/user-home/flow'
+            self.driver.get(admin_url)
             self.workflow()
             self.check_result()
         except Exception as e:
@@ -43,7 +45,7 @@ class TC007:
             if (qcd.open_workspace(self.driver) != 1):
                 raise Exception('fail to open workspace')
         except Exception as e:
-            logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
+            qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
             print("exception:{}".format(e))
             pass
 
@@ -107,11 +109,7 @@ class TC007:
                 compare1.click()
                 
             qcd.cell_by_cell_compare(self.driver, 1)
-            # qcd.select_mapping_tab(self.driver)
-
-            # qcd.select_mapping_table_item(self.driver, 1)
-            # qcd.select_key_for_table_item(self.driver, 1)
-
+            
             # execute
             qcd.save_excute_workflow(self.driver, 'TC_007_ALEX')
         except Exception as e:
@@ -123,8 +121,9 @@ class TC007:
 
     def check_result(self):
         try:
-            summary_xpath = '/html/body/div[2]/div[3]/div/div/div/table/tr[7]/div/div[1]/div[2]'
-            qcd.check_summary_in_fianl_mismatched_count(self.driver, summary_xpath)
+            summary_xpath = '/html/body/div[2]/div[3]/div/div/div/div/table/tr[8]/div/div[1]/div[2]'
+            qcd.check_summary_in_fianl_mismatched_count(self.driver, self.__class__.__name__, summary_xpath)
+            qcd.click_result_close(self.driver)
         except Exception as e:
             qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
             print("exception:{}".format(e))

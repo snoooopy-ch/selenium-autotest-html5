@@ -44,7 +44,7 @@ class TC009:
             if (qcd.open_workspace(self.driver) != 1):
                 raise Exception('fail to open workspace')
         except Exception as e:
-            logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
+            qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
             print("exception:{}".format(e))
             pass
 
@@ -57,7 +57,7 @@ class TC009:
 
             self.driver.execute_async_script(load_jquery_js, jquery_url)
                 
-            with open("drag_and_drop.js") as f:
+            with open("js/drag_and_drop.js") as f:
                 drag_and_drop_js = f.read()
             
             # input 1
@@ -117,14 +117,15 @@ class TC009:
             # execute
             qcd.save_excute_workflow(self.driver, 'TC_009_ALEX')
         except Exception as e:
-            logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
+            qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
             print("exception:{}".format(e))
             pass
 
     def check_result(self):
         try:
-            qcd.check_summary_in_final_result(self.driver, '')
+            qcd.check_summary_in_final_result(self.driver, self.__class__.__name__, '')
+            qcd.click_result_close(self.driver)
         except Exception as e:
-            logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
+            qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
             print("exception:{}".format(e))
             pass

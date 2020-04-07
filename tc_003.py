@@ -45,7 +45,7 @@ class TC003:
             if (qcd.open_workspace(self.driver) != 1):
                 raise Exception('fail to open workspace')
         except Exception as e:
-            logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
+            qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
             print("exception:{}".format(e))
             pass
 
@@ -62,7 +62,7 @@ class TC003:
                 drag_and_drop_js = f.read()
             
             # input 1
-            qcd.drop_element_to_position(driver, drag_and_drop_js, qcd.input_xpath, 300, 0)
+            qcd.drop_element_to_position(self.driver, drag_and_drop_js, qcd.input_xpath, 300, 0)
             input1 = self.driver.find_element_by_xpath('//div[@id="copy-component0"]')
 
             if (qcd.open_container(self.driver) != 1):
@@ -112,7 +112,7 @@ class TC003:
     def check_result(self):
         try:
             # show matching tables for TC003
-            detail_span_xpath = '/html/body/div[2]/div[3]/div/div/div/div[2]/span[2]'
+            detail_span_xpath = '/html/body/div[2]/div[3]/div/div/div/div/div[2]/span[2]'
             try:
                 detail_span = self.driver.find_elements_by_xpath(detail_span_xpath)
                 if (len(detail_span) == 1):
@@ -122,10 +122,12 @@ class TC003:
                 print(e)
                 pass
 
-            summary_xpath = '/html/body/div[2]/div[3]/div/div/div/div[3]/div[2]/div[1]/div[2]'
-            qcd.check_summary_in_final_result(self.driver, summary_xpath)
+            summary_xpath = '/html/body/div[2]/div[3]/div/div/div/div/div[3]/div[2]/div[1]/div[2]'
+            qcd.check_summary_in_final_result(self.driver, self.__class__.__name__, summary_xpath)
+            qcd.click_result_close(self.driver)
         except Exception as e:
             qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
             print("exception:{}".format(e))
+            time.sleep(1)
             pass
 

@@ -67,7 +67,7 @@ name_xpath                  = '//div[@id="root"]/div/div[1]/div/div/div/div/div/
 save_xpath                  = '//div[@id="root"]/div/div[1]/div/div/div/div/div/div[1]/header/div/button[1]'
 excute_xpath                = '//div[@id="root"]/div/div[1]/div/div/div/div/div/div[1]/header/div/button[2]'
 result_xpath                = '//div[@id="root"]/div/div[1]/div/div/div/div/div/div[1]/header/div/button[3]'
-result_txt_xpath            = '/html/body/div[2]/div[3]/div/div/div/table/tr[7]/span'
+result_txt_xpath            = '/html/body/div[2]/div[3]/div/div/div/div/table/tr[8]/span'
 random_input_xpath          = '//*[@id="top_panel"]/div/div[2]/div[2]/div/div[2]/div/div/input'
 open_dashboard_xpath        = '//*[@id="root"]/div/div[1]/div/div/header/div/div[2]/div/div/div/button[1]'
 searchbox_dashboard_xpath   = '//*[@id="root"]/div/div[1]/div/div/div/div/div/div[2]/div[1]/div/div/input'
@@ -77,6 +77,7 @@ notification_button_xpath   = '//*[@id="root"]/div/div[1]/div/div/div/div/div/di
 start_at_xapth              = '//*[@id="root"]/div/div[1]/div/div/div/div/div/div[2]/div/div[2]/div[5]/div/div[1]/div/div[2]/div/div[2]/div/div/span/span[1]/input'
 notification_create_xpath   = '//*[@id="root"]/div/div[1]/div/div/div/div/div/div[2]/div/div[2]/div[5]/div/div[3]/div[1]/button'
 notification_close_xpath    = '//*[@id="root"]/div/div[1]/div/div/div/div/div/div[2]/div/div[1]/header/div/div'
+result_close_xpath          = '/html/body/div[2]/div[3]/div/header/div/button'
 
 
 def init_selenium():
@@ -485,7 +486,9 @@ def save_excute_workflow(driver, flow_name):
     return
 
 # check summary in final result
-def check_summary_in_final_result(driver, summary_xpath):
+def check_summary_in_final_result(driver, class_name, summary_xpath):
+    print('=====================')
+    print(class_name + ' result:')
 
     try:
         result_txt = driver.find_elements_by_xpath(result_txt_xpath)
@@ -540,7 +543,10 @@ def check_summary_in_final_result(driver, summary_xpath):
     return;
 
 # check summary in final result for TC007, TC009
-def check_summary_in_fianl_mismatched_count(driver, summary_xpath):
+def check_summary_in_fianl_mismatched_count(driver, class_name, summary_xpath):
+    print('=====================')
+    print(class_name + ' result:')
+
     try:
         summary_table = driver.find_element_by_xpath(summary_xpath)
         summary_tables = summary_table.find_elements_by_xpath('./div')
@@ -557,12 +563,12 @@ def check_summary_in_fianl_mismatched_count(driver, summary_xpath):
 
 # action to search on dashboard
 def input_searchbox_on_dashboard(driver, value):
-    searchbox = self.driver.find_element_by_xpath(searchbox_dashboard_xpath)
+    searchbox = driver.find_element_by_xpath(searchbox_dashboard_xpath)
     searchbox.send_keys(value)
     time.sleep(5)
 
     try:
-        records = self.driver.find_elements_by_xpath(search_recod_xpath)
+        records = driver.find_elements_by_xpath(search_recod_xpath)
     except Exception as e:
         records = []
     
@@ -571,7 +577,7 @@ def input_searchbox_on_dashboard(driver, value):
 # action to click editview on first record
 def click_editview_firstrecord_on_dashboard(driver):
     try:
-        records = self.driver.find_elements_by_xpath(search_recod_xpath)
+        records = driver.find_elements_by_xpath(search_recod_xpath)
         editview = records[0].find_element_by_xpath('./div/div[8]/div/svg')        
     except Exception as e:
         records = []
@@ -579,25 +585,34 @@ def click_editview_firstrecord_on_dashboard(driver):
 
 # action to click notification on dashboard()
 def click_notification(driver):
-    notification = self.driver.find_element_by_xpath(notification_xpath)
+    notification = driver.find_element_by_xpath(notification_xpath)
     notification.click()
     return
 
 # action to click tab on notification board
 def click_tab_on_notification_board(driver, index):
-    button = self.driver.find_element_by_xpath(notification_button_xpath + '/button[' + index + ']')
+    button = driver.find_element_by_xpath(notification_button_xpath + '/button[' + index + ']')
     button.click()
     return
 
 # action to set start time    
 def set_start_time_with10(driver):
-    self.driver.find_element_by_xpath(start_at_xapth).click()
+    driver.find_element_by_xpath(start_at_xapth).click()
     now = datetime.datetime.now()
     now_plus_10 = now + datetime.timedelta(seconds = 10)
     current_min = now_plus_10.minute
     current_sec = now_plus_10.second
-    self.driver.find_element_by_xpath('//*[@id="root"]/div/div[1]/div/div/div/div/div/div[2]/div/div[2]/div[5]/div/div[1]/div/div[2]/div/div[2]/div/div/div[1]/div/select/option[@id=["' + current_min + '"]]')
-    self.driver.find_element_by_xpath('//*[@id="root"]/div/div[1]/div/div/div/div/div/div[2]/div/div[2]/div[5]/div/div[1]/div/div[2]/div/div[2]/div/div/div[2]/div/select/option[@id=["' + current_min + '"]]')
-    self.drvier.find_element_by_xpath(notification_create_xpath).click()
-    self.driver.find_element_by_xpath(notification_close_xpath).click()
+    driver.find_element_by_xpath('//*[@id="root"]/div/div[1]/div/div/div/div/div/div[2]/div/div[2]/div[5]/div/div[1]/div/div[2]/div/div[2]/div/div/div[1]/div/select/option[@id=["' + current_min + '"]]')
+    driver.find_element_by_xpath('//*[@id="root"]/div/div[1]/div/div/div/div/div/div[2]/div/div[2]/div[5]/div/div[1]/div/div[2]/div/div[2]/div/div/div[2]/div/select/option[@id=["' + current_min + '"]]')
+    drvier.find_element_by_xpath(notification_create_xpath).click()
+    driver.find_element_by_xpath(notification_close_xpath).click()
+    return
+
+# action to click result close
+def click_result_close(driver):
+    try:
+        driver.find_element_by_xpath(result_close_xpath).click()
+        time.sleep(3)
+    except Exception as e:
+        print(e)
     return

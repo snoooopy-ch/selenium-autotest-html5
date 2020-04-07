@@ -45,7 +45,7 @@ class TC004:
             if (qcd.open_workspace(self.driver) != 1):
                 raise Exception('fail to open workspace')
         except Exception as e:
-            logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
+            qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
             print("exception:{}".format(e))
             pass
 
@@ -99,7 +99,7 @@ class TC004:
                 compare1.click()
                 
             qcd.cell_by_cell_compare(self.driver, 1)
-            qcd.add_mapping_table_name(self.driver)
+            qcd.select_mapping_tab(self.driver)
 
             qcd.select_mapping_table_item(self.driver, 1)
             qcd.select_key_for_table_item(self.driver, 1)
@@ -116,4 +116,11 @@ class TC004:
             pass
 
     def check_result(self):
+        try:
+            qcd.check_summary_in_final_result(self.driver, self.__class__.__name__, '/html/body/div[2]/div[3]/div/div/div/div/div[3]/div[1]/div[2]')
+            qcd.click_result_close(self.driver)
+        except Exception as e:
+            qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
+            print("exception:{}".format(e))
+            pass
         pass

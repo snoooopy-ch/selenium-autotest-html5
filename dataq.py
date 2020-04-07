@@ -79,6 +79,7 @@ if __name__ == '__main__':
                 raise Exception('fail to login')
 
             for index in scpt_number:
+                driver.refresh()
                 TCCLASS = str2Class("TC" + str(index).zfill(3))
                 tc = TCCLASS(driver)
                 tc.test()

@@ -44,7 +44,7 @@ class TC014:
             if (qcd.open_workspace(self.driver) != 1):
                 raise Exception('fail to open workspace')
         except Exception as e:
-            logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
+            qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
             print("exception:{}".format(e))
             pass
 
@@ -91,9 +91,25 @@ class TC014:
             # execute
             qcd.save_excute_workflow(self.driver, 'TC_014_ALEX')
         except Exception as e:
-            logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
+            qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
             print("exception:{}".format(e))
             pass
-
+        
     def check_result(self):
-        pass
+        try:
+            detail_span_xpath = '/html/body/div[2]/div[3]/div/div/div/div/div[1]/span[2]'
+            try:
+                detail_span = self.driver.find_elements_by_xpath(detail_span_xpath)
+                if (len(detail_span) == 1):
+                    detail_span[0].click()
+                    time.sleep(qcd.WAITM)
+            except Exception as e:
+                print(e)
+                pass
+            qcd.check_summary_statue_in_final_result(self.driver, self.__class__.__name__, '/html/body/div[2]/div[3]/div/div/div/div/div[2]/div[1]/div[2]')
+            qcd.click_result_close(self.driver)
+        except Exception as e:
+            qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
+            print("exception:{}".format(e))
+            pass
+        return

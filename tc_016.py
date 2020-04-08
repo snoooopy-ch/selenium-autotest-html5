@@ -43,7 +43,7 @@ class TC016:
             if (qcd.open_workspace(self.driver) != 1):
                 raise Exception('fail to open workspace')
         except Exception as e:
-            logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
+            qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
             print("exception:{}".format(e))
             pass
 
@@ -63,11 +63,13 @@ class TC016:
             qcd.drop_element_to_position(driver, drag_and_drop_js, qcd.input_xpath, 300, 0)
             input1 = driver.find_element_by_xpath('//div[@id="copy-component0"]')
 
+            qcd.click_notification(driver)
+
             if (qcd.open_container(driver) != 1):
                 input1.click()
 
-            qcd.select_dbset_input(driver, 'sampledb_src')
-            qcd.select_db(driver)
+            qcd.select_dbset_input(driver, 'AWS_HADOOP')
+            qcd.select_db_with_index(driver, 2)
             qcd.select_table(driver, 2)
             qcd.click_add_select_btn(driver)
 
@@ -105,7 +107,7 @@ class TC016:
             qcd.save_excute_workflow(driver, 'TC_016_ALEX')
             
         except Exception as e:
-            logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
+            qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
             print("exception:{}".format(e))
             pass
 

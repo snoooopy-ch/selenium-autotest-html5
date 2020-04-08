@@ -49,7 +49,7 @@ if __name__ == '__main__':
     if args.user:
         user = args.user
     else:
-        user = "mary"
+        user = "john"
 
     print(user)
 

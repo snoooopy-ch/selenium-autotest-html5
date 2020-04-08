@@ -30,8 +30,6 @@ class TC008:
     def test(self):
         try:
             self.open_workspace()
-            admin_url = 'http://dataq-automation-alb-1598668034.us-east-1.elb.amazonaws.com:9000/#/user-home/flow'
-            self.driver.get(admin_url)
             self.workflow()
             self.check_result()
         except Exception as e:

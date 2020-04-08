@@ -71,14 +71,14 @@ result_txt_xpath            = '/html/body/div[2]/div[3]/div/div/div/div/table/tr
 random_input_xpath          = '//*[@id="top_panel"]/div/div[2]/div[2]/div/div[2]/div/div/input'
 open_dashboard_xpath        = '//*[@id="root"]/div/div[1]/div/div/header/div/div[2]/div/div/div/button[1]'
 searchbox_dashboard_xpath   = '//*[@id="root"]/div/div[1]/div/div/div/div/div/div[2]/div[1]/div/div/input'
-search_recod_xpath          = '//*[@id="root"]/div/div[1]/div/div/div/div/div/div[3]/div/div[1]/div[2]/div'
-notification_xpath          = '//*[@id="root"]/div/div[1]/div/div/div/div/div/div[1]/header/div/button[3]'
+search_table_recod_xpath    = '//*[@id="root"]/div/div[1]/div/div/div/div/div/div[3]/div/div[1]/div[2]/div'
+notification_xpath          = '//*[@id="root"]/div/div[1]/div/div/div/div/div/div[1]/header/div/img[1]'
 notification_button_xpath   = '//*[@id="root"]/div/div[1]/div/div/div/div/div/div[2]/div/div[2]/div[1]/div/div'
 start_at_xapth              = '//*[@id="root"]/div/div[1]/div/div/div/div/div/div[2]/div/div[2]/div[5]/div/div[1]/div/div[2]/div/div[2]/div/div/span/span[1]/input'
 notification_create_xpath   = '//*[@id="root"]/div/div[1]/div/div/div/div/div/div[2]/div/div[2]/div[5]/div/div[3]/div[1]/button'
 notification_close_xpath    = '//*[@id="root"]/div/div[1]/div/div/div/div/div/div[2]/div/div[1]/header/div/div'
 result_close_xpath          = '/html/body/div[2]/div[3]/div/header/div/button'
-
+save_execute_on_xpath       = '//*[@id="root"]/div/div[1]/div/div/div/div/div/div[2]/div/div[2]/div[2]/div/button'
 
 def init_selenium():
     chromeOptions = webdriver.ChromeOptions()
@@ -142,13 +142,13 @@ def open_dashboard(driver):
     try:
         btn_dashboard = driver.find_element_by_xpath(open_dashboard_xpath)
         btn_dashboard.click()
-        tiem.sleep(10)
+        time.sleep(WAITL)
 
         print('open dashboard')
     except Exception as e:
         print(e)
         ret = 0
-    return
+    return ret
 
 # action to move element
 def drop_element_to_position(driver, js, xpath, x, y):
@@ -175,7 +175,7 @@ def open_container(driver):
 def select_dbset_input(driver, db):
     db_select = driver.find_elements_by_xpath("//select[@name='connection']")[0]
     db_select.click()
-    time.sleep(WAITS)
+    time.sleep(WAITM)
 
     db_value = driver.find_element_by_xpath("//select[@name='connection']/option[@value='" + db + "']")
     db_value.click()
@@ -192,6 +192,18 @@ def select_db(driver):
     db_demo = driver.find_element_by_xpath("//div[@id='top_panel']/div/div[2]/div[2]/div[2]/div/div[3]/div[2]/div/div")
     db_demo.click()
     time.sleep(WAITM)
+
+    print('select db name')    
+    return
+
+# action to select db table
+def select_db_with_index(driver, index):
+    db_name = driver.find_elements_by_xpath("//div[@class=' css-tlfecz-indicatorContainer']")[0]
+    db_name.click()
+    
+    db_demo = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div[3]/div[2]/div/div["' + str(index) + '"]')
+    db_demo.click()
+    time.sleep(WAITL)
 
     print('select db name')    
     return
@@ -539,6 +551,31 @@ def check_summary_in_final_result(driver, class_name, summary_xpath):
         print('No mismatch in the table')
         
     time.sleep(10)
+    return
+
+
+# check summary in final result for TC014
+def check_summary_statue_in_final_result(driver, class_name, summary_xpath):
+    print('=====================')
+    print(class_name + ' result:')
+
+    summary_table = driver.find_element_by_xpath(summary_xpath)
+    table_trs = summary_table.find_elements_by_xpath('./div')
+
+    flag = 0
+    try:
+        for tr in table_trs:
+            inner_tr = tr.find_element_by_xpath('./div')
+            tds = inner_tr.find_elements_by_xpath('./div')
+
+            output = ''
+            find = 0
+            print("{} {} {}".format(tds[1].text, tds[7].text, tds[8].find_element_by_xpath('./span').text))
+    except Exception as ex:
+        print(ex)
+        pass
+
+    time.sleep(10)
 
     return;
 
@@ -568,7 +605,7 @@ def input_searchbox_on_dashboard(driver, value):
     time.sleep(5)
 
     try:
-        records = driver.find_elements_by_xpath(search_recod_xpath)
+        records = driver.find_elements_by_xpath(search_table_recod_xpath)
     except Exception as e:
         records = []
     
@@ -577,35 +614,43 @@ def input_searchbox_on_dashboard(driver, value):
 # action to click editview on first record
 def click_editview_firstrecord_on_dashboard(driver):
     try:
-        records = driver.find_elements_by_xpath(search_recod_xpath)
-        editview = records[0].find_element_by_xpath('./div/div[8]/div/svg')        
+        records = driver.find_elements_by_xpath(search_table_recod_xpath)
+        editview = records[0].find_element_by_xpath('./div/div[8]/div/*[name()="svg"]')
+        editview.click()
+        time.sleep(20)
     except Exception as e:
+        print(e)
         records = []
     return
 
 # action to click notification on dashboard()
 def click_notification(driver):
-    notification = driver.find_element_by_xpath(notification_xpath)
-    notification.click()
+    try:
+        notification = driver.find_element_by_xpath(notification_xpath)
+        notification.click()
+    except Exception as e:
+        print(e)
+        pass
     return
 
 # action to click tab on notification board
 def click_tab_on_notification_board(driver, index):
-    button = driver.find_element_by_xpath(notification_button_xpath + '/button[' + index + ']')
+    button = driver.find_element_by_xpath(notification_button_xpath + '/button[' + str(index) + ']')
     button.click()
+    print('open notification dialog')
     return
 
 # action to set start time    
 def set_start_time_with10(driver):
     driver.find_element_by_xpath(start_at_xapth).click()
-    now = datetime.datetime.now()
-    now_plus_10 = now + datetime.timedelta(seconds = 10)
+    now_plus_10 = datetime.now() + timedelta(minutes = 1)
     current_min = now_plus_10.minute
-    current_sec = now_plus_10.second
-    driver.find_element_by_xpath('//*[@id="root"]/div/div[1]/div/div/div/div/div/div[2]/div/div[2]/div[5]/div/div[1]/div/div[2]/div/div[2]/div/div/div[1]/div/select/option[@id=["' + current_min + '"]]')
-    driver.find_element_by_xpath('//*[@id="root"]/div/div[1]/div/div/div/div/div/div[2]/div/div[2]/div[5]/div/div[1]/div/div[2]/div/div[2]/div/div/div[2]/div/select/option[@id=["' + current_min + '"]]')
-    drvier.find_element_by_xpath(notification_create_xpath).click()
+    current_hour = now_plus_10.hour
+    driver.find_element_by_xpath('//*[@id="root"]/div/div[1]/div/div/div/div/div/div[2]/div/div[2]/div[5]/div/div[1]/div/div[2]/div/div[2]/div/div/div[1]/div/select/option[@id="' + str(current_hour) + '"]')
+    driver.find_element_by_xpath('//*[@id="root"]/div/div[1]/div/div/div/div/div/div[2]/div/div[2]/div[5]/div/div[1]/div/div[2]/div/div[2]/div/div/div[2]/div/select/option[@id="' + str(current_min) + '"]')
+    driver.find_element_by_xpath(notification_create_xpath).click()
     driver.find_element_by_xpath(notification_close_xpath).click()
+    print('set time')
     return
 
 # action to click result close
@@ -615,4 +660,21 @@ def click_result_close(driver):
         time.sleep(3)
     except Exception as e:
         print(e)
+    return
+
+# action select cluster on notification dialog
+def select_cluster_execute_job(driver, index):
+    try:
+        driver.find_element_by_xpath('//*[@id="root"]/div/div[1]/div/div/div/div/div/div[2]/div/div[2]/div[2]/div/div/div/div[1]').click()
+        time.sleep(WAITS)
+        driver.find_element_by_xpath('//*[@id="root"]/div/div[1]/div/div/div/div/div/div[2]/div/div[2]/div[2]/div/div/div[2]/div/div["' + str(index) + '"]').click()
+        time.sleep(WAITS)
+    except Exception as e:
+        pass
+    return
+
+# action save and close on execute tab
+def save_close_execute_tab(driver):
+    driver.find_element_by_xpath(save_execute_on_xpath).click()
+    driver.find_element_by_xpath(notification_close_xpath).click()
     return

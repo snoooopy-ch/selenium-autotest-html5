@@ -43,7 +43,7 @@ class TC019:
             if (qcd.open_workspace(self.driver) != 1):
                 raise Exception('fail to open workspace')
         except Exception as e:
-            logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
+            qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
             print("exception:{}".format(e))
             pass
 
@@ -111,7 +111,7 @@ class TC019:
                 compare1.click()
                 
             qcd.cell_by_cell_compare(self.driver, 1)
-            qcd.input_random_sample_on_data_compare*(self.driver, 3)
+            qcd.input_random_sample_on_data_compare(self.driver, 3)
             
             qcd.select_mapping_tab(self.driver)
             qcd.select_mapping_table_item(self.driver, 1)
@@ -128,12 +128,10 @@ class TC019:
             print("exception:{}".format(e))
             pass
 
-        print('finish')
-
     def check_result(self):
         try:
-            summary_xpath= '/html/body/div[2]/div[3]/div/div/div/div[2]/div[1]/div[2]'
-            qcd.check_summary_in_final_result(self.driver, summary_xpath)
+            summary_xpath= '/html/body/div[2]/div[3]/div/div/div/div/div[3]/div[1]/div[2]'
+            qcd.check_summary_in_final_result(self.driver, self.__class__.__name__, summary_xpath)
         except Exception as e:
             qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
             print("exception:{}".format(e))

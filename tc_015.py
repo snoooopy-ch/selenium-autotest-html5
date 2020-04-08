@@ -43,7 +43,7 @@ class TC015:
             if (qcd.open_workspace(self.driver) != 1):
                 raise Exception('fail to open workspace')
         except Exception as e:
-            logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
+            qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
             print("exception:{}".format(e))
             pass
 
@@ -54,48 +54,65 @@ class TC015:
             with open("js/jquery_load_helper.js") as f:
                 load_jquery_js = f.read()
 
-            driver.execute_async_script(load_jquery_js, jquery_url)
+            self.driver.execute_async_script(load_jquery_js, jquery_url)
                 
             with open("js/drag_and_drop.js") as f:
                 drag_and_drop_js = f.read()
             
             # input 1
-            qcd.drop_element_to_position(driver, drag_and_drop_js, qcd.input_xpath, 300, 0)
-            input1 = driver.find_element_by_xpath('//div[@id="copy-component0"]')
+            qcd.drop_element_to_position(self.driver, drag_and_drop_js, qcd.input_xpath, 300, 0)
+            input1 = self.driver.find_element_by_xpath('//div[@id="copy-component0"]')
 
-            if (qcd.open_container(driver) != 1):
+            if (qcd.open_container(self.driver) != 1):
                 input1.click()
 
-            qcd.select_dbset_input(driver, 'marketing_dev')
-            qcd.select_db(driver)
-            qcd.select_table(driver, 1)
-            qcd.select_table(driver, 2)
-            qcd.select_table(driver, 3)
-            qcd.select_table(driver, 6)
-            qcd.select_table(driver, 7)
-            qcd.click_add_select_btn(driver)
+            qcd.select_dbset_input(self.driver, 'marketing_dev')
+            qcd.select_db(self.driver)
+            qcd.select_table(self.driver, 1)
+            qcd.select_table(self.driver, 2)
+            qcd.select_table(self.driver, 3)
+            qcd.select_table(self.driver, 6)
+            qcd.select_table(self.driver, 7)
+            qcd.click_add_select_btn(self.driver)
 
             # data profile
-            qcd.drop_element_to_position(driver, drag_and_drop_js, qcd.data_profile_xpath, 400, -160)
-            data_profile = driver.find_element_by_xpath('//div[@id="copy-component1"]')
-            qcd.connect_elements(driver, input1, 1, data_profile, 1)
+            qcd.drop_element_to_position(self.driver, drag_and_drop_js, qcd.data_profile_xpath, 400, -160)
+            data_profile = self.driver.find_element_by_xpath('//div[@id="copy-component1"]')
+            qcd.connect_elements(self.driver, input1, 1, data_profile, 1)
 
-            if (qcd.open_container(driver) != 1):
+            if (qcd.open_container(self.driver) != 1):
                 data_profile.click()
 
             
             # custom
-            selected = driver.find_elements_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div')
+            selected = self.driver.find_elements_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div')
             for item in selected:
                 print("TC015: {0} table are selected", item.text)
 
             # execute
-            qcd.save_excute_workflow(driver, 'TC_015_ALEX')
-            
+            qcd.save_excute_workflow(self.driver, 'TC_015_ALEX')
+
         except Exception as e:
-            logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
+            qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
             print("exception:{}".format(e))
             pass
 
     def check_result(self):
+        self.driver.find_element_by_xpath('/html/body/div[2]/div[3]/div/div/div/div/div[1]/div/div/div[1]').click()
+        time.sleep(1)
+        count_tr = self.driver.find_elements_by_xpath('/html/body/div[2]/div[3]/div/div/div/div/div[1]/div/div[2]/div/div')
+        self.driver.find_element_by_xpath('/html/body/div[2]/div[3]/div/div/div/div/div[1]/div/div/div[1]').click()
+
+        for tr in range(0, len(count_tr)):
+            self.driver.find_element_by_xpath('/html/body/div[2]/div[3]/div/div/div/div/div[1]/div/div/div[1]').click()
+            time.sleep(1)
+            table_tr = self.driver.find_elements_by_xpath('/html/body/div[2]/div[3]/div/div/div/div/div[1]/div/div[2]/div/div')
+            table_tr[tr].click()
+            time.sleep(1)
+
+            attribute_tr = self.driver.find_elements_by_xpath('/html/body/div[2]/div[3]/div/div/div/div/div[2]/div/div[1]/div[5]/div')
+            for attr_tr in attribute_tr:
+                attr_tr.find_element_by_xpath('./div/div')
+                attr_tr.click()
+                time.sleep(3)
         pass

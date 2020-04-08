@@ -43,7 +43,7 @@ class TC020:
             if (qcd.open_dashboard(self.driver) != 1):
                 raise Exception('fail to open dashboard')
         except Exception as e:
-            logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
+            qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
             print("exception:{}".format(e))
             pass
 
@@ -54,27 +54,30 @@ class TC020:
             with open("js/jquery_load_helper.js") as f:
                 load_jquery_js = f.read()
 
-            driver.execute_async_script(load_jquery_js, jquery_url)
+            self.driver.execute_async_script(load_jquery_js, jquery_url)
                 
             with open("js/drag_and_drop.js") as f:
                 drag_and_drop_js = f.read()
 
-            record_count = tc.input_searchbox_on_dashboard(driver)
+            record_count = qcd.input_searchbox_on_dashboard(self.driver, "TC_019")
             
             if record_count == 0:
                 raise Exception('no search results')
             
-            qcd.click_editview_firstrecord_on_dashboard(driver)
-            qcd.click_notification(driver)
-            qcd.click_tab_on_notification_board(driver, 4)
-            qcd.set_start_time_with10(driver)
+            qcd.click_editview_firstrecord_on_dashboard(self.driver)
+            time.sleep(qcd.WAITM)
+            qcd.click_notification(self.driver)
+            qcd.click_tab_on_notification_board(self.driver, 4)
+            qcd.set_start_time_with10(self.driver)
 
-            time.sleep(30)
+            time.sleep(5)
             
         except Exception as e:
-            logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
+            qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
             print("exception:{}".format(e))
             pass
+
+        time.sleep(100)
 
     def check_result(self):
         pass

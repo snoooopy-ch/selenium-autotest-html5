@@ -81,7 +81,7 @@ class TC004:
             if (qcd.open_container(self.driver) != 1):
                 input2.click()
 
-            time.sleep(WAIT3)
+            time.sleep(qcd.WAIT3)
             qcd.select_dbset_input(self.driver, 'demodb_dest')
             qcd.select_db(self.driver)
             qcd.select_table(self.driver, 7)

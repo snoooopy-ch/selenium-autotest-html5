@@ -78,7 +78,7 @@ class TC011:
 
             if (qcd.open_container(self.driver) != 1):
                 input2.click()
-                time.sleep(WAIT1)
+                time.sleep(qcd.WAIT1)
 
             qcd.select_dbset_input(self.driver, 'demo_conn')
             qcd.select_db(self.driver)

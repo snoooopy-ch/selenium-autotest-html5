@@ -106,7 +106,7 @@ class TC003:
             print("exception:{}".format(e))
             pass
 
-        time.sleep(WAIT1)
+        time.sleep(qcd.WAIT1)
         print('finish')
 
     def check_result(self):
@@ -128,6 +128,6 @@ class TC003:
         except Exception as e:
             qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
             print("exception:{}".format(e))
-            time.sleep(WAIT1)
+            time.sleep(qcd.WAIT1)
             pass
 

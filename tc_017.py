@@ -112,5 +112,5 @@ class TC017:
             print("exception:{}".format(e))
             pass
             
-        time.sleep(WAIT100)
+        time.sleep(qcd.WAIT100)
         return

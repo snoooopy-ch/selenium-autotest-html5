@@ -87,7 +87,7 @@ if __name__ == '__main__':
             print(e)
             pass
 
-        time.sleep(WAIT1)
+        time.sleep(qcd.WAIT1)
 
     except KeyboardInterrupt:
         pass

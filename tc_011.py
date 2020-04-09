@@ -78,7 +78,7 @@ class TC011:
 
             if (qcd.open_container(self.driver) != 1):
                 input2.click()
-                time.sleep(1)
+                time.sleep(WAIT1)
 
             qcd.select_dbset_input(self.driver, 'demo_conn')
             qcd.select_db(self.driver)
@@ -118,7 +118,7 @@ class TC011:
                 detail_span = self.driver.find_elements_by_xpath(detail_span_xpath)
                 if (len(detail_span) == 1):
                     detail_span[0].click()
-                    time.sleep(qcd.WAITM)
+                    time.sleep(qcd.WAIT3)
             except Exception as e:
                 print(e)
                 pass

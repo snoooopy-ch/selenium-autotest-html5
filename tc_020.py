@@ -65,19 +65,19 @@ class TC020:
                 raise Exception('no search results')
             
             qcd.click_editview_firstrecord_on_dashboard(self.driver)
-            time.sleep(qcd.WAITM)
+            time.sleep(qcd.WAIT3)
             qcd.click_notification(self.driver)
             qcd.click_tab_on_notification_board(self.driver, 4)
             qcd.set_start_time_with10(self.driver)
 
-            time.sleep(5)
+            time.sleep(WAIT5)
             
         except Exception as e:
             qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
             print("exception:{}".format(e))
             pass
 
-        time.sleep(100)
+        time.sleep(WAIT100)
 
     def check_result(self):
         pass

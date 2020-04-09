@@ -99,20 +99,20 @@ class TC015:
 
     def check_result(self):
         self.driver.find_element_by_xpath('/html/body/div[2]/div[3]/div/div/div/div/div[1]/div/div/div[1]').click()
-        time.sleep(1)
+        time.sleep(WAIT1)
         count_tr = self.driver.find_elements_by_xpath('/html/body/div[2]/div[3]/div/div/div/div/div[1]/div/div[2]/div/div')
         self.driver.find_element_by_xpath('/html/body/div[2]/div[3]/div/div/div/div/div[1]/div/div/div[1]').click()
 
         for tr in range(0, len(count_tr)):
             self.driver.find_element_by_xpath('/html/body/div[2]/div[3]/div/div/div/div/div[1]/div/div/div[1]').click()
-            time.sleep(1)
+            time.sleep(WAIT1)
             table_tr = self.driver.find_elements_by_xpath('/html/body/div[2]/div[3]/div/div/div/div/div[1]/div/div[2]/div/div')
             table_tr[tr].click()
-            time.sleep(1)
+            time.sleep(WAIT1)
 
             attribute_tr = self.driver.find_elements_by_xpath('/html/body/div[2]/div[3]/div/div/div/div/div[2]/div/div[1]/div[5]/div')
             for attr_tr in attribute_tr:
                 attr_tr.find_element_by_xpath('./div/div')
                 attr_tr.click()
-                time.sleep(3)
+                time.sleep(WAIT3)
         pass

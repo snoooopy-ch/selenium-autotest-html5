@@ -72,7 +72,7 @@ if __name__ == '__main__':
         driver.get(url)
 
     	# login page loading...
-        time.sleep(qcd.WAITS)
+        time.sleep(qcd.WAIT1)
         try:
             # login
             if (qcd.login(driver, user, password) != 1):
@@ -87,7 +87,7 @@ if __name__ == '__main__':
             print(e)
             pass
 
-        time.sleep(1)
+        time.sleep(WAIT1)
 
     except KeyboardInterrupt:
         pass

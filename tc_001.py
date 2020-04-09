@@ -118,7 +118,7 @@ class TC001:
             pass
 
         print('finished')
-        time.sleep(5)
+        time.sleep(WAIT5)
 
     def check_result(self):
         try:

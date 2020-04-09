@@ -36,9 +36,12 @@ formatter = logging.Formatter(
 
 logger.setLevel(LOG_LEVEL)
 
-WAITS =                     1
-WAITM =                     3
-WAITL =                     5
+WAIT1 =                     2
+WAIT3 =                     5
+WAIT5 =                     10
+WAIT10 =                    15
+WAIT20 =                    20
+WAIT100 =					100
 
 user_xpath                  = '//div[@id="root"]/div/div/div/div/div/div/input'
 pass_xpath                  = '//div[@id="root"]/div/div/div/div/div[2]/div/input'
@@ -108,7 +111,7 @@ def login(driver, login_user, login_pass):
 
         btn_login = driver.find_elements_by_xpath(loginbtn_xpath)[0]
         btn_login.click()
-        time.sleep(WAITL)
+        time.sleep(WAIT5)
 
         print('login')
     except Exception as e:
@@ -125,7 +128,7 @@ def open_workspace(driver):
     try:
         btn_plus = driver.find_element_by_xpath(open_xpath)
         btn_plus.click()
-        time.sleep(10)
+        time.sleep(WAIT10)
 
         print('open workspace')
 
@@ -142,7 +145,7 @@ def open_dashboard(driver):
     try:
         btn_dashboard = driver.find_element_by_xpath(open_dashboard_xpath)
         btn_dashboard.click()
-        time.sleep(WAITL)
+        time.sleep(WAIT5)
 
         print('open dashboard')
     except Exception as e:
@@ -175,11 +178,11 @@ def open_container(driver):
 def select_dbset_input(driver, db):
     db_select = driver.find_elements_by_xpath("//select[@name='connection']")[0]
     db_select.click()
-    time.sleep(WAITM)
+    time.sleep(WAIT3)
 
     db_value = driver.find_element_by_xpath("//select[@name='connection']/option[@value='" + db + "']")
     db_value.click()
-    time.sleep(WAITS)
+    time.sleep(WAIT1)
 
     print('select db set')
     return
@@ -191,7 +194,7 @@ def select_db(driver):
     
     db_demo = driver.find_element_by_xpath("//div[@id='top_panel']/div/div[2]/div[2]/div[2]/div/div[3]/div[2]/div/div")
     db_demo.click()
-    time.sleep(WAITM)
+    time.sleep(WAIT3)
 
     print('select db name')    
     return
@@ -203,7 +206,7 @@ def select_db_with_index(driver, index):
     
     db_demo = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div[3]/div[2]/div/div["' + str(index) + '"]')
     db_demo.click()
-    time.sleep(WAITL)
+    time.sleep(WAIT5)
 
     print('select db name')    
     return
@@ -212,11 +215,11 @@ def select_db_with_index(driver, index):
 def click_select_tableitem_for_select_columns(driver, index):
     db_select = driver.find_element_by_xpath(table_sc_xpath)
     db_select.click()
-    time.sleep(WAITS)
+    time.sleep(WAIT1)
 
     db_value = driver.find_element_by_xpath(table_sc_val_xpath + '[' + str(index) + ']')
     db_value.click()
-    time.sleep(WAITS)
+    time.sleep(WAIT1)
     print('select table item')
     return
     
@@ -243,12 +246,12 @@ def select_item_from_column_data_type(driver, index):
     xpath = "//*[@id='top_panel']/div/div[2]/div[2]/div[2]/div/div[1]/div[2]/div/div/div[4]/div/div[1]/div[1]"
     city = driver.find_element_by_xpath(xpath)
     city.click()
-    time.sleep(WAITS)
+    time.sleep(WAIT1)
 
     item_xpath = "//*[@id='top_panel']/div/div[2]/div[2]/div[2]/div/div[1]/div[2]/div/div/div[4]/div/div[2]/div/div[" + str(index) + "]"
     item_value = driver.find_element_by_xpath(item_xpath)
     item_value.click()
-    time.sleep(WAITS)
+    time.sleep(WAIT1)
     print('select item from column type ' + str(index))
     return
 
@@ -258,14 +261,14 @@ def click_all_select(driver):
     btn_select_all.click()
     
     print('select all the table')
-    time.sleep(WAITS)
+    time.sleep(WAIT1)
     return
 
 # action to click 'Add Selected' button
 def click_add_select_btn(driver):
     btn_add = driver.find_element_by_xpath(btn_addSelected)
     btn_add.click()
-    time.sleep(WAITM)
+    time.sleep(WAIT3)
 
     print('add selected click')
     return
@@ -278,10 +281,10 @@ def connect_all_elements(driver):
 
     action = ActionChains(driver)
     action.click_and_hold(entry1).move_to_element(entry3).release(entry3).perform()
-    time.sleep(WAITS)
+    time.sleep(WAIT1)
 
     action.click_and_hold(entry2).move_to_element(entry3).release(entry3).perform()
-    time.sleep(WAITS)
+    time.sleep(WAIT1)
 
     print('element selected')
     return
@@ -300,7 +303,7 @@ def connect_elements(driver, element1, n, element2, m):
 
     action = ActionChains(driver)
     action.click_and_hold(entry1).move_to_element(entry2).release(entry2).perform()
-    time.sleep(WAITS)
+    time.sleep(WAIT1)
 
     print('connected')
     return
@@ -310,20 +313,20 @@ def connect_elements(driver, element1, n, element2, m):
 def cell_by_cell_compare(driver, index):
     db_select3 = driver.find_elements_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div/div/div/div')[1]
     db_select3.click()
-    time.sleep(WAITS)
+    time.sleep(WAIT1)
     print("db open")
 
     db_select_val3 = driver.find_elements_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div/div/div[2]/div/div')[index - 1]
     db_select_val3.click()
     print("selected")
-    time.sleep(WAITS)
+    time.sleep(WAIT1)
     return
 
 # select mapping tab
 def select_mapping_tab(driver):
     tab_mapping = driver.find_element_by_xpath(tabmapping_xpath)
     tab_mapping.click()
-    time.sleep(WAITM)
+    time.sleep(WAIT3)
 
     print('mapping tab selected')
     return
@@ -332,33 +335,33 @@ def select_mapping_tab(driver):
 def add_mapping_table_name(driver):
     table = driver.find_element_by_xpath(table1_xpath)
     table.click()
-    time.sleep(WAITS)
+    time.sleep(WAIT1)
 
     table_value = driver.find_element_by_xpath(table1_val_xpath)
     table_value.click()
-    time.sleep(WAITS)
+    time.sleep(WAIT1)
 
     table = driver.find_element_by_xpath(table2_xpath)
     table.click()
-    time.sleep(WAITS)
+    time.sleep(WAIT1)
 
     table_value = driver.find_element_by_xpath(table2_val_xpath)
     table_value.click()
-    time.sleep(WAITL)
+    time.sleep(WAIT5)
 
     plus = driver.find_element_by_xpath(mapplus_xpath)
     plus.click()
-    time.sleep(WAITM)
+    time.sleep(WAIT3)
 
     print('mapping table names')
     return
 
 # select mapping table item
 def select_mapping_table_item(driver, index):
-    time.sleep(WAITM)
+    time.sleep(WAIT3)
     table_item = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[3]/div/div[1]/table/tr[' + str(index) + ']/td[2]/span[1]')
     table_item.click()
-    time.sleep(WAITM)
+    time.sleep(WAIT3)
     print('select mapping table item')
     return
 
@@ -366,7 +369,7 @@ def select_mapping_table_item(driver, index):
 def select_key_for_table_item(driver, index):
     input_key = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[3]/div/div[2]/div/div[2]/div/div[1]/div[2]/div[' + str(index) + ']/div/div[1]/input')
     input_key.click()
-    time.sleep(WAITS)
+    time.sleep(WAIT1)
 
     print('select key for table item')
     return
@@ -445,7 +448,7 @@ def initialize_on_dataquality(driver, index1, index2, index3, index4, value):
     select_column_on_dataquality(driver, index3)
     select_operator_on_dataquality(driver, index4)    
     apply_button_on_dataquality(driver)
-    time.sleep(WAITM)
+    time.sleep(WAIT3)
     return
 
 # initialize on data quality
@@ -455,7 +458,7 @@ def initialize_on_dataquality_for_select_rule(driver, index1, index2, index3, va
     select_table_on_dataquality(driver, index2)
     select_operator_on_dataquality(driver, index3)    
     apply_button_on_dataquality(driver)
-    time.sleep(WAITM)
+    time.sleep(WAIT3)
     return
 
 # insert sql on data quality
@@ -479,20 +482,20 @@ def save_excute_workflow(driver, flow_name):
 
     btn_save = driver.find_element_by_xpath(save_xpath)
     btn_save.click()
-    time.sleep(WAITM)
+    time.sleep(WAIT3)
 
     print('executing...')
     btn_execute = driver.find_element_by_xpath(excute_xpath)
     btn_execute.click()
-    time.sleep(WAITM)
+    time.sleep(WAIT3)
 
     try:
         btn_result = WebDriverWait(driver, 2000).until(EC.element_to_be_clickable((By.XPATH, result_xpath)))
-        time.sleep(WAITM)
+        time.sleep(WAIT3)
         btn_result.click()
-        time.sleep(10)
+        time.sleep(WAIT10)
     except Exception as e:
-        time.sleep(10)
+        time.sleep(WAIT10)
         pass
 
     return
@@ -550,7 +553,7 @@ def check_summary_in_final_result(driver, class_name, summary_xpath):
     if (flag == 0):
         print('No mismatch in the table')
         
-    time.sleep(10)
+    time.sleep(WAIT10)
     return
 
 
@@ -575,7 +578,7 @@ def check_summary_statue_in_final_result(driver, class_name, summary_xpath):
         print(ex)
         pass
 
-    time.sleep(10)
+    time.sleep(WAIT10)
 
     return;
 
@@ -595,14 +598,14 @@ def check_summary_in_fianl_mismatched_count(driver, class_name, summary_xpath):
     except Exception as ex:
         pass
 
-    time.sleep(10)
+    time.sleep(WAIT10)
     return
 
 # action to search on dashboard
 def input_searchbox_on_dashboard(driver, value):
     searchbox = driver.find_element_by_xpath(searchbox_dashboard_xpath)
     searchbox.send_keys(value)
-    time.sleep(5)
+    time.sleep(WAIT5)
 
     try:
         records = driver.find_elements_by_xpath(search_table_recod_xpath)
@@ -617,7 +620,7 @@ def click_editview_firstrecord_on_dashboard(driver):
         records = driver.find_elements_by_xpath(search_table_recod_xpath)
         editview = records[0].find_element_by_xpath('./div/div[8]/div/*[name()="svg"]')
         editview.click()
-        time.sleep(20)
+        time.sleep(WAIT20)
     except Exception as e:
         print(e)
         records = []
@@ -657,7 +660,7 @@ def set_start_time_with10(driver):
 def click_result_close(driver):
     try:
         driver.find_element_by_xpath(result_close_xpath).click()
-        time.sleep(3)
+        time.sleep(WAIT3)
     except Exception as e:
         print(e)
     return
@@ -666,9 +669,9 @@ def click_result_close(driver):
 def select_cluster_execute_job(driver, index):
     try:
         driver.find_element_by_xpath('//*[@id="root"]/div/div[1]/div/div/div/div/div/div[2]/div/div[2]/div[2]/div/div/div/div[1]').click()
-        time.sleep(WAITS)
+        time.sleep(WAIT1)
         driver.find_element_by_xpath('//*[@id="root"]/div/div[1]/div/div/div/div/div/div[2]/div/div[2]/div[2]/div/div/div[2]/div/div["' + str(index) + '"]').click()
-        time.sleep(WAITS)
+        time.sleep(WAIT1)
     except Exception as e:
         pass
     return

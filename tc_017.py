@@ -101,7 +101,7 @@ class TC017:
                 detail_span = self.self.driver.find_elements_by_xpath(detail_span_xpath)
                 if (len(detail_span) == 1):
                     detail_span[0].click()
-                    time.sleep(qcd.WAITM)
+                    time.sleep(qcd.WAIT3)
             except Exception as e:
                 print(e)
                 pass
@@ -112,5 +112,5 @@ class TC017:
             print("exception:{}".format(e))
             pass
             
-        time.sleep(100)
+        time.sleep(WAIT100)
         return

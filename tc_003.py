@@ -106,7 +106,7 @@ class TC003:
             print("exception:{}".format(e))
             pass
 
-        time.sleep(1)
+        time.sleep(WAIT1)
         print('finish')
 
     def check_result(self):
@@ -117,7 +117,7 @@ class TC003:
                 detail_span = self.driver.find_elements_by_xpath(detail_span_xpath)
                 if (len(detail_span) == 1):
                     detail_span[0].click()
-                    time.sleep(qcd.WAITM)
+                    time.sleep(qcd.WAIT3)
             except Exception as e:
                 print(e)
                 pass
@@ -128,6 +128,6 @@ class TC003:
         except Exception as e:
             qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
             print("exception:{}".format(e))
-            time.sleep(1)
+            time.sleep(WAIT1)
             pass
 

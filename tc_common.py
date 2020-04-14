@@ -36,12 +36,15 @@ formatter = logging.Formatter(
 
 logger.setLevel(LOG_LEVEL)
 
-WAIT1 =                     2
-WAIT3 =                     5
-WAIT5 =                     10
-WAIT10 =                    15
-WAIT20 =                    20
-WAIT100 =					100
+WAIT1                       = 2
+WAIT3                       = 5
+WAIT5                       = 10
+WAIT10                      = 15
+WAIT20                      = 20
+WAIT100                     = 100
+
+elements                    = ["Input", "Data Compare", "Select Columns", "Common Type", "Remove Duplicates", "Data Quality", "Data Profile"]
+element_xpath               = ['//div[@id="component0"]/img', '//div[@id="component1"]/img', '//div[@id="component2"]/img', '//div[@id="component3"]/img', '//div[@id="component4"]/img', '//div[@id="component5"]/img', '//div[@id="component6"]/img']
 
 user_xpath                  = '//div[@id="root"]/div/div/div/div/div/div/input'
 pass_xpath                  = '//div[@id="root"]/div/div/div/div/div[2]/div/input'
@@ -154,7 +157,9 @@ def open_dashboard(driver):
     return ret
 
 # action to move element
-def drop_element_to_position(driver, js, xpath, x, y):
+def drop_element_to_position(driver, js, element, x, y):
+    index = elements.index(element)
+    xpath = element_xpath[index]
     input_element = driver.find_element_by_xpath(xpath)
     driver.execute_script(js, input_element, x, y)
 

@@ -60,7 +60,7 @@ class TC015:
                 drag_and_drop_js = f.read()
             
             # input 1
-            qcd.drop_element_to_position(self.driver, drag_and_drop_js, qcd.input_xpath, 300, 0)
+            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Input", 300, 0)
             input1 = self.driver.find_element_by_xpath('//div[@id="copy-component0"]')
 
             if (qcd.open_container(self.driver) != 1):
@@ -76,7 +76,7 @@ class TC015:
             qcd.click_add_select_btn(self.driver)
 
             # data profile
-            qcd.drop_element_to_position(self.driver, drag_and_drop_js, qcd.data_profile_xpath, 400, -160)
+            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Data Profile", 400, -160)
             data_profile = self.driver.find_element_by_xpath('//div[@id="copy-component1"]')
             qcd.connect_elements(self.driver, input1, 1, data_profile, 1)
 

@@ -85,6 +85,20 @@ notification_create_xpath   = '//*[@id="root"]/div/div[1]/div/div/div/div/div/di
 notification_close_xpath    = '//*[@id="root"]/div/div[1]/div/div/div/div/div/div[2]/div/div[1]/header/div/div'
 result_close_xpath          = '/html/body/div[2]/div[3]/div/header/div/button'
 save_execute_on_xpath       = '//*[@id="root"]/div/div[1]/div/div/div/div/div/div[2]/div/div[2]/div[2]/div/button'
+select_all_commontype_xpath = '//*[@id="top_panel"]/div/div[2]/div[1]/div/div[2]/div[4]/button'
+share_btn_xpath             = '/html/body/div[2]/div[3]/div/header/div/div/button'
+settings_xpath              = '//*[@id="root"]/div/div[1]/div/div/header/div/div[2]/div/div/div/button[3]'
+settings_searchbox_xpath    = '//*[@id="root"]/div/div[1]/div/div/div/div/div/main/div[2]/div/div[1]/div[1]/div/input'
+new_connection_xpath        = '//*[@id="root"]/div/div[1]/div/div/div/div/div/main/div[2]/div/div[1]/div[2]/button'
+input_data_tag_xpath        = '//*[@id="simple-tab-1"]'
+input_config_tag_xpath      = '//*[@id="simple-tab-0"]'
+data_search_table_xpath     = '//*[@id="top_panel"]/div/div[2]/div[3]/div[1]/div/div/div/div[1]'
+sql_column_xpath            = '//*[@id="top_panel"]/div/div[2]/div[3]/div/div[2]/div/div[2]/div/div[1]/div[2]/div[1]/div/div[6]/span/*[name()="svg"]'
+detail_xpath                = '/html/body/div[2]/div[3]/div/div/div/div/div[1]/div[3]/span[2]'
+summary_select_xpath        = '/html/body/div[2]/div[3]/div/div/div/div/div[1]/div[2]/div/div/div[1]'
+                              
+
+
 
 def init_selenium():
     chromeOptions = webdriver.ChromeOptions()
@@ -162,6 +176,7 @@ def drop_element_to_position(driver, js, element, x, y):
     xpath = element_xpath[index]
     input_element = driver.find_element_by_xpath(xpath)
     driver.execute_script(js, input_element, x, y)
+    time.sleep(WAIT3)
 
     print('move element')
     pass
@@ -249,15 +264,30 @@ def select_item_from_column_type(driver, index):
 # action to click data type of column type
 def select_item_from_column_data_type(driver, index):
     xpath = "//*[@id='top_panel']/div/div[2]/div[2]/div[2]/div/div[1]/div[2]/div/div/div[4]/div/div[1]/div[1]"
+#             //*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div[1]/div[2]/div[2]/div/div[4]/div/div[2]/div
     city = driver.find_element_by_xpath(xpath)
     city.click()
     time.sleep(WAIT1)
-
+#                  //*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div[1]/div[2]/div[2]/div/div[4]/div/div[2]/div
     item_xpath = "//*[@id='top_panel']/div/div[2]/div[2]/div[2]/div/div[1]/div[2]/div/div/div[4]/div/div[2]/div/div[" + str(index) + "]"
     item_value = driver.find_element_by_xpath(item_xpath)
     item_value.click()
     time.sleep(WAIT1)
     print('select item from column type ' + str(index))
+    return
+
+# action to click data type of column type list
+def select_item_from_column_data_type_list(driver, index1, index2):
+    xpath = '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div[1]/div[2]/div[' + str(index1) + ']/div/div[4]/div/div/div[1]'
+    city = driver.find_element_by_xpath(xpath)
+    city.click()
+    time.sleep(WAIT1)
+
+    item_xpath = '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div[1]/div[2]/div[' + str(index1) + ']/div/div[4]/div/div[2]/div/div[' + str(index2) + ']'
+    item_value = driver.find_element_by_xpath(item_xpath)
+    item_value.click()
+    time.sleep(WAIT1)
+    print('select item from column type ' + str(index1) + ":" + str(index2))
     return
 
 # action to click all check of table
@@ -482,7 +512,7 @@ def add_sql_on_dataquality(driver, index, sql, job):
     
 # save and excute workflow
 def save_excute_workflow(driver, flow_name):
-    name_field = driver.find_element_by_xpath(name_xpath);
+    name_field = driver.find_element_by_xpath(name_xpath)
     name_field.send_keys(flow_name)
 
     btn_save = driver.find_element_by_xpath(save_xpath)
@@ -503,6 +533,14 @@ def save_excute_workflow(driver, flow_name):
         time.sleep(WAIT10)
         pass
 
+    return
+
+# select all for common type and select column
+def click_select_all_for_commontype(driver):
+    select_all_button = driver.find_element_by_xpath(select_all_commontype_xpath)
+    select_all_button.click()
+    print('select all the table')
+    time.sleep(WAIT1)
     return
 
 # check summary in final result
@@ -561,6 +599,30 @@ def check_summary_in_final_result(driver, class_name, summary_xpath):
     time.sleep(WAIT10)
     return
 
+# add columns for datacompare's table item
+def add_columns_in_datacompare_tableitem(driver):
+    column1 = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[3]/div/div[2]/div/div[1]/div[1]/div/div/div[1]')
+    column1.click()
+    driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[3]/div/div[2]/div/div[1]/div[1]/div/div[2]/div/div[3]').click()
+
+    column2 = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[3]/div/div[2]/div/div[1]/div[2]/div/div/div[1]')
+    column2.click()
+    driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[3]/div/div[2]/div/div[1]/div[2]/div/div[2]/div/div[3]').click()
+
+    driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[3]/div/div[2]/div/div[1]/div[3]').click()
+    return
+
+# click to share button
+def click_share_button_and_close(driver):
+    share_btn = driver.find_element_by_xpath(share_btn_xpath)
+    share_btn.click()
+    time.sleep(WAIT1)
+    print("share link : " + driver.find_element_by_xpath('//*[@id="share-link-textfield"]').text)
+    copy_btn = driver.find_element_by_xpath('/html/body/div[3]/div[3]/div/div[3]/button[1]')
+    copy_btn.click()
+    close_btn = driver.find_element_by_xpath('/html/body/div[2]/div[3]/div/header/div/div/button')
+    close_btn.click()
+    return
 
 # check summary in final result for TC014
 def check_summary_statue_in_final_result(driver, class_name, summary_xpath):
@@ -685,4 +747,120 @@ def select_cluster_execute_job(driver, index):
 def save_close_execute_tab(driver):
     driver.find_element_by_xpath(save_execute_on_xpath).click()
     driver.find_element_by_xpath(notification_close_xpath).click()
+    return
+
+# open settings
+def open_settings(driver):
+    settings_btn = driver.find_element_by_xpath(settings_xpath)
+    settings_btn.click()
+    time.sleep(WAIT5)
+    return
+
+# input keywords to search box in settings board
+def search_in_settings(driver, keyword):
+    search_input = driver.find_element_by_xpath(settings_searchbox_xpath)
+    search_input.send_keys(keyword)
+    time.sleep(WAIT3)
+    return
+
+# delete on settings board
+def click_delete_settings_search(driver):
+    try:
+        driver.find_element_by_xpath('//*[@id="root"]/div/div[1]/div/div/div/div/div/main/div[2]/div/div[2]/div[1]/div[2]/div[1]/div/div[6]/div/button[2]').click()
+        driver.find_element_by_xpath('/html/body/div[2]/div[3]/div/div[3]/button[2]').click()
+        time.sleep(WAIT3)
+    except Exception as e:
+        pass
+    return
+
+# add new connection on settings board
+def add_new_connection(driver, index, name, url, user, password):
+    driver.find_element_by_xpath(new_connection_xpath).click()
+    time.sleep(WAIT10)
+    driver.find_element_by_xpath('//*[@id="root"]/div/div[1]/div/div/div/div/div/main/div[2]/div[2]/ul/div[' + str(index) + ']/div').click()
+    print('database clicked')
+
+    time.sleep(WAIT3)
+    driver.find_element_by_xpath('//*[@id="outlined-bare"]').send_keys(name)
+    driver.find_element_by_xpath('//*[@id="root"]/div/div[1]/div/div/div/div/div/main/div[2]/div/div[2]/div/div/section[1]/div[2]/p/span').click()
+
+    driver.find_element_by_xpath('//*[@id="root"]/div/div[1]/div/div/div/div/div/main/div[2]/div/div[2]/div/div/section[1]/div[2]/div/div/div[1]/div/input').send_keys(Keys.CONTROL + 'a') 
+    driver.find_element_by_xpath('//*[@id="root"]/div/div[1]/div/div/div/div/div/main/div[2]/div/div[2]/div/div/section[1]/div[2]/div/div/div[1]/div/input').send_keys(Keys.DELETE)
+    driver.find_element_by_xpath('//*[@id="root"]/div/div[1]/div/div/div/div/div/main/div[2]/div/div[2]/div/div/section[1]/div[2]/div/div/div[1]/div/input').send_keys(url)
+
+    absolute_file_path = os.path.abspath("files/mysql-connector-java-8.0.12.jar")
+    driver.find_element_by_xpath('//*[@id="root"]/div/div[1]/div/div/div/div/div/main/div[2]/div/div[2]/div/div/section[1]/div[2]/input').send_keys(absolute_file_path)
+
+    driver.find_element_by_xpath('//*[@id="root"]/div/div[1]/div/div/div/div/div/main/div[2]/div/div[2]/div/div/section[2]/div[1]/div/div/input').send_keys(user)
+    driver.find_element_by_xpath('//*[@id="root"]/div/div[1]/div/div/div/div/div/main/div[2]/div/div[2]/div/div/section[2]/div[2]/div/div/input').send_keys(password)
+
+    time.sleep(WAIT3)
+    try:
+        test_btn = driver.find_element_by_xpath('//*[@id="root"]/div/div[1]/div/div/div/div/div/main/div[2]/div/div[2]/div/div/section[3]/div/div[2]/button')
+        test_btn.click()
+    except Exception as e:
+        pass
+
+    time.sleep(WAIT5)
+    try:
+        create_btn = driver.find_element_by_xpath('//*[@id="root"]/div/div[1]/div/div/div/div/div/main/div[2]/div/div[2]/div/div/section[3]/div/div[1]/button')
+        create_btn.click()
+    except Exception as e:
+        pass
+
+    print('new connection added')
+    time.sleep(WAIT3)
+    return
+
+# click data tab on input
+def click_datatab_input(driver):
+    driver.find_element_by_xpath(input_data_tag_xpath).click()
+    time.sleep(WAIT1)
+    print('datatab clicked')
+    return
+
+# select table item on data tab
+def select_tableitem_on_datasearch(driver, index):
+    driver.find_element_by_xpath(data_search_table_xpath).click()
+    time.sleep(WAIT1)
+    driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[3]/div[1]/div/div/div[2]/div/div[' +  str(index)+ ']').click()
+    time.sleep(WAIT1)
+    print('select table item on data search')
+    return
+
+# input sql on sql column
+def input_sql_on_sqlcolumn(driver):
+    driver.find_element_by_xpath(sql_column_xpath).click()
+    driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[3]/div/div[2]/div/div[2]/div/div[2]/div/div[2]/div/input').send_keys('lower(city_name)')
+    driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[3]/div/div[2]/div/div[2]/div/div[1]/span[2]').click()
+    time.sleep(WAIT1)
+    print('insert sql transformation')
+    return
+
+# click summary index
+def click_summary_index(driver, index):
+    driver.find_element_by_xpath('/html/body/div[2]/div[3]/div/div/div/div/div/div[3]/span[2]').click()
+
+    driver.find_element_by_xpath('/html/body/div[2]/div[3]/div/div/div/div/div[1]/div[2]/div/div/div[1]').click()
+    driver.find_element_by_xpath('/html/body/div[2]/div[3]/div/div/div/div/div[1]/div[2]/div/div[2]/div/div[' + str(index) + ']').click()
+
+    rows = driver.find_elements_by_xpath('/html/body/div[2]/div[3]/div/div/div/div/div[2]/div/div/div[1]/div[2]/div')
+    for row in rows:
+        typevalue = row.find_element_by_xpath('./div/div[1]/div/div[1]').text
+        if typevalue == '':
+            city_name = row.find_element_by_xpath('./div/div[2]/div/div[2]').text
+            print('city name is converted to lower case: ' + city_name)
+    return
+
+
+# clear entry before inputing value
+def entry_clear(self, element):
+    element.send_keys(Keys.CONTROL + 'a') 
+    element.send_keys(Keys.DELETE)
+    return
+
+# open config tab on input
+def open_config_tab_on_input(driver):
+    driver.find_element_by_xpath(input_config_tag_xpath).click()
+    time.sleep(WAIT1)
     return

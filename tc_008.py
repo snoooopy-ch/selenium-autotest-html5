@@ -83,7 +83,7 @@ class TC008:
             qcd.select_table(self.driver, 1)
             qcd.click_add_select_btn(self.driver)
 
-            # selet type
+            # select type
             qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Common Type", 300, -50)
             selectcolumns = self.driver.find_element_by_xpath('//div[@id="copy-component2"]')
 

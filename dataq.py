@@ -24,6 +24,9 @@ from tc_017 import TC017
 #from tc_018 import TC018
 from tc_019 import TC019
 from tc_020 import TC020
+from tc_021 import TC021
+from tc_022 import TC022
+from tc_023 import TC023
 
 #BASE_URL = 'http://dataq-frontend.s3-website.us-east-2.amazonaws.com/#/user-home/flow'
 #BASE_URL = 'http://dataq-automation-alb-1598668034.us-east-1.elb.amazonaws.com:9000'
@@ -63,7 +66,7 @@ if __name__ == '__main__':
     if args.scripts:
         scpt_number = [int(item) for item in args.scripts.split(',')]
     else:
-        scpt_number = [1,2,3,4,5,6,7,8,9,11,12,13,14,15,16,17,19,20]
+        scpt_number = [1,2,3,4,5,6,7,8,9,11,12,13,14,15,16,17,19,20,21,22,23]
 
     print(scpt_number)
 

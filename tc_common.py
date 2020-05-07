@@ -17,13 +17,10 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.webdriver.common.action_chains import ActionChains
 
-import requests
-import lxml.html
 import os
 import subprocess
 import traceback
 
-from lxml import etree
 
 import logging
 
@@ -97,22 +94,27 @@ sql_column_xpath            = '//*[@id="top_panel"]/div/div[2]/div[3]/div/div[2]
 detail_xpath                = '/html/body/div[2]/div[3]/div/div/div/div/div[1]/div[3]/span[2]'
 summary_select_xpath        = '/html/body/div[2]/div[3]/div/div/div/div/div[1]/div[2]/div/div/div[1]'
                               
-
-
-
 def init_selenium():
     chromeOptions = webdriver.ChromeOptions()
-    chromeOptions.add_argument("--remote-debugging-port=9222")
-    chromeOptions.add_argument("start-maximized")
-    chromeOptions.add_argument("user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36")
-
+    
     if _platform == "linux" or _platform =="linux2":
-        driver = webdriver.Chrome('/usr/bin/chromedriver',chrome_options=chromeOptions)
+        chromeOptions = webdriver.ChromeOptions()
+        chromeOptions.add_argument("--no-sandbox")  
+        chromeOptions.add_argument('--headless')
+        chromeOptions.add_argument("--disable-gpu")
+        driver = webdriver.Chrome(chrome_options=chromeOptions)
     elif _platform == "darwin":
+        chromeOptions.add_argument("--remote-debugging-port=9222")
+        chromeOptions.add_argument("start-maximized")
+        chromeOptions.add_argument("user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36")
         driver = webdriver.Chrome()
     elif _platform == "win32" or _platform == "win64":
+        chromeOptions.add_argument("--remote-debugging-port=9222")
+        chromeOptions.add_argument("start-maximized")
+        chromeOptions.add_argument("user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36")
         driver = webdriver.Chrome('chromedriver.exe',chrome_options=chromeOptions)
 
+    driver.implicitly_wait(10)
     return driver
 
 # action to login

@@ -2,8 +2,6 @@
 
 import time
 import sys
-import requests
-import lxml.html
 import os
 import subprocess
 import traceback

@@ -98,7 +98,7 @@ if __name__ == '__main__':
         # slack_post("error:{}".format(e))
         qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
         print("exception:{}".format(e))
-    finally:
-        driver.quit()
+    # finally:
+    #     driver.quit()
     
     sys.exit()

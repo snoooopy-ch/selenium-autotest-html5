@@ -1,3 +1,11 @@
+How to build
+
+docker build --tag dataq .
+docker run -i -t --name dataqcontainer dataq
+
+
+
+
 usage: dataq.py [-h] [-r URL] [-u USER] [-p PASSWORD] [-s SCRIPTS]
 
 optional arguments:

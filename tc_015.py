@@ -3,8 +3,6 @@
 import time
 import sys
 import tc_common as qcd
-import requests
-import lxml.html
 import os
 import subprocess
 import traceback

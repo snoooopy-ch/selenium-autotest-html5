@@ -68,8 +68,8 @@ class TC004:
 
             qcd.select_dbset_input(self.driver, 'marketing_dev')
             qcd.select_db(self.driver)
-            qcd.select_table(self.driver, 4)
-            qcd.select_table(self.driver, 11)
+            qcd.select_table(self.driver, "Doctor")
+            qcd.select_table(self.driver, "Patient")
             qcd.click_add_select_btn(self.driver)
 
             # input 2
@@ -82,8 +82,8 @@ class TC004:
             time.sleep(qcd.WAIT3)
             qcd.select_dbset_input(self.driver, 'demodb_dest')
             qcd.select_db(self.driver)
-            qcd.select_table(self.driver, 7)
-            qcd.select_table(self.driver, 12)
+            qcd.select_table(self.driver, "doctor")
+            qcd.select_table(self.driver, "Patient")
             qcd.click_add_select_btn(self.driver)
 
             # data compare

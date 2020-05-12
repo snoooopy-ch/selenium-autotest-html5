@@ -66,8 +66,8 @@ class TC011:
 
             qcd.select_dbset_input(self.driver, 'employee_demo')
             qcd.select_db(self.driver)
-            qcd.select_table(self.driver, 8)
-            qcd.select_table(self.driver, 9)
+            qcd.select_table(self.driver, "employees")
+            qcd.select_table(self.driver, "salaries")
             qcd.click_add_select_btn(self.driver)
 
             # input 2
@@ -80,8 +80,8 @@ class TC011:
 
             qcd.select_dbset_input(self.driver, 'demo_conn')
             qcd.select_db(self.driver)
-            qcd.select_table(self.driver, 8)
-            qcd.select_table(self.driver, 9)
+            qcd.select_table(self.driver, "employees")
+            qcd.select_table(self.driver, "salaries")
             qcd.click_add_select_btn(self.driver)            
 
             # data compare

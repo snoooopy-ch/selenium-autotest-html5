@@ -67,7 +67,7 @@ class TC002:
 
             qcd.select_dbset_input(self.driver, 'sampledb_src')
             qcd.select_db(self.driver)
-            qcd.select_table(self.driver, 2)
+            qcd.select_table(self.driver, "collegedetails_zero_records")
             qcd.click_add_select_btn(self.driver)
 
             # input 2
@@ -79,7 +79,7 @@ class TC002:
 
             qcd.select_dbset_input(self.driver, 'sampledb_dest')
             qcd.select_db(self.driver)
-            qcd.select_table(self.driver, 2)
+            qcd.select_table(self.driver, "collegedetails_zero_records")
             qcd.click_add_select_btn(self.driver)
 
             # data compare

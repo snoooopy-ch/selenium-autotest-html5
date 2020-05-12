@@ -68,9 +68,9 @@ class TC001:
 
             qcd.select_dbset_input(self.driver, 'marketing_dev')
             qcd.select_db(self.driver)
-            qcd.select_table(self.driver, 1)
-            qcd.select_table(self.driver, 2)
-            qcd.select_table(self.driver, 3)
+            qcd.select_table(self.driver, "City")
+            qcd.select_table(self.driver, "Claims")
+            qcd.select_table(self.driver, "Diagnosis")
             qcd.click_add_select_btn(self.driver)
 
             # input 2
@@ -82,9 +82,9 @@ class TC001:
 
             qcd.select_dbset_input(self.driver, 'demodb_dest')
             qcd.select_db(self.driver)
-            qcd.select_table(self.driver, 1)
-            qcd.select_table(self.driver, 2)
-            qcd.select_table(self.driver, 3)
+            qcd.select_table(self.driver, "City")
+            qcd.select_table(self.driver, "Claimslist")
+            qcd.select_table(self.driver, "Diagnosis")
             qcd.click_add_select_btn(self.driver)
 
             # data compare
@@ -116,7 +116,6 @@ class TC001:
             pass
 
         print('finished')
-        time.sleep(qcd.WAIT5)
 
     def check_result(self):
         try:

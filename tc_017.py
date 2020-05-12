@@ -66,9 +66,9 @@ class TC017:
 
             qcd.select_dbset_input(self.driver, 'marketing_dev')
             qcd.select_db(self.driver)
-            qcd.select_table(self.driver, 4)
-            qcd.select_table(self.driver, 9)
-            qcd.select_table(self.driver, 11)
+            qcd.select_table(self.driver, "Patient")
+            qcd.select_table(self.driver, "Insurance")
+            qcd.select_table(self.driver, "Doctor")
             qcd.click_add_select_btn(self.driver)
 
             # Data Quality
@@ -110,5 +110,5 @@ class TC017:
             print("exception:{}".format(e))
             pass
             
-        time.sleep(qcd.WAIT100)
+        time.sleep(qcd.WAIT1)
         return

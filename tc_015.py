@@ -66,11 +66,11 @@ class TC015:
 
             qcd.select_dbset_input(self.driver, 'marketing_dev')
             qcd.select_db(self.driver)
-            qcd.select_table(self.driver, 1)
-            qcd.select_table(self.driver, 2)
-            qcd.select_table(self.driver, 3)
-            qcd.select_table(self.driver, 6)
-            qcd.select_table(self.driver, 7)
+            qcd.select_table(self.driver, "City")
+            qcd.select_table(self.driver, "Claims")
+            qcd.select_table(self.driver, "Diagnosis")
+            qcd.select_table(self.driver, "History")
+            qcd.select_table(self.driver, "H_Ins_Staff")
             qcd.click_add_select_btn(self.driver)
 
             # data profile

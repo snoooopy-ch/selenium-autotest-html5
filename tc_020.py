@@ -75,7 +75,7 @@ class TC020:
             print("exception:{}".format(e))
             pass
 
-        time.sleep(qcd.WAIT100)
+        time.sleep(qcd.WAIT1)
 
     def check_result(self):
         pass

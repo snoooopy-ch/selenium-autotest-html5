@@ -66,7 +66,7 @@ class TC007:
 
             qcd.select_dbset_input(self.driver, 'sampledb_src')
             qcd.select_db(self.driver)
-            qcd.select_table(self.driver, 4)
+            qcd.select_table(self.driver, "tolerance")
             qcd.click_add_select_btn(self.driver)
 
             # input 2
@@ -78,7 +78,7 @@ class TC007:
 
             qcd.select_dbset_input(self.driver, 'sampledb_dest')
             qcd.select_db(self.driver)
-            qcd.select_table(self.driver, 4)
+            qcd.select_table(self.driver, "tolerance")
             qcd.click_add_select_btn(self.driver)
 
             # selet columns

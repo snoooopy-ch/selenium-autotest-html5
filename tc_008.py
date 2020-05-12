@@ -66,7 +66,7 @@ class TC008:
 
             qcd.select_dbset_input(self.driver, 'marketing_dev')
             qcd.select_db(self.driver)
-            qcd.select_table(self.driver, 1)
+            qcd.select_table(self.driver, "City")
             qcd.click_add_select_btn(self.driver)
 
             # input 2
@@ -78,7 +78,7 @@ class TC008:
 
             qcd.select_dbset_input(self.driver, 'demodb_dest')
             qcd.select_db(self.driver)
-            qcd.select_table(self.driver, 1)
+            qcd.select_table(self.driver, "City")
             qcd.click_add_select_btn(self.driver)
 
             # select type

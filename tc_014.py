@@ -67,8 +67,8 @@ class TC014:
 
             qcd.select_dbset_input(self.driver, 'marketing_dev')
             qcd.select_db(self.driver)
-            qcd.select_table(self.driver, 10)
-            qcd.select_table(self.driver, 11)
+            qcd.select_table(self.driver, "Patient")
+            qcd.select_table(self.driver, "Medicine_manufacturer_info")
             qcd.click_add_select_btn(self.driver)
 
             # Data Quality

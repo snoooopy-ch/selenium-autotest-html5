@@ -247,7 +247,7 @@ def click_select_tableitem_for_select_columns(driver, index):
     
 # action to click one item of table
 def select_table(driver, index):
-    xpath = "//div[@id='top_panel']/div/div[2]/div[2]/div[2]/div[2]/div[1]/div[3]/div[" + str(index) + "]/label/span"
+    xpath = '//*[@id="' + index + '"]'
     city = driver.find_element_by_xpath(xpath)
     city.click()
 

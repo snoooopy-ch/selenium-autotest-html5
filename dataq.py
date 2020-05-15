@@ -73,6 +73,9 @@ if __name__ == '__main__':
     try:
         driver = qcd.init_selenium() 
         driver.get(url)
+        driver.set_window_size(1920, 1080)
+        size = driver.get_window_size()
+        print("2: Window size: width = {}px, height = {}px".format(size["width"], size["height"]))
 
     	# login page loading...
         time.sleep(qcd.WAIT1)

@@ -98,10 +98,13 @@ def init_selenium():
     chromeOptions = webdriver.ChromeOptions()
     
     if _platform == "linux" or _platform =="linux2":
-        chromeOptions = webdriver.ChromeOptions()
-        chromeOptions.add_argument("--no-sandbox")  
-        chromeOptions.add_argument('--headless')
-        chromeOptions.add_argument("--disable-gpu")
+        chromeOptions.add_argument("--headless")
+#        options.add_argument("window-size=1400,600")
+        chromeOptions.add_argument("--start-maximized")
+        chromeOptions.add_argument("--remote-debugging-port=9222")
+        chromeOptions.add_argument('--no-sandbox')
+        chromeOptions.add_argument("lang=ja_JP") 
+        chromeOptions.add_argument("user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36")
         driver = webdriver.Chrome(chrome_options=chromeOptions)
     elif _platform == "darwin":
         chromeOptions.add_argument("--remote-debugging-port=9222")
@@ -113,6 +116,9 @@ def init_selenium():
         chromeOptions.add_argument("start-maximized")
         chromeOptions.add_argument("user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36")
         driver = webdriver.Chrome('chromedriver.exe',chrome_options=chromeOptions)
+        
+    size = driver.get_window_size()
+    print("1: Window size: width = {}px, height = {}px".format(size["width"], size["height"]))
 
     driver.implicitly_wait(10)
     return driver

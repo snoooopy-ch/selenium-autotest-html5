@@ -1,5 +1,8 @@
 FROM python:3.8
 
+COPY . /app
+WORKDIR /app
+
 # RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
 
 RUN wget -q https://artifacts.elastic.co/GPG-KEY-elasticsearch

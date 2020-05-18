@@ -21,7 +21,7 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.webdriver.common.action_chains import ActionChains
 
-class TC016:
+class TC024:
     def __init__(self, drv):
         self.driver = drv
 
@@ -59,30 +59,48 @@ class TC016:
             
             # input 1
             qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Input", 300, 0)
-            input1 = driver.find_element_by_xpath('//div[@id="copy-component0"]')
+            input1 = self.driver.find_element_by_xpath('//div[@id="copy-component0"]')
 
             qcd.click_notification(self.driver)
+            qcd.select_cluster_execute_job(self.driver, 2)
+            qcd.save_close_execute_tab(self.driver)
 
             if (qcd.open_container(self.driver) != 1):
                 input1.click()
-
-            qcd.select_dbset_input(self.driver, 'AWS_HADOOP')
-            qcd.select_db_with_index(self.driver, 2)
-            qcd.select_table(self.driver, 2)
-            qcd.click_add_select_btn(self.driver)
-
+                
+            qcd.click_manual_upload_input(self.driver)
+            qcd.select_manual_upload_dataset_format(self.driver, 3)
+            qcd.set_dataset_path(self.driver, '/tmp/sale_details.json')
+            qcd.click_manual_upload_validate(self.driver)
+            
+            try:
+                element = WebDriverWait(self.driver, qcd.WAIT20).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="root"]/div/div[2]/div')))
+                time.sleep(qcd.WAIT3)
+                element = WebDriverWait(self.driver, qcd.WAIT20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="root"]/div/div[2]/div/div/div[2]/button')))
+                element.click()
+            except Exception as e:
+                raise Exception('Input1 Validate fails')
+            
             # input 2
             qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Input", 300, 160)
             input2 = self.driver.find_element_by_xpath('//div[@id="copy-component1"]')
 
             if (qcd.open_container(self.driver) != 1):
                 input2.click()
-
-            qcd.select_dbset_input(self.driver, 'sampledb_dest')
-            qcd.select_db(self.driver)
-            qcd.select_table(self.driver, 2)
-            qcd.click_add_select_btn(self.driver)
-
+                
+            qcd.click_manual_upload_input(self.driver)
+            qcd.select_manual_upload_dataset_format(self.driver, 3)
+            qcd.set_dataset_path(self.driver, '/tmp/sale_details.json')
+            qcd.click_manual_upload_validate(self.driver)
+            
+            try:
+                element = WebDriverWait(self.driver, qcd.WAIT20).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="root"]/div/div[2]/div')))
+                time.sleep(qcd.WAIT3)
+                element = WebDriverWait(self.driver, qcd.WAIT20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="root"]/div/div[2]/div/div/div[2]/button')))
+                element.click()
+            except Exception as e:
+                raise Exception('Input2 Validate fails')
+            
             # data compare
             qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Data Compare", 700, 80)
             compare1 = self.driver.find_element_by_xpath('//div[@id="copy-component2"]')
@@ -93,16 +111,13 @@ class TC016:
             if (qcd.open_container(self.driver) != 1):
                 compare1.click()
                 
-            qcd.cell_by_cell_compare(self.driver, 3)
+            qcd.cell_by_cell_compare(self.driver, 1)
             qcd.select_mapping_tab(self.driver)
-
-            # custom
-            matching_items = self.driver.find_elements_by_xpath('//*[@id="top_panel"]/div/div[2]/div[3]/div/div[1]/table/tr')
-            matching_count = len(matching_items);
-            print("TC012: {} items are matched", matching_count);
+            qcd.select_mapping_table_item(self.driver, 1)
+            qcd.select_key_for_table_item(self.driver, 1)
 
             # execute
-            qcd.save_excute_workflow(self.driver, 'TC_016_ALEX')
+            qcd.save_excute_workflow(self.driver, 'TC_024_ALEX')
             
         except Exception as e:
             qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
@@ -110,4 +125,12 @@ class TC016:
             pass
 
     def check_result(self):
-        pass
+        try:
+            qcd.click_share_button_and_close(self.driver)
+            qcd.click_result_close(self.driver)
+            element = WebDriverWait(self.driver, qcd.WebDriverWait).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="root"]/div/div[1]/div/div/div/div/div/div/div[2]/div/div[1]/div[2]/div[1]/div/div[8]/div')))
+            print("metric percentage = " + format(element.text))
+        except Exception as e:
+            print("exception:{}".format(e))
+            pass
+        return

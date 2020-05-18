@@ -39,6 +39,7 @@ WAIT5                       = 10
 WAIT10                      = 15
 WAIT20                      = 20
 WAIT100                     = 100
+WAITDRIVER                  = 20
 
 elements                    = ["Input", "Data Compare", "Select Columns", "Common Type", "Remove Duplicates", "Data Quality", "Data Profile"]
 element_xpath               = ['//div[@id="component0"]/img', '//div[@id="component1"]/img', '//div[@id="component2"]/img', '//div[@id="component3"]/img', '//div[@id="component4"]/img', '//div[@id="component5"]/img', '//div[@id="component6"]/img']
@@ -79,7 +80,7 @@ notification_xpath          = '//*[@id="root"]/div/div[1]/div/div/div/div/div/di
 notification_button_xpath   = '//*[@id="root"]/div/div[1]/div/div/div/div/div/div[2]/div/div[2]/div[1]/div/div'
 start_at_xapth              = '//*[@id="root"]/div/div[1]/div/div/div/div/div/div[2]/div/div[2]/div[5]/div/div[1]/div/div[2]/div/div[2]/div/div/span/span[1]/input'
 notification_create_xpath   = '//*[@id="root"]/div/div[1]/div/div/div/div/div/div[2]/div/div[2]/div[5]/div/div[3]/div[1]/button'
-notification_close_xpath    = '//*[@id="root"]/div/div[1]/div/div/div/div/div/div[2]/div/div[1]/header/div/div'
+notification_close_xpath    = '//*[@id="root"]/div/div[1]/div/div/div/div/div/div[2]/div/div[1]/div/button'
 result_close_xpath          = '/html/body/div[2]/div[3]/div/header/div/button'
 save_execute_on_xpath       = '//*[@id="root"]/div/div[1]/div/div/div/div/div/div[2]/div/div[2]/div[2]/div/button'
 select_all_commontype_xpath = '//*[@id="top_panel"]/div/div[2]/div[1]/div/div[2]/div[4]/button'
@@ -93,13 +94,18 @@ data_search_table_xpath     = '//*[@id="top_panel"]/div/div[2]/div[3]/div[1]/div
 sql_column_xpath            = '//*[@id="top_panel"]/div/div[2]/div[3]/div/div[2]/div/div[2]/div/div[1]/div[2]/div[1]/div/div[6]/span/*[name()="svg"]'
 detail_xpath                = '/html/body/div[2]/div[3]/div/div/div/div/div[1]/div[3]/span[2]'
 summary_select_xpath        = '/html/body/div[2]/div[3]/div/div/div/div/div[1]/div[2]/div/div/div[1]'
-                              
+action_on_first_flow_xpath  = '//*[@id="root"]/div/div[1]/div/div/div/div/div/div/div[2]/div/div[1]/div[2]/div[1]/div/div[1]/div/button/span[1]/*[name()="svg"]'
+search_flow_xpath           = '//*[@id="root"]/div/div[1]/div/div/div/div/div/div/div[1]/div[1]/div/div/input'
+manual_upload_xpath         = '//*[@id="top_panel"]/div/div[2]/div[2]/div[1]/div[2]'
+dataset_format_xpath        = '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div[2]/div/div[1]/div[2]/div/div[1]'
+dataset_path_xpath          = '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div[2]/div[1]/div[3]/div[2]/div/input'
+manual_upload_validate_xpath = '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div[2]/div[1]/button/span[1]'
+
 def init_selenium():
     chromeOptions = webdriver.ChromeOptions()
     
     if _platform == "linux" or _platform =="linux2":
         chromeOptions.add_argument("--headless")
-#        options.add_argument("window-size=1400,600")
         chromeOptions.add_argument("--start-maximized")
         chromeOptions.add_argument("--remote-debugging-port=9222")
         chromeOptions.add_argument('--no-sandbox')
@@ -117,9 +123,6 @@ def init_selenium():
         chromeOptions.add_argument("user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36")
         driver = webdriver.Chrome('chromedriver.exe',chrome_options=chromeOptions)
         
-    size = driver.get_window_size()
-    print("1: Window size: width = {}px, height = {}px".format(size["width"], size["height"]))
-
     driver.implicitly_wait(10)
     return driver
 
@@ -521,6 +524,8 @@ def add_sql_on_dataquality(driver, index, sql, job):
 # save and excute workflow
 def save_excute_workflow(driver, flow_name):
     name_field = driver.find_element_by_xpath(name_xpath)
+    name_field.send_keys(Keys.CONTROL + 'a') 
+    name_field.send_keys(Keys.DELETE)
     name_field.send_keys(flow_name)
 
     btn_save = driver.find_element_by_xpath(save_xpath)
@@ -533,7 +538,7 @@ def save_excute_workflow(driver, flow_name):
     time.sleep(WAIT3)
 
     try:
-        btn_result = WebDriverWait(driver, 2000).until(EC.element_to_be_clickable((By.XPATH, result_xpath)))
+        btn_result = WebDriverWait(driver, 300).until(EC.element_to_be_clickable((By.XPATH, result_xpath)))
         time.sleep(WAIT3)
         btn_result.click()
         time.sleep(WAIT10)
@@ -625,10 +630,10 @@ def click_share_button_and_close(driver):
     share_btn = driver.find_element_by_xpath(share_btn_xpath)
     share_btn.click()
     time.sleep(WAIT1)
-    print("share link : " + driver.find_element_by_xpath('//*[@id="share-link-textfield"]').text)
+    print("share link : " + driver.find_element_by_xpath('//*[@id="share-link-textfield"]').get_attribute("value"))
     copy_btn = driver.find_element_by_xpath('/html/body/div[3]/div[3]/div/div[3]/button[1]')
     copy_btn.click()
-    close_btn = driver.find_element_by_xpath('/html/body/div[2]/div[3]/div/header/div/div/button')
+    close_btn = driver.find_element_by_xpath('/html/body/div[3]/div[3]/div/div[3]/button[2]')
     close_btn.click()
     return
 
@@ -734,7 +739,8 @@ def set_start_time_with10(driver):
 # action to click result close
 def click_result_close(driver):
     try:
-        driver.find_element_by_xpath(result_close_xpath).click()
+        elements = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, result_close_xpath)))
+        elements.click()
         time.sleep(WAIT3)
     except Exception as e:
         print(e)
@@ -745,7 +751,7 @@ def select_cluster_execute_job(driver, index):
     try:
         driver.find_element_by_xpath('//*[@id="root"]/div/div[1]/div/div/div/div/div/div[2]/div/div[2]/div[2]/div/div/div/div[1]').click()
         time.sleep(WAIT1)
-        driver.find_element_by_xpath('//*[@id="root"]/div/div[1]/div/div/div/div/div/div[2]/div/div[2]/div[2]/div/div/div[2]/div/div["' + str(index) + '"]').click()
+        driver.find_element_by_xpath('//*[@id="root"]/div/div[1]/div/div/div/div/div/div[2]/div/div[2]/div[2]/div/div/div[2]/div/div[' + str(index) + ']').click()
         time.sleep(WAIT1)
     except Exception as e:
         pass
@@ -755,6 +761,8 @@ def select_cluster_execute_job(driver, index):
 def save_close_execute_tab(driver):
     driver.find_element_by_xpath(save_execute_on_xpath).click()
     driver.find_element_by_xpath(notification_close_xpath).click()
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="root"]/div/div[2]/div/div/div[2]/button')))
+    element.click()
     return
 
 # open settings
@@ -871,4 +879,48 @@ def entry_clear(self, element):
 def open_config_tab_on_input(driver):
     driver.find_element_by_xpath(input_config_tag_xpath).click()
     time.sleep(WAIT1)
+    return
+
+# action to first flow
+def click_action_on_first_flow(driver, index):
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, action_on_first_flow_xpath)))
+    element.click()
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="long-menu"]/div[3]/ul/li[' + str(index) + ']')))
+    element.click()
+    time.sleep(WAIT5)
+    return
+
+# action to find flow
+def find_specific_flow(driver, keys):
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, search_flow_xpath)))
+    element.send_keys(Keys.CONTROL + 'a')
+    element.send_keys(Keys.DELETE)
+    element.send_keys(keys)
+    time.sleep(WAIT3)
+    return
+
+# action to click manual upload in input
+def click_manual_upload_input(driver):
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, manual_upload_xpath)))
+    element.click()
+    return
+
+# select manual upload dataset format
+def select_manual_upload_dataset_format(driver, index):
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, dataset_format_xpath)))
+    element.click()
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div[2]/div/div[1]/div[2]/div[2]/div/div[' + str(index) + ']')))
+    element.click()
+    return;
+
+# set dataset path
+def set_dataset_path(driver, path):
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, dataset_path_xpath)))
+    element.send_keys(path)
+    return
+
+# click manual upload validate
+def click_manual_upload_validate(driver):
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, manual_upload_validate_xpath)))
+    element.click()
     return

@@ -28,4 +28,3 @@ RUN pip install --upgrade pip
 
 # install selenium
 RUN pip install selenium
-CMD python dataq.py -s 1

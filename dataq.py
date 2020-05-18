@@ -27,6 +27,10 @@ from tc_020 import TC020
 from tc_021 import TC021
 from tc_022 import TC022
 from tc_023 import TC023
+from tc_024 import TC024
+from tc_025 import TC025
+from tc_026 import TC026
+from tc_027 import TC027
 
 #BASE_URL = 'http://dataq-frontend.s3-website.us-east-2.amazonaws.com/#/user-home/flow'
 #BASE_URL = 'http://dataq-automation-alb-1598668034.us-east-1.elb.amazonaws.com:9000'
@@ -66,16 +70,14 @@ if __name__ == '__main__':
     if args.scripts:
         scpt_number = [int(item) for item in args.scripts.split(',')]
     else:
-        scpt_number = [1,2,3,4,5,6,7,8,9,11,12,13,14,15,16,17,19,20,21,22,23]
+        scpt_number = [1,2,3,4,5,6,7,8,9,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,27]
 
     print(scpt_number)
 
+    driver = qcd.init_selenium() 
     try:
-        driver = qcd.init_selenium() 
         driver.get(url)
         driver.set_window_size(1920, 1080)
-        size = driver.get_window_size()
-        print("2: Window size: width = {}px, height = {}px".format(size["width"], size["height"]))
 
     	# login page loading...
         time.sleep(qcd.WAIT1)
@@ -85,10 +87,14 @@ if __name__ == '__main__':
                 raise Exception('fail to login')
 
             for index in scpt_number:
-                driver.refresh()
-                TCCLASS = str2Class("TC" + str(index).zfill(3))
-                tc = TCCLASS(driver)
-                tc.test()
+                try:
+                    driver.refresh()
+                    TCCLASS = str2Class("TC" + str(index).zfill(3))
+                    tc = TCCLASS(driver)
+                    tc.test()
+                except Exception as e:
+                    print(e)        
+                    pass
         except Exception as e:
             print(e)
             pass
@@ -98,10 +104,9 @@ if __name__ == '__main__':
     except KeyboardInterrupt:
         pass
     except Exception as e:
-        # slack_post("error:{}".format(e))
         qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
         print("exception:{}".format(e))
-    # finally:
-    #     driver.quit()
+    finally:
+        driver.quit()
     
     sys.exit()

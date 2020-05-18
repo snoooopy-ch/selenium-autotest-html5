@@ -9,6 +9,7 @@ import traceback
 import logging
 
 from datetime import datetime, date, timedelta
+
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
@@ -21,7 +22,8 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.webdriver.common.action_chains import ActionChains
 
-class TC016:
+
+class TC027:
     def __init__(self, drv):
         self.driver = drv
 
@@ -59,55 +61,47 @@ class TC016:
             
             # input 1
             qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Input", 300, 0)
-            input1 = driver.find_element_by_xpath('//div[@id="copy-component0"]')
-
-            qcd.click_notification(self.driver)
+            input1 = self.driver.find_element_by_xpath('//div[@id="copy-component0"]')
 
             if (qcd.open_container(self.driver) != 1):
                 input1.click()
 
-            qcd.select_dbset_input(self.driver, 'AWS_HADOOP')
-            qcd.select_db_with_index(self.driver, 2)
-            qcd.select_table(self.driver, 2)
-            qcd.click_add_select_btn(self.driver)
-
-            # input 2
-            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Input", 300, 160)
-            input2 = self.driver.find_element_by_xpath('//div[@id="copy-component1"]')
-
-            if (qcd.open_container(self.driver) != 1):
-                input2.click()
-
-            qcd.select_dbset_input(self.driver, 'sampledb_dest')
+            qcd.select_dbset_input(self.driver, 'hims')
             qcd.select_db(self.driver)
-            qcd.select_table(self.driver, 2)
+            qcd.select_table(self.driver, "courses_info")
             qcd.click_add_select_btn(self.driver)
-
-            # data compare
-            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Data Compare", 700, 80)
-            compare1 = self.driver.find_element_by_xpath('//div[@id="copy-component2"]')
-
-            qcd.connect_elements(self.driver, input1, 1, compare1, 1)
-            qcd.connect_elements(self.driver, input2, 1, compare1, 1)
-
-            if (qcd.open_container(self.driver) != 1):
-                compare1.click()
-                
-            qcd.cell_by_cell_compare(self.driver, 3)
-            qcd.select_mapping_tab(self.driver)
-
-            # custom
-            matching_items = self.driver.find_elements_by_xpath('//*[@id="top_panel"]/div/div[2]/div[3]/div/div[1]/table/tr')
-            matching_count = len(matching_items);
-            print("TC012: {} items are matched", matching_count);
+            
+            # data profile
+            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Data Profile", 500, -160)
+            data_profile = self.driver.find_element_by_xpath('//div[@id="copy-component1"]')
+            qcd.connect_elements(self.driver, input1, 1, data_profile, 1)
 
             # execute
-            qcd.save_excute_workflow(self.driver, 'TC_016_ALEX')
-            
+            qcd.save_excute_workflow(self.driver, 'flow1')
         except Exception as e:
             qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
             print("exception:{}".format(e))
             pass
 
+        print('finished')
+
     def check_result(self):
-        pass
+        try:
+            qcd.click_result_close(self.driver)
+            qcd.open_dashboard(self.driver)
+            
+            # Edit
+            qcd.click_action_on_first_flow(self.driver, 1)
+            
+            input1 = self.driver.find_element_by_xpath('//div[@id="copy-component0"]')
+            if (qcd.open_container(self.driver) != 1):
+                input1.click()
+                
+            qcd.select_table(self.driver, "Student_Information")
+            qcd.click_add_select_btn(self.driver)
+            qcd.save_excute_workflow(self.driver, 'flow1')
+            
+        except Exception as e:
+            qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
+            print("exception:{}".format(e))
+            pass

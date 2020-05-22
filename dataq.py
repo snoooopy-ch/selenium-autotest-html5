@@ -28,7 +28,7 @@ from tc_021 import TC021
 from tc_022 import TC022
 from tc_023 import TC023
 from tc_024 import TC024
-from tc_025 import TC025
+#from tc_025 import TC025
 from tc_026 import TC026
 from tc_027 import TC027
 

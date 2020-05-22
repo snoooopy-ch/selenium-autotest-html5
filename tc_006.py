@@ -94,10 +94,10 @@ class TC006:
                 selectcolumns.click()
 
             qcd.click_select_tableitem_for_select_columns(self.driver, 1)
-            qcd.click_sc_done(self.driver)
+            qcd.click_save_on_cp(self.driver)
 
             qcd.click_select_tableitem_for_select_columns(self.driver, 2)
-            qcd.click_sc_done(self.driver)
+            qcd.click_save_on_cp(self.driver)
 
             # data compare
             qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Data Compare", 700, 80)

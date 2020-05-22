@@ -62,12 +62,21 @@ class TC016:
             input1 = driver.find_element_by_xpath('//div[@id="copy-component0"]')
 
             qcd.click_notification(self.driver)
+            qcd.select_cluster_execute_job(self.driver, 2)
+            qcd.save_close_execute_tab(self.driver)
 
             if (qcd.open_container(self.driver) != 1):
                 input1.click()
 
             qcd.select_dbset_input(self.driver, 'AWS_HADOOP')
             qcd.select_db_with_index(self.driver, 2)
+            element = WebDriverWait(driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div[1]/div[5]/button')))
+            element.click()
+            
+            element = WebDriverWait(driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div[2]/div[1]/div[1]/div/div/input')))
+            element.send_keys("me")
+            
+            qcd.select_table(self.driver, 1)
             qcd.select_table(self.driver, 2)
             qcd.click_add_select_btn(self.driver)
 
@@ -78,9 +87,14 @@ class TC016:
             if (qcd.open_container(self.driver) != 1):
                 input2.click()
 
-            qcd.select_dbset_input(self.driver, 'sampledb_dest')
+            qcd.select_dbset_input(self.driver, 'demodb_dest')
             qcd.select_db(self.driver)
-            qcd.select_table(self.driver, 2)
+            
+            element = WebDriverWait(driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div[2]/div[1]/div[1]/div/div/input')))
+            element.send_keys("m")
+            
+            qcd.select_table(self.driver, 4)
+            qcd.select_table(self.driver, 5)
             qcd.click_add_select_btn(self.driver)
 
             # data compare
@@ -93,13 +107,14 @@ class TC016:
             if (qcd.open_container(self.driver) != 1):
                 compare1.click()
                 
-            qcd.cell_by_cell_compare(self.driver, 3)
+            qcd.cell_by_cell_compare(self.driver, 1)
             qcd.select_mapping_tab(self.driver)
-
-            # custom
-            matching_items = self.driver.find_elements_by_xpath('//*[@id="top_panel"]/div/div[2]/div[3]/div/div[1]/table/tr')
-            matching_count = len(matching_items);
-            print("TC012: {} items are matched", matching_count);
+            
+            qcd.add_mapping_table_name(self.driver)
+            qcd.select_mapping_table_item(self.driver, 1)
+            qcd.select_key_for_table_item(self.driver, 1)
+            qcd.select_mapping_table_item(self.driver, 2)
+            qcd.select_key_for_table_item(self.driver, 1)
 
             # execute
             qcd.save_excute_workflow(self.driver, 'TC_016_ALEX')

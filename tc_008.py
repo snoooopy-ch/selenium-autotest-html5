@@ -81,7 +81,7 @@ class TC008:
             qcd.select_table(self.driver, "City")
             qcd.click_add_select_btn(self.driver)
 
-            # select type
+            # Common type
             qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Common Type", 300, -50)
             selectcolumns = self.driver.find_element_by_xpath('//div[@id="copy-component2"]')
 
@@ -94,7 +94,7 @@ class TC008:
 
             qcd.select_item_from_column_type(self.driver, 3)
             qcd.select_item_from_column_data_type(self.driver, 9)
-            qcd.click_sc_done(self.driver)
+            qcd.click_save_on_cp(self.driver)
 
             # data compare
             qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Data Compare", 700, 80)

@@ -91,16 +91,16 @@ class TC021:
                 selectcolumns.click()
 
             qcd.click_select_tableitem_for_select_columns(self.driver, 1)
-            qcd.click_sc_done(self.driver)
+            qcd.click_save_on_cp(self.driver)
 
             qcd.click_select_tableitem_for_select_columns(self.driver, 2)
-            qcd.click_sc_done(self.driver)
+            qcd.click_save_on_cp(self.driver)
 
             qcd.click_select_tableitem_for_select_columns(self.driver, 3)
-            qcd.click_sc_done(self.driver)
+            qcd.click_save_on_cp(self.driver)
 
             qcd.click_select_tableitem_for_select_columns(self.driver, 4)
-            qcd.click_sc_done(self.driver)
+            qcd.click_save_on_cp(self.driver)
 
             # common type
             qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Common Type", 500, -150)
@@ -115,20 +115,20 @@ class TC021:
             qcd.click_select_all_for_commontype(self.driver)
             qcd.select_item_from_column_data_type_list(self.driver, 2, 1)
             qcd.select_item_from_column_data_type_list(self.driver, 5, 1)
-            qcd.click_sc_done(self.driver)
+            qcd.click_save_on_cp(self.driver)
 
             qcd.click_select_tableitem_for_select_columns(self.driver, 2)
             qcd.click_select_all_for_commontype(self.driver)
-            qcd.click_sc_done(self.driver)
+            qcd.click_save_on_cp(self.driver)
 
             qcd.click_select_tableitem_for_select_columns(self.driver, 3)
             qcd.click_select_all_for_commontype(self.driver)
             qcd.select_item_from_column_data_type_list(self.driver, 7, 5)
-            qcd.click_sc_done(self.driver)
+            qcd.click_save_on_cp(self.driver)
 
             qcd.click_select_tableitem_for_select_columns(self.driver, 4)
             qcd.click_select_all_for_commontype(self.driver)
-            qcd.click_sc_done(self.driver)
+            qcd.click_save_on_cp(self.driver)
 
             # Remove Duplicate
             qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Remove Duplicates", 750, -160)
@@ -140,19 +140,19 @@ class TC021:
 
             qcd.click_select_tableitem_for_select_columns(self.driver, 1)
             qcd.click_select_all_for_commontype(self.driver)
-            qcd.click_sc_done(self.driver)
+            qcd.click_save_on_cp(self.driver)
 
             qcd.click_select_tableitem_for_select_columns(self.driver, 2)
             qcd.click_select_all_for_commontype(self.driver)
-            qcd.click_sc_done(self.driver)
+            qcd.click_save_on_cp(self.driver)
 
             qcd.click_select_tableitem_for_select_columns(self.driver, 3)
             qcd.click_select_all_for_commontype(self.driver)
-            qcd.click_sc_done(self.driver)
+            qcd.click_save_on_cp(self.driver)
 
             qcd.click_select_tableitem_for_select_columns(self.driver, 4)
             qcd.click_select_all_for_commontype(self.driver)
-            qcd.click_sc_done(self.driver)
+            qcd.click_save_on_cp(self.driver)
 
             # Data Compare
             qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Data Compare", 700, 0)

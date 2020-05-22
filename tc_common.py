@@ -420,8 +420,8 @@ def select_key_for_table_item(driver, index):
     print('select key for table item')
     return
 
-# action to click done
-def click_sc_done(driver):
+# action to click save button
+def click_save_on_cp(driver):
     btn_done = driver.find_element_by_xpath(done_sc_xapth)
     btn_done.click()
     print('click done')

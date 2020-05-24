@@ -72,7 +72,7 @@ class TC014:
             qcd.click_add_select_btn(self.driver)
 
             # Data Quality
-            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Data Quality", 500, -300)
+            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Data Quality", 500, -100)
             data_quality = self.driver.find_element_by_xpath('//div[@id="copy-component1"]');
             qcd.connect_elements(self.driver, input1, 1, data_quality, 1)
 

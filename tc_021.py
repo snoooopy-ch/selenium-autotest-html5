@@ -131,7 +131,7 @@ class TC021:
             qcd.click_save_on_cp(self.driver)
 
             # Remove Duplicate
-            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Remove Duplicates", 750, -160)
+            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Remove Duplicates", 800, -200)
             removeduplicates = self.driver.find_element_by_xpath('//div[@id="copy-component4"]')
 
             qcd.connect_elements(self.driver, commontype, 2, removeduplicates, 1)
@@ -155,7 +155,7 @@ class TC021:
             qcd.click_save_on_cp(self.driver)
 
             # Data Compare
-            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Data Compare", 700, 0)
+            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Data Compare", 800, 0)
             compare1 = self.driver.find_element_by_xpath('//div[@id="copy-component5"]')
 
             qcd.connect_elements(self.driver, removeduplicates, 2, compare1, 1)
@@ -168,14 +168,23 @@ class TC021:
             qcd.select_mapping_tab(self.driver)
             qcd.add_mapping_table_name(self.driver)
 
+            qcd.select_key_for_warning_mapping_tableitem(self.driver, 1)
+                    
+            #qcd.select_mapping_table_item(self.driver, 1)
+            #qcd.select_key_for_table_item(self.driver, 1)
+            
+            #qcd.select_mapping_table_item(self.driver, 4)
+            #qcd.select_key_for_table_item(self.driver, 1)
+
             qcd.select_mapping_table_item(self.driver, 1)
-            qcd.select_key_for_table_item(self.driver, 1)
-
-            qcd.select_mapping_table_item(self.driver, 4)
-            qcd.select_key_for_table_item(self.driver, 1)
-
-            qcd.select_mapping_table_item(self.driver, 2)
+            data_type = self.driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[3]/div/div[2]/div/div[2]/div/div[1]/div[2]/div[2]/div/div[2]/img').get_attribute("title")
+            print("colleage_code_Varchar's type is " + data_type)
+            
+            qcd.select_mapping_table_item(self.driver, 3)
             qcd.add_columns_in_datacompare_tableitem(self.driver)
+            
+            data_type = self.driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[3]/div/div[2]/div/div[2]/div/div[1]/div[2]/div[5]/div/div[2]/img').get_attribute("title")
+            print("gradePoints_int's type is " + data_type)
 
             # execute
             qcd.save_excute_workflow(self.driver, 'TC_021_ALEX')
@@ -183,7 +192,6 @@ class TC021:
         except Exception as e:
             qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
             print("exception:{}".format(e))
-            time.sleep(100)
             pass
 
     def check_result(self):

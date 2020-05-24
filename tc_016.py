@@ -59,7 +59,7 @@ class TC016:
             
             # input 1
             qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Input", 300, 0)
-            input1 = driver.find_element_by_xpath('//div[@id="copy-component0"]')
+            input1 = self.driver.find_element_by_xpath('//div[@id="copy-component0"]')
 
             qcd.click_notification(self.driver)
             qcd.select_cluster_execute_job(self.driver, 2)
@@ -70,14 +70,14 @@ class TC016:
 
             qcd.select_dbset_input(self.driver, 'AWS_HADOOP')
             qcd.select_db_with_index(self.driver, 2)
-            element = WebDriverWait(driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div[1]/div[5]/button')))
+            element = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div[1]/div[5]/button')))
             element.click()
             
-            element = WebDriverWait(driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div[2]/div[1]/div[1]/div/div/input')))
+            element = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div[2]/div[1]/div[1]/div/div/input')))
             element.send_keys("me")
             
-            qcd.select_table(self.driver, 1)
-            qcd.select_table(self.driver, 2)
+            qcd.select_table(self.driver, "medicine")
+            qcd.select_table(self.driver, "medicine_manufacturer_info")
             qcd.click_add_select_btn(self.driver)
 
             # input 2
@@ -90,11 +90,11 @@ class TC016:
             qcd.select_dbset_input(self.driver, 'demodb_dest')
             qcd.select_db(self.driver)
             
-            element = WebDriverWait(driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div[2]/div[1]/div[1]/div/div/input')))
+            element = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div[2]/div[1]/div[1]/div/div/input')))
             element.send_keys("m")
             
-            qcd.select_table(self.driver, 4)
-            qcd.select_table(self.driver, 5)
+            qcd.select_table(self.driver, "medicine")
+            qcd.select_table(self.driver, "manufacturer_info")
             qcd.click_add_select_btn(self.driver)
 
             # data compare
@@ -125,4 +125,12 @@ class TC016:
             pass
 
     def check_result(self):
+        try:
+            summary_xpath = '/html/body/div[2]/div[3]/div/div/div/div/div[3]/div[1]/div[2]'
+            qcd.check_summary_in_final_result(self.driver, self.__class__.__name__, summary_xpath)
+            qcd.click_result_close(self.driver)
+        except Exception as e:
+            qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
+            print("exception:{}".format(e))
+            pass
         pass

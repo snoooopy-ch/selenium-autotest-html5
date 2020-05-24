@@ -64,11 +64,10 @@ class TC022:
             qcd.add_new_connection(self.driver, 6, 'employee_demo', 'jdbc:mysql://54.86.47.129:3306/employee?useUnicode=true& useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC', 'demouser1', 'demopassword')
             
             qcd.open_dashboard(self.driver)
-            self.driver.find_element_by_xpath('//*[@id="root"]/div/div[1]/div/div/div/div/div/div[3]/div/div[1]/div[2]/div[1]/div/div[8]/div/*[name()="svg"]').click()
+            qcd.click_action_on_first_flow(self.driver, 1)
+            # self.driver.find_element_by_xpath('//*[@id="root"]/div/div[1]/div/div/div/div/div/div[3]/div/div[1]/div[2]/div[1]/div/div[8]/div/*[name()="svg"]').click()
 
-            time.sleep(qcd.WAIT10)
             input1 = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component0"]')))
-            #input1 = self.driver.find_element_by_xpath('//div[@id="copy-component0"]')
             if (qcd.open_container(self.driver) != 1):
                 input1.click()
 
@@ -88,4 +87,3 @@ class TC022:
             print("employee_demo exist")
         except NoSuchElementException:
             print("employee_demo unexist")
-        time.sleep(100)

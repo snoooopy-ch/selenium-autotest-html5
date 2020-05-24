@@ -74,13 +74,13 @@ result_xpath                = '//div[@id="root"]/div/div[1]/div/div/div/div/div/
 result_txt_xpath            = '/html/body/div[2]/div[3]/div/div/div/div/table/tr[8]/span'
 random_input_xpath          = '//*[@id="top_panel"]/div/div[2]/div[2]/div/div[2]/div/div/input'
 open_dashboard_xpath        = '//*[@id="root"]/div/div[1]/div/div/header/div/div[2]/div/div/div/button[1]'
-searchbox_dashboard_xpath   = '//*[@id="root"]/div/div[1]/div/div/div/div/div/div[2]/div[1]/div/div/input'
-search_table_recod_xpath    = '//*[@id="root"]/div/div[1]/div/div/div/div/div/div[3]/div/div[1]/div[2]/div'
+searchbox_dashboard_xpath   = '//*[@id="root"]/div/div[1]/div/div/div/div/div/div/div[1]/div[1]/div/div/input'
+search_table_recod_xpath    = '//*[@id="root"]/div/div[1]/div/div/div/div/div/div/div[2]/div/div[1]/div[2]/div'
 notification_xpath          = '//*[@id="root"]/div/div[1]/div/div/div/div/div/div[1]/header/div/img[1]'
 notification_button_xpath   = '//*[@id="root"]/div/div[1]/div/div/div/div/div/div[2]/div/div[2]/div[1]/div/div'
 start_at_xapth              = '//*[@id="root"]/div/div[1]/div/div/div/div/div/div[2]/div/div[2]/div[5]/div/div[1]/div/div[2]/div/div[2]/div/div/span/span[1]/input'
 notification_create_xpath   = '//*[@id="root"]/div/div[1]/div/div/div/div/div/div[2]/div/div[2]/div[5]/div/div[3]/div[1]/button'
-notification_close_xpath    = '//*[@id="root"]/div/div[1]/div/div/div/div/div/div[2]/div/div[1]/div/button'
+notification_close_xpath    = '//*[@id="root"]/div/div[1]/div/div/div/div/div/div[2]/div/div[1]/header/div/div'
 result_close_xpath          = '/html/body/div[2]/div[3]/div/header/div/button'
 save_execute_on_xpath       = '//*[@id="root"]/div/div[1]/div/div/div/div/div/div[2]/div/div[2]/div[2]/div/button'
 select_all_commontype_xpath = '//*[@id="top_panel"]/div/div[2]/div[1]/div/div[2]/div[4]/button'
@@ -94,7 +94,7 @@ data_search_table_xpath     = '//*[@id="top_panel"]/div/div[2]/div[3]/div[1]/div
 sql_column_xpath            = '//*[@id="top_panel"]/div/div[2]/div[3]/div/div[2]/div/div[2]/div/div[1]/div[2]/div[1]/div/div[6]/span/*[name()="svg"]'
 detail_xpath                = '/html/body/div[2]/div[3]/div/div/div/div/div[1]/div[3]/span[2]'
 summary_select_xpath        = '/html/body/div[2]/div[3]/div/div/div/div/div[1]/div[2]/div/div/div[1]'
-action_on_first_flow_xpath  = '//*[@id="root"]/div/div[1]/div/div/div/div/div/div/div[2]/div/div[1]/div[2]/div[1]/div/div[1]/div/button/span[1]/*[name()="svg"]'
+action_on_first_flow_xpath  = '//*[@id="root"]/div/div[1]/div/div/div/div/div/div/div[2]/div/div[1]/div[2]/div[1]/div/div[1]/div/button'
 search_flow_xpath           = '//*[@id="root"]/div/div[1]/div/div/div/div/div/div/div[1]/div[1]/div/div/input'
 manual_upload_xpath         = '//*[@id="top_panel"]/div/div[2]/div[2]/div[1]/div[2]'
 dataset_format_xpath        = '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div[2]/div/div[1]/div[2]/div/div[1]'
@@ -207,38 +207,36 @@ def open_container(driver):
 
 # action to select db set.
 def select_dbset_input(driver, db):
-    db_select = driver.find_elements_by_xpath("//select[@name='connection']")[0]
-    db_select.click()
-    time.sleep(WAIT3)
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div[1]/div[2]/div/select')))
+    element.click()
 
-    db_value = driver.find_element_by_xpath("//select[@name='connection']/option[@value='" + db + "']")
+    db_value = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div[1]/div[2]/div/select/option[@value="' + db + '"]')
     db_value.click()
-    time.sleep(WAIT1)
-
+    time.sleep(WAIT3)
     print('select db set')
     return
 
 # action to select db
 def select_db(driver):
-    db_name = driver.find_elements_by_xpath("//div[@class=' css-tlfecz-indicatorContainer']")[0]
-    db_name.click()
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div[3]/div/div[2]/div')))
+    element.click()
     
-    db_demo = driver.find_element_by_xpath("//div[@id='top_panel']/div/div[2]/div[2]/div[2]/div/div[3]/div[2]/div/div")
-    db_demo.click()
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div[3]/div[2]/div/div')))
+    element.click()
+    
     time.sleep(WAIT3)
-
     print('select db name')    
     return
 
 # action to select db table
 def select_db_with_index(driver, index):
-    db_name = driver.find_elements_by_xpath("//div[@class=' css-tlfecz-indicatorContainer']")[0]
-    db_name.click()
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div[3]/div/div[2]/div')))
+    element.click()
     
-    db_demo = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div[3]/div[2]/div/div["' + str(index) + '"]')
-    db_demo.click()
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div[3]/div[2]/div/div[' + str(index) + ']')))
+    element.click()
+    
     time.sleep(WAIT5)
-
     print('select db name')    
     return
 
@@ -257,9 +255,8 @@ def click_select_tableitem_for_select_columns(driver, index):
 # action to click one item of table
 def select_table(driver, index):
     xpath = '//*[@id="' + index + '"]'
-    city = driver.find_element_by_xpath(xpath)
-    city.click()
-
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, xpath)))
+    element.click()
     print('select table ' + str(index))
     return
 
@@ -418,6 +415,21 @@ def select_key_for_table_item(driver, index):
     time.sleep(WAIT1)
 
     print('select key for table item')
+    return
+
+def select_key_for_warning_mapping_tableitem(driver, keyindex):
+    tables_tr = driver.find_elements_by_xpath('//*[@id="tableContainer"]/table/tr')
+    count = len(tables_tr)
+    for i in range(count):
+        try:
+            img = driver.find_element_by_xpath('//*[@id="tableContainer"]/table/tr[' + str(i + 1) + ']/td[4]/img')
+            table_item = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="tableContainer"]/table/tr[' + str(i + 1) + ']/td[2]/span[1]')))
+            table_item.click()
+            input_key = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[3]/div/div[2]/div/div[2]/div/div[1]/div[2]/div[' + str(keyindex) + ']/div/div[1]/input')))
+            input_key.click()
+            time.sleep(WAIT1)
+        except Exception as e:
+            pass
     return
 
 # action to click save button
@@ -653,7 +665,7 @@ def check_summary_statue_in_final_result(driver, class_name, summary_xpath):
 
             output = ''
             find = 0
-            print("{} {} {}".format(tds[1].text, tds[7].text, tds[8].find_element_by_xpath('./span').text))
+            print("{} {} {}".format(tds[1].text, tds[7].text, tds[9].find_element_by_xpath('./span').text))
     except Exception as ex:
         print(ex)
         pass
@@ -685,7 +697,7 @@ def check_summary_in_fianl_mismatched_count(driver, class_name, summary_xpath):
 def input_searchbox_on_dashboard(driver, value):
     searchbox = driver.find_element_by_xpath(searchbox_dashboard_xpath)
     searchbox.send_keys(value)
-    time.sleep(WAIT5)
+    time.sleep(WAIT1)
 
     try:
         records = driver.find_elements_by_xpath(search_table_recod_xpath)
@@ -693,18 +705,6 @@ def input_searchbox_on_dashboard(driver, value):
         records = []
     
     return len(records)
-
-# action to click editview on first record
-def click_editview_firstrecord_on_dashboard(driver):
-    try:
-        records = driver.find_elements_by_xpath(search_table_recod_xpath)
-        editview = records[0].find_element_by_xpath('./div/div[8]/div/*[name()="svg"]')
-        editview.click()
-        time.sleep(WAIT20)
-    except Exception as e:
-        print(e)
-        records = []
-    return
 
 # action to click notification on dashboard()
 def click_notification(driver):
@@ -798,6 +798,11 @@ def add_new_connection(driver, index, name, url, user, password):
 
     time.sleep(WAIT3)
     driver.find_element_by_xpath('//*[@id="outlined-bare"]').send_keys(name)
+    
+    dateTimeObj = datetime.now()
+    database_name = 'employee_' + str(dateTimeObj.microsecond)
+    driver.find_element_by_xpath('//*[@id="root"]/div/div[1]/div/div/div/div/div/main/div[2]/div/div[2]/div/div/section[1]/div[2]/div[3]/div[1]/div/input').send_keys(database_name)
+    
     driver.find_element_by_xpath('//*[@id="root"]/div/div[1]/div/div/div/div/div/main/div[2]/div/div[2]/div/div/section[1]/div[2]/p/span').click()
 
     driver.find_element_by_xpath('//*[@id="root"]/div/div[1]/div/div/div/div/div/main/div[2]/div/div[2]/div/div/section[1]/div[2]/div/div/div[1]/div/input').send_keys(Keys.CONTROL + 'a') 
@@ -810,16 +815,14 @@ def add_new_connection(driver, index, name, url, user, password):
     driver.find_element_by_xpath('//*[@id="root"]/div/div[1]/div/div/div/div/div/main/div[2]/div/div[2]/div/div/section[2]/div[1]/div/div/input').send_keys(user)
     driver.find_element_by_xpath('//*[@id="root"]/div/div[1]/div/div/div/div/div/main/div[2]/div/div[2]/div/div/section[2]/div[2]/div/div/input').send_keys(password)
 
-    time.sleep(WAIT3)
     try:
-        test_btn = driver.find_element_by_xpath('//*[@id="root"]/div/div[1]/div/div/div/div/div/main/div[2]/div/div[2]/div/div/section[3]/div/div[2]/button')
+        test_btn = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="root"]/div/div[1]/div/div/div/div/div/main/div[2]/div/div[2]/div/div/section[3]/div/div[2]/button')))
         test_btn.click()
     except Exception as e:
         pass
 
-    time.sleep(WAIT5)
     try:
-        create_btn = driver.find_element_by_xpath('//*[@id="root"]/div/div[1]/div/div/div/div/div/main/div[2]/div/div[2]/div/div/section[3]/div/div[1]/button')
+        create_btn = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="root"]/div/div[1]/div/div/div/div/div/main/div[2]/div/div[2]/div/div/section[3]/div/div[1]/button')))
         create_btn.click()
     except Exception as e:
         pass

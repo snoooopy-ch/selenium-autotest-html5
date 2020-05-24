@@ -90,6 +90,8 @@ class TC026:
         try:
             qcd.click_result_close(self.driver)
             
+            dateTimeObj = datetime.now()
+            timestamp = str(dateTimeObj.microsecond)
             # Clone
             qcd.open_dashboard(self.driver)
             qcd.find_specific_flow(self.driver, "Clone_Edit_Delete")
@@ -97,8 +99,8 @@ class TC026:
             element = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="root"]/div/div[1]/div/div/div/div/div/div/div[2]/div[1]/div/div[2]/div/div/input')))
             element.send_keys(Keys.CONTROL + 'a')
             element.send_keys(Keys.DELETE)
-            element.send_keys("TC026_cloned")
-            element = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="root"]/div/div[1]/div/div/div/div/div/div/div[2]/div[1]/div/div[3]')))
+            element.send_keys(timestamp + "_cloned")
+            element = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="root"]/div/div[1]/div/div/div/div/div/div/div[2]/div[1]/div/div[3]/div[1]')))
             element.click()
             time.sleep(qcd.WAIT10)
             
@@ -116,29 +118,29 @@ class TC026:
             element = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="root"]/div/div[1]/div/div/div/div/div/div/div[2]/div[1]/div/div[2]/div/div/input')))
             element.send_keys(Keys.CONTROL + 'a')
             element.send_keys(Keys.DELETE)
-            element.send_keys("Modified_Flow")
-            element = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="root"]/div/div[1]/div/div/div/div/div/div/div[2]/div[1]/div/div[3]')))
+            element.send_keys(timestamp + "_Modified_Flow")
+            element = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="root"]/div/div[1]/div/div/div/div/div/div/div[2]/div[1]/div/div[3]/div[1]')))
             element.click()
             time.sleep(qcd.WAIT5)
             
             # Check
-            qcd.find_specific_flow(self.driver, "Modified_Flow")
+            qcd.find_specific_flow(self.driver, timestamp + "_Modified_Flow")
             element = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="root"]/div/div[1]/div/div/div/div/div/div/div[2]/div/div[1]/div[2]/div[1]/div/div[2]/span')))
-            if (element.text == 'Modified_Flow'):
+            if (element.text == (timestamp + '_Modified_Flow')):
                 print('Renamed to Modified_flow')
             else:
                 print('Unrenamed to Modified_flow')
             
             # Delete
             qcd.open_dashboard(self.driver)
-            qcd.find_specific_flow(self.driver, "TC026_cloned")
+            qcd.find_specific_flow(self.driver, timestamp + "_cloned")
             qcd.click_action_on_first_flow(self.driver, 3)
             time.sleep(qcd.WAIT5)
             
             # Check
-            qcd.find_specific_flow(self.driver, "TC026_cloned")
+            qcd.find_specific_flow(self.driver, timestamp + "_cloned")
             element = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="root"]/div/div[1]/div/div/div/div/div/div/div[2]/div/div[1]/div[2]/div[1]/div/div[2]/span')))
-            if (element.text == 'TC026_cloned'):
+            if (element.text == (timestamp + '_cloned')):
                 print('TC026_cloned is UnDeleted')
             else:
                 print('TC026_cloned is Deleted')

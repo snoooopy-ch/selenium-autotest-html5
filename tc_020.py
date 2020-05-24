@@ -62,14 +62,13 @@ class TC020:
             if record_count == 0:
                 raise Exception('no search results')
             
-            qcd.click_editview_firstrecord_on_dashboard(self.driver)
+            qcd.click_action_on_first_flow(self.driver, 1)
             time.sleep(qcd.WAIT3)
             qcd.click_notification(self.driver)
             qcd.click_tab_on_notification_board(self.driver, 4)
             qcd.set_start_time_with10(self.driver)
 
-            time.sleep(qcd.WAIT5)
-            
+            time.sleep(qcd.WAIT100)
         except Exception as e:
             qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
             print("exception:{}".format(e))

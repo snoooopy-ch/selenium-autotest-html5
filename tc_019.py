@@ -80,7 +80,7 @@ class TC019:
             qcd.select_dbset_input(self.driver, 'demodb_dest')
             qcd.select_db(self.driver)
             qcd.select_table(self.driver, "City")
-            qcd.select_table(self.driver, "Doctor")
+            qcd.select_table(self.driver, "doctor")
             qcd.click_add_select_btn(self.driver)
 
             # selet columns

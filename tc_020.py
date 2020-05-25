@@ -68,7 +68,6 @@ class TC020:
             qcd.click_tab_on_notification_board(self.driver, 4)
             qcd.set_start_time_with10(self.driver)
 
-            time.sleep(qcd.WAIT100)
         except Exception as e:
             qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
             print("exception:{}".format(e))

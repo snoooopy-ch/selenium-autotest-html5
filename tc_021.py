@@ -59,7 +59,7 @@ class TC021:
             
             # input 1
             qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Input", 300, 0)
-            input1 = self.driver.find_element_by_xpath('//div[@id="copy-component0"]')
+            input1 = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component0"]')))
 
             if (qcd.open_container(self.driver) != 1):
                 input1.click()
@@ -71,7 +71,7 @@ class TC021:
 
             # input 2
             qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Input", 300, 160)
-            input2 = self.driver.find_element_by_xpath('//div[@id="copy-component1"]')
+            input2 = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component1"]')))
 
             if (qcd.open_container(self.driver) != 1):
                 input2.click()
@@ -83,7 +83,7 @@ class TC021:
 
             # select columns
             qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Select Columns", 500, -150)
-            selectcolumns = self.driver.find_element_by_xpath('//div[@id="copy-component2"]')
+            selectcolumns = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component2"]')))
 
             qcd.connect_elements(self.driver, input1, 1, selectcolumns, 1)
             
@@ -104,7 +104,7 @@ class TC021:
 
             # common type
             qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Common Type", 500, -150)
-            commontype = self.driver.find_element_by_xpath('//div[@id="copy-component3"]')
+            commontype = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component3"]')))
 
             qcd.connect_elements(self.driver, selectcolumns, 2, commontype, 1)
 
@@ -132,7 +132,7 @@ class TC021:
 
             # Remove Duplicate
             qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Remove Duplicates", 800, -200)
-            removeduplicates = self.driver.find_element_by_xpath('//div[@id="copy-component4"]')
+            removeduplicates = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component4"]')))
 
             qcd.connect_elements(self.driver, commontype, 2, removeduplicates, 1)
             if (qcd.open_container(self.driver) != 1):
@@ -156,7 +156,7 @@ class TC021:
 
             # Data Compare
             qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Data Compare", 800, 0)
-            compare1 = self.driver.find_element_by_xpath('//div[@id="copy-component5"]')
+            compare1 = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component5"]')))
 
             qcd.connect_elements(self.driver, removeduplicates, 2, compare1, 1)
             qcd.connect_elements(self.driver, input2, 1, compare1, 1)

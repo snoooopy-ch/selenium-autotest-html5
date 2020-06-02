@@ -187,7 +187,6 @@ def drop_element_to_position(driver, js, element, x, y):
     xpath = element_xpath[index]
     input_element = driver.find_element_by_xpath(xpath)
     driver.execute_script(js, input_element, x, y)
-    time.sleep(WAIT3)
 
     print('move element')
     pass
@@ -572,6 +571,8 @@ def click_select_all_for_commontype(driver):
 def check_summary_in_final_result(driver, class_name, summary_xpath):
     print('=====================')
     print(class_name + ' result:')
+    
+    time1 = time.time();
 
     try:
         result_txt = driver.find_elements_by_xpath(result_txt_xpath)
@@ -585,6 +586,8 @@ def check_summary_in_final_result(driver, class_name, summary_xpath):
 
     if (summary_xpath == ''):
         return
+    time2 = time.time();
+    print("time-consuming is {} seconds".format(time2-time1));
     
     summary_table = driver.find_element_by_xpath(summary_xpath)
     table_trs = summary_table.find_elements_by_xpath('./div')
@@ -617,11 +620,12 @@ def check_summary_in_final_result(driver, class_name, summary_xpath):
     except Exception as ex:
         print(ex)
         pass
+    
+    time3 = time.time();
+    print("time-consuming is {} seconds".format(time3-time2));
 
     if (flag == 0):
         print('No mismatch in the table')
-        
-    time.sleep(WAIT10)
     return
 
 # add columns for datacompare's table item

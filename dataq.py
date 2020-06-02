@@ -87,14 +87,17 @@ if __name__ == '__main__':
                 raise Exception('fail to login')
 
             for index in scpt_number:
+                start_time = time.time()
                 try:
                     driver.refresh()
                     TCCLASS = str2Class("TC" + str(index).zfill(3))
                     tc = TCCLASS(driver)
                     tc.test()
                 except Exception as e:
-                    print(e)        
+                    print(e)
                     pass
+                end_time = time.time()
+                print("TC{} Total execution time: {} seconds".format(str(index).zfill(3), end_time - start_time))
         except Exception as e:
             print(e)
             pass

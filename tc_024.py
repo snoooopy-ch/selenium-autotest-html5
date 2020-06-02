@@ -59,7 +59,7 @@ class TC024:
             
             # input 1
             qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Input", 300, 0)
-            input1 = self.driver.find_element_by_xpath('//div[@id="copy-component0"]')
+            input1 = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component0"]')))
 
             qcd.click_notification(self.driver)
             qcd.select_cluster_execute_job(self.driver, 2)
@@ -83,7 +83,7 @@ class TC024:
             
             # input 2
             qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Input", 300, 160)
-            input2 = self.driver.find_element_by_xpath('//div[@id="copy-component1"]')
+            input2 = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component1"]')))
 
             if (qcd.open_container(self.driver) != 1):
                 input2.click()
@@ -103,7 +103,7 @@ class TC024:
             
             # data compare
             qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Data Compare", 700, 80)
-            compare1 = self.driver.find_element_by_xpath('//div[@id="copy-component2"]')
+            compare1 = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component2"]')))
 
             qcd.connect_elements(self.driver, input1, 1, compare1, 1)
             qcd.connect_elements(self.driver, input2, 1, compare1, 1)

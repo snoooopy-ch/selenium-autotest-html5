@@ -60,7 +60,7 @@ class TC014:
             
             # input 1
             qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Input", 300, 0)
-            input1 = self.driver.find_element_by_xpath('//div[@id="copy-component0"]')
+            input1 = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component0"]')))
 
             if (qcd.open_container(self.driver) != 1):
                 input1.click()
@@ -73,7 +73,7 @@ class TC014:
 
             # Data Quality
             qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Data Quality", 500, -100)
-            data_quality = self.driver.find_element_by_xpath('//div[@id="copy-component1"]');
+            data_quality = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component1"]')))
             qcd.connect_elements(self.driver, input1, 1, data_quality, 1)
 
             if (qcd.open_container(self.driver) != 1):

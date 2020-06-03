@@ -97,6 +97,9 @@ class TC014:
         try:
             detail_span_xpath = '/html/body/div[2]/div[3]/div/div/div/div/div[1]/span[2]'
             try:
+                if qcd.isElementPresentForResult(self.driver, detail_span_xpath) != True:
+                    raise Exception()
+                
                 detail_span = self.driver.find_elements_by_xpath(detail_span_xpath)
                 if (len(detail_span) == 1):
                     detail_span[0].click()

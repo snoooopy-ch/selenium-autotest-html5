@@ -113,12 +113,14 @@ class TC011:
             # show matching tables for TC003
             detail_span_xpath = '/html/body/div[2]/div[3]/div/div/div/div/div[2]/span[2]'
             try:
+                if qcd.isElementPresentForResult(self.driver, detail_span_xpath) != True:
+                    raise Exception()
+                
                 detail_span = self.driver.find_elements_by_xpath(detail_span_xpath)
                 if (len(detail_span) == 1):
                     detail_span[0].click()
                     time.sleep(qcd.WAIT3)
             except Exception as e:
-                print(e)
                 pass
 
             qcd.check_summary_in_final_result(self.driver, self.__class__.__name__, '/html/body/div[2]/div[3]/div/div/div/div/div[3]/div[2]/div[1]/div[2]')

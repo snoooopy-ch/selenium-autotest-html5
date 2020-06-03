@@ -193,7 +193,7 @@ def drop_element_to_position(driver, js, element, x, y):
 
 # action to open controller
 def open_container(driver):
-    ret = 1   
+    ret = 1
     container = driver.find_elements_by_xpath(container_xpath)
     if (len(container) == 2):
         ret = 1
@@ -209,7 +209,7 @@ def select_dbset_input(driver, db):
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div[1]/div[2]/div/select')))
     element.click()
 
-    db_value = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div[1]/div[2]/div/select/option[@value="' + db + '"]')
+    db_value = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div[1]/div[2]/div/select/option[@value="' + db + '"]')))
     db_value.click()
     time.sleep(WAIT3)
     print('select db set')
@@ -219,10 +219,8 @@ def select_dbset_input(driver, db):
 def select_db(driver):
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div[3]/div/div[2]/div')))
     element.click()
-    
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div[3]/div[2]/div/div')))
     element.click()
-    
     time.sleep(WAIT3)
     print('select db name')    
     return
@@ -353,66 +351,53 @@ def connect_elements(driver, element1, n, element2, m):
 
 # select 'cell By cell Compare' item
 def cell_by_cell_compare(driver, index):
-    db_select3 = driver.find_elements_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div/div/div/div')[1]
+    db_select3 = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div/div/div/div/div')))
     db_select3.click()
-    time.sleep(WAIT1)
     print("db open")
 
-    db_select_val3 = driver.find_elements_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div/div/div[2]/div/div')[index - 1]
+    db_select_val3 = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div/div/div/div[2]/div/div[' + str(index) + ']')))
     db_select_val3.click()
     print("selected")
-    time.sleep(WAIT1)
     return
 
 # select mapping tab
 def select_mapping_tab(driver):
-    tab_mapping = driver.find_element_by_xpath(tabmapping_xpath)
+    tab_mapping = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, tabmapping_xpath)))
     tab_mapping.click()
-    time.sleep(WAIT3)
-
     print('mapping tab selected')
     return
 
 # selct mapping table name
 def add_mapping_table_name(driver):
-    table = driver.find_element_by_xpath(table1_xpath)
+    table = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, table1_xpath)))
     table.click()
-    time.sleep(WAIT1)
-
-    table_value = driver.find_element_by_xpath(table1_val_xpath)
+    
+    table_value = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, table1_val_xpath)))
     table_value.click()
-    time.sleep(WAIT1)
-
-    table = driver.find_element_by_xpath(table2_xpath)
+    
+    table = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, table2_xpath)))
     table.click()
-    time.sleep(WAIT1)
 
-    table_value = driver.find_element_by_xpath(table2_val_xpath)
+    table_value = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, table2_val_xpath)))
     table_value.click()
-    time.sleep(WAIT5)
 
-    plus = driver.find_element_by_xpath(mapplus_xpath)
+    plus = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, mapplus_xpath)))
     plus.click()
-    time.sleep(WAIT3)
 
     print('mapping table names')
     return
 
 # select mapping table item
 def select_mapping_table_item(driver, index):
-    time.sleep(WAIT3)
-    table_item = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[3]/div/div[1]/table/tr[' + str(index) + ']/td[2]/span[1]')
+    table_item = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[3]/div/div[1]/table/tr[' + str(index) + ']/td[2]/span[1]')))
     table_item.click()
-    time.sleep(WAIT3)
     print('select mapping table item')
     return
 
 # select key for table item
 def select_key_for_table_item(driver, index):
-    input_key = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[3]/div/div[2]/div/div[2]/div/div[1]/div[2]/div[' + str(index) + ']/div/div[1]/input')
+    input_key = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[3]/div/div[2]/div/div[2]/div/div[1]/div[2]/div[' + str(index) + ']/div/div[1]/input')))
     input_key.click()
-    time.sleep(WAIT1)
-
     print('select key for table item')
     return
 
@@ -546,16 +531,15 @@ def save_excute_workflow(driver, flow_name):
     print('executing...')
     btn_execute = driver.find_element_by_xpath(excute_xpath)
     btn_execute.click()
-    time.sleep(WAIT3)
 
     try:
         btn_result = WebDriverWait(driver, 300).until(EC.element_to_be_clickable((By.XPATH, result_xpath)))
-        time.sleep(WAIT3)
         btn_result.click()
-        time.sleep(WAIT10)
     except Exception as e:
-        time.sleep(WAIT10)
         pass
+    
+    WebDriverWait(driver, WAITDRIVER).until(EC.url_contains("show-result"))
+    time.sleep(WAIT3)
 
     return
 
@@ -572,38 +556,46 @@ def check_summary_in_final_result(driver, class_name, summary_xpath):
     print('=====================')
     print(class_name + ' result:')
     
-    time1 = time.time();
-
     try:
+        check = isElementPresentForResult(driver, result_txt_xpath)
+        if check != True:
+            raise Exception()
+        
         result_txt = driver.find_elements_by_xpath(result_txt_xpath)
         if (len(result_txt) == 1):
             if (result_txt[0].text == 'No mismatch in the table'):
                 print('No mismatch in the table')
                 return
     except Exception as e:
-        print(e)
         pass
 
     if (summary_xpath == ''):
         return
-    time2 = time.time();
-    print("time-consuming is {} seconds".format(time2-time1));
     
     summary_table = driver.find_element_by_xpath(summary_xpath)
-    table_trs = summary_table.find_elements_by_xpath('./div')
+    table_trs = driver.find_elements_by_xpath(summary_xpath + '/div')
 
     flag = 0
     try:
-        for tr in table_trs:
-            inner_tr = tr.find_element_by_xpath('./div')
-            tds = inner_tr.find_elements_by_xpath('./div')
-
+        for i in range(0, len(table_trs)):
+            tr = driver.find_element_by_xpath(summary_xpath + '/div[' + str(i + 1) + ']')
+            inner_tr = driver.find_element_by_xpath(summary_xpath + '/div[' + str(i + 1) + ']/div')
+            tds = driver.find_elements_by_xpath(summary_xpath + '/div[' + str(i + 1) + ']/div/div')
+            
             output = ''
             find = 0
-            for td in tds:
+            for j in range(0, len(tds)):
                 try:
-                    img_element = td.find_element_by_xpath('./img')
+                    td = driver.find_element_by_xpath(summary_xpath + '/div[' + str(i + 1) + ']/div/div[' + str(j + 1) + ']')
+                    img_xpath = summary_xpath + '/div[' + str(i + 1) + ']/div/div[' + str(j + 1) + ']/img'
+                    check = isElementPresentForResult(driver, img_xpath)
+                    
+                    if check != True:
+                        raise Exception()
+
+                    img_element = driver.find_element_by_xpath(img_xpath)
                     tmp = img_element.get_attribute("alt")
+                    
                     if (tmp.find('umnatch') != -1):
                         find = 1
                         flag = 1
@@ -618,12 +610,8 @@ def check_summary_in_final_result(driver, class_name, summary_xpath):
             if (find == 1):
                 print(output + ' is unmatched')
     except Exception as ex:
-        print(ex)
         pass
     
-    time3 = time.time();
-    print("time-consuming is {} seconds".format(time3-time2));
-
     if (flag == 0):
         print('No mismatch in the table')
     return
@@ -931,3 +919,16 @@ def click_manual_upload_validate(driver):
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, manual_upload_validate_xpath)))
     element.click()
     return
+
+
+# check element present in UI
+def isElementPresentForResult(driver, index):
+    driver.implicitly_wait(1)
+    try:
+        driver.find_element_by_xpath(index)
+        return True
+    except Exception as e:
+        return False
+    finally:
+        driver.implicitly_wait(20)
+

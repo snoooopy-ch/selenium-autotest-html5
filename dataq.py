@@ -44,6 +44,7 @@ if __name__ == '__main__':
     parser.add_argument("-u", "--user", help="input login user, default 'john'")
     parser.add_argument("-p", "--password", help="input login pass, default 'dataq'")
     parser.add_argument("-s", "--scripts", help="input script number to execute using comma")
+    parser.add_argument("-a", "--all", help="input for all scripts", action="store_true")
     args = parser.parse_args()
 
     if args.url:
@@ -71,6 +72,9 @@ if __name__ == '__main__':
         scpt_number = [int(item) for item in args.scripts.split(',')]
     else:
         scpt_number = [1,2,3,4,5,6,7,8,9,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,27]
+        
+    if args.all:
+        scpt_number = [1,2,3,4,5,6,7,8,9,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,27]
 
     print(scpt_number)
 
@@ -81,23 +85,44 @@ if __name__ == '__main__':
 
     	# login page loading...
         time.sleep(qcd.WAIT1)
+        
+        runTotal = len(scpt_number)
+        passedTotal = 0
+        failedTotal = 0
+        
+        passedNumbers = []
+        failedNumbers = []
         try:
             # login
             if (qcd.login(driver, user, password) != 1):
                 raise Exception('fail to login')
 
+            startTotal = time.time()
             for index in scpt_number:
+                print("================")
                 start_time = time.time()
                 try:
                     driver.refresh()
                     TCCLASS = str2Class("TC" + str(index).zfill(3))
                     tc = TCCLASS(driver)
                     tc.test()
+                    
+                    passedTotal = passedTotal + 1
+                    passedNumbers.append(index)
                 except Exception as e:
-                    print(e)
+                    failedTotal = failedTotal + 1
+                    failedNumbers.append(index)
                     pass
                 end_time = time.time()
-                print("TC{} Total execution time: {} seconds".format(str(index).zfill(3), end_time - start_time))
+                print("TC{} execution time: {} seconds".format(str(index).zfill(3), end_time - start_time))
+            endTotal = time.time()
+            
+            print("Ran {} tests".format(runTotal))
+            print("Passed {} tests".format(passedTotal))
+            print("Failed {} tests".format(failedTotal))
+            print("Passed Scirpts: {}".format(passedNumbers))
+            print("Failed Scirpts: {}".format(failedNumbers))
+            print("Total execution time: {} seconds".format(endTotal - startTotal))
         except Exception as e:
             print(e)
             pass

@@ -553,7 +553,6 @@ def click_select_all_for_commontype(driver):
 
 # check summary in final result
 def check_summary_in_final_result(driver, class_name, summary_xpath):
-    print('=====================')
     print(class_name + ' result:')
     
     try:
@@ -643,7 +642,6 @@ def click_share_button_and_close(driver):
 
 # check summary in final result for TC014
 def check_summary_statue_in_final_result(driver, class_name, summary_xpath):
-    print('=====================')
     print(class_name + ' result:')
 
     summary_table = driver.find_element_by_xpath(summary_xpath)
@@ -668,7 +666,6 @@ def check_summary_statue_in_final_result(driver, class_name, summary_xpath):
 
 # check summary in final result for TC007, TC009
 def check_summary_in_fianl_mismatched_count(driver, class_name, summary_xpath):
-    print('=====================')
     print(class_name + ' result:')
 
     try:

@@ -79,7 +79,6 @@ class TC022:
             pass
 
     def check_result(self):
-        print('=====================')
         print(self.__class__.__name__ + ' result:')
         try:
             qcd.open_config_tab_on_input(self.driver)

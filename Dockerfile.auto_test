@@ -1,0 +1,8 @@
+FROM dataquser/base-docker-images:auto_test_python3.8_basedocker
+
+# ARG AUTOMATION_TEST_ARGS
+
+COPY . /app
+WORKDIR /app
+
+# CMD python dataq.py ${AUTOMATION_TEST_ARGS}

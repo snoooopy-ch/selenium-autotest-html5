@@ -929,3 +929,50 @@ def isElementPresentForResult(driver, index):
     finally:
         driver.implicitly_wait(20)
 
+# nullCheckOnDataQuality
+def nullCheckOnDataQuality(driver, index):
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div/div[2]/div/div[1]/div[2]/div[' + str(index)']/div[3]/div/div[1]/span/span/index')))
+    element.click()
+    return
+
+# uniqueCheckOnDataQuality
+def uniqueCheckOnDataQuality(driver, index):
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div/div[2]/div/div[1]/div[2]/div[' + str(index)']/div[4]/div/div[1]/span/span/index')))
+    element.click()
+    return
+
+# checkLeftSpacesOnDataQuality
+def checkLeftSpacesOnDataQuality(driver, index):
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div/div[2]/div/div[1]/div[2]/div[' + str(index)']/div[5]/span/span/index')))
+    element.click()
+    return
+
+# checkRightSpacesOnDataQuality
+def checkRightSpacesOnDataQuality(driver, index):
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div/div[2]/div/div[1]/div[2]/div[' + str(index)']/div[6]/span/span/index')))
+    element.click()
+    return
+
+# inputMaxLenghtOnDataQaulitiy
+def inputMaxLenghtOnDataQaulitiy(driver, index):
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div/div[2]/div/div[1]/div[2]/div[' + str(index)']/div[7]/div/div/index')))
+    element.click()
+    return
+
+# inputMinLenghtOndataQaulitiy
+def inputMinLenghtOndataQaulitiy(driver, value):
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div/div[2]/div/div[1]/div[2]/div[' + str(index)']/div[8]/div/div/index')))
+    element.send_keys(value)
+    return
+
+# inputMaxValueOnDataQuality
+def inputMaxValueOnDataQuality(driver, index, value):
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div/div[2]/div/div[1]/div[2]/div[' + str(index)']/div[9]/div/div/index')))
+    element.send_keys(value)
+    return
+
+# inputMinValueOnDataQuality
+def inputMinValueOnDataQuality(driver, index, value):
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div/div[2]/div/div[1]/div[2]/div[' + str(index)']/div[10]/div/div/index')))
+    element.send_keys(value)
+    return

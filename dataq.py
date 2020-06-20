@@ -17,10 +17,10 @@ from tc_009 import TC009
 from tc_011 import TC011
 from tc_012 import TC012
 from tc_013 import TC013
-from tc_014 import TC014
+#from tc_014 import TC014
 from tc_015 import TC015
 from tc_016 import TC016
-from tc_017 import TC017
+#from tc_017 import TC017
 #from tc_018 import TC018
 from tc_019 import TC019
 from tc_020 import TC020
@@ -71,10 +71,10 @@ if __name__ == '__main__':
     if args.scripts:
         scpt_number = [int(item) for item in args.scripts.split(',')]
     else:
-        scpt_number = [1,2,3,4,5,6,7,8,9,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,27]
+        scpt_number = [1,2,3,4,5,6,7,8,9,11,12,13,15,16,19,20,21,22,23,24,25,26,27]
         
     if args.all:
-        scpt_number = [1,2,3,4,5,6,7,8,9,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,27]
+        scpt_number = [1,2,3,4,5,6,7,8,9,11,12,13,15,16,19,20,21,22,23,24,25,26,27]
 
     print(scpt_number)
 

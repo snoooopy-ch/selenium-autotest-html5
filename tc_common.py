@@ -44,9 +44,9 @@ WAITDRIVER                  = 20
 elements                    = ["Input", "Data Compare", "Select Columns", "Common Type", "Remove Duplicates", "Data Quality", "Data Profile"]
 element_xpath               = ['//div[@id="component0"]/img', '//div[@id="component1"]/img', '//div[@id="component2"]/img', '//div[@id="component3"]/img', '//div[@id="component4"]/img', '//div[@id="component5"]/img', '//div[@id="component6"]/img']
 
-user_xpath                  = '//div[@id="root"]/div/div/div/div/div/div/input'
-pass_xpath                  = '//div[@id="root"]/div/div/div/div/div[2]/div/input'
-loginbtn_xpath              ="//button[@class='MuiButtonBase-root MuiButton-root jss13 MuiButton-contained MuiButton-containedSecondary']"
+user_xpath                  = '//*[@id="root"]/div/div[1]/div/div[1]/div/div/div[2]/div[1]/div/input'
+pass_xpath                  = '//*[@id="root"]/div/div[1]/div/div[1]/div/div/div[2]/div[2]/div/input'
+loginbtn_xpath              = '//*[@id="root"]/div/div[1]/div/div[1]/div/div/div[2]/div[3]/button'
 open_xpath                  = '//button[@class="MuiButtonBase-root MuiFab-root MuiFab-sizeSmall MuiFab-primary"]'
 input_xpath                 = '//div[@id="component0"]/img'
 container_xpath             = '//*[@id="root"]/div/div[1]/div/div/div/div/div/div[2]/div'

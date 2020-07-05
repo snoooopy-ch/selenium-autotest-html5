@@ -9,6 +9,7 @@ import traceback
 import logging
 
 from datetime import datetime, date, timedelta
+
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
@@ -21,13 +22,14 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.webdriver.common.action_chains import ActionChains
 
-class TC022:
+
+class TC031:
     def __init__(self, drv):
         self.driver = drv
 
     def test(self):
         try:
-            self.open_dashboard()
+            self.open_workspace()
             self.workflow()
             self.check_result()
         except Exception as e:
@@ -35,11 +37,11 @@ class TC022:
             print("exception:{}".format(e))
             pass
 
-    def open_dashboard(self):
+    def open_workspace(self):
         try:
             # open
-            if (qcd.open_dashboard(self.driver) != 1):
-                raise Exception('fail to open dashboard')
+            if (qcd.open_workspace(self.driver) != 1):
+                raise Exception('fail to open workspace')
         except Exception as e:
             qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
             print("exception:{}".format(e))
@@ -56,32 +58,41 @@ class TC022:
                 
             with open("js/drag_and_drop.js") as f:
                 drag_and_drop_js = f.read()
-
-            qcd.open_settings(self.driver)
             
-            qcd.search_in_settings(self.driver, "employee_demo")
-            qcd.click_delete_settings_search(self.driver)
-            qcd.add_new_connection(self.driver, 6, 'employee_demo', 'jdbc:mysql://54.86.47.129:3306/employee?useUnicode=true& useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC', 'demouser1', 'demopassword')
-            
-            qcd.open_dashboard(self.driver)
-            qcd.click_action_on_first_flow(self.driver, 1)
+            # input 1
+            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Input", 300, 0)
+            input1 = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component0"]')))
 
-            input1 = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component0"]')))
             if (qcd.open_container(self.driver) != 1):
                 input1.click()
 
-            time.sleep(qcd.WAIT5)
+            qcd.select_dbset_input(self.driver, 'tims')
+            qcd.select_db(self.driver)
+            qcd.select_table(self.driver, "assessment_report")
+            qcd.select_table(self.driver, "students_info")
+            qcd.click_add_select_btn(self.driver)
             
+            # data profile
+            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Data Profile", 500, -160)
+            data_profile = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component1"]')))
+            qcd.connect_elements(self.driver, input1, 1, data_profile, 1)
+            
+            input1.click()
+            if (qcd.open_container(self.driver) != 1):
+                input1.click()
+                
+            qcd.click_datatab_input(self.driver)
+            qcd.select_tableitem_on_datasearch(self.driver, 1)
+            
+            # execute
+            qcd.save_excute_workflow(self.driver, 'TC_031_ALEX')
+
         except Exception as e:
             qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
             print("exception:{}".format(e))
             pass
 
+        print('finished')
+
     def check_result(self):
-        print(self.__class__.__name__ + ' result:')
-        try:
-            qcd.open_config_tab_on_input(self.driver)
-            self.driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div[1]/div[2]/div/select/option[@value="employee_demo"]')
-            print("employee_demo exist")
-        except NoSuchElementException:
-            print("employee_demo unexist")
+        return

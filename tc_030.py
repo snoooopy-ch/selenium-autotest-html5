@@ -32,7 +32,7 @@ class TC030:
             self.check_result()
         except Exception as e:
             qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
-            print("exception:{}".format(e))
+            raise Exception(e)
             pass
 
     def open_workspace(self):
@@ -42,7 +42,7 @@ class TC030:
                 raise Exception('fail to open workspace')
         except Exception as e:
             qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
-            print("exception:{}".format(e))
+            raise Exception(e)
             pass
 
     def workflow(self):
@@ -112,9 +112,9 @@ class TC030:
             
             qcd.checkLeftSpacesOnDataQuality(self.driver, 22)
             
-            qcd.nullCheckOnDataQuality(self.driver, 23)
-            qcd.uniqueCheckOnDataQuality(self.driver, 23)
-            qcd.inputSQLWhereConditionOnDataQuality(self.driver, 23, "RadioLogy IS NULL")
+            # qcd.nullCheckOnDataQuality(self.driver, 23)
+            # qcd.uniqueCheckOnDataQuality(self.driver, 23)
+            # qcd.inputSQLWhereConditionOnDataQuality(self.driver, 23, "RadioLogy IS NULL")
             
             qcd.clickNextButtonOnDataQuality(self.driver)
             
@@ -143,7 +143,7 @@ class TC030:
             
         except Exception as e:
             qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
-            print("exception:{}".format(e))
+            raise Exception(e)
             pass
         
     def check_result(self):
@@ -160,11 +160,11 @@ class TC030:
             except Exception as e:
                 print(e)
                 pass
-            qcd.check_summary_statue_in_TC028_result(self.driver, self.__class__.__name__, '/html/body/div[2]/div[3]/div/div/div/div/div[2]/div[1]/div[2]')
+            qcd.check_summary_statue_in_TC028_result(self.driver, self.__class__.__name__, '/html/body/div[2]/div[3]/div/div/div/div/div[3]/div[1]/div[2]')
             qcd.click_result_close(self.driver)
         except Exception as e:
             qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
-            print("exception:{}".format(e))
+            raise Exception(e)
             pass
             
         time.sleep(qcd.WAIT1)

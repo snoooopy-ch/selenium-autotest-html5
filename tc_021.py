@@ -32,7 +32,7 @@ class TC021:
             self.check_result()
         except Exception as e:
             qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
-            print("exception:{}".format(e))
+            raise Exception(e)
             pass
 
     def open_workspace(self):
@@ -42,7 +42,7 @@ class TC021:
                 raise Exception('fail to open workspace')
         except Exception as e:
             qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
-            print("exception:{}".format(e))
+            raise Exception(e)
             pass
 
     def workflow(self):
@@ -170,12 +170,6 @@ class TC021:
 
             qcd.select_key_for_warning_mapping_tableitem(self.driver, 1)
                     
-            #qcd.select_mapping_table_item(self.driver, 1)
-            #qcd.select_key_for_table_item(self.driver, 1)
-            
-            #qcd.select_mapping_table_item(self.driver, 4)
-            #qcd.select_key_for_table_item(self.driver, 1)
-
             qcd.select_mapping_table_item(self.driver, 1)
             data_type = self.driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[3]/div/div[2]/div/div[2]/div/div[1]/div[2]/div[2]/div/div[2]/img').get_attribute("title")
             print("colleage_code_Varchar's type is " + data_type)
@@ -191,7 +185,7 @@ class TC021:
 
         except Exception as e:
             qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
-            print("exception:{}".format(e))
+            raise Exception(e)
             pass
 
     def check_result(self):
@@ -210,5 +204,5 @@ class TC021:
 
         except Exception as e:
             qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
-            print("exception:{}".format(e))
+            raise Exception(e)
             pass

@@ -32,7 +32,7 @@ class TC024:
             self.check_result()
         except Exception as e:
             qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
-            print("exception:{}".format(e))
+            raise Exception(e)
             pass
 
     def open_workspace(self):
@@ -42,7 +42,7 @@ class TC024:
                 raise Exception('fail to open workspace')
         except Exception as e:
             qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
-            print("exception:{}".format(e))
+            raise Exception(e)
             pass
 
     def workflow(self):
@@ -121,7 +121,7 @@ class TC024:
             
         except Exception as e:
             qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
-            print("exception:{}".format(e))
+            raise Exception(e)
             pass
 
     def check_result(self):
@@ -133,6 +133,6 @@ class TC024:
             print("metric percentage = " + str(element.text))
             print(2)
         except Exception as e:
-            print("exception:{}".format(e))
+            raise Exception(e)
             pass
         return

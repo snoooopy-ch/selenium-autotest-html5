@@ -253,8 +253,9 @@ def click_select_tableitem_for_select_columns(driver, index):
     
 # action to click one item of table
 def select_table(driver, index):
-    xpath = '//*[@id="' + index + '"]'
-    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, xpath)))
+    xpath = '//input[@id="' + index + '"]'
+#    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, xpath)))
+    element = driver.find_element_by_xpath(xpath);
     element.click()
     print('select table ' + str(index))
     return
@@ -271,11 +272,9 @@ def select_item_from_column_type(driver, index):
 # action to click data type of column type
 def select_item_from_column_data_type(driver, index):
     xpath = "//*[@id='top_panel']/div/div[2]/div[2]/div[2]/div/div[1]/div[2]/div/div/div[4]/div/div[1]/div[1]"
-#             //*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div[1]/div[2]/div[2]/div/div[4]/div/div[2]/div
     city = driver.find_element_by_xpath(xpath)
     city.click()
     time.sleep(WAIT1)
-#                  //*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div[1]/div[2]/div[2]/div/div[4]/div/div[2]/div
     item_xpath = "//*[@id='top_panel']/div/div[2]/div[2]/div[2]/div/div[1]/div[2]/div/div/div[4]/div/div[2]/div/div[" + str(index) + "]"
     item_value = driver.find_element_by_xpath(item_xpath)
     item_value.click()

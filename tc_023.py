@@ -34,7 +34,7 @@ class TC023:
             self.check_result()
         except Exception as e:
             qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
-            print("exception:{}".format(e))
+            raise Exception(e)
             pass
 
     def open_workspace(self):
@@ -44,7 +44,7 @@ class TC023:
                 raise Exception('fail to open workspace')
         except Exception as e:
             qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
-            print("exception:{}".format(e))
+            raise Exception(e)
             pass
 
     def workflow(self):
@@ -109,7 +109,7 @@ class TC023:
             qcd.save_excute_workflow(self.driver, 'TC_023_ALEX')
         except Exception as e:
             qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
-            print("exception:{}".format(e))
+            raise Exception(e)
             pass
 
         print('finished')
@@ -119,5 +119,5 @@ class TC023:
             qcd.click_summary_index(self.driver, 1)
         except Exception as e:
             qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
-            print("exception:{}".format(e))
+            raise Exception(e)
             pass

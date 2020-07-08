@@ -45,7 +45,7 @@ def str2Class(str):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument("-r", "--url", help="input site url, default 'http://dataq-automation-alb-1598668034.us-east-1.elb.amazonaws.com:9000'")
+    parser.add_argument("-r", "--url", help="input site url, default 'http://dataq-frontend.s3-website.us-east-2.amazonaws.com/#/user-home'")
     parser.add_argument("-u", "--user", help="input login user, default 'john'")
     parser.add_argument("-p", "--password", help="input login pass, default 'dataq'")
     parser.add_argument("-s", "--scripts", help="input script number to execute using comma")
@@ -55,7 +55,7 @@ if __name__ == '__main__':
     if args.url:
         url = agrs.url
     else:
-        url = 'http://dataq-automation-alb-1598668034.us-east-1.elb.amazonaws.com:9000'
+        url = 'http://dataq-frontend.s3-website.us-east-2.amazonaws.com/#/user-home'
     
     print(url)
 
@@ -117,6 +117,7 @@ if __name__ == '__main__':
                 except Exception as e:
                     failedTotal = failedTotal + 1
                     failedNumbers.append(index)
+                    print("exception:{}".format(e))
                     pass
                 end_time = time.time()
                 print("TC{} execution time: {} seconds".format(str(index).zfill(3), end_time - start_time))

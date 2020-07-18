@@ -44,12 +44,12 @@ WAITDRIVER                  = 20
 elements                    = ["Input", "Data Compare", "Select Columns", "Common Type", "Remove Duplicates", "Data Quality", "Data Profile"]
 element_xpath               = ['//div[@id="component0"]/img', '//div[@id="component1"]/img', '//div[@id="component2"]/img', '//div[@id="component3"]/img', '//div[@id="component4"]/img', '//div[@id="component5"]/img', '//div[@id="component6"]/img']
 
-user_xpath                  = '//*[@id="root"]/div/div[1]/div/div[1]/div/div/div[2]/div[1]/div/input'
-pass_xpath                  = '//*[@id="root"]/div/div[1]/div/div[1]/div/div/div[2]/div[2]/div/input'
-loginbtn_xpath              = '//*[@id="root"]/div/div[1]/div/div[1]/div/div/div[2]/div[3]/button'
+user_xpath                  = '//*[@id="root"]/div/div/div[1]/div/div[1]/div/div/div[2]/div[1]/div/input'
+pass_xpath                  = '//*[@id="root"]/div/div/div[1]/div/div[1]/div/div/div[2]/div[2]/div/input'
+loginbtn_xpath              = '//*[@id="root"]/div/div/div[1]/div/div[1]/div/div/div[2]/div[3]/button'
 open_xpath                  = '//button[@class="MuiButtonBase-root MuiFab-root MuiFab-sizeSmall MuiFab-primary"]'
 input_xpath                 = '//div[@id="component0"]/img'
-container_xpath             = '//*[@id="root"]/div/div[1]/div/div/div/div/div/div[2]/div'
+container_xpath             = '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/div[2]/div'
 selectcolumn_xpath          = '//div[@id="component2"]/img'
 select_all_xpath            = '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div[2]/div[1]/div[4]/button/span[1]'
 selecttype_xpath            = '//div[@id="component3"]/img'
@@ -67,10 +67,10 @@ table_sc_xpath              = '//*[@id="top_panel"]/div/div[2]/div[1]/div/div[1]
 table_sc_val_xpath          = '//*[@id="top_panel"]/div/div[2]/div[1]/div/div[1]/div/div[2]/div/div'
 done_sc_xapth               = '//*[@id="top_panel"]/div/div[1]/header/div/button'
 mapplus_xpath               = '//*[@id="top_panel"]/div/div[2]/div[3]/div/div[1]/div[2]/div[3]'
-name_xpath                  = '//div[@id="root"]/div/div[1]/div/div/div/div/div/div[1]/header/div/div/div/input'
-save_xpath                  = '//div[@id="root"]/div/div[1]/div/div/div/div/div/div[1]/header/div/button[1]'
-excute_xpath                = '//div[@id="root"]/div/div[1]/div/div/div/div/div/div[1]/header/div/button[2]'
-result_xpath                = '//div[@id="root"]/div/div[1]/div/div/div/div/div/div[1]/header/div/button[3]'
+name_xpath                  = '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/div[1]/header/div/div/div/input'
+save_xpath                  = '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/div[1]/header/div/button[1]'
+excute_xpath                = '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/div[1]/header/div/button[2]'
+result_xpath                = '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/div[1]/header/div/button[3]'
 result_txt_xpath            = '/html/body/div[2]/div[3]/div/div/div/div/table/tr[8]/span'
 random_input_xpath          = '//*[@id="top_panel"]/div/div[2]/div[2]/div/div[2]/div/div/input'
 searchbox_dashboard_xpath   = '//*[@id="root"]/div/div[1]/div/div/div/div/div/div/div[1]/div[1]/div/div/input'
@@ -84,9 +84,9 @@ result_close_xpath          = '/html/body/div[2]/div[3]/div/header/div/button'
 save_execute_on_xpath       = '//*[@id="root"]/div/div[1]/div/div/div/div/div/div[2]/div/div[2]/div[2]/div/button'
 select_all_commontype_xpath = '//*[@id="top_panel"]/div/div[2]/div[1]/div/div[2]/div[4]/button'
 share_btn_xpath             = '/html/body/div[2]/div[3]/div/header/div/div/button'
-open_dashboard_xpath        = '//*[@id="root"]/div/div[1]/div/div/header/div/div[2]/div/div/div/button[1]'
-excution_xpath              = '//*[@id="root"]/div/div[1]/div/div/header/div/div[2]/div/div/div/button[2]'
-settings_xpath              = '//*[@id="root"]/div/div[1]/div/div/header/div/div[2]/div/div/div/button[3]'
+open_dashboard_xpath        = '//*[@id="root"]/div/div/div[1]/div/div/header/div/div[2]/div/div/div/button[1]'
+excution_xpath              = '//*[@id="root"]/div/div/div[1]/div/div/header/div/div[2]/div/div/div/button[2]'
+settings_xpath              = '//*[@id="root"]/div/div/div[1]/div/div/header/div/div[2]/div/div/div/button[3]'
 settings_searchbox_xpath    = '//*[@id="root"]/div/div[1]/div/div/div/div/div/main/div[2]/div/div[1]/div[1]/div/input'
 new_connection_xpath        = '//*[@id="root"]/div/div[1]/div/div/div/div/div/main/div[2]/div/div[1]/div[2]/button'
 input_data_tag_xpath        = '//*[@id="simple-tab-1"]'
@@ -208,10 +208,10 @@ def open_container(driver):
 
 # action to select db set.
 def select_dbset_input(driver, db):
-    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div[1]/div[2]/div/select')))
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div[2]/div/select')))
     element.click()
 
-    db_value = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div[1]/div[2]/div/select/option[@value="' + db + '"]')))
+    db_value = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div[2]/div/select/option[@value="' + db + '"]')))
     db_value.click()
     time.sleep(WAIT3)
     print('select db set')
@@ -388,11 +388,38 @@ def add_mapping_table_name(driver):
     print('mapping table names')
     return
 
+# adding table on type compare mapping tab
+def add_mapping_table_for_type_compare(driver):
+    table = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="tableContainer"]/div[2]/div[1]/div/div/div[1]')))
+    table.click()
+    
+    table_value = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="tableContainer"]/div[2]/div[1]/div/div[2]/div/div')))
+    table_value.click()
+    
+    table = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="tableContainer"]/div[2]/div[2]/div/div/div[1]')))
+    table.click()
+
+    table_value = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="tableContainer"]/div[2]/div[2]/div/div[2]/div/div')))
+    table_value.click()
+
+    plus = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="tableContainer"]/div[2]/div[3]/img')))
+    plus.click()
+
+    print('adding mapping table')
+    return
+
 # select mapping table item
 def select_mapping_table_item(driver, index):
     table_item = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="tableContainer"]/table/tbody/tr[' + str(index) + ']/td[2]')))
     table_item.click()
     print('select mapping table item')
+    return
+
+#select primary key for data compare table item
+def select_primary_key_for_type_compare(driver, index):
+    input_key = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[3]/div/div[2]/div/div[2]/div/div[1]/div[2]/div[' + str(index) + ']/div/div[1]/span/span[1]')))
+    input_key.click()
+    print('select key for table item')
     return
 
 # select key for table item

@@ -262,7 +262,7 @@ def select_table(driver, index):
 
 # action to click one item of column type
 def select_item_from_column_type(driver, index):
-    xpath = "//*[@id='top_panel']/div/div[2]/div[1]/div/div[2]/div[3]/div[" + str(index) + "]/input"
+    xpath = '//*[@id="' + index + '"]'
     city = driver.find_element_by_xpath(xpath)
     city.click()
 
@@ -424,7 +424,8 @@ def select_primary_key_for_type_compare(driver, index):
 
 # select key for table item
 def select_key_for_table_item(driver, index):
-    input_key = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[3]/div/div[2]/div/div[2]/div/div[1]/div[2]/div[' + str(index) + ']/div/div[1]/input')))
+    # 2020/07/23 for 009
+    input_key = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[3]/div/div[2]/div/div[2]/div/div[1]/div[2]/div[' + str(index) + ']/div/div[1]/span/span[1]')))
     input_key.click()
     print('select key for table item')
     return

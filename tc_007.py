@@ -117,7 +117,7 @@ class TC007:
 
     def check_result(self):
         try:
-            summary_xpath = '/html/body/div[2]/div[3]/div/div/div/div/table/tr[8]/div/div[1]/div[2]'
+            summary_xpath = '/html/body/div[2]/div[3]/div/div/div/div/div[2]/div[8]/div[1]/div[2]'
             qcd.check_summary_in_fianl_mismatched_count(self.driver, self.__class__.__name__, summary_xpath)
             qcd.click_result_close(self.driver)
         except Exception as e:

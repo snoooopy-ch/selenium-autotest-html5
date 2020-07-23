@@ -95,14 +95,13 @@ data_search_table_xpath     = '//*[@id="top_panel"]/div/div[2]/div[3]/div[1]/div
 sql_column_xpath            = '//*[@id="top_panel"]/div/div[2]/div[3]/div/div[2]/div/div[2]/div/div[1]/div[2]/div[1]/div/div[6]/span/*[name()="svg"]'
 detail_xpath                = '/html/body/div[2]/div[3]/div/div/div/div/div[1]/div[3]/span[2]'
 summary_select_xpath        = '/html/body/div[2]/div[3]/div/div/div/div/div[1]/div[2]/div/div/div[1]'
-action_on_first_flow_xpath  = '//*[@id="root"]/div/div[1]/div/div/div/div/div/div/div[2]/div/div[1]/div[2]/div[1]/div/div[1]/div/button'
+action_on_first_flow_xpath  = '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/div/div[2]/div/div[1]/div[2]/div[1]/div/div[1]/div/div/button'
 search_flow_xpath           = '//*[@id="root"]/div/div[1]/div/div/div/div/div/div/div[1]/div[1]/div/div/input'
 manual_upload_xpath         = '//*[@id="top_panel"]/div/div[2]/div[2]/div[1]/div[2]'
 dataset_format_xpath        = '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div[2]/div/div[1]/div[2]/div/div[1]'
-dataset_path_xpath          = '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div[2]/div[1]/div[3]/div[2]/div/input'
-manual_upload_validate_xpath = '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div[2]/div[1]/button/span[1]'
-viewedit_xpath              = '//*[@id="root"]/div/div[1]/div/div/div/div/div/div[2]/div/div[1]/div[2]/div[1]/div/div[8]/div/div/*[name()="svg"]'
-
+manual_upload_validate_xpath = '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div/div[1]/button'
+viewedit_xpath              = '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/div[2]/div/div[1]/div[2]/div[1]/div/div[8]/div/div/*[name()="svg"]'
+                              
 def init_selenium():
     chromeOptions = webdriver.ChromeOptions()
     
@@ -573,6 +572,26 @@ def save_excute_workflow(driver, flow_name):
 
     return
 
+def save_excute_workflow_without_rename(driver):
+    btn_save = driver.find_element_by_xpath(save_xpath)
+    btn_save.click()
+    time.sleep(WAIT3)
+
+    print('executing...')
+    btn_execute = driver.find_element_by_xpath(excute_xpath)
+    btn_execute.click()
+
+    try:
+        btn_result = WebDriverWait(driver, 300).until(EC.element_to_be_clickable((By.XPATH, result_xpath)))
+        btn_result.click()
+    except Exception as e:
+        pass
+    
+    WebDriverWait(driver, WAITDRIVER).until(EC.url_contains("show-result"))
+    time.sleep(WAIT3)
+
+    return
+
 # select all for common type and select column
 def click_select_all_for_commontype(driver):
     select_all_button = driver.find_element_by_xpath(select_all_commontype_xpath)
@@ -943,14 +962,36 @@ def select_manual_upload_dataset_format(driver, index):
     return;
 
 # set dataset path
-def set_dataset_path(driver, path):
-    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, dataset_path_xpath)))
+def set_dataset_path(driver, xpath, path):
+    element = driver.find_element_by_xpath(xpath)
     element.send_keys(path)
     return
 
 # click manual upload validate
 def click_manual_upload_validate(driver):
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, manual_upload_validate_xpath)))
+    element.click()
+    return
+
+# input delimiter on input
+def input_delimiter_on_input(driver, value):
+    element = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div/div/div[3]/div[1]/div[2]/div/input')
+    element.send_keys(value)
+    return
+
+# set header as true or false on input
+def set_header_on_input(driver, index):
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div/div/div[3]/div[2]/div[2]/div/div[1]')))
+    element.click()
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div/div/div[3]/div[2]/div[2]/div[2]/div/div[' + str(index) + ']')))
+    element.click()
+    return
+
+# set interschema as true or false on input
+def set_interschema_on_input(driver, index):
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div/div/div[3]/div[3]/div[2]/div/div[1]')))
+    element.click()
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div/div/div[3]/div[3]/div[2]/div[2]/div/div[' + str(index) + ']')))
     element.click()
     return
 
@@ -1093,4 +1134,16 @@ def check_summary_statue_in_TC028_result(driver, class_name, summary_xpath):
 
     time.sleep(WAIT10)
 
-    return;
+    return
+
+# Upload Json Flow File
+def onUploadJsonFlowFile(driver, filePath):
+    element = driver.find_element_by_xpath('//*[@id="upload-image1"]')
+    absolute_file_path = os.path.abspath("files/" + filePath)
+    element.send_keys(absolute_file_path)
+    element = driver.find_element_by_xpath('//*[@id="root"]/div/div/div[1]/div/div/div/div/div/div/div[2]/div[1]/div/div[2]/div/div/input')
+    element.send_keys("TC_036_JSON")
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/div/div[2]/div[1]/div/div[3]/div[1]')))
+    element.click()
+    return
+    

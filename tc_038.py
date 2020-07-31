@@ -9,7 +9,6 @@ import traceback
 import logging
 
 from datetime import datetime, date, timedelta
-
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
@@ -22,8 +21,7 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.webdriver.common.action_chains import ActionChains
 
-
-class TC023:
+class TC038:
     def __init__(self, drv):
         self.driver = drv
 
@@ -65,59 +63,51 @@ class TC023:
 
             if (qcd.open_container(self.driver) != 1):
                 input1.click()
-
-            qcd.select_dbset_input(self.driver, 'marketing_dev')
-            qcd.select_db(self.driver)
-            qcd.select_table(self.driver, "City")
-            qcd.click_add_select_btn(self.driver)
-            qcd.click_datatab_input(self.driver)
-            # qcd.select_tableitem_on_datasearch(self.driver, 1)
-
-            # input 2
-            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Input", 300, 160)
-            input2 = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component1"]')))
+                
+            qcd.click_manual_upload_input(self.driver)
+            qcd.select_manual_upload_dataset_format(self.driver, 2)
+            
+            absolute_file_path = os.path.abspath("files/FlightDelayPrediction_2019.csv")
+            qcd.set_dataset_path(self.driver, '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div/div/div[2]/label/span[1]/input', absolute_file_path)
+            time.sleep(qcd.WAIT3)
+            qcd.input_delimiter_on_input(self.driver, "/")
+            qcd.set_header_on_input(self.driver, 1)
+            qcd.set_interschema_on_input(self.driver, 1)
+            self.driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div/div/button').click()
+            
+            try:
+                element = WebDriverWait(self.driver, qcd.WAIT20).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="root"]/div/div/div[2]/div')))
+                time.sleep(qcd.WAIT3)
+                element = WebDriverWait(self.driver, qcd.WAIT20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="root"]/div/div/div[2]/div/div/div[2]/button')))
+                element.click()
+            except Exception as e:
+                raise Exception('Input1 Validate fails')
+            
+            # Data Quality
+            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Data Quality", 500, -200)
+            data_quality = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component1"]')))
+            qcd.connect_elements(self.driver, input1, 1, data_quality, 1)
 
             if (qcd.open_container(self.driver) != 1):
-                input2.click()
+                data_quality.click()
 
-            qcd.select_dbset_input(self.driver, 'demodb_dest')
-            qcd.select_db(self.driver)
-            qcd.select_table(self.driver, "City")
-            qcd.click_add_select_btn(self.driver)
-            qcd.click_datatab_input(self.driver)
-            # qcd.select_tableitem_on_datasearch(self.driver, 1)
-
-            # data compare
-            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Data Compare", 400, 80)
-            compare1 = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component2"]')))
-
-            qcd.connect_elements(self.driver, input1, 1, compare1, 1)
-            qcd.connect_elements(self.driver, input2, 1, compare1, 1)
-
-            if (qcd.open_container(self.driver) != 1):
-                compare1.click()
+            qcd.nullCheckOnDataQuality(self.driver, 1)
+            qcd.checkCompletenessOnDataQuality(self.driver, 1)
+            qcd.checkLeftSpacesOnDataQuality(self.driver, 1)
+            qcd.checkRightSpacesOnDataQuality(self.driver, 1)
             
-            qcd.cell_by_cell_compare(self.driver, 1)
-
-            qcd.select_mapping_tab(self.driver)
-
-            qcd.select_mapping_table_item(self.driver, 1)
-            qcd.select_key_for_table_item(self.driver, 1)
-            
-            qcd.input_sql_on_sqlcolumn(self.driver)
             # execute
-            qcd.save_excute_workflow(self.driver, 'TC_023_ALEX')
+            qcd.save_excute_workflow(self.driver, 'TC_038_ALEX')
+            
         except Exception as e:
             qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
             raise Exception(e)
             pass
-
-        print('finished')
 
     def check_result(self):
         try:
-            qcd.click_summary_index(self.driver, 1)
+            print(1)
         except Exception as e:
-            qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
             raise Exception(e)
             pass
+        return

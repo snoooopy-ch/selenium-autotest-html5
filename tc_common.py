@@ -75,13 +75,13 @@ result_txt_xpath            = '/html/body/div[2]/div[3]/div/div/div/div/table/tr
 random_input_xpath          = '//*[@id="top_panel"]/div/div[2]/div[2]/div/div[2]/div/div/input'
 searchbox_dashboard_xpath   = '//*[@id="root"]/div/div[1]/div/div/div/div/div/div/div[1]/div[1]/div/div/input'
 search_table_recod_xpath    = '//*[@id="root"]/div/div[1]/div/div/div/div/div/div/div[2]/div/div[1]/div[2]/div'
-notification_xpath          = '//*[@id="root"]/div/div[1]/div/div/div/div/div/div[1]/header/div/img[1]'
+notification_xpath          = '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/div[1]/header/div/img[1]'
 notification_button_xpath   = '//*[@id="root"]/div/div[1]/div/div/div/div/div/div[2]/div/div[2]/div[1]/div/div'
 start_at_xapth              = '//*[@id="root"]/div/div[1]/div/div/div/div/div/div[2]/div/div[2]/div[5]/div/div[1]/div/div[2]/div/div[2]/div/div/span/span[1]/input'
 notification_create_xpath   = '//*[@id="root"]/div/div[1]/div/div/div/div/div/div[2]/div/div[2]/div[5]/div/div[3]/div[1]/button'
-notification_close_xpath    = '//*[@id="root"]/div/div[1]/div/div/div/div/div/div[2]/div/div[1]/header/div/div'
+notification_close_xpath    = '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/div[2]/div/div[1]/header/div/div[1]'
 result_close_xpath          = '/html/body/div[2]/div[3]/div/header/div/button'
-save_execute_on_xpath       = '//*[@id="root"]/div/div[1]/div/div/div/div/div/div[2]/div/div[2]/div[2]/div/button'
+save_execute_on_xpath       = '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/div[2]/div/div[2]/div[2]/div/button'
 select_all_commontype_xpath = '//*[@id="top_panel"]/div/div[2]/div[1]/div/div[2]/div[4]/button'
 share_btn_xpath             = '/html/body/div[2]/div[3]/div/header/div/div/button'
 open_dashboard_xpath        = '//*[@id="root"]/div/div/div[1]/div/div/header/div/div[2]/div/div/div/button[1]'
@@ -207,20 +207,27 @@ def open_container(driver):
 
 # action to select db set.
 def select_dbset_input(driver, db):
-    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div[2]/div/select')))
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div[1]/div[2]/div/div/div[1]')))
     element.click()
 
-    db_value = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div[2]/div/select/option[@value="' + db + '"]')))
-    db_value.click()
+    time.sleep(WAIT1)
+    db_value = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div[2]/div/div[2]/div')))
+    items = db_value.find_elements_by_xpath('./div')
+    
+    for item in items:
+        if (item.text == db):
+            item.click()
+            break
+    
     time.sleep(WAIT3)
     print('select db set')
     return
 
 # action to select db
 def select_db(driver):
-    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div[3]/div/div[2]/div')))
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div[3]/div/div/div[1]')))
     element.click()
-    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div[3]/div[2]/div/div')))
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div[3]/div/div[2]/div/div')))
     element.click()
     time.sleep(WAIT3)
     print('select db name')    
@@ -228,10 +235,10 @@ def select_db(driver):
 
 # action to select db table
 def select_db_with_index(driver, index):
-    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div[3]/div/div[2]/div')))
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div[3]/div/div/div[1]')))
     element.click()
     
-    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div[3]/div[2]/div/div[' + str(index) + ']')))
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div[3]/div/div[2]/div/div[' + str(index) + ']')))
     element.click()
     
     time.sleep(WAIT5)
@@ -787,9 +794,9 @@ def click_result_close(driver):
 # action select cluster on notification dialog
 def select_cluster_execute_job(driver, index):
     try:
-        driver.find_element_by_xpath('//*[@id="root"]/div/div[1]/div/div/div/div/div/div[2]/div/div[2]/div[2]/div/div/div/div[1]').click()
+        driver.find_element_by_xpath('//*[@id="root"]/div/div/div[1]/div/div/div/div/div/div[2]/div/div[2]/div[2]/div/div/div/div[1]').click()
         time.sleep(WAIT1)
-        driver.find_element_by_xpath('//*[@id="root"]/div/div[1]/div/div/div/div/div/div[2]/div/div[2]/div[2]/div/div/div[2]/div/div[' + str(index) + ']').click()
+        driver.find_element_by_xpath('//*[@id="root"]/div/div/div[1]/div/div/div/div/div/div[2]/div/div[2]/div[2]/div/div/div[2]/div/div[' + str(index) + ']').click()
         time.sleep(WAIT1)
     except Exception as e:
         pass
@@ -799,7 +806,7 @@ def select_cluster_execute_job(driver, index):
 def save_close_execute_tab(driver):
     driver.find_element_by_xpath(save_execute_on_xpath).click()
     driver.find_element_by_xpath(notification_close_xpath).click()
-    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="root"]/div/div[2]/div/div/div[2]/button')))
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="root"]/div/div/div[2]/div/div/div[2]/button')))
     element.click()
     return
 
@@ -968,8 +975,8 @@ def set_dataset_path(driver, xpath, path):
     return
 
 # click manual upload validate
-def click_manual_upload_validate(driver):
-    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, manual_upload_validate_xpath)))
+def click_manual_upload_validate(driver, xpath):
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, xpath)))
     element.click()
     return
 

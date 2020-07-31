@@ -1,0 +1,126 @@
+{
+  "executorCores": 2,
+  "executorMemory": "3g",
+  "email": [],
+  "flowName": "dataq1594714826958",
+  "hadoop": false,
+  "livy": false,
+  "numExecutors": 2,
+  "root": "component1",
+  "executeOn": "LOCAL",
+  "UIDataModel": {
+    "component0": {
+      "name": "Input Source",
+      "icon": "/assets/images/components/input (grey).svg",
+      "hasOutput": true,
+      "type": "InputSource",
+      "active": true,
+      "top": 75,
+      "left": 93,
+      "showProgressInput": false,
+      "query": "",
+      "databases": [
+        "hims_db"
+      ],
+      "selectedTables": [
+        "courses_info"
+      ],
+      "filterTab": true,
+      "selectedDatabase": [
+        {
+          "label": "hims_db",
+          "value": "hims_db"
+        }
+      ],
+      "checkedTables": [
+        {
+          "value": "Student_Information",
+          "checked": false
+        },
+        {
+          "value": "courses_info",
+          "checked": true
+        },
+        {
+          "value": "medicine_students_finalreport",
+          "checked": false
+        },
+        {
+          "value": "store_sales",
+          "checked": false
+        },
+        {
+          "value": "store_sales_1M",
+          "checked": false
+        },
+        {
+          "value": "store_sales_5M",
+          "checked": false
+        }
+      ],
+      "selectedTablesOptions": [
+        "courses_info"
+      ],
+      "tables": [
+        "Student_Information",
+        "courses_info",
+        "medicine_students_finalreport",
+        "store_sales",
+        "store_sales_1M",
+        "store_sales_5M"
+      ],
+      "result": {
+        "courses_info": {
+          "schema": [
+            {
+              "columnName": "Courses",
+              "columnType": "string",
+              "actualColumnType": "VARCHAR",
+              "nullable": false
+            },
+            {
+              "columnName": "Code",
+              "columnType": "string",
+              "actualColumnType": "VARCHAR",
+              "nullable": false
+            },
+            {
+              "columnName": "Courses_ID",
+              "columnType": "string",
+              "actualColumnType": "VARCHAR",
+              "nullable": false
+            }
+          ],
+          "sampleData": null,
+          "sqlexection": null,
+          "primarykey": [
+            "Courses_ID"
+          ],
+          "foreignkey": null,
+          "count": 0,
+          "connectionName": "hims"
+        }
+      },
+      "enableDataTab": false,
+      "checkBox": false,
+      "selectedConnection": "hims",
+      "dataBaseName": "hims_db",
+      "selectedTableForPreview": null,
+      "selectedTableOptions": "",
+      "manualFlow": false
+    },
+    "component1": {
+      "name": "Data Profile",
+      "icon": "/assets/images/components/Data Profile (grey).svg",
+      "hasInput": true,
+      "hasOutput": false,
+      "type": "DataProfile",
+      "isRoot": true,
+      "top": 53,
+      "left": 498,
+      "dependsOn": {
+        "component0": true
+      }
+    }
+  }
+}

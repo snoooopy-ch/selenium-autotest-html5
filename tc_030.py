@@ -102,7 +102,7 @@ class TC030:
             
             qcd.nullCheckOnDataQuality(self.driver, 9)
             qcd.uniqueCheckOnDataQuality(self.driver, 9)
-            qcd.inputSQLWhereConditionOnDataQuality(self.driver, 9, "Microbiology_examDate='2005-04-01'")
+#            qcd.inputSQLWhereConditionOnDataQuality(self.driver, 9, "Microbiology_examDate='2005-04-01'")
             
             time.sleep(qcd.WAIT1)
             
@@ -117,6 +117,7 @@ class TC030:
             # qcd.inputSQLWhereConditionOnDataQuality(self.driver, 23, "RadioLogy IS NULL")
             
             qcd.clickNextButtonOnDataQuality(self.driver)
+            qcd.scrollToTop(self.driver)
             
             qcd.checkLeftSpacesOnDataQuality(self.driver, 2)
             

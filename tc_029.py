@@ -93,27 +93,22 @@ class TC029:
             qcd.inputMaxLengthOnDataQuality(self.driver, 2, 1)
             qcd.inputMinLengthOnDataQuality(self.driver, 2, 1)
             
-            # qcd.checkCompletenessOnDataQuality(self.driver, 6)
-            # qcd.nullCheckOnDataQuality(self.driver, 6)
-            # qcd.uniqueCheckOnDataQuality(self.driver, 6)
-            # qcd.checkLeftSpacesOnDataQuality(self.driver, 6)
-            # qcd.checkRightSpacesOnDataQuality(self.driver, 6)
-            # qcd.inputMaxValueOnDataQuality(self.driver, 6, 625)
-            # qcd.inputMinValueOnDataQuality(self.driver, 6, 31)
+            qcd.nullCheckOnDataQuality(self.driver, 6)
+            qcd.uniqueCheckOnDataQuality(self.driver, 6)
+            qcd.inputMaxValueOnDataQuality(self.driver, 6, 625)
+            qcd.inputMinValueOnDataQuality(self.driver, 6, 31)
             
-            qcd.checkCompletenessOnDataQuality(self.driver, 8)
             qcd.nullCheckOnDataQuality(self.driver, 8)
             qcd.uniqueCheckOnDataQuality(self.driver, 8)
-            qcd.checkLeftSpacesOnDataQuality(self.driver, 8)
-            qcd.checkRightSpacesOnDataQuality(self.driver, 8)
             qcd.inputMaxValueOnDataQuality(self.driver, 8, 91)
             qcd.inputMinValueOnDataQuality(self.driver, 8, str(0.21))
             
             qcd.clickNextButtonOnDataQuality(self.driver)
+            qcd.scrollToTop(self.driver)
             
-            qcd.checkCompletenessOnDataQuality(self.driver, 17)
-            qcd.inputMaxLengthOnDataQuality(self.driver, 17, 29)
-            qcd.inputMinLengthOnDataQuality(self.driver, 17, 0)
+            qcd.checkCompletenessOnDataQuality(self.driver, 11)
+            qcd.inputMaxLengthOnDataQuality(self.driver, 11, 29)
+            qcd.inputMinLengthOnDataQuality(self.driver, 11, 0)
             
             # execute
             qcd.save_excute_workflow(self.driver, 'TC_029_ALEX')
@@ -137,7 +132,7 @@ class TC029:
             except Exception as e:
                 print(e)
                 pass
-            qcd.check_summary_statue_in_TC028_result(self.driver, self.__class__.__name__, '/html/body/div[2]/div[3]/div/div/div/div/div[2]/div[1]/div[2]')
+            qcd.check_summary_statue_in_TC028_result(self.driver, self.__class__.__name__, '/html/body/div[2]/div[3]/div/div/div/div/div[3]/div[1]/div[2]')
             qcd.click_result_close(self.driver)
         except Exception as e:
             qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))

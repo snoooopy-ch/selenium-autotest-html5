@@ -77,19 +77,25 @@ class TC028:
             if (qcd.open_container(self.driver) != 1):
                 data_quality.click()
 
+            # c_id
             qcd.nullCheckOnDataQuality(self.driver, 1)
             qcd.uniqueCheckOnDataQuality(self.driver, 1)
             qcd.inputMaxValueOnDataQuality(self.driver, 1, 210)
             qcd.inputMinValueOnDataQuality(self.driver, 1, 200)
             
+            # c_status
             qcd.inputMaxLengthOnDataQuality(self.driver, 2, 4)
             qcd.inputMinLengthOnDataQuality(self.driver, 2, 4)
             
-            qcd.checkLeftSpacesOnDataQuality(self.driver, 3)
-            qcd.checkRightSpacesOnDataQuality(self.driver, 4)
+            # h_id
+            qcd.nullCheckOnDataQuality(self.driver, 3)
             
+            # p_id
+            qcd.nullCheckOnDataQuality(self.driver, 4)
+            qcd.uniqueCheckOnDataQuality(self.driver, 4)
+            
+            # amount_claimd
             qcd.inputMinValueOnDataQuality(self.driver, 6, 33000)
-            qcd.inputMinLengthOnDataQuality(self.driver, 7, 4)
 
             # execute
             qcd.save_excute_workflow(self.driver, 'TC_028_ALEX')

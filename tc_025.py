@@ -108,10 +108,11 @@ class TC025:
 
     def check_result(self):
         try:
+            qcd.check_summary_in_final_result(self.driver, self.__class__.__name__, '/html/body/div[2]/div[3]/div/div/div/div/div[3]/div[1]/div[2]/div')
             qcd.click_result_close(self.driver)
             
             # Edit
-            qcd.open_dashboard(self.driver)
+            qcd.click_action_on_flow_page(self.driver)
             qcd.find_specific_flow(self.driver, "flows_edit")
             qcd.click_action_on_first_flow(self.driver, 1)
             

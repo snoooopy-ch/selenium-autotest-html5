@@ -57,6 +57,7 @@ class TC020:
             with open("js/drag_and_drop.js") as f:
                 drag_and_drop_js = f.read()
 
+            qcd.open_excutions(self.driver)
             record_count = qcd.input_searchbox_on_dashboard(self.driver, "TC_019")
             
             if record_count == 0:

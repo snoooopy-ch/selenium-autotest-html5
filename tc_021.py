@@ -93,13 +93,14 @@ class TC021:
             qcd.click_select_tableitem_for_select_columns(self.driver, 1)
             qcd.click_save_on_cp(self.driver)
 
-            qcd.click_select_tableitem_for_select_columns(self.driver, 2)
-            qcd.click_save_on_cp(self.driver)
-
             qcd.click_select_tableitem_for_select_columns(self.driver, 3)
             qcd.click_save_on_cp(self.driver)
 
-            qcd.click_select_tableitem_for_select_columns(self.driver, 4)
+            qcd.click_select_tableitem_for_select_columns(self.driver, 5)
+            qcd.click_save_on_cp(self.driver)
+
+            qcd.click_select_tableitem_for_select_columns(self.driver, 6)
+            qcd.select_table(self.driver, "joining_date")
             qcd.click_save_on_cp(self.driver)
 
             # common type
@@ -111,22 +112,23 @@ class TC021:
             if (qcd.open_container(self.driver) != 1):
                 commontype.click()
 
+            qcd.click_maximize_for_select_columns(self.driver)
             qcd.click_select_tableitem_for_select_columns(self.driver, 1)
             qcd.click_select_all_for_commontype(self.driver)
             qcd.select_item_from_column_data_type_list(self.driver, 2, 1)
             qcd.select_item_from_column_data_type_list(self.driver, 5, 1)
             qcd.click_save_on_cp(self.driver)
 
-            qcd.click_select_tableitem_for_select_columns(self.driver, 2)
+            qcd.click_select_tableitem_for_select_columns(self.driver, 3)
             qcd.click_select_all_for_commontype(self.driver)
             qcd.click_save_on_cp(self.driver)
 
-            qcd.click_select_tableitem_for_select_columns(self.driver, 3)
+            qcd.click_select_tableitem_for_select_columns(self.driver, 5)
             qcd.click_select_all_for_commontype(self.driver)
             qcd.select_item_from_column_data_type_list(self.driver, 7, 5)
             qcd.click_save_on_cp(self.driver)
 
-            qcd.click_select_tableitem_for_select_columns(self.driver, 4)
+            qcd.click_select_tableitem_for_select_columns(self.driver, 6)
             qcd.click_select_all_for_commontype(self.driver)
             qcd.click_save_on_cp(self.driver)
 
@@ -138,11 +140,8 @@ class TC021:
             if (qcd.open_container(self.driver) != 1):
                 removeduplicates.click()
 
+            qcd.click_maximize_for_select_columns(self.driver)
             qcd.click_select_tableitem_for_select_columns(self.driver, 1)
-            qcd.click_select_all_for_commontype(self.driver)
-            qcd.click_save_on_cp(self.driver)
-
-            qcd.click_select_tableitem_for_select_columns(self.driver, 2)
             qcd.click_select_all_for_commontype(self.driver)
             qcd.click_save_on_cp(self.driver)
 
@@ -150,7 +149,11 @@ class TC021:
             qcd.click_select_all_for_commontype(self.driver)
             qcd.click_save_on_cp(self.driver)
 
-            qcd.click_select_tableitem_for_select_columns(self.driver, 4)
+            qcd.click_select_tableitem_for_select_columns(self.driver, 5)
+            qcd.click_select_all_for_commontype(self.driver)
+            qcd.click_save_on_cp(self.driver)
+
+            qcd.click_select_tableitem_for_select_columns(self.driver, 6)
             qcd.click_select_all_for_commontype(self.driver)
             qcd.click_save_on_cp(self.driver)
 
@@ -163,6 +166,7 @@ class TC021:
 
             if (qcd.open_container(self.driver) != 1):
                 compare1.click()
+            qcd.click_maximize_for_select_columns(self.driver)
 
             qcd.cell_by_cell_compare(self.driver, 1)
             qcd.select_mapping_tab(self.driver)

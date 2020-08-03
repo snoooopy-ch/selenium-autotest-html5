@@ -84,7 +84,7 @@ result_close_xpath          = '/html/body/div[2]/div[3]/div/header/div/button'
 save_execute_on_xpath       = '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/div[2]/div/div[2]/div[2]/div/button'
 select_all_commontype_xpath = '//*[@id="top_panel"]/div/div[2]/div[1]/div/div[2]/div[4]/button'
 share_btn_xpath             = '/html/body/div[2]/div[3]/div/header/div/div/button'
-flow_xpath        = '//*[@id="root"]/div/div/div[1]/div/div/header/div/div[2]/div/div/div/button[1]'
+flow_xpath                  = '//*[@id="root"]/div/div/div[1]/div/div/header/div/div[2]/div/div/div/button[1]'
 excution_xpath              = '//*[@id="root"]/div/div/div[1]/div/div/header/div/div[2]/div/div/div/button[2]'
 settings_xpath              = '//*[@id="root"]/div/div/div[1]/div/div/header/div/div[2]/div/div/div/button[3]'
 settings_searchbox_xpath    = '//*[@id="root"]/div/div[1]/div/div/div/div/div/main/div[2]/div/div[1]/div[1]/div/input'
@@ -633,8 +633,6 @@ def check_summary_in_final_result(driver, class_name, summary_xpath):
     if (summary_xpath == ''):
         return
     
-    time.sleep(1000)
-    
     summary_table = driver.find_element_by_xpath(summary_xpath)
     table_trs = driver.find_elements_by_xpath(summary_xpath + '/div')
 
@@ -942,6 +940,13 @@ def entry_clear(self, element):
 def open_config_tab_on_input(driver):
     driver.find_element_by_xpath(input_config_tag_xpath).click()
     time.sleep(WAIT1)
+    return
+
+# action to flow page
+def click_action_on_flow_page(driver):
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, flow_xpath)))
+    element.click()
+    time.sleep(WAIT5)
     return
 
 # action to first flow

@@ -63,7 +63,7 @@ class TC020:
             if record_count == 0:
                 raise Exception('no search results')
             
-            qcd.click_action_on_first_flow(self.driver, 1)
+            qcd.clickFirstViewEditActionOnExcutions(self.driver)
             time.sleep(qcd.WAIT3)
             qcd.click_notification(self.driver)
             qcd.click_tab_on_notification_board(self.driver, 4)

@@ -76,9 +76,9 @@ random_input_xpath          = '//*[@id="top_panel"]/div/div[2]/div[2]/div/div[2]
 searchbox_dashboard_xpath   = '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/div[1]/div[3]/div[1]/div/div/input'
 search_table_recod_xpath    = '//*[@id="root"]/div/div[1]/div/div/div/div/div/div/div[2]/div/div[1]/div[2]/div'
 notification_xpath          = '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/div[1]/header/div/img[1]'
-notification_button_xpath   = '//*[@id="root"]/div/div[1]/div/div/div/div/div/div[2]/div/div[2]/div[1]/div/div'
-start_at_xapth              = '//*[@id="root"]/div/div[1]/div/div/div/div/div/div[2]/div/div[2]/div[5]/div/div[1]/div/div[2]/div/div[2]/div/div/span/span[1]/input'
-notification_create_xpath   = '//*[@id="root"]/div/div[1]/div/div/div/div/div/div[2]/div/div[2]/div[5]/div/div[3]/div[1]/button'
+notification_button_xpath   = '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/div[2]/div/div[2]/div[1]/div/div'
+start_at_xapth              = '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/div[2]/div/div[2]/div[5]/div/div[1]/div/div[2]/div/div[2]/div/div/span/span[1]/input'
+notification_create_xpath   = '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/div[2]/div/div[2]/div[5]/div/div[3]/div[1]/button'
 notification_close_xpath    = '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/div[2]/div/div[1]/header/div/div[1]'
 result_close_xpath          = '/html/body/div[2]/div[3]/div/header/div/button'
 save_execute_on_xpath       = '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/div[2]/div/div[2]/div[2]/div/button'
@@ -87,8 +87,8 @@ share_btn_xpath             = '/html/body/div[2]/div[3]/div/header/div/div/butto
 flow_xpath                  = '//*[@id="root"]/div/div/div[1]/div/div/header/div/div[2]/div/div/div/button[1]'
 excution_xpath              = '//*[@id="root"]/div/div/div[1]/div/div/header/div/div[2]/div/div/div/button[2]'
 settings_xpath              = '//*[@id="root"]/div/div/div[1]/div/div/header/div/div[2]/div/div/div/button[3]'
-settings_searchbox_xpath    = '//*[@id="root"]/div/div[1]/div/div/div/div/div/main/div[2]/div/div[1]/div[1]/div/input'
-new_connection_xpath        = '//*[@id="root"]/div/div[1]/div/div/div/div/div/main/div[2]/div/div[1]/div[2]/button'
+settings_searchbox_xpath    = '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div[1]/div[1]/div/input'
+new_connection_xpath        = '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div[1]/div[2]/button'
 input_data_tag_xpath        = '//*[@id="simple-tab-1"]'
 input_config_tag_xpath      = '//*[@id="simple-tab-0"]'
 data_search_table_xpath     = '//*[@id="top_panel"]/div/div[2]/div[3]/div[1]/div/div/div/div[1]'
@@ -96,7 +96,7 @@ sql_column_xpath            = '//*[@id="top_panel"]/div/div[2]/div[3]/div/div[2]
 detail_xpath                = '/html/body/div[2]/div[3]/div/div/div/div/div[1]/div[3]/span[2]'
 summary_select_xpath        = '/html/body/div[2]/div[3]/div/div/div/div/div[1]/div[2]/div/div/div[1]'
 action_on_first_flow_xpath  = '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/div/div[2]/div/div[1]/div[2]/div[1]/div/div[1]/div/div/button'
-search_flow_xpath           = '//*[@id="root"]/div/div[1]/div/div/div/div/div/div/div[1]/div[1]/div/div/input'
+search_flow_xpath           = '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/div/div[1]/div[2]/div[1]/div/div/input'
 manual_upload_xpath         = '//*[@id="top_panel"]/div/div[2]/div[2]/div[1]/div[2]'
 dataset_format_xpath        = '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div[2]/div/div[1]/div[2]/div/div[1]'
 manual_upload_validate_xpath = '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div/div[1]/button'
@@ -245,7 +245,7 @@ def select_db_with_index(driver, index):
     print('select db name')    
     return
 
-# click to maximize button on select columns
+# click to maximize button on select columns, data_compare
 def click_maximize_for_select_columns(driver):
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[1]/header/div/div/*[name()="svg"]')))
     element.click()
@@ -780,8 +780,8 @@ def set_start_time_with10(driver):
     now_plus_10 = datetime.now() + timedelta(minutes = 1)
     current_min = now_plus_10.minute
     current_hour = now_plus_10.hour
-    driver.find_element_by_xpath('//*[@id="root"]/div/div[1]/div/div/div/div/div/div[2]/div/div[2]/div[5]/div/div[1]/div/div[2]/div/div[2]/div/div/div[1]/div/select/option[@id="' + str(current_hour) + '"]')
-    driver.find_element_by_xpath('//*[@id="root"]/div/div[1]/div/div/div/div/div/div[2]/div/div[2]/div[5]/div/div[1]/div/div[2]/div/div[2]/div/div/div[2]/div/select/option[@id="' + str(current_min) + '"]')
+    driver.find_element_by_xpath('//*[@id="root"]/div/div/div[1]/div/div/div/div/div/div[2]/div/div[2]/div[5]/div/div[1]/div/div[2]/div/div[2]/div/div/div[1]/div/select/option[@id="' + str(current_hour) + '"]')
+    driver.find_element_by_xpath('//*[@id="root"]/div/div/div[1]/div/div/div/div/div/div[2]/div/div[2]/div[5]/div/div[1]/div/div[2]/div/div[2]/div/div/div[2]/div/select/option[@id="' + str(current_min) + '"]')
     driver.find_element_by_xpath(notification_create_xpath).click()
     driver.find_element_by_xpath(notification_close_xpath).click()
     print('set time')
@@ -840,7 +840,7 @@ def search_in_settings(driver, keyword):
 # delete on settings board
 def click_delete_settings_search(driver):
     try:
-        driver.find_element_by_xpath('//*[@id="root"]/div/div[1]/div/div/div/div/div/main/div[2]/div/div[2]/div[1]/div[2]/div[1]/div/div[6]/div/button[2]').click()
+        driver.find_element_by_xpath('//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div[2]/div[1]/div[2]/div[1]/div/div[6]/div/button[2]').click()
         driver.find_element_by_xpath('/html/body/div[2]/div[3]/div/div[3]/button[2]').click()
         time.sleep(WAIT3)
     except Exception as e:
@@ -851,7 +851,7 @@ def click_delete_settings_search(driver):
 def add_new_connection(driver, index, name, url, user, password):
     driver.find_element_by_xpath(new_connection_xpath).click()
     time.sleep(WAIT10)
-    driver.find_element_by_xpath('//*[@id="root"]/div/div[1]/div/div/div/div/div/main/div[2]/div[2]/ul/div[' + str(index) + ']/div').click()
+    driver.find_element_by_xpath('//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div[2]/ul/div[' + str(index) + ']/div').click()
     print('database clicked')
 
     time.sleep(WAIT3)
@@ -859,30 +859,34 @@ def add_new_connection(driver, index, name, url, user, password):
     
     dateTimeObj = datetime.now()
     database_name = 'employee_' + str(dateTimeObj.microsecond)
-    driver.find_element_by_xpath('//*[@id="root"]/div/div[1]/div/div/div/div/div/main/div[2]/div/div[2]/div/div/section[1]/div[2]/div[3]/div[1]/div/input').send_keys(database_name)
+    driver.find_element_by_xpath('//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div[2]/div/div/section[1]/div[2]/div[3]/div[1]/div/input').send_keys(database_name)
     
-    driver.find_element_by_xpath('//*[@id="root"]/div/div[1]/div/div/div/div/div/main/div[2]/div/div[2]/div/div/section[1]/div[2]/p/span').click()
+    driver.find_element_by_xpath('//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div[2]/div/div/section[1]/div[2]/p/span').click()
 
-    driver.find_element_by_xpath('//*[@id="root"]/div/div[1]/div/div/div/div/div/main/div[2]/div/div[2]/div/div/section[1]/div[2]/div/div/div[1]/div/input').send_keys(Keys.CONTROL + 'a') 
-    driver.find_element_by_xpath('//*[@id="root"]/div/div[1]/div/div/div/div/div/main/div[2]/div/div[2]/div/div/section[1]/div[2]/div/div/div[1]/div/input').send_keys(Keys.DELETE)
-    driver.find_element_by_xpath('//*[@id="root"]/div/div[1]/div/div/div/div/div/main/div[2]/div/div[2]/div/div/section[1]/div[2]/div/div/div[1]/div/input').send_keys(url)
+    driver.find_element_by_xpath('//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div[2]/div/div/section[1]/div[2]/div/div/div[1]/div/input').send_keys(Keys.CONTROL + 'a') 
+    driver.find_element_by_xpath('//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div[2]/div/div/section[1]/div[2]/div/div/div[1]/div/input').send_keys(Keys.DELETE)
+    driver.find_element_by_xpath('//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div[2]/div/div/section[1]/div[2]/div/div/div[1]/div/input').send_keys(url)
 
     absolute_file_path = os.path.abspath("files/mysql-connector-java-8.0.12.jar")
-    driver.find_element_by_xpath('//*[@id="root"]/div/div[1]/div/div/div/div/div/main/div[2]/div/div[2]/div/div/section[1]/div[2]/input').send_keys(absolute_file_path)
+    driver.find_element_by_xpath('//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div[2]/div/div/section[1]/div[2]/input').send_keys(absolute_file_path)
 
-    driver.find_element_by_xpath('//*[@id="root"]/div/div[1]/div/div/div/div/div/main/div[2]/div/div[2]/div/div/section[2]/div[1]/div/div/input').send_keys(user)
-    driver.find_element_by_xpath('//*[@id="root"]/div/div[1]/div/div/div/div/div/main/div[2]/div/div[2]/div/div/section[2]/div[2]/div/div/input').send_keys(password)
+    driver.find_element_by_xpath('//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div[2]/div/div/section[2]/div[1]/div/div/input').send_keys(user)
+    driver.find_element_by_xpath('//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div[2]/div/div/section[2]/div[2]/div/div/input').send_keys(password)
 
     try:
-        test_btn = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="root"]/div/div[1]/div/div/div/div/div/main/div[2]/div/div[2]/div/div/section[3]/div/div[2]/button')))
+        test_btn = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div[2]/div/div/section[3]/div/div[2]/button')))
         test_btn.click()
+        
+        WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="root"]/div/div/div[2]/div/div/div[2]/button'))).click()
     except Exception as e:
+        print(e)
         pass
 
     try:
-        create_btn = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="root"]/div/div[1]/div/div/div/div/div/main/div[2]/div/div[2]/div/div/section[3]/div/div[1]/button')))
+        create_btn = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div[2]/div/div/section[3]/div/div[1]/button')))
         create_btn.click()
     except Exception as e:
+        print(e)
         pass
 
     print('new connection added')

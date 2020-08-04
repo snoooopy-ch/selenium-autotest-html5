@@ -64,7 +64,7 @@ class TC022:
             qcd.add_new_connection(self.driver, 6, 'employee_demo', 'jdbc:mysql://54.86.47.129:3306/employee?useUnicode=true& useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC', 'demouser1', 'demopassword')
             
             qcd.open_dashboard(self.driver)
-            qcd.click_action_on_first_flow(self.driver, 1)
+            qcd.clickFirstViewEditActionOnExcutions(self.driver)
 
             input1 = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component0"]')))
             if (qcd.open_container(self.driver) != 1):
@@ -81,8 +81,24 @@ class TC022:
         print(self.__class__.__name__ + ' result:')
         try:
             qcd.open_config_tab_on_input(self.driver)
-            self.driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div[1]/div[2]/div/select/option[@value="employee_demo"]')
-            print("employee_demo exist")
+    
+            element = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div[1]/div[2]/div/div/div[1]')))
+            element.click()
+
+            time.sleep(qcd.WAIT1)
+            db_value = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div[2]/div/div[2]/div')))
+            items = db_value.find_elements_by_xpath('./div')
+            
+            flag = 0
+            for item in items:
+                if (item.text == 'employee_demo'):
+                    print("employee_demo exist")
+                    flag = 1
+                    break
+            
+            if (flag == 0):
+                print("employee_demo unexist")    
+
         except NoSuchElementException:
             print("employee_demo unexist")
             raise Exception(e)

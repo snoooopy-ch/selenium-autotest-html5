@@ -106,6 +106,7 @@ class TC016:
 
             if (qcd.open_container(self.driver) != 1):
                 compare1.click()
+            qcd.click_maximize_for_select_columns(self.driver)
                 
             qcd.cell_by_cell_compare(self.driver, 1)
             qcd.select_mapping_tab(self.driver)

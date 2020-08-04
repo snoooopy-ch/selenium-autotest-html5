@@ -88,7 +88,7 @@ class TC027:
     def check_result(self):
         try:
             qcd.click_result_close(self.driver)
-            qcd.open_dashboard(self.driver)
+            qcd.click_action_on_flow_page(self.driver)
             
             # Edit
             qcd.click_action_on_first_flow(self.driver, 1)

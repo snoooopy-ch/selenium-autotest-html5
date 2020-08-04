@@ -93,7 +93,7 @@ class TC026:
             dateTimeObj = datetime.now()
             timestamp = str(dateTimeObj.microsecond)
             # Clone
-            qcd.open_dashboard(self.driver)
+            qcd.click_action_on_flow_page(self.driver)
             qcd.find_specific_flow(self.driver, "Clone_Edit_Delete")
             qcd.click_action_on_first_flow(self.driver, 2)
             element = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="root"]/div/div[1]/div/div/div/div/div/div/div[2]/div[1]/div/div[2]/div/div/input')))
@@ -112,7 +112,7 @@ class TC026:
             print('DataProfile is copied')
             
             # Rename
-            qcd.open_dashboard(self.driver)
+            qcd.click_action_on_flow_page(self.driver)
             qcd.find_specific_flow(self.driver, "Clone_Edit_Delete")
             qcd.click_action_on_first_flow(self.driver, 4)
             element = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="root"]/div/div[1]/div/div/div/div/div/div/div[2]/div[1]/div/div[2]/div/div/input')))
@@ -132,7 +132,7 @@ class TC026:
                 print('Unrenamed to Modified_flow')
             
             # Delete
-            qcd.open_dashboard(self.driver)
+            qcd.click_action_on_flow_page(self.driver)
             qcd.find_specific_flow(self.driver, timestamp + "_cloned")
             qcd.click_action_on_first_flow(self.driver, 3)
             time.sleep(qcd.WAIT5)

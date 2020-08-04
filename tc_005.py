@@ -91,21 +91,24 @@ class TC005:
 
             if (qcd.open_container(self.driver) != 1):
                 compare1.click()
+            
+            qcd.click_maximize_for_select_columns(self.driver)
                 
             qcd.cell_by_cell_compare(self.driver, 1)
             qcd.select_mapping_tab(self.driver)
 
-            qcd.select_mapping_table_item(self.driver, 1)
-            qcd.select_key_for_table_item(self.driver, 1)
+            # qcd.select_mapping_table_item(self.driver, 1)
+            # qcd.select_key_for_table_item(self.driver, 1)
 
-            qcd.select_mapping_table_item(self.driver, 3)
-            qcd.select_key_for_table_item(self.driver, 1)
+            # qcd.select_mapping_table_item(self.driver, 3)
+            # qcd.select_key_for_table_item(self.driver, 1)
 
-            qcd.select_mapping_table_item(self.driver, 9)
-            qcd.select_key_for_table_item(self.driver, 1)
+            # qcd.select_mapping_table_item(self.driver, 9)
+            # qcd.select_key_for_table_item(self.driver, 1)
 
-            qcd.select_mapping_table_item(self.driver, 10)
-            qcd.select_key_for_table_item(self.driver, 1)
+            # qcd.select_mapping_table_item(self.driver, 10)
+            # qcd.select_key_for_table_item(self.driver, 1)
+            qcd.select_key_for_warning_mapping_tableitem(self.driver, 1)
            
             # execute
             qcd.save_excute_workflow(self.driver, 'TC_005_ALEX')

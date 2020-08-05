@@ -78,6 +78,7 @@ class TC036:
 
         if (qcd.open_container(self.driver) != 1):
             input1.click()
+        qcd.click_maximize_for_select_columns(self.driver)
             
         qcd.select_table(self.driver, "courses_info")
         qcd.select_table(self.driver, "Student_Information")

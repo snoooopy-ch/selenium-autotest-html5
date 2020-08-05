@@ -79,7 +79,7 @@ class TC035:
 
             if (qcd.open_container(self.driver) != 1):
                 data_profile.click()
-
+ 
             # execute
             qcd.save_excute_workflow(self.driver, 'TC_035_ALEX')
 
@@ -90,7 +90,7 @@ class TC035:
 
     def check_result(self):
         qcd.click_result_close(self.driver)
-        qcd.open_dashboard(self.driver)
+        qcd.click_action_on_flow_page(self.driver)
         time.sleep(qcd.WAIT5)
         element = self.driver.find_element_by_xpath('//*[@id="root"]/div/div/div[1]/div/div/div/div/div/div/div[2]/div/div[1]/div[2]/div[1]/div/div[7]/div/div')
         html = element.get_attribute('innerHTML')

@@ -70,7 +70,7 @@ class TC037:
             absolute_file_path = os.path.abspath("files/dp_resck_037.json")
             qcd.set_dataset_path(self.driver, '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div/div[1]/div[2]/label/span[1]/input', absolute_file_path)
             time.sleep(qcd.WAIT3)
-            qcd.click_manual_upload_validate(self.driver, '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div[2]/div[1]/button')
+            qcd.click_manual_upload_validate(self.driver, '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div/div[1]/button')
             
             try:
                 element = WebDriverWait(self.driver, qcd.WAIT20).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="root"]/div/div/div[2]/div')))
@@ -101,6 +101,11 @@ class TC037:
             qcd.checkCompletenessOnDataQuality(self.driver, 5)
             qcd.checkLeftSpacesOnDataQuality(self.driver, 5)
             qcd.checkRightSpacesOnDataQuality(self.driver, 5)
+            
+            qcd.nullCheckOnDataQuality(self.driver, 6)
+            qcd.checkCompletenessOnDataQuality(self.driver, 6)
+            qcd.checkLeftSpacesOnDataQuality(self.driver, 6)
+            qcd.checkRightSpacesOnDataQuality(self.driver, 6)
             
             qcd.nullCheckOnDataQuality(self.driver, 7)
             

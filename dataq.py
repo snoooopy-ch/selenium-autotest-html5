@@ -113,6 +113,7 @@ if __name__ == '__main__':
                 print("================")
                 start_time = time.time()
                 try:
+                    driver.get(url)
                     driver.refresh()
                     TCCLASS = str2Class("TC" + str(index).zfill(3))
                     tc = TCCLASS(driver)

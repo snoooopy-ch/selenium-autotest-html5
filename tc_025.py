@@ -138,14 +138,14 @@ class TC025:
                 compare1.click()
             qcd.select_mapping_tab(self.driver)
             qcd.add_mapping_table_name(self.driver)
+            qcd.select_key_for_warning_mapping_tableitem(self.driver, 1)
             
             # execute
             qcd.save_excute_workflow(self.driver, 'flows_edit')
-            qcd.click_result_close(self.driver)
+
+            WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, qcd.detail_xpath))).click()
+            WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, qcd.exportToPDF_xpath))).click()
             
-            qcd.open_dashboard(self.driver)
-            qcd.find_specific_flow(self.driver, "flows_edit")
-            qcd.click_action_on_first_flow(self.driver, 5)
         except Exception as e:
             qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
             raise Exception(e)

@@ -999,6 +999,12 @@ def set_dataset_path(driver, xpath, path):
     element.send_keys(path)
     return
 
+# check multiline manual upload on input
+def check_multiline_manual_upload_input(driver):
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div/div[1]/div[3]/div[1]/span')))
+    element.click()
+    return
+
 # click manual upload validate
 def click_manual_upload_validate(driver, xpath):
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, xpath)))

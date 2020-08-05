@@ -70,6 +70,7 @@ class TC037:
             absolute_file_path = os.path.abspath("files/dp_resck_037.json")
             qcd.set_dataset_path(self.driver, '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div/div[1]/div[2]/label/span[1]/input', absolute_file_path)
             time.sleep(qcd.WAIT3)
+            qcd.check_multiline_manual_upload_input(self.driver)
             qcd.click_manual_upload_validate(self.driver, '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div/div[1]/button')
             
             try:

@@ -119,4 +119,5 @@ class TC005:
             pass
 
     def check_result(self):
+        qcd.click_result_close(self.driver)
         pass

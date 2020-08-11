@@ -110,7 +110,7 @@ class TC013:
     def check_result(self):
         try:
             # show matching tables for TC003
-            detail_span_xpath = '/html/body/div[2]/div[3]/div/div/div/div/div[2]/span[2]'
+            detail_span_xpath = '/html/body/div[2]/div[3]/div/div/div/div/div[1]/div[2]/span[2]'
             try:
                 if qcd.isElementPresentForResult(self.driver, detail_span_xpath) != True:
                     raise Exception()

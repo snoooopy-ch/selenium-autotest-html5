@@ -110,7 +110,7 @@ class TC003:
     def check_result(self):
         try:
             # show matching tables for TC003
-            detail_span_xpath = '/html/body/div[2]/div[3]/div/div/div/div/div[2]/span[2]'
+            detail_span_xpath = '/html/body/div[2]/div[3]/div/div/div/div/div[1]/div[2]/span[2]'
             try:
                 detail_span = self.driver.find_elements_by_xpath(detail_span_xpath)
                 if (len(detail_span) == 1):

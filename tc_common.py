@@ -102,6 +102,7 @@ dataset_format_xpath        = '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div
 manual_upload_validate_xpath = '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div/div[1]/button'
 viewedit_xpath              = '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/div[2]/div/div[1]/div[2]/div[1]/div/div[8]/div/div/*[name()="svg"]'
 exportToPDF_xpath           = '/html/body/div[2]/div[3]/div/div/div/div/div[2]/div/div[1]/a/button'
+logout_xpath                = '//*[@id="root"]/div/div/div[1]/div/div/header/div/div[3]/button'
                               
 def init_selenium():
     chromeOptions = webdriver.ChromeOptions()

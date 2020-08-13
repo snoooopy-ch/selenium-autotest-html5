@@ -754,6 +754,8 @@ def check_summary_in_fianl_mismatched_count(driver, class_name, summary_xpath):
 # action to search on dashboard
 def input_searchbox_on_dashboard(driver, value):
     searchbox = driver.find_element_by_xpath(searchbox_dashboard_xpath)
+    searchbox.send_keys(Keys.CONTROL + 'a')
+    searchbox.send_keys(Keys.DELETE)
     searchbox.send_keys(value)
     time.sleep(WAIT1)
 

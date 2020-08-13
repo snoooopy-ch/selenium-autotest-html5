@@ -1002,8 +1002,17 @@ def set_dataset_path(driver, xpath, path):
     return
 
 # check multiline manual upload on input
-def check_multiline_manual_upload_input(driver):
-    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div/div[1]/div[3]/div[1]/span')))
+def check_multiline_manual_upload_input(driver, value):
+    # element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div/div[1]/div[3]/div[1]/span')))
+    # element.click()
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div/div[1]/div[3]/div[1]/div[2]/div/div[1]')))
+    element.click()
+    
+    if value == "true":
+        index = "1"
+    else:
+        index = "2"
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div/div[1]/div[3]/div[1]/div[2]/div[2]/div/div[' + index + ']')))
     element.click()
     return
 

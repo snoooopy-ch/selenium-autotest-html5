@@ -103,6 +103,7 @@ manual_upload_validate_xpath = '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/di
 viewedit_xpath              = '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/div[2]/div/div[1]/div[2]/div[1]/div/div[8]/div/div/*[name()="svg"]'
 exportToPDF_xpath           = '/html/body/div[2]/div[3]/div/div/div/div/div[2]/div/div[1]/a/button'
 logout_xpath                = '//*[@id="root"]/div/div/div[1]/div/div/header/div/div[3]/button'
+input_select_column_xpath   = '//*[@id="top_panel"]/div/div[2]/div[1]/div/div[2]/div[2]/div/div/input'
                               
 def init_selenium():
     chromeOptions = webdriver.ChromeOptions()
@@ -698,6 +699,19 @@ def add_columns_in_datacompare_tableitem(driver):
     driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[3]/div/div[2]/div/div[1]/div[3]').click()
     return
 
+# add mapping columns for datacompare's table item
+def add_mappingcolumns_in_datacompare_tableitem(driver):
+    column1 = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[3]/div/div[2]/div/div[1]/div[1]/div/div/div[1]')
+    column1.click()
+    driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[3]/div/div[2]/div/div[1]/div[1]/div/div[2]/div/div[1]').click()
+
+    column2 = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[3]/div/div[2]/div/div[1]/div[2]/div/div/div[1]')
+    column2.click()
+    driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[3]/div/div[2]/div/div[1]/div[2]/div/div[2]/div/div[1]').click()
+
+    driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[3]/div/div[2]/div/div[1]/div[3]').click()
+    return
+
 # click to share button
 def click_share_button_and_close(driver):
     share_btn = driver.find_element_by_xpath(share_btn_xpath)
@@ -1214,3 +1228,23 @@ def onUploadJsonFlowFile(driver, filePath):
     element.click()
     return
     
+# Set Input Select Column
+def setInputSelectColumnValue(driver, value):
+    element = driver.find_element_by_xpath(input_select_column_xpath)
+    element.send_keys(value)
+    return
+
+# Get Input Select Column
+def getInputSelectColumnValue(driver):
+    element = driver.find_element_by_xpath(input_select_column_xpath)
+    return element.get_attribute("value")
+
+# Remove column on Select Column
+def removeColumnOnSelectColumn(driver, index):
+    element = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div/div[1]/div[2]/div[' + str(index) + ']/div/div[4]/div/img')
+    element.click()
+    
+# Get Column Row Counts on Select Column
+def columnRowCounts(driver):
+    numbersOfColumn = len(driver.find_elements_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div/div[1]/div[2]/div'))
+    return numbersOfColumn

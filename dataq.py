@@ -50,7 +50,7 @@ from tc_043 import TC043
 from tc_044 import TC044
 
 #BASE_URL = 'http://dataq-frontend.s3-website.us-east-2.amazonaws.com/#/user-home/flow'
-#BASE_URL = 'http://dataq-automation-alb-1598668034.us-east-1.elb.amazonaws.com:9000'
+#BASE_URL = 'http://dataq-automation-alb-1598668034.us-east-1.elb.amazonaws.com:7000'
 
 def str2Class(str):
     return getattr(sys.modules[__name__], str)

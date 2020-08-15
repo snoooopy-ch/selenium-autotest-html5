@@ -10,7 +10,7 @@ usage: dataq.py [-h] [-r URL] [-u USER] [-p PASSWORD] [-s SCRIPTS] [-a]
 
 optional arguments:
   -h,			--help			show this help message and exit
-  -r URL,		--url URL		input site url, default 'http://dataq-automation-alb-1598668034.us-east-1.elb.amazonaws.com:9000'
+  -r URL,		--url URL		input site url, default 'http://dataq-automation-alb-1598668034.us-east-1.elb.amazonaws.com:7000'
   -u USER,		--user USER		input login user, default 'john'
   -p PASSWORD,		--password PASSWORD	input login pass, default 'dataq'
   -s SCRIPTS,		--scripts SCRIPTS	input script number to execute using comma

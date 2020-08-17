@@ -41,8 +41,17 @@ WAIT20                      = 20
 WAIT100                     = 100
 WAITDRIVER                  = 20
 
-elements                    = ["Input", "Data Compare", "Select Columns", "Common Type", "Remove Duplicates", "Data Quality", "Data Profile"]
-element_xpath               = ['//div[@id="component0"]/img', '//div[@id="component1"]/img', '//div[@id="component2"]/img', '//div[@id="component3"]/img', '//div[@id="component4"]/img', '//div[@id="component5"]/img', '//div[@id="component6"]/img']
+elements                    = ["Input", "Data Compare", "Select Columns", "Common Type", 
+                               "Filter Rows", "Remove Duplicates", "Data Quality", "Data Profile"]
+element_xpath               = ['//div[@id="component0"]/img', 
+                               '//div[@id="component1"]/img', 
+                               '//div[@id="component2"]/img', 
+                               '//div[@id="component3"]/img', 
+                               '//div[@id="component4"]/img', 
+                               '//div[@id="component5"]/img', 
+                               '//div[@id="component6"]/img', 
+                               '//div[@id="component7"]/img'
+                               ]
 
 user_xpath                  = '//*[@id="root"]/div/div/div[1]/div/div[1]/div/div/div[2]/div[1]/div/input'
 pass_xpath                  = '//*[@id="root"]/div/div/div[1]/div/div[1]/div/div/div[2]/div[2]/div/input'
@@ -87,8 +96,8 @@ share_btn_xpath             = '/html/body/div[2]/div[3]/div/header/div/div/butto
 flow_xpath                  = '//*[@id="root"]/div/div/div[1]/div/div/header/div/div[2]/div/div/div/button[1]'
 excution_xpath              = '//*[@id="root"]/div/div/div[1]/div/div/header/div/div[2]/div/div/div/button[2]'
 settings_xpath              = '//*[@id="root"]/div/div/div[1]/div/div/header/div/div[2]/div/div/div/button[3]'
-settings_searchbox_xpath    = '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div[1]/div[1]/div/input'
-new_connection_xpath        = '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div[1]/div[2]/button'
+settings_searchbox_xpath    = '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div/div[1]/div[1]/div/input'
+new_connection_xpath        = '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div/div[1]/div[2]/button'
 input_data_tag_xpath        = '//*[@id="simple-tab-1"]'
 input_config_tag_xpath      = '//*[@id="simple-tab-0"]'
 data_search_table_xpath     = '//*[@id="top_panel"]/div/div[2]/div[3]/div[1]/div/div/div/div[1]'
@@ -864,7 +873,7 @@ def search_in_settings(driver, keyword):
 # delete on settings board
 def click_delete_settings_search(driver):
     try:
-        driver.find_element_by_xpath('//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div[2]/div[1]/div[2]/div[1]/div/div[6]/div/button[2]').click()
+        driver.find_element_by_xpath('//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div/div[2]/div[1]/div[2]/div[1]/div/div[6]/div/button[2]').click()
         driver.find_element_by_xpath('/html/body/div[2]/div[3]/div/div[3]/button[2]').click()
         time.sleep(WAIT3)
     except Exception as e:
@@ -875,7 +884,7 @@ def click_delete_settings_search(driver):
 def add_new_connection(driver, index, name, url, user, password):
     driver.find_element_by_xpath(new_connection_xpath).click()
     time.sleep(WAIT10)
-    driver.find_element_by_xpath('//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div[2]/ul/div[' + str(index) + ']/div').click()
+    driver.find_element_by_xpath('//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div[2]/ul/div[' + str(index) + ']/div').click()
     print('database clicked')
 
     time.sleep(WAIT3)
@@ -883,22 +892,23 @@ def add_new_connection(driver, index, name, url, user, password):
     
     dateTimeObj = datetime.now()
     database_name = 'employee_' + str(dateTimeObj.microsecond)
-    driver.find_element_by_xpath('//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div[2]/div/div/section[1]/div[2]/div[3]/div[1]/div/input').send_keys(database_name)
+    driver.find_element_by_xpath('//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div/div[2]/div/div/section[1]/div[2]/div[3]/div[1]/div/input').send_keys(database_name)
     
-    driver.find_element_by_xpath('//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div[2]/div/div/section[1]/div[2]/p/span').click()
+    driver.find_element_by_xpath('//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div/div[2]/div/div/section[1]/div[2]/p/span').click()
 
-    driver.find_element_by_xpath('//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div[2]/div/div/section[1]/div[2]/div/div/div[1]/div/input').send_keys(Keys.CONTROL + 'a') 
-    driver.find_element_by_xpath('//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div[2]/div/div/section[1]/div[2]/div/div/div[1]/div/input').send_keys(Keys.DELETE)
-    driver.find_element_by_xpath('//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div[2]/div/div/section[1]/div[2]/div/div/div[1]/div/input').send_keys(url)
+    driver.find_element_by_xpath('//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div/div[2]/div/div/section[1]/div[2]/div/div/div[1]/div/input').send_keys(Keys.CONTROL + 'a') 
+    driver.find_element_by_xpath('//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div/div[2]/div/div/section[1]/div[2]/div/div/div[1]/div/input').send_keys(Keys.DELETE)
+    driver.find_element_by_xpath('//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div/div[2]/div/div/section[1]/div[2]/div/div/div[1]/div/input').send_keys(url)
 
     absolute_file_path = os.path.abspath("files/mysql-connector-java-8.0.12.jar")
-    driver.find_element_by_xpath('//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div[2]/div/div/section[1]/div[2]/input').send_keys(absolute_file_path)
+    driver.find_element_by_xpath('//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div/div[2]/div/div/section[1]/div[2]/input').send_keys(absolute_file_path)
 
-    driver.find_element_by_xpath('//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div[2]/div/div/section[2]/div[1]/div/div/input').send_keys(user)
-    driver.find_element_by_xpath('//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div[2]/div/div/section[2]/div[2]/div/div/input').send_keys(password)
+    driver.find_element_by_xpath('//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div/div[2]/div/div/section[2]/div[1]/div/div/input').send_keys(user)
+    driver.find_element_by_xpath('//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div/div[2]/div/div/section[2]/div[2]/div/div/input').send_keys(password)
 
     try:
-        test_btn = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div[2]/div/div/section[3]/div/div[2]/button')))
+        test_btn = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div/div[2]/div/div/section[3]/div/div[2]/button')))
+                                                                                                
         test_btn.click()
         
         WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="root"]/div/div/div[2]/div/div/div[2]/button'))).click()
@@ -907,7 +917,7 @@ def add_new_connection(driver, index, name, url, user, password):
         pass
 
     try:
-        create_btn = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div[2]/div/div/section[3]/div/div[1]/button')))
+        create_btn = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div/div[2]/div/div/section[3]/div/div[1]/button')))
         create_btn.click()
     except Exception as e:
         print(e)
@@ -952,10 +962,13 @@ def click_summary_index(driver, index):
 
     rows = driver.find_elements_by_xpath('/html/body/div[2]/div[3]/div/div/div/div/div[2]/div/div/div[1]/div[2]/div')
     for row in rows:
-        typevalue = row.find_element_by_xpath('./div/div[1]/div/div[1]').text
-        if typevalue == '':
-            city_name = row.find_element_by_xpath('./div/div[2]/div/div[2]').text
-            print('city name is converted to lower case: ' + city_name)
+        try:
+            typevalue = row.find_element_by_xpath('./div/div[1]/div/div[1]').text
+            if typevalue == '':
+                city_name = row.find_element_by_xpath('./div/div[2]/div/div[2]').text
+                print('city name is converted to lower case: ' + city_name)
+        except:
+            break
     return
 
 

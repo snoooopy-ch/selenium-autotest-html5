@@ -7,6 +7,7 @@ import os
 import subprocess
 import traceback
 import logging
+import re
 
 from datetime import datetime, date, timedelta
 from selenium import webdriver
@@ -71,6 +72,7 @@ class TC024:
             qcd.click_manual_upload_input(self.driver)
             qcd.select_manual_upload_dataset_format(self.driver, 3)
             qcd.set_dataset_path(self.driver, '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div[2]/div[1]/div[2]/div[2]/div/input', '/tmp/sale_details.json')
+            qcd.check_multiline_manual_upload_input(self.driver, "true")
             qcd.click_manual_upload_validate(self.driver, '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div[2]/div[1]/button')
             
             try:
@@ -91,6 +93,7 @@ class TC024:
             qcd.click_manual_upload_input(self.driver)
             qcd.select_manual_upload_dataset_format(self.driver, 3)
             qcd.set_dataset_path(self.driver, '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div[2]/div[1]/div[2]/div[2]/div/input', '/tmp/sale_details.json')
+            qcd.check_multiline_manual_upload_input(self.driver, "true")
             qcd.click_manual_upload_validate(self.driver, '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div[2]/div[1]/button')
             
             try:
@@ -128,9 +131,11 @@ class TC024:
         try:
             qcd.click_share_button_and_close(self.driver)
             qcd.click_result_close(self.driver)
-            element = WebDriverWait(self.driver, qcd.WebDriverWait).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="root"]/div/div[1]/div/div/div/div/div/div/div[2]/div/div[1]/div[2]/div[1]/div/div[8]/div')))
+            element = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/div/div[2]/div/div[1]/div[2]/div[1]/div/div[8]/div/div')))
             print(1)
-            print("metric percentage = " + str(element.text))
+            html = element.get_attribute('innerHTML')
+            html = re.compile(r'<[^>]+>').sub('', html)
+            print("metric percentage = " + str(html))
             print(2)
         except Exception as e:
             raise Exception(e)

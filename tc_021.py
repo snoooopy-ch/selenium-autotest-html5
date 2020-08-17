@@ -133,7 +133,7 @@ class TC021:
             qcd.click_save_on_cp(self.driver)
 
             # Remove Duplicate
-            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Remove Duplicates", 800, -200)
+            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Remove Duplicates", 700, -200)
             removeduplicates = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component4"]')))
 
             qcd.connect_elements(self.driver, commontype, 2, removeduplicates, 1)
@@ -158,7 +158,7 @@ class TC021:
             qcd.click_save_on_cp(self.driver)
 
             # Data Compare
-            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Data Compare", 800, 0)
+            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Data Compare", 850, 0)
             compare1 = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component5"]')))
 
             qcd.connect_elements(self.driver, removeduplicates, 2, compare1, 1)
@@ -202,9 +202,10 @@ class TC021:
             qcd.click_share_button_and_close(self.driver)
             qcd.click_result_close(self.driver)
 
-            metric_item = self.driver.find_element_by_xpath('//*[@id="root"]/div/div[1]/div/div/div/div/div/div[3]/div/div[1]/div[2]/div[1]/div/div[7]/div')
+            qcd.open_dashboard(self.driver)
+            metric_item = self.driver.find_element_by_xpath('//*[@id="root"]/div/div/div[1]/div/div/div/div/div/div[2]/div/div[1]/div[2]/div[1]/div/div[7]/div/div')
             ActionChains(self.driver).move_to_element(metric_item).perform()
-            print(self.driver.find_element_by_xpath('//*[@id="root"]/div/div[1]/div/div/div/div/div/div[3]/div/div[1]/div[2]/div[1]/div/div[7]/div') + '   ' + self.driver.find_element_by_xpath('html/body/div[2]/div').text())
+            print(self.driver.find_element_by_xpath('/html/body/div[2]/div').text())
 
         except Exception as e:
             qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))

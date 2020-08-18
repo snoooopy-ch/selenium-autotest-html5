@@ -223,7 +223,7 @@ def select_dbset_input(driver, db):
     element.click()
 
     time.sleep(WAIT1)
-    db_value = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div[2]/div/div[2]/div')))
+    db_value = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div[1]/div[2]/div/div[2]/div')))
     items = db_value.find_elements_by_xpath('./div')
     
     for item in items:

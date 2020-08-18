@@ -59,13 +59,14 @@ class TC040:
             ];
             
             for i in range(5):
-                p = str(i + 1)
-                firstElement = self.driver.find_element_by_xpath('//*[@id="root"]/div/div/div[1]/div/div/div/div/div/div/div[2]/div/div[1]/div[2]/div[1]' + fieldsXpath[i])
                 searchbox = self.driver.find_element_by_xpath(qcd.search_flow_xpath)
                 searchbox.send_keys(Keys.CONTROL + 'a')
                 searchbox.send_keys(Keys.DELETE)
                 
+                p = str(i + 1)
+                firstElement = self.driver.find_element_by_xpath('//*[@id="root"]/div/div/div[1]/div/div/div/div/div/div/div[2]/div/div[1]/div[2]/div[1]' + fieldsXpath[i])
                 keyword = firstElement.text;
+                
                 if i == 4:
                     html = firstElement.get_attribute('innerHTML')
                     html = re.compile(r'<[^>]+>').sub('', html)
@@ -75,10 +76,12 @@ class TC040:
                 time.sleep(qcd.WAIT1)
                 records = self.driver.find_elements_by_xpath('//*[@id="root"]/div/div/div[1]/div/div/div/div/div/div/div[2]/div/div[1]/div[2]/div')
                 
+                start = 0
                 for record in records:
                     innerRecord = record.find_element_by_xpath('./div')
                     recordClass = innerRecord.get_attribute("class")
                     if recordClass.find('-padRow') == -1:
+                        start = 1
                         idElement = record.find_element_by_xpath('.' + fieldsXpath[i])
                         
                         target = idElement.text
@@ -88,9 +91,12 @@ class TC040:
                             target = html
                     
                         if target.find(keyword) == -1:
-                            print("{} search not working".format(fields[i]))
+                            print("{} search not working".format(fieldsName[i]))
                             break
+                        
                     else:
+                        if start == 0:
+                            print("{} search not working".format(fieldsName[i]))
                         break
             
         except Exception as e:

@@ -113,6 +113,12 @@ viewedit_xpath              = '//*[@id="root"]/div/div/div[1]/div/div/div/div/di
 exportToPDF_xpath           = '/html/body/div[2]/div[3]/div/div/div/div/div[2]/div/div[1]/a/button'
 logout_xpath                = '//*[@id="root"]/div/div/div[1]/div/div/header/div/div[3]/button'
 input_select_column_xpath   = '//*[@id="top_panel"]/div/div[2]/div[1]/div/div[2]/div[2]/div/div/input'
+dialog_input_xpath          = '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/div/div[2]/div[1]/div/div[2]/div/div/input'
+dialog_savebtn_xpath        = '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/div/div[2]/div[1]/div/div[3]/div[1]'
+rules_xpath                 = '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/div/div/ul/div[2]'  
+add_rule_button_xpath       = '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div/div[2]/div/div/section[2]/div/div/button'
+vieweditaction_rule_xpath     = '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div/div[2]/div/div[1]/div[2]/div[1]/div/div[5]/div/button[1]'
+deleteaction_rule_xpath     = '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div/div[2]/div/div[1]/div[2]/div[1]/div/div[5]/div/button[2]'
                               
 def init_selenium():
     chromeOptions = webdriver.ChromeOptions()
@@ -995,6 +1001,7 @@ def click_action_on_flow_page(driver):
 def click_action_on_first_flow(driver, index):
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, action_on_first_flow_xpath)))
     element.click()
+    time.sleep(WAIT1)
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="long-menu"]/div[3]/ul/li[' + str(index) + ']')))
     element.click()
     time.sleep(WAIT5)
@@ -1246,10 +1253,8 @@ def onUploadJsonFlowFile(driver, filePath):
     element = driver.find_element_by_xpath('//*[@id="upload-image1"]')
     absolute_file_path = os.path.abspath("files/" + filePath)
     element.send_keys(absolute_file_path)
-    element = driver.find_element_by_xpath('//*[@id="root"]/div/div/div[1]/div/div/div/div/div/div/div[2]/div[1]/div/div[2]/div/div/input')
-    element.send_keys("TC_036_JSON")
-    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/div/div[2]/div[1]/div/div[3]/div[1]')))
-    element.click()
+    
+    self.inputValueAndSaveOnDailog(driver, "TC_036_JSON")
     return
     
 # Set Input Select Column
@@ -1272,3 +1277,67 @@ def removeColumnOnSelectColumn(driver, index):
 def columnRowCounts(driver):
     numbersOfColumn = len(driver.find_elements_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div/div[1]/div[2]/div'))
     return numbersOfColumn
+
+# Input value on Dailog
+def inputValueAndSaveOnDailog(driver, value):
+    element = driver.find_element_by_xpath(dialog_input_xpath)
+    element.send_keys(Keys.CONTROL + 'a')
+    element.send_keys(Keys.DELETE)
+    element.send_keys(value)
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, dialog_savebtn_xpath)))
+    element.click()
+    return
+
+# check Message and close on Dialog
+def checkMessageAndClose(driver):
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="client-snackbar"]')))
+    element.click()
+    print("MessageBox: " + element.text)
+    
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="root"]/div/div/div[2]/div/div/div[2]/button')))
+    element.click()
+    return
+
+# select rule on settings page
+def selectRuleOnSettings(driver):
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/div/div/ul/div[2]')))
+    element.click()
+    return
+
+# click add new rule
+def clickAddNewRuleButton(driver):
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div/div[1]/div[2]/button')))
+    element.click()
+    return
+
+# add New Rule
+def addNewRule(driver, ruleName, description, type):
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div/div[2]/div/div/section[1]/div[1]/div[2]/div/div/input')))
+    element.send_keys(ruleName)
+    
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div/div[2]/div/div/section[1]/div[2]/div[2]/div/div/textarea')))
+    element.send_keys(description)
+    
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div/div[2]/div/div/section[1]/div[3]/div[2]/div/div/div')))
+    element.click()
+    
+    if type == "SQL":
+        element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="menu-"]/div[3]/ul/li[1]')))
+        element.click()
+    else:
+        element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="menu-"]/div[3]/ul/li[2]')))
+        element.click()
+    
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, add_rule_button_xpath)))
+    element.click()
+    return
+    
+# delete Rule
+def deleteRule(driver):
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, deleteaction_rule_xpath)))
+    element.click()
+    
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[2]/div[3]/div/div[3]/button[2]')))
+    element.click()
+    return
+    

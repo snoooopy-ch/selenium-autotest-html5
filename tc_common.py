@@ -1312,26 +1312,36 @@ def clickAddNewRuleButton(driver):
 
 # add New Rule
 def addNewRule(driver, ruleName, description, type):
-    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div/div[2]/div/div/section[1]/div[1]/div[2]/div/div/input')))
-    element.send_keys(ruleName)
+    if ruleName != "":
+        element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div/div[2]/div/div/section[1]/div[1]/div[2]/div/div/input')))
+        clearInputValue(element)
+        element.send_keys(ruleName)
     
-    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div/div[2]/div/div/section[1]/div[2]/div[2]/div/div/textarea')))
-    element.send_keys(description)
+    if description != "":
+        element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div/div[2]/div/div/section[1]/div[2]/div[2]/div/div/textarea')))
+        clearInputValue(element)
+        element.send_keys(description)
     
-    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div/div[2]/div/div/section[1]/div[3]/div[2]/div/div/div')))
-    element.click()
-    
-    if type == "SQL":
-        element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="menu-"]/div[3]/ul/li[1]')))
+    if type != "":
+        element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div/div[2]/div/div/section[1]/div[3]/div[2]/div/div/div')))
         element.click()
-    else:
-        element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="menu-"]/div[3]/ul/li[2]')))
-        element.click()
+        
+        if type == "SQL":
+            element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="menu-"]/div[3]/ul/li[1]')))
+            element.click()
+        else:
+            element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="menu-"]/div[3]/ul/li[2]')))
+            element.click()
     
-    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, add_rule_button_xpath)))
-    element.click()
+    clickAddRuleButton(driver)
     return
-    
+
+# clear input element
+def clearInputValue(element):
+    element.send_keys(Keys.CONTROL + 'a')
+    element.send_keys(Keys.DELETE)
+    return
+
 # delete Rule
 def deleteRule(driver):
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, deleteaction_rule_xpath)))
@@ -1339,5 +1349,16 @@ def deleteRule(driver):
     
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[2]/div[3]/div/div[3]/button[2]')))
     element.click()
+    
+    return
+
+# click edit&view button
+def clickEditViewRuleButton(driver):
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, vieweditaction_rule_xpath)))
+    element.click()
     return
     
+def clickAddRuleButton(driver):
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, add_rule_button_xpath)))
+    element.click()
+    return

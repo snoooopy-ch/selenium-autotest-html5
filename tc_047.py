@@ -22,7 +22,7 @@ from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.webdriver.common.action_chains import ActionChains
 
 
-class TC046:
+class TC047:
     def __init__(self, drv):
         self.driver = drv
 
@@ -41,11 +41,18 @@ class TC046:
             qcd.selectRuleOnSettings(self.driver)
             
             qcd.clickAddNewRuleButton(self.driver)
-            qcd.addNewRule(self.driver, "SQLtest", "Doctor\r\nWHERE gendertypeid=2;", "SQL")
+            qcd.addNewRule(self.driver, "SQL_RegEx_test1", "[A-Z][a-z]*[0-9][-]", "REGULAR_EXPRESSION")
+            qcd.checkMessageAndClose(self.driver)
+            
+            qcd.deleteRule(self.driver)
+            qcd.checkMessageAndClose(self.driver)
+            
+            qcd.clickAddNewRuleButton(self.driver)
+            qcd.addNewRule(self.driver, "SQL_RegEx_test2", "([A_Z][+])[a-z]{2}", "REGULAR_EXPRESSION")
             qcd.checkMessageAndClose(self.driver)
             
             qcd.clickEditViewRuleButton(self.driver)
-            qcd.clickAddRuleButton(self.driver)
+            qcd.addNewRule(self.driver, "", "([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$", "")
             qcd.checkMessageAndClose(self.driver)
             
             qcd.deleteRule(self.driver)

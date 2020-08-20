@@ -99,64 +99,73 @@ if __name__ == '__main__':
     print(scpt_number)
 
     driver = qcd.init_selenium() 
+
+    runTotal = len(scpt_number)
+    passedTotal = 0
+    failedTotal = 0
+    
+    passedNumbers = []
+    failedNumbers = []
     try:
-        driver.get(url)
-        driver.set_window_size(1920, 1080)
-
-    	# login page loading...
-        time.sleep(qcd.WAIT1)
-        
-        runTotal = len(scpt_number)
-        passedTotal = 0
-        failedTotal = 0
-        
-        passedNumbers = []
-        failedNumbers = []
-        try:
-            # login
-            if (qcd.login(driver, user, password) != 1):
-                raise Exception('fail to login')
-
-            startTotal = time.time()
-            for index in scpt_number:
-                print("================")
-                start_time = time.time()
+        startTotal = time.time()
+        for index in scpt_number:
+            try:
+                driver.get(url)
+                driver.refresh()
+    
                 try:
-                    driver.get(url)
-                    driver.refresh()
-                    TCCLASS = str2Class("TC" + str(index).zfill(3))
-                    tc = TCCLASS(driver)
-                    tc.test()
-                    
-                    passedTotal = passedTotal + 1
-                    passedNumbers.append(index)
-                except Exception as e:
-                    failedTotal = failedTotal + 1
-                    failedNumbers.append(index)
-                    print("exception:{}".format(e))
+                    alert = driver.switch_to.alert
+                    alert.accept()
+                except:
                     pass
-                end_time = time.time()
-                print("TC{} execution time: {} seconds".format(str(index).zfill(3), end_time - start_time))
-            endTotal = time.time()
+    
+                driver.set_window_size(1920, 1080)
+
+                # login page loading...
+                time.sleep(qcd.WAIT1)
+
+                print("================")            
+                print("TC{} start".format(str(index).zfill(3)))
+                # login
+                if (qcd.login(driver, user, password) != 1):
+                    raise Exception('fail to login')
             
-            print("Ran {} tests".format(runTotal))
-            print("Passed {} tests".format(passedTotal))
-            print("Failed {} tests".format(failedTotal))
-            print("Passed Scirpts: {}".format(passedNumbers))
-            print("Failed Scirpts: {}".format(failedNumbers))
-            print("Total execution time: {} seconds".format(endTotal - startTotal))
-        except Exception as e:
-            print(e)
-            pass
+                start_time = time.time()
 
-        time.sleep(qcd.WAIT1)
+                driver.get(url)
+                driver.refresh()
+                TCCLASS = str2Class("TC" + str(index).zfill(3))
+                tc = TCCLASS(driver)
+                tc.test()
+                
+                passedTotal = passedTotal + 1
+                passedNumbers.append(index)
 
-    except KeyboardInterrupt:
-        pass
+                qcd.logout(driver)
+            except Exception as e:
+                failedTotal = failedTotal + 1
+                failedNumbers.append(index)
+                print("exception:{}".format(e))
+                
+                if driver.current_url != 'http://dataq-frontend.s3-website.us-east-2.amazonaws.com/#/':
+                    qcd.logout(driver)
+                pass
+            
+            end_time = time.time()
+            print("TC{} execution time: {} seconds".format(str(index).zfill(3), end_time - start_time))
+
+        endTotal = time.time()
+        print("Ran {} tests".format(runTotal))
+        print("Passed {} tests".format(passedTotal))
+        print("Failed {} tests".format(failedTotal))
+        print("Passed Scirpts: {}".format(passedNumbers))
+        print("Failed Scirpts: {}".format(failedNumbers))
+        print("Total execution time: {} seconds".format(endTotal - startTotal))
     except Exception as e:
-        qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
-        print("exception:{}".format(e))
+        print(e)
+        pass
     finally:
         driver.quit()
     
+    time.sleep(qcd.WAIT1)
     sys.exit()

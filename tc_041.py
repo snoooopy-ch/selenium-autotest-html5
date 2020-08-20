@@ -44,8 +44,7 @@ class TC041:
         else:
             print("Redirecting to Flow page is failed")
             
-        logoutBtn = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, qcd.logout_xpath)))
-        logoutBtn.click()
+        qcd.logout(self.driver)
         
         self.driver.back()
         print("back button clicked")

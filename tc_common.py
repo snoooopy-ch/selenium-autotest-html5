@@ -1362,3 +1362,14 @@ def clickAddRuleButton(driver):
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, add_rule_button_xpath)))
     element.click()
     return
+
+def logout(driver):
+    logoutBtn = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, logout_xpath)))
+    logoutBtn.click()
+    
+    try:
+        alert = driver.switch_to.alert
+        alert.accept()
+    except:
+        pass
+    return

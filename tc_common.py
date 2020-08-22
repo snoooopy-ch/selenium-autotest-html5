@@ -1364,9 +1364,12 @@ def clickAddRuleButton(driver):
     return
 
 def logout(driver):
+    click_result_close(driver)
+    
     logoutBtn = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, logout_xpath)))
     logoutBtn.click()
     
+    print('logout')
     try:
         alert = driver.switch_to.alert
         alert.accept()

@@ -60,9 +60,9 @@ open_xpath                  = '//button[@class="MuiButtonBase-root MuiFab-root M
 input_xpath                 = '//div[@id="component0"]/img'
 container_xpath             = '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/div[2]/div'
 selectcolumn_xpath          = '//div[@id="component2"]/img'
-select_all_xpath            = '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div[2]/div[1]/div[4]/button/span[1]'
+select_all_xpath            = '//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div[2]/div/div[4]/button'
 selecttype_xpath            = '//div[@id="component3"]/img'
-btn_addSelected             = '//div[@id="top_panel"]/div/div[2]/div[2]/div[2]/div[2]/div[1]/div[2]/button'
+btn_addSelected             = '//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div[2]/div/div[2]/button'
 compare_xpath               = '//div[@id="component1"]/img'
 removeDup_xpath             = '//div[@id="component4"]/img'
 data_quality_xpath          = '//div[@id="component6"]/img'
@@ -225,11 +225,11 @@ def open_container(driver):
 
 # action to select db set.
 def select_dbset_input(driver, db):
-    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div[1]/div[2]/div/div/div[1]')))
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div[2]/div/div/div[1]')))
     element.click()
 
     time.sleep(WAIT1)
-    db_value = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div[1]/div[2]/div/div[2]/div')))
+    db_value = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div[2]/div/div[2]/div')))
     items = db_value.find_elements_by_xpath('./div')
     
     for item in items:
@@ -243,20 +243,20 @@ def select_dbset_input(driver, db):
 
 # action to select db
 def select_db(driver):
-    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div[3]/div/div/div[1]')))
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div[3]/div/div/div[1]')))
     element.click()
-    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div[3]/div/div[2]/div/div')))
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div[3]/div/div[2]/div/div')))
     element.click()
     time.sleep(WAIT3)
-    print('select db name')    
+    print('select db name')
     return
 
 # action to select db table
 def select_db_with_index(driver, index):
-    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div[3]/div/div/div[1]')))
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div[3]/div/div/div[1]')))
     element.click()
     
-    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div[3]/div/div[2]/div/div[' + str(index) + ']')))
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div[3]/div/div[2]/div/div[' + str(index) + ']')))
     element.click()
     
     time.sleep(WAIT5)

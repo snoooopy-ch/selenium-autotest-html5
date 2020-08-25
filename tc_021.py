@@ -203,9 +203,9 @@ class TC021:
             qcd.click_result_close(self.driver)
 
             qcd.open_dashboard(self.driver)
-            metric_item = self.driver.find_element_by_xpath('//*[@id="root"]/div/div/div[1]/div/div/div/div/div/div[2]/div/div[1]/div[2]/div[1]/div/div[7]/div/div')
+            metric_item = self.driver.find_element_by_xpath('/html/body/div/div/div/div[1]/div/div/div/div/div/div[2]/div/div[1]/div[2]/div[1]/div/div[7]/div/div')
             ActionChains(self.driver).move_to_element(metric_item).perform()
-            print(self.driver.find_element_by_xpath('/html/body/div[2]/div').text())
+            print(self.driver.find_element_by_xpath('/html/body/div[3]/div').text())
 
         except Exception as e:
             qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))

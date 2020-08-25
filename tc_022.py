@@ -82,11 +82,11 @@ class TC022:
         try:
             qcd.open_config_tab_on_input(self.driver)
     
-            element = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div[1]/div[2]/div/div/div[1]')))
+            element = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div[2]/div/div/div[1]')))
             element.click()
 
             time.sleep(qcd.WAIT1)
-            db_value = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div[2]/div/div[2]/div')))
+            db_value = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div[2]/div/div[2]/div')))
             items = db_value.find_elements_by_xpath('./div')
             
             flag = 0

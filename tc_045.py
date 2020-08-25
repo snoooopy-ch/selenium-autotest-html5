@@ -61,7 +61,6 @@ class TC045:
             print("deleted")
         except Exception as e:
             qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
-            time.sleep(1000)
             raise Exception(e)
             pass
 

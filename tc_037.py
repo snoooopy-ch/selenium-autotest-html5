@@ -64,14 +64,15 @@ class TC037:
             if (qcd.open_container(self.driver) != 1):
                 input1.click()
                 
+            qcd.click_maximize_for_select_columns(self.driver)
             qcd.click_manual_upload_input(self.driver)
             qcd.select_manual_upload_dataset_format(self.driver, 3)
             
             absolute_file_path = os.path.abspath("files/dp_resck_037.json")
-            qcd.set_dataset_path(self.driver, '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div/div[1]/div[2]/label/span[1]/input', absolute_file_path)
+            qcd.set_dataset_path(self.driver, '//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div[2]/div[1]/div[2]/label/span[1]/input', absolute_file_path)
             time.sleep(qcd.WAIT3)
-            qcd.check_multiline_manual_upload_input(self.driver, "true")
-            qcd.click_manual_upload_validate(self.driver, '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div/div[1]/button')
+            qcd.check_multiline_manual_upload_input_without_awshadoop(self.driver, "true")
+            qcd.click_manual_upload_validate(self.driver, '/html/body/div/div/div/div[1]/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[3]/div/div/div[1]/button')
             
             try:
                 element = WebDriverWait(self.driver, qcd.WAIT20).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="root"]/div/div/div[2]/div')))
@@ -81,6 +82,9 @@ class TC037:
             except Exception as e:
                 raise Exception('Input1 Validate fails')
             
+            if (qcd.open_container(self.driver) == 1):
+                input1.click()
+                
             # Data Quality
             qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Data Quality", 500, -200)
             data_quality = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component1"]')))

@@ -106,19 +106,21 @@ detail_xpath                = '/html/body/div[2]/div[3]/div/div/div/div/div[1]/d
 summary_select_xpath        = '/html/body/div[2]/div[3]/div/div/div/div/div[1]/div[2]/div/div/div[1]'
 action_on_first_flow_xpath  = '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/div/div[2]/div/div[1]/div[2]/div[1]/div/div[1]/div/div/button'
 search_flow_xpath           = '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/div/div[1]/div[2]/div[1]/div/div/input'
-manual_upload_xpath         = '//*[@id="top_panel"]/div/div[2]/div[2]/div[1]/div[2]'
-dataset_format_xpath        = '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div[2]/div/div[1]/div[2]/div/div[1]'
+manual_upload_xpath         = '/html/body/div/div/div/div[1]/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[1]/div/div/button[2]'
+dataset_format_xpath        = '/html/body/div/div/div/div[1]/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[3]/div/div[2]/div[1]/div[1]/div[2]/div/div[1]'
 manual_upload_validate_xpath = '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div/div[1]/button'
 viewedit_xpath              = '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/div[2]/div/div[1]/div[2]/div[1]/div/div[8]/div/div/*[name()="svg"]'
 exportToPDF_xpath           = '/html/body/div[2]/div[3]/div/div/div/div/div[2]/div/div[1]/a/button'
 logout_xpath                = '//*[@id="root"]/div/div/div[1]/div/div/header/div/div[3]/button'
 input_select_column_xpath   = '//*[@id="top_panel"]/div/div[2]/div[1]/div/div[2]/div[2]/div/div/input'
-dialog_input_xpath          = '/html/body/div[27]/div[3]/div/div[2]/div/div/input'
-dialog_savebtn_xpath        = '/html/body/div[27]/div[3]/div/div[3]/button[1]'
+dialog_input_xpath          = '/html/body/div[5]/div[3]/div/div[2]/div/div/input'
+dialog_savebtn_xpath        = '/html/body/div[5]/div[3]/div/div[3]/button[1]'
 rules_xpath                 = '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/div/div/ul/div[2]'  
 add_rule_button_xpath       = '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div/div[2]/div/div/section[2]/div/div/button'
 vieweditaction_rule_xpath     = '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div/div[2]/div/div[1]/div[2]/div[1]/div/div[5]/div/button[1]'
 deleteaction_rule_xpath     = '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div/div[2]/div/div[1]/div[2]/div[1]/div/div[5]/div/button[2]'
+input_manualupload_dataset_xpath = '//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div[2]/div[1]/div[2]/div[2]/div/input'                              
+                              
                               
 def init_selenium():
     chromeOptions = webdriver.ChromeOptions()
@@ -953,7 +955,7 @@ def select_tableitem_on_datasearch(driver, index):
 # input sql on sql column
 def input_sql_on_sqlcolumn(driver):
     driver.find_element_by_xpath(sql_column_xpath).click()
-    driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[3]/div/div[2]/div/div[2]/div/div[2]/div/div[2]/div/input').send_keys('lower(city_name)')
+    driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[3]/div/div[2]/div/div[2]/div/div[2]/div/div[2]/div/div/input').send_keys('lower(city_name)')
     driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[3]/div/div[2]/div/div[2]/div/div[1]/span[2]').click()
     time.sleep(WAIT1)
     print('insert sql transformation')
@@ -1026,7 +1028,7 @@ def click_manual_upload_input(driver):
 def select_manual_upload_dataset_format(driver, index):
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, dataset_format_xpath)))
     element.click()
-    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div[2]/div/div[1]/div[2]/div[2]/div/div[' + str(index) + ']')))
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '/html/body/div/div/div/div[1]/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[3]/div/div[2]/div[1]/div[1]/div[2]/div[2]/div/div[' + str(index) + ']')))
     element.click()
     return;
 
@@ -1038,18 +1040,30 @@ def set_dataset_path(driver, xpath, path):
 
 # check multiline manual upload on input
 def check_multiline_manual_upload_input(driver, value):
-    # element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div/div[1]/div[3]/div[1]/span')))
-    # element.click()
-    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div/div[1]/div[3]/div[1]/div[2]/div/div[1]')))
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '/html/body/div/div/div/div[1]/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[3]/div/div[2]/div[1]/div[3]/div[1]/div[2]/div/div[1]')))
     element.click()
     
     if value == "true":
         index = "1"
     else:
         index = "2"
-    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div/div[1]/div[3]/div[1]/div[2]/div[2]/div/div[' + index + ']')))
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '/html/body/div/div/div/div[1]/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[3]/div/div[2]/div[1]/div[3]/div[1]/div[2]/div[2]/div/div[' + index + ']')))
     element.click()
     return
+
+# check multiline manual upload on input with out aws_hadoop
+def check_multiline_manual_upload_input_without_awshadoop(driver, value):
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '/html/body/div/div/div/div[1]/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[3]/div/div/div[1]/div[3]/div[1]/div[2]/div/div[1]')))
+    element.click()
+    
+    if value == "true":
+        index = "1"
+    else:
+        index = "2"
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '/html/body/div/div/div/div[1]/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[3]/div/div/div[1]/div[3]/div[1]/div[2]/div[2]/div/div[' + index + ']')))
+    element.click()
+    return
+
 
 # click manual upload validate
 def click_manual_upload_validate(driver, xpath):
@@ -1059,23 +1073,23 @@ def click_manual_upload_validate(driver, xpath):
 
 # input delimiter on input
 def input_delimiter_on_input(driver, value):
-    element = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div/div/div[3]/div[1]/div[2]/div/input')
+    element = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div/div[3]/div[1]/div[2]/div/input')
     element.send_keys(value)
     return
 
 # set header as true or false on input
 def set_header_on_input(driver, index):
-    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div/div/div[3]/div[2]/div[2]/div/div[1]')))
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '/html/body/div/div/div/div[1]/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[3]/div/div/div/div[3]/div[2]/div[2]/div/div[1]')))
     element.click()
-    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div/div/div[3]/div[2]/div[2]/div[2]/div/div[' + str(index) + ']')))
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '/html/body/div/div/div/div[1]/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[3]/div/div/div/div[3]/div[2]/div[2]/div[2]/div/div[' + str(index) + ']')))
     element.click()
     return
 
 # set interschema as true or false on input
 def set_interschema_on_input(driver, index):
-    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div/div/div[3]/div[3]/div[2]/div/div[1]')))
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '/html/body/div/div/div/div[1]/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[3]/div/div/div/div[3]/div[3]/div[2]/div/div[1]')))
     element.click()
-    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div/div/div[3]/div[3]/div[2]/div[2]/div/div[' + str(index) + ']')))
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '/html/body/div/div/div/div[1]/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[3]/div/div/div/div[3]/div[3]/div[2]/div[2]/div/div[' + str(index) + ']')))
     element.click()
     return
 
@@ -1140,7 +1154,7 @@ def checkRightSpacesOnDataQuality(driver, index):
 def inputMaxLengthOnDataQuality(driver, index, value):
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[3]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index) + ']/div/div[7]/div/div/input')))
     if index > 7:
-        target = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[3]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index -1) + ']/div/div[7]/div/div/input')))
+        target = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[3]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index -1) + ']/div/div[7]/div/button')))
         driver.execute_script("arguments[0].scrollIntoView();", target)
     element.send_keys(value);
     return
@@ -1149,7 +1163,7 @@ def inputMaxLengthOnDataQuality(driver, index, value):
 def inputMinLengthOnDataQuality(driver, index, value):
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[3]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index) + ']/div/div[8]/div/div/input')))
     if index > 7:
-        target = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[3]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index - 1) + ']/div/div[8]/div/div/input')))
+        target = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[3]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index - 1) + ']/div/div[8]/div/button')))
         driver.execute_script("arguments[0].scrollIntoView();", target)
     element.send_keys(value)
     return
@@ -1158,7 +1172,8 @@ def inputMinLengthOnDataQuality(driver, index, value):
 def inputRegularExpressOnDataQuality(driver, index, value):
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[3]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index) + ']/div/div[12]/div/div/textarea')))
     if index > 7:
-        target = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[3]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index - 1) + ']/div/div[12]/div/div/textarea')))
+        target = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[3]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index - 1) + ']/div/div[12]/div')))
+                                                                                                
         driver.execute_script("arguments[0].scrollIntoView();", target)
     element.send_keys(value)
     return
@@ -1167,7 +1182,7 @@ def inputRegularExpressOnDataQuality(driver, index, value):
 def inputSQLWhereConditionOnDataQuality(driver, index, value):
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[3]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index) + ']/div/div[11]/div/div/textarea')))
     if index > 7:
-        target = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[3]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index - 1) + ']/div/div[11]/div/div/textarea')))
+        target = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[3]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index - 1) + ']/div/div[11]/div/button')))
         driver.execute_script("arguments[0].scrollIntoView();", target)
     element.send_keys(value)
     return
@@ -1176,7 +1191,7 @@ def inputSQLWhereConditionOnDataQuality(driver, index, value):
 def inputMaxValueOnDataQuality(driver, index, value):
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[3]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index) + ']/div/div[9]/div/div/input')))
     if index > 7:
-        target = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[3]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index - 1) + ']/div/div[9]/div/div/input')))
+        target = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[3]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index - 1) + ']/div/div[9]/div/button')))
         driver.execute_script("arguments[0].scrollIntoView();", target)
     element.send_keys(value)
     return
@@ -1185,7 +1200,7 @@ def inputMaxValueOnDataQuality(driver, index, value):
 def inputMinValueOnDataQuality(driver, index, value):
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[3]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index) + ']/div/div[10]/div/div/input')))
     if index > 7:
-        target = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[3]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index - 1) + ']/div/div[10]/div/div/input')))
+        target = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[3]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index - 1) + ']/div/div[10]/div/button')))
         driver.execute_script("arguments[0].scrollIntoView();", target)
     element.send_keys(value)
     return
@@ -1254,7 +1269,7 @@ def onUploadJsonFlowFile(driver, filePath):
     absolute_file_path = os.path.abspath("files/" + filePath)
     element.send_keys(absolute_file_path)
     
-    self.inputValueAndSaveOnDailog(driver, "TC_036_JSON")
+    inputValueAndSaveOnDailog(driver, "TC_036_JSON")
     return
     
 # Set Input Select Column
@@ -1280,11 +1295,15 @@ def columnRowCounts(driver):
 
 # Input value on Dailog
 def inputValueAndSaveOnDailog(driver, value):
-    element = driver.find_element_by_xpath(dialog_input_xpath)
+    divs = driver.find_elements_by_xpath('/html/body/div')
+    length = len(divs)
+    print(length)
+    print('/html/body/div[' + str(length) + ']/div[3]/div/div[2]/div/div/input')
+    element = driver.find_element_by_xpath('/html/body/div[' + str(length) + ']/div[3]/div/div[2]/div/div/input')
     element.send_keys(Keys.CONTROL + 'a')
     element.send_keys(Keys.DELETE)
     element.send_keys(value)
-    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, dialog_savebtn_xpath)))
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[' + str(length) + ']/div[3]/div/div[3]/button[1]')))
     element.click()
     return
 

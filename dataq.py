@@ -98,8 +98,6 @@ if __name__ == '__main__':
 
     print(scpt_number)
 
-    driver = qcd.init_selenium() 
-
     runTotal = len(scpt_number)
     passedTotal = 0
     failedTotal = 0
@@ -110,46 +108,54 @@ if __name__ == '__main__':
         startTotal = time.time()
         for index in scpt_number:
             try:
-                driver.get(url)
-                driver.refresh()
-    
                 try:
-                    alert = driver.switch_to.alert
-                    alert.accept()
-                except:
+                    driver = qcd.init_selenium() 
+                    driver.get(url)
+                    driver.refresh()
+        
+                    try:
+                        alert = driver.switch_to.alert
+                        alert.accept()
+                    except:
+                        pass
+        
+                    driver.set_window_size(1920, 1080)
+
+                    # login page loading...
+                    time.sleep(qcd.WAIT1)
+
+                    print("================")            
+                    print("TC{} start".format(str(index).zfill(3)))
+                    # login
+                    if (qcd.login(driver, user, password) != 1):
+                        raise Exception('fail to login')
+                
+                    start_time = time.time()
+
+                    driver.get(url)
+                    driver.refresh()
+                    TCCLASS = str2Class("TC" + str(index).zfill(3))
+                    tc = TCCLASS(driver)
+                    tc.test()
+                    
+                    if index != 41:
+                        qcd.logout(driver)
+                    
+                    passedTotal = passedTotal + 1
+                    passedNumbers.append(index)
+                except Exception as e:
+                    failedTotal = failedTotal + 1
+                    failedNumbers.append(index)
+                    print("exception:{}".format(e))
+                    
+                    if driver.current_url != 'http://dataq-frontend.s3-website.us-east-2.amazonaws.com/#/':
+                        qcd.logout(driver)
                     pass
-    
-                driver.set_window_size(1920, 1080)
-
-                # login page loading...
-                time.sleep(qcd.WAIT1)
-
-                print("================")            
-                print("TC{} start".format(str(index).zfill(3)))
-                # login
-                if (qcd.login(driver, user, password) != 1):
-                    raise Exception('fail to login')
-            
-                start_time = time.time()
-
-                driver.get(url)
-                driver.refresh()
-                TCCLASS = str2Class("TC" + str(index).zfill(3))
-                tc = TCCLASS(driver)
-                tc.test()
                 
-                passedTotal = passedTotal + 1
-                passedNumbers.append(index)
-
-                qcd.logout(driver)
             except Exception as e:
-                failedTotal = failedTotal + 1
-                failedNumbers.append(index)
-                print("exception:{}".format(e))
-                
-                if driver.current_url != 'http://dataq-frontend.s3-website.us-east-2.amazonaws.com/#/':
-                    qcd.logout(driver)
                 pass
+            finally:
+                driver.quit()
             
             end_time = time.time()
             print("TC{} execution time: {} seconds".format(str(index).zfill(3), end_time - start_time))
@@ -165,7 +171,7 @@ if __name__ == '__main__':
         print(e)
         pass
     finally:
-        driver.quit()
+        pass
     
     time.sleep(qcd.WAIT1)
     sys.exit()

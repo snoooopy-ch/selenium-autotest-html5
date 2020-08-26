@@ -71,9 +71,9 @@ class TC024:
                 
             qcd.click_manual_upload_input(self.driver)
             qcd.select_manual_upload_dataset_format(self.driver, 3)
-            qcd.set_dataset_path(self.driver, '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div[2]/div[1]/div[2]/div[2]/div/input', '/tmp/sale_details.json')
+            qcd.set_dataset_path(self.driver, qcd.input_manualupload_dataset_xpath, '/tmp/sale_details.json')
             qcd.check_multiline_manual_upload_input(self.driver, "true")
-            qcd.click_manual_upload_validate(self.driver, '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div[2]/div[1]/button')
+            qcd.click_manual_upload_validate(self.driver, '/html/body/div/div/div/div[1]/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[3]/div/div[2]/div[1]/button')
             
             try:
                 element = WebDriverWait(self.driver, qcd.WAIT20).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="root"]/div/div/div[2]/div')))
@@ -92,9 +92,9 @@ class TC024:
                 
             qcd.click_manual_upload_input(self.driver)
             qcd.select_manual_upload_dataset_format(self.driver, 3)
-            qcd.set_dataset_path(self.driver, '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div[2]/div[1]/div[2]/div[2]/div/input', '/tmp/sale_details.json')
+            qcd.set_dataset_path(self.driver, qcd.input_manualupload_dataset_xpath, '/tmp/sale_details.json')
             qcd.check_multiline_manual_upload_input(self.driver, "true")
-            qcd.click_manual_upload_validate(self.driver, '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div[2]/div[1]/button')
+            qcd.click_manual_upload_validate(self.driver, '/html/body/div/div/div/div[1]/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[3]/div/div[2]/div[1]/button')
             
             try:
                 element = WebDriverWait(self.driver, qcd.WAIT20).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="root"]/div/div/div[2]/div')))

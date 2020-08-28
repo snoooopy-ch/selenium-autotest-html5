@@ -120,6 +120,7 @@ add_rule_button_xpath       = '//*[@id="root"]/div/div/div[1]/div/div/div/div/di
 vieweditaction_rule_xpath     = '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div/div[2]/div/div[1]/div[2]/div[1]/div/div[5]/div/button[1]'
 deleteaction_rule_xpath     = '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div/div[2]/div/div[1]/div[2]/div[1]/div/div[5]/div/button[2]'
 input_manualupload_dataset_xpath = '//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div[2]/div[1]/div[2]/div[2]/div/input'                              
+add_rule_search_xpath       = '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div/div[1]/div[1]/div/input'
                               
                               
 def init_selenium():
@@ -234,13 +235,16 @@ def select_dbset_input(driver, db):
     db_value = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div[2]/div/div[2]/div')))
     items = db_value.find_elements_by_xpath('./div')
     
+    index = 1
     for item in items:
         if (item.text == db):
             item.click()
             break
+        index += 1
     
     time.sleep(WAIT3)
     print('select db set')
+    print(index)
     return
 
 # action to select db
@@ -1154,7 +1158,7 @@ def checkRightSpacesOnDataQuality(driver, index):
 def inputMaxLengthOnDataQuality(driver, index, value):
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[3]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index) + ']/div/div[7]/div/div/input')))
     if index > 7:
-        target = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[3]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index -1) + ']/div/div[7]/div/button')))
+        target = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[3]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index -1) + ']/div/div[7]/div')))
         driver.execute_script("arguments[0].scrollIntoView();", target)
     element.send_keys(value);
     return
@@ -1163,7 +1167,7 @@ def inputMaxLengthOnDataQuality(driver, index, value):
 def inputMinLengthOnDataQuality(driver, index, value):
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[3]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index) + ']/div/div[8]/div/div/input')))
     if index > 7:
-        target = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[3]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index - 1) + ']/div/div[8]/div/button')))
+        target = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[3]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index - 1) + ']/div/div[8]/div')))
         driver.execute_script("arguments[0].scrollIntoView();", target)
     element.send_keys(value)
     return
@@ -1182,7 +1186,7 @@ def inputRegularExpressOnDataQuality(driver, index, value):
 def inputSQLWhereConditionOnDataQuality(driver, index, value):
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[3]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index) + ']/div/div[11]/div/div/textarea')))
     if index > 7:
-        target = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[3]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index - 1) + ']/div/div[11]/div/button')))
+        target = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[3]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index - 1) + ']/div/div[11]/div')))
         driver.execute_script("arguments[0].scrollIntoView();", target)
     element.send_keys(value)
     return
@@ -1191,7 +1195,7 @@ def inputSQLWhereConditionOnDataQuality(driver, index, value):
 def inputMaxValueOnDataQuality(driver, index, value):
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[3]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index) + ']/div/div[9]/div/div/input')))
     if index > 7:
-        target = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[3]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index - 1) + ']/div/div[9]/div/button')))
+        target = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[3]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index - 1) + ']/div/div[9]/div')))
         driver.execute_script("arguments[0].scrollIntoView();", target)
     element.send_keys(value)
     return
@@ -1200,7 +1204,7 @@ def inputMaxValueOnDataQuality(driver, index, value):
 def inputMinValueOnDataQuality(driver, index, value):
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[3]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index) + ']/div/div[10]/div/div/input')))
     if index > 7:
-        target = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[3]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index - 1) + ']/div/div[10]/div/button')))
+        target = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[3]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index - 1) + ']/div/div[10]/div')))
         driver.execute_script("arguments[0].scrollIntoView();", target)
     element.send_keys(value)
     return
@@ -1330,27 +1334,32 @@ def clickAddNewRuleButton(driver):
     return
 
 # add New Rule
-def addNewRule(driver, ruleName, description, type):
+def addNewRule(driver, ruleName, type, description):
     if ruleName != "":
         element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div/div[2]/div/div/section[1]/div[1]/div[2]/div/div/input')))
         clearInputValue(element)
         element.send_keys(ruleName)
     
+    if type != "":
+        element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div/div[2]/div/div/section[1]/div[2]/div[2]/div/div')))
+        element.click()
+        
+        if type == "REGULAR_EXPRESSION":
+            element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="menu-"]/div[3]/ul/li[1]')))
+            element.click()
+        elif type == "SQL":
+            element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="menu-"]/div[3]/ul/li[2]')))
+            element.click()
+        else:
+            element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="menu-"]/div[3]/ul/li[3]')))
+            element.click()
+            
     if description != "":
-        element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div/div[2]/div/div/section[1]/div[2]/div[2]/div/div/textarea')))
+        element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div/div[2]/div/div/section[1]/div[3]/div[2]/div/div/textarea')))
         clearInputValue(element)
         element.send_keys(description)
     
-    if type != "":
-        element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div/div[2]/div/div/section[1]/div[3]/div[2]/div/div/div')))
-        element.click()
-        
-        if type == "SQL":
-            element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="menu-"]/div[3]/ul/li[1]')))
-            element.click()
-        else:
-            element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="menu-"]/div[3]/ul/li[2]')))
-            element.click()
+    
     
     clickAddRuleButton(driver)
     return
@@ -1362,7 +1371,10 @@ def clearInputValue(element):
     return
 
 # delete Rule
-def deleteRule(driver):
+def deleteRule(driver, keyword):
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, add_rule_search_xpath)))
+    element.send_keys(keyword)
+    
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, deleteaction_rule_xpath)))
     element.click()
     
@@ -1372,7 +1384,10 @@ def deleteRule(driver):
     return
 
 # click edit&view button
-def clickEditViewRuleButton(driver):
+def clickEditViewRuleButton(driver, keyword):
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, add_rule_search_xpath)))
+    element.send_keys(keyword)
+    
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, vieweditaction_rule_xpath)))
     element.click()
     return

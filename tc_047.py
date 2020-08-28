@@ -41,21 +41,21 @@ class TC047:
             qcd.selectRuleOnSettings(self.driver)
             
             qcd.clickAddNewRuleButton(self.driver)
-            qcd.addNewRule(self.driver, "SQL_RegEx_test1", "[A-Z][a-z]*[0-9][-]", "REGULAR_EXPRESSION")
+            qcd.addNewRule(self.driver, "SQL_RegEx_test1", "REGULAR_EXPRESSION", "[A-Z][a-z]*[0-9][-]")
             qcd.checkMessageAndClose(self.driver)
             
-            qcd.deleteRule(self.driver)
+            qcd.deleteRule(self.driver, "SQL_RegEx_test1")
             qcd.checkMessageAndClose(self.driver)
             
             qcd.clickAddNewRuleButton(self.driver)
-            qcd.addNewRule(self.driver, "SQL_RegEx_test2", "([A_Z][+])[a-z]{2}", "REGULAR_EXPRESSION")
+            qcd.addNewRule(self.driver, "SQL_RegEx_test2", "REGULAR_EXPRESSION", "([A_Z][+])[a-z]{2}")
             qcd.checkMessageAndClose(self.driver)
             
-            qcd.clickEditViewRuleButton(self.driver)
-            qcd.addNewRule(self.driver, "", "([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$", "")
+            qcd.clickEditViewRuleButton(self.driver, "SQL_RegEx_test2")
+            qcd.addNewRule(self.driver, "", "", "([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$")
             qcd.checkMessageAndClose(self.driver)
             
-            qcd.deleteRule(self.driver)
+            qcd.deleteRule(self.driver, "SQL_RegEx_test2")
             qcd.checkMessageAndClose(self.driver)
             
         except Exception as e:

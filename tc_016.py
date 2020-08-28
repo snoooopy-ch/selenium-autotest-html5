@@ -69,6 +69,7 @@ class TC016:
                 input1.click()
 
             qcd.select_dbset_input(self.driver, 'AWS_HADOOP')
+            time.sleep(qcd.WAIT3)
             qcd.select_db_with_index(self.driver, 2)
             element = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div[5]/button')))
             element.click()

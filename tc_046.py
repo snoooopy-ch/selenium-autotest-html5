@@ -44,11 +44,11 @@ class TC046:
             qcd.addNewRule(self.driver, "SQLtest", "Doctor\r\nWHERE gendertypeid=2;", "SQL")
             qcd.checkMessageAndClose(self.driver)
             
-            qcd.clickEditViewRuleButton(self.driver)
+            qcd.clickEditViewRuleButton(self.driver, "SQLtest")
             qcd.clickAddRuleButton(self.driver)
             qcd.checkMessageAndClose(self.driver)
             
-            qcd.deleteRule(self.driver)
+            qcd.deleteRule(self.driver, "SQLtest")
             qcd.checkMessageAndClose(self.driver)
             
         except Exception as e:

@@ -70,7 +70,7 @@ class TC035:
             qcd.select_table(self.driver, "Policy")
             qcd.click_add_select_btn(self.driver)
             qcd.click_datatab_input(self.driver)
-            qcd.select_tableitem_on_datasearch(self.driver, 1)
+#            qcd.select_tableitem_on_datasearch(self.driver, 1)
 
             # data profile
             qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Data Profile", 400, -160)

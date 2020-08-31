@@ -69,7 +69,7 @@ class TC048:
                 input1.click()
 
             qcd.select_dbset_input(self.driver, 'AWS_HADOOP')
-            qcd.select_db_with_index(self.driver, 2)
+            qcd.select_db_with_index(self.driver, "userdb")
             qcd.select_table(self.driver, "bill")
             qcd.click_add_select_btn(self.driver)
 

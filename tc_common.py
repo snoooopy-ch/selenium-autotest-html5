@@ -38,6 +38,7 @@ WAIT3                       = 5
 WAIT5                       = 10
 WAIT10                      = 15
 WAIT20                      = 20
+WAIT50                      = 50
 WAIT100                     = 100
 WAITDRIVER                  = 20
 
@@ -244,7 +245,6 @@ def select_dbset_input(driver, db):
     
     time.sleep(WAIT3)
     print('select db set')
-    print(index)
     return
 
 # action to select db
@@ -258,12 +258,19 @@ def select_db(driver):
     return
 
 # action to select db table
-def select_db_with_index(driver, index):
+def select_db_with_index(driver, db):
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div[3]/div/div/div[1]')))
     element.click()
     
-    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div[3]/div/div[2]/div/div[' + str(index) + ']')))
-    element.click()
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div[3]/div/div[2]/div')))
+    items = element.find_elements_by_xpath('./div')
+    
+    index = 1
+    for item in items:
+        if (item.text == db):
+            item.click()
+            break
+        index += 1
     
     time.sleep(WAIT5)
     print('select db name')    
@@ -496,10 +503,11 @@ def input_random_sample_on_data_compare(driver, value):
 
 # select rule on data quality
 def select_rule_on_dataquality(driver, index):
-    driver.execute_script("document.getElementById('top_panel').scrollTop = 0;")
+    driver.execute_script("document.getElementById('dataContainerId').scrollTop = 0;")
     
     select_rule = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[3]/div[2]/div/div[1]/div[1]/div/div/div[1]')
     select_rule.click()
+    time.sleep(WAIT1)
 
     select_rule_item = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[3]/div[2]/div/div[1]/div[1]/div/div[2]/div/div[' + str(index) + ']')
     select_rule_item.click()
@@ -941,7 +949,7 @@ def add_new_connection(driver, index, name, url, user, password):
 
 # click data tab on input
 def click_datatab_input(driver):
-    driver.execute_script("document.getElementById('top_panel').scrollTop = 0;")
+    driver.execute_script("document.getElementById('dataContainerId').scrollTop = 0;")
     driver.find_element_by_xpath(input_data_tag_xpath).click()
     time.sleep(WAIT1)
     print('datatab clicked')

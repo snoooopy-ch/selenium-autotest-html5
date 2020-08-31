@@ -71,13 +71,13 @@ class TC038:
             absolute_file_path = os.path.abspath("files/FlightDelayPrediction_2019.csv")
             qcd.set_dataset_path(self.driver, '/html/body/div/div/div/div[1]/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[3]/div/div/div/div[2]/label/span[1]/input', absolute_file_path)
             time.sleep(qcd.WAIT3)
-            qcd.input_delimiter_on_input(self.driver, "/")
+            qcd.input_delimiter_on_input(self.driver, ",")
             qcd.set_header_on_input(self.driver, 1)
             qcd.set_interschema_on_input(self.driver, 1)
             self.driver.find_element_by_xpath('/html/body/div/div/div/div[1]/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[3]/div/div/div/button').click()
             
             try:
-                element = WebDriverWait(self.driver, qcd.WAIT20).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="root"]/div/div/div[2]/div')))
+                element = WebDriverWait(self.driver, qcd.WAIT50).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="root"]/div/div/div[2]/div')))
                 time.sleep(qcd.WAIT3)
                 element = WebDriverWait(self.driver, qcd.WAIT20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="root"]/div/div/div[2]/div/div/div[2]/button')))
                 element.click()
@@ -110,7 +110,7 @@ class TC038:
 
     def check_result(self):
         try:
-            print(1)
+            pass
         except Exception as e:
             raise Exception(e)
             pass

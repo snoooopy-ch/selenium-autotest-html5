@@ -51,6 +51,10 @@ from tc_044 import TC044
 from tc_045 import TC045
 from tc_046 import TC046
 from tc_047 import TC047
+from tc_049 import TC049
+from tc_050 import TC050
+from tc_051 import TC051
+from tc_052 import TC052
 
 #BASE_URL = 'http://dataq-frontend.s3-website.us-east-2.amazonaws.com/#/user-home/flow'
 #BASE_URL = 'http://dataq-automation-alb-1598668034.us-east-1.elb.amazonaws.com:7000'

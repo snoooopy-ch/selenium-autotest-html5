@@ -103,8 +103,8 @@ class TC021:
             qcd.select_table(self.driver, "joining_date")
             qcd.click_save_on_cp(self.driver)
 
-            # common type
-            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Common Type", 500, -150)
+            # Column type
+            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Column type", 500, -150)
             commontype = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component3"]')))
 
             qcd.connect_elements(self.driver, selectcolumns, 2, commontype, 1)

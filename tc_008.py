@@ -81,8 +81,8 @@ class TC008:
             qcd.select_table(self.driver, "City")
             qcd.click_add_select_btn(self.driver)
 
-            # Common type
-            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Common Type", 300, -50)
+            # Column type
+            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Column type", 300, -50)
             selectcolumns = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component2"]')))
 
             qcd.connect_elements(self.driver, input1, 1, selectcolumns, 1)

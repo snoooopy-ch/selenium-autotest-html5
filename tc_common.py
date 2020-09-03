@@ -42,7 +42,7 @@ WAIT50                      = 50
 WAIT100                     = 100
 WAITDRIVER                  = 20
 
-elements                    = ["Input", "Data Compare", "Select Columns", "Common Type", 
+elements                    = ["Input", "Data Compare", "Select Columns", "Column type", 
                                "Filter Rows", "Remove Duplicates", "Data Quality", "Data Profile"]
 element_xpath               = ['//div[@id="component0"]/img', 
                                '//div[@id="component1"]/img', 
@@ -281,6 +281,13 @@ def click_maximize_for_select_columns(driver):
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[1]/header/div/div/*[name()="svg"]')))
     element.click()
     return
+
+# click to maximize button on select columns, data_compare
+def close_maximize_for_select_columns(driver):
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[1]/header/div/div')))
+    element.click()
+    return
+
 
 # action to select table item for 'select columns' or 'remove_duplicate'
 def click_select_tableitem_for_select_columns(driver, index):
@@ -638,7 +645,7 @@ def save_excute_workflow_without_rename(driver):
 
     return
 
-# select all for common type and select column
+# select all for Column type and select column
 def click_select_all_for_commontype(driver):
     select_all_button = driver.find_element_by_xpath(select_all_commontype_xpath)
     select_all_button.click()
@@ -1230,6 +1237,31 @@ def scrollToTop(driver):
     driver.execute_script("arguments[0].scrollIntoView();", element)
     return
 
+# nullCheckOnDataQualityHeader
+def nullCheckOnDataQualityHeader(driver):
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[3]/div[2]/div/div[1]/div[2]/div/div[1]/div[1]/div/div[3]/div/label')))
+    element.click()
+    return
+
+# checkCompletenessOnDataQualityHeader
+def checkCompletenessOnDataQualityHeader(driver):
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[3]/div[2]/div/div[1]/div[2]/div/div[1]/div[1]/div/div[2]/div/label')))
+    element.click()
+    return
+
+# checkLeftSpacesOnDataQualityHeader
+def checkLeftSpacesOnDataQualityHeader(driver):
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[3]/div[2]/div/div[1]/div[2]/div/div[1]/div[1]/div/div[5]/div/label')))
+    element.click()
+    return
+
+# checkRightSpacesOnDataQualityHeader
+def checkRightSpacesOnDataQualityHeader(driver):
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[3]/div[2]/div/div[1]/div[2]/div/div[1]/div[1]/div/div[6]/div/label')))
+    element.click()
+    return
+
+
 # clickViewEditActionOnExcutions
 def clickFirstViewEditActionOnExcutions(driver):
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, viewedit_xpath)))
@@ -1417,4 +1449,9 @@ def logout(driver):
         alert.accept()
     except:
         pass
+    return
+
+def clickAutoSuggestOnDataQuality(driver):
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/label/span[1]')))
+    element.click()
     return

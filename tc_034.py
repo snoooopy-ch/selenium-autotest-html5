@@ -59,7 +59,7 @@ class TC034:
                 drag_and_drop_js = f.read()
             
             count = 0;
-            elements = ["Input", "Data Compare", "Select Columns", "Common Type", "Remove Duplicates", "Data Quality", "Data Profile"]
+            elements = ["Input", "Data Compare", "Select Columns", "Column type", "Remove Duplicates", "Data Quality", "Data Profile"]
             results = []
             
             for element in elements:

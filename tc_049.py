@@ -169,7 +169,6 @@ class TC049:
             qcd.click_result_close(self.driver)
         except Exception as e:
             qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
-            time.sleep(1000)
             raise Exception(e)
             pass
         return

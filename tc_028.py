@@ -77,7 +77,7 @@ class TC028:
             if (qcd.open_container(self.driver) != 1):
                 data_quality.click()
 
-            # c_id
+            # claims_id
             qcd.nullCheckOnDataQuality(self.driver, 1)
             qcd.uniqueCheckOnDataQuality(self.driver, 1)
             qcd.inputMaxValueOnDataQuality(self.driver, 1, 210)
@@ -95,7 +95,7 @@ class TC028:
             qcd.uniqueCheckOnDataQuality(self.driver, 4)
             
             # amount_claimd
-            qcd.inputMinValueOnDataQuality(self.driver, 6, 33000)
+            qcd.inputMinValueOnDataQuality(self.driver, 7, 33000)
 
             # execute
             qcd.save_excute_workflow(self.driver, 'TC_028_ALEX')

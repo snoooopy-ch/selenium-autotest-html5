@@ -1123,7 +1123,7 @@ def isElementPresentForResult(driver, index):
         return False
     finally:
         driver.implicitly_wait(20)
-        
+
 # checkCompleteness
 def checkCompletenessOnDataQuality(driver, index):
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[3]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index) + ']/div/div[2]/span/span[1]')))
@@ -1133,6 +1133,7 @@ def checkCompletenessOnDataQuality(driver, index):
     element.click()
     return
 
+
 # nullCheckOnDataQuality
 def nullCheckOnDataQuality(driver, index):
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[3]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index) + ']/div/div[3]/div/div/span')))
@@ -1141,7 +1142,7 @@ def nullCheckOnDataQuality(driver, index):
         driver.execute_script("arguments[0].scrollIntoView();", target)
     element.click()
     return
-
+        
 # uniqueCheckOnDataQuality
 def uniqueCheckOnDataQuality(driver, index):
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[3]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index) + ']/div/div[4]/div/div/span')))
@@ -1237,15 +1238,15 @@ def scrollToTop(driver):
     driver.execute_script("arguments[0].scrollIntoView();", element)
     return
 
-# nullCheckOnDataQualityHeader
-def nullCheckOnDataQualityHeader(driver):
-    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[3]/div[2]/div/div[1]/div[2]/div/div[1]/div[1]/div/div[3]/div/label')))
-    element.click()
-    return
-
 # checkCompletenessOnDataQualityHeader
 def checkCompletenessOnDataQualityHeader(driver):
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[3]/div[2]/div/div[1]/div[2]/div/div[1]/div[1]/div/div[2]/div/label')))
+    element.click()
+    return
+
+# nullCheckOnDataQualityHeader
+def nullCheckOnDataQualityHeader(driver):
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[3]/div[2]/div/div[1]/div[2]/div/div[1]/div[1]/div/div[3]/div/label')))
     element.click()
     return
 

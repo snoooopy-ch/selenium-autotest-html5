@@ -2,11 +2,10 @@
 
 import time
 import sys
+import tc_common as qcd
 import os
 import subprocess
 import traceback
-
-import tc_common as qcd
 import logging
 
 from datetime import datetime, date, timedelta
@@ -22,7 +21,7 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.webdriver.common.action_chains import ActionChains
 
-class TC025:
+class TC055:
     def __init__(self, drv):
         self.driver = drv
 
@@ -48,7 +47,7 @@ class TC025:
 
     def workflow(self):
         try:
-            # load jQuerypython
+            # load jQuery
             jquery_url = "http://code.jquery.com/jquery-1.11.2.min.js"
             with open("js/jquery_load_helper.js") as f:
                 load_jquery_js = f.read()
@@ -57,7 +56,7 @@ class TC025:
                 
             with open("js/drag_and_drop.js") as f:
                 drag_and_drop_js = f.read()
-
+            
             # input 1
             qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Input", 300, 0)
             input1 = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component0"]')))
@@ -65,89 +64,77 @@ class TC025:
             if (qcd.open_container(self.driver) != 1):
                 input1.click()
 
-            qcd.select_dbset_input(self.driver, 'tims')
+            qcd.select_dbset_input(self.driver, 'sampledb_dest')
             qcd.select_db(self.driver)
-            qcd.select_table(self.driver, "assessment_report")
+            qcd.select_table(self.driver, "Jan_2019_ontime")
             qcd.click_add_select_btn(self.driver)
+            
+            # selet columns
+            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Select Columns", 500, -80)
+            selectcolumns = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component1"]')))
+
+            qcd.connect_elements(self.driver, input1, 1, selectcolumns, 1)
+
+            if (qcd.open_container(self.driver) != 1):
+                selectcolumns.click()
+
+            qcd.click_select_tableitem_for_select_columns(self.driver, 1)
+            qcd.click_save_on_cp(self.driver)
+            
+            # Filter Rows
+            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Filter Rows", 700, -120)
+            filterrow = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component2"]')))
+
+            qcd.connect_elements(self.driver, selectcolumns, 2, filterrow, 1)
+
+            if (qcd.open_container(self.driver) != 1):
+                filterrow.click()
+
+            qcd.click_select_tableitem_for_fiter_rows(self.driver, 1)
+            qcd.insertSQLIntoFilterRowTextarea(self.driver, 'select * from Jan_2019_ontime where DAY_OF_WEEK = 2')
+            qcd.click_save_on_cp(self.driver)
 
             # input 2
             qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Input", 300, 160)
-            input2 = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component1"]')))
+            input2 = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component3"]')))
 
             if (qcd.open_container(self.driver) != 1):
                 input2.click()
 
-            qcd.select_dbset_input(self.driver, 'hims')
+            qcd.select_dbset_input(self.driver, 'sampledb_dest')
             qcd.select_db(self.driver)
-            qcd.select_table(self.driver, "medicine_students_finalreport")
+            qcd.select_table(self.driver, "Jan_2019_ontime")
             qcd.click_add_select_btn(self.driver)
 
             # data compare
-            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Data Compare", 400, 80)
-            compare1 = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component2"]')))
+            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Data Compare", 800, 80)
+            compare1 = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component4"]')))
 
-            qcd.connect_elements(self.driver, input1, 1, compare1, 1)
+            qcd.connect_elements(self.driver, filterrow, 2, compare1, 1)
             qcd.connect_elements(self.driver, input2, 1, compare1, 1)
 
             if (qcd.open_container(self.driver) != 1):
                 compare1.click()
-            
+                
             qcd.cell_by_cell_compare(self.driver, 1)
+            
             qcd.select_mapping_tab(self.driver)
-
-            qcd.add_mapping_table_name(self.driver)
-            qcd.select_mapping_table_item(self.driver, 1)
-            qcd.select_key_for_table_item(self.driver, 2)
-            
-            # execute
-            qcd.save_excute_workflow(self.driver, 'flows_edit')
-        except Exception as e:
-            qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
-            raise Exception(e)
-            pass    
-
-    def check_result(self):
-        try:
-            qcd.check_summary_in_final_result(self.driver, self.__class__.__name__, qcd.normal_result_summary_xpath)
-            qcd.click_result_close(self.driver)
-            
-            # Edit
-            qcd.click_action_on_flow_page(self.driver)
-            qcd.find_specific_flow(self.driver, "flows_edit")
-            qcd.click_action_on_first_flow(self.driver, 1)
-            
-            # input1
-            input1 = self.driver.find_element_by_xpath('//div[@id="copy-component0"]')
-            if (qcd.open_container(self.driver) != 1):
-                input1.click()
-            qcd.select_table(self.driver, "students_info")
-            qcd.click_add_select_btn(self.driver)
-            input1.click()
-            
-            # input2
-            input2 = self.driver.find_element_by_xpath('//div[@id="copy-component1"]')
-            if (qcd.open_container(self.driver) != 1):
-                input2.click()
-            qcd.select_table(self.driver, "Student_Information")
-            qcd.click_add_select_btn(self.driver)
-            input2.click()
-            
-            # compare
-            compare1 = self.driver.find_element_by_xpath('//div[@id="copy-component2"]')
-            if (qcd.open_container(self.driver) != 1):
-                compare1.click()
-            qcd.select_mapping_tab(self.driver)
-            qcd.add_mapping_table_name(self.driver)
+            # qcd.select_mapping_table_item(self.driver, 1)
+            # qcd.add_columns_in_datacompare_tableitem(self.driver)
             qcd.select_key_for_warning_mapping_tableitem(self.driver, 1)
-            
-            # execute
-            qcd.save_excute_workflow(self.driver, 'flows_edit')
 
-            WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, qcd.detail_xpath))).click()
-            WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, qcd.exportToPDF_xpath))).click()
-            
+            # execute
+            qcd.save_excute_workflow(self.driver, 'TC_055_ALEX')
+
         except Exception as e:
             qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
             raise Exception(e)
             pass
 
+    def check_result(self):
+        try:
+            qcd.check_summary_in_final_result(self.driver, self.__class__.__name__, qcd.normal_result_summary_xpath)
+        except Exception as e:
+            qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
+            raise Exception(e)
+            pass

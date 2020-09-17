@@ -20,6 +20,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 import os
 import subprocess
 import traceback
+import re
 
 
 import logging
@@ -69,6 +70,7 @@ removeDup_xpath             = '//div[@id="component4"]/img'
 data_quality_xpath          = '//div[@id="component6"]/img'
 data_profile_xpath          = '//div[@id="component7"]/img'
 tabmapping_xpath            = '//*[@id="simple-tab-1"]'
+tabcompare_xpath            = '//*[@id="simple-tab-0"]'
 table1_xpath                = '//*[@id="top_panel"]/div/div[2]/div[3]/div/div[1]/div[2]/div[1]/div/div'
 table1_val_xpath            = '//*[@id="top_panel"]/div/div[2]/div[3]/div/div[1]/div[2]/div[1]/div/div[2]/div'
 table2_xpath                = '//*[@id="top_panel"]/div/div[2]/div[3]/div/div[1]/div[2]/div[2]/div/div'
@@ -122,6 +124,7 @@ vieweditaction_rule_xpath     = '//*[@id="root"]/div/div/div[1]/div/div/div/div/
 deleteaction_rule_xpath     = '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div/div[2]/div/div[1]/div[2]/div[1]/div/div[5]/div/button[2]'
 input_manualupload_dataset_xpath = '//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div[2]/div[1]/div[2]/div[2]/div/input'                              
 add_rule_search_xpath       = '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div/div[1]/div[1]/div/input'
+normal_result_summary_xpath = '/html/body/div[2]/div[3]/div/div/div/div/div[3]/div[1]/div[2]'
                               
                               
 def init_selenium():
@@ -418,6 +421,20 @@ def select_mapping_tab(driver):
     print('mapping tab selected')
     return
 
+# select sql tab
+def select_mapping_tab(driver):
+    tab_mapping = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, tabmapping_xpath)))
+    tab_mapping.click()
+    print('sql tab selected')
+    return
+
+# select compare tab
+def select_compare_tab(driver):
+    tab_mapping = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, tabcompare_xpath)))
+    tab_mapping.click()
+    print('compare tab selected')
+    return
+
 # selct mapping table name
 def add_mapping_table_name(driver):
     table = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, table1_xpath)))
@@ -599,6 +616,36 @@ def add_sql_on_dataquality(driver, index, sql, job):
     apply = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div[1]/div[4]/button')
     apply.click()
     
+# apply sql rule on data quality
+def apply_sql_rul_dataquality(driver, sql, name):
+    driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[3]/div[2]/div/div[2]/div/div[1]/textarea[1]').send_keys(sql)
+    driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[3]/div[2]/div/div[2]/div/div[1]/input').send_keys(name)
+    driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[3]/div[2]/div/div[2]/div/div[1]/div[2]/button').click()
+    
+    print('new sql rul is added')
+    return
+    
+# modify sql rule on data quality
+def modify_sql_rul_dataquality(driver, index, sql, name):
+    driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[3]/div[2]/div/div[2]/div/div[2]/div/div/div[1]/div[2]/div[' + str(index) + ']/div/div[5]/div/*[name()="svg"]').click()
+    
+    if sql != "":
+        element = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[3]/div[2]/div/div[2]/div/div[1]/textarea[1]')
+        element.send_keys(Keys.CONTROL + 'a')
+        element.send_keys(Keys.DELETE)
+        element.send_keys(sql)
+    
+    if name != "":  
+        element = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[3]/div[2]/div/div[2]/div/div[1]/input')
+        element.send_keys(Keys.CONTROL + 'a')
+        element.send_keys(Keys.DELETE)
+        element.send_keys(name)
+    
+    driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[3]/div[2]/div/div[2]/div/div[1]/div[2]/button').click()
+    
+    print('sql rul is updated')
+    return
+
 # save and excute workflow
 def save_excute_workflow(driver, flow_name):
     name_field = driver.find_element_by_xpath(name_xpath)
@@ -781,8 +828,34 @@ def check_summary_statue_in_final_result(driver, class_name, summary_xpath):
         pass
 
     time.sleep(WAIT10)
+    return
 
-    return;
+# check summary in final result for TC060
+def check_summary_statue_in_final_tc60_result(driver, class_name, summary_xpath):
+    print(class_name + ' result:')
+
+    summary_table = driver.find_element_by_xpath(summary_xpath)
+    table_trs = summary_table.find_elements_by_xpath('./div')
+
+    flag = 0
+    try:
+        for tr in table_trs:
+            inner_tr = tr.find_element_by_xpath('./div')
+            tds = inner_tr.find_elements_by_xpath('./div')
+            
+            output = ''
+            find = 0
+            
+            text1 = re.compile(r'<[^>]+>').sub('', tds[1].text)
+            text2 = re.compile(r'<[^>]+>').sub('', tds[6].text)
+            print("{} {}".format(text1, text2))
+    except Exception as ex:
+        print(ex)
+        pass
+
+    time.sleep(WAIT1)
+    return
+
 
 # check summary in final result for TC007, TC009
 def check_summary_in_fianl_mismatched_count(driver, class_name, summary_xpath):
@@ -1455,4 +1528,24 @@ def logout(driver):
 def clickAutoSuggestOnDataQuality(driver):
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/label/span[1]')))
     element.click()
+    return
+
+
+# action to select table item for 'filter rows'
+def click_select_tableitem_for_fiter_rows(driver, index):
+    db_select = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[3]/div[1]/div[1]/div/div/div[1]')
+    db_select.click()
+    time.sleep(WAIT1)
+
+    db_value = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[3]/div[1]/div[1]/div/div[2]/div[' + str(index) + ']')
+    db_value.click()
+    time.sleep(WAIT1)
+    return
+
+# insert sql into filter row textarea
+def insertSQLIntoFilterRowTextarea(driver, text):
+    textarea = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[3]/div[1]/textarea[1]')
+    textarea.send_keys(text)
+    
+    driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[3]/div[1]/div[3]/button').click()
     return

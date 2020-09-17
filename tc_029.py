@@ -132,7 +132,7 @@ class TC029:
             except Exception as e:
                 print(e)
                 pass
-            qcd.check_summary_statue_in_TC028_result(self.driver, self.__class__.__name__, '/html/body/div[2]/div[3]/div/div/div/div/div[3]/div[1]/div[2]')
+            qcd.check_summary_statue_in_TC028_result(self.driver, self.__class__.__name__, qcd.normal_result_summary_xpath)
             qcd.click_result_close(self.driver)
         except Exception as e:
             qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))

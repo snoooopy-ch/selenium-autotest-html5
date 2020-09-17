@@ -21,7 +21,7 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.webdriver.common.action_chains import ActionChains
 
-class TC028:
+class TC060:
     def __init__(self, drv):
         self.driver = drv
 
@@ -66,7 +66,10 @@ class TC028:
 
             qcd.select_dbset_input(self.driver, 'marketing_dev')
             qcd.select_db(self.driver)
-            qcd.select_table(self.driver, "Claims")
+            qcd.select_table(self.driver, "Doctor")
+            qcd.select_table(self.driver, "Patient")
+            qcd.select_table(self.driver, "Insurance")
+            qcd.select_table(self.driver, "Staff")
             qcd.click_add_select_btn(self.driver)
 
             # Data Quality
@@ -76,29 +79,19 @@ class TC028:
 
             if (qcd.open_container(self.driver) != 1):
                 data_quality.click()
-
-            # claims_id
-            qcd.nullCheckOnDataQuality(self.driver, 1)
-            qcd.uniqueCheckOnDataQuality(self.driver, 1)
-            qcd.inputMaxValueOnDataQuality(self.driver, 1, 210)
-            qcd.inputMinValueOnDataQuality(self.driver, 1, 200)
             
-            # c_status
-            qcd.inputMaxLengthOnDataQuality(self.driver, 2, 4)
-            qcd.inputMinLengthOnDataQuality(self.driver, 2, 4)
+            qcd.select_mapping_tab(self.driver)
             
-            # h_id
-            qcd.nullCheckOnDataQuality(self.driver, 3)
+            qcd.apply_sql_rul_dataquality(self.driver, "SELECT Patient_name,Patient_blood_group,diagnosis_session, Patient_healthcard_no FROM Patient WHERE Patient_healthcard_no BETWEEN 47 AND 48 LIMIT 49", "sql1")
+            qcd.apply_sql_rul_dataquality(self.driver, "SELECT I_id,I_name,I_address FROM Insurance where active=1", "sql2")
+            qcd.apply_sql_rul_dataquality(self.driver, "Select doc_name,Specialization From Doctor ORDER BY doc_name", "sql3")
+            qcd.apply_sql_rul_dataquality(self.driver, "SELECT Patient_name from Patient where Patient_blood_group='A+ve'", "sql4")
+            qcd.apply_sql_rul_dataquality(self.driver, "Select birth_date from Patient where Patient_name=Ratna", "sql5")
             
-            # p_id
-            qcd.nullCheckOnDataQuality(self.driver, 4)
-            qcd.uniqueCheckOnDataQuality(self.driver, 4)
-            
-            # amount_claimd
-            qcd.inputMinValueOnDataQuality(self.driver, 7, 33000)
+            qcd.modify_sql_rul_dataquality(self.driver, 5, "Select birth_date from Patient where Patient_name=Vithika", "")
 
             # execute
-            qcd.save_excute_workflow(self.driver, 'TC_028_ALEX')
+            qcd.save_excute_workflow(self.driver, 'TC_060_ALEX')
             
         except Exception as e:
             qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
@@ -107,24 +100,48 @@ class TC028:
         
     def check_result(self):
         try:
-            detail_span_xpath = '/html/body/div[2]/div[3]/div/div/div/div/div[1]/span[2]'
-            try:
-                if qcd.isElementPresentForResult(self.driver, detail_span_xpath) != True:
-                    raise Exception()
+            self.printResultTable()
+            
+            qcd.open_excutions(self.driver)
+            qcd.clickFirstViewEditActionOnExcutions(self.driver)
+            
+            data_quality = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component1"]')))
+            
+            if (qcd.open_container(self.driver) == 1):
+                data_quality.click()
                 
-                detail_span = self.driver.find_elements_by_xpath(detail_span_xpath)
-                if (len(detail_span) == 1):
-                    detail_span[0].click()
-                    time.sleep(qcd.WAIT3)
-            except Exception as e:
-                print(e)
-                pass
-            qcd.check_summary_statue_in_TC028_result(self.driver, self.__class__.__name__, qcd.normal_result_summary_xpath)
-            qcd.click_result_close(self.driver)
+            if (qcd.open_container(self.driver) != 1):
+                data_quality.click()
+            
+            qcd.select_mapping_tab(self.driver)
+            qcd.apply_sql_rul_dataquality(self.driver, "Select doc_name From Doctor where age=40", "sql6")
+            
+            self.driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[3]/div[2]/div/div[2]/div/div[2]/div/div/div[1]/div[2]/div[6]/div/div[5]/div/div').click()
+            
+            # execute
+            qcd.save_excute_workflow(self.driver, 'TC_060_ALEX')
+            
+            self.printResultTable()
         except Exception as e:
             qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
             raise Exception(e)
             pass
-            
-        time.sleep(qcd.WAIT1)
         return
+    
+    def printResultTable(self):
+        detail_span_xpath = '/html/body/div[2]/div[3]/div/div/div/div/div[1]/span[2]'
+        try:
+            if qcd.isElementPresentForResult(self.driver, detail_span_xpath) != True:
+                raise Exception()
+            
+            detail_span = self.driver.find_elements_by_xpath(detail_span_xpath)
+            if (len(detail_span) == 1):
+                detail_span[0].click()
+                time.sleep(qcd.WAIT3)
+        except Exception as e:
+            print(e)
+            raise Exception(e)
+            pass
+        qcd.check_summary_statue_in_final_tc60_result(self.driver, self.__class__.__name__, qcd.normal_result_summary_xpath)
+        qcd.click_result_close(self.driver)
+        

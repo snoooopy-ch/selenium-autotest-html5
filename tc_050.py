@@ -165,7 +165,7 @@ class TC050:
                 raise Exception(e)
                 pass
 
-            summary_table = self.driver.find_element_by_xpath('/html/body/div[2]/div[3]/div/div/div/div/div[3]/div[1]/div[2]')
+            summary_table = self.driver.find_element_by_xpath(qcd.normal_result_summary_xpath)
             table_trs = summary_table.find_elements_by_xpath('./div')
 
             flag = 0

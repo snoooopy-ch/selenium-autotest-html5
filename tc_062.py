@@ -21,7 +21,7 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.webdriver.common.action_chains import ActionChains
 
-class TC008:
+class TC062:
     def __init__(self, drv):
         self.driver = drv
 
@@ -63,57 +63,32 @@ class TC008:
 
             if (qcd.open_container(self.driver) != 1):
                 input1.click()
-
-            qcd.select_dbset_input(self.driver, 'marketing_dev')
-            qcd.select_db(self.driver)
-            qcd.select_table(self.driver, "City")
-            qcd.click_add_select_btn(self.driver)
-
-            # input 2
-            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Input", 300, 160)
-            input2 = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component1"]')))
-
-            if (qcd.open_container(self.driver) != 1):
-                input2.click()
-
-            qcd.select_dbset_input(self.driver, 'demodb_dest')
-            qcd.select_db(self.driver)
-            qcd.select_table(self.driver, "City")
-            qcd.click_add_select_btn(self.driver)
-
-            # Column type
-            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Column type", 300, -50)
-            selectcolumns = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component2"]')))
-
-            qcd.connect_elements(self.driver, input1, 1, selectcolumns, 1)
-
-            if (qcd.open_container(self.driver) != 1):
-                selectcolumns.click()
-
-            qcd.click_select_tableitem_for_select_columns(self.driver, 1)
-
-            qcd.select_item_from_column_type(self.driver, "c_id")
-            qcd.select_item_from_column_data_type(self.driver, 9)
-            qcd.click_save_on_cp(self.driver)
-
-            # data compare
-            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Data Compare", 700, 80)
-            compare1 = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component3"]')))
-
-            qcd.connect_elements(self.driver, selectcolumns, 2, compare1, 1)
-            qcd.connect_elements(self.driver, input2, 1, compare1, 1)
-
-            if (qcd.open_container(self.driver) != 1):
-                compare1.click()
                 
-            qcd.cell_by_cell_compare(self.driver, 1)
-            qcd.select_mapping_tab(self.driver)
-
-            qcd.select_mapping_table_item(self.driver, 1)
-            qcd.select_key_for_table_item(self.driver, 1)
+            qcd.click_maximize_for_select_columns(self.driver)
+            qcd.click_sql_input(self.driver)
+            qcd.select_dbset_sql_input(self.driver, 'marketing_dev')
+            qcd.select_db_sql(self.driver)
+            qcd.add_sql_title_content(self.driver, 'sqlPaintent', "select Patient_name from Patient WHERE Patient_status='Paid'")
+            
+            try:
+                element = WebDriverWait(self.driver, qcd.WAIT50).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="root"]/div/div/div[2]/div')))
+                time.sleep(qcd.WAIT3)
+                element = WebDriverWait(self.driver, qcd.WAIT20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="root"]/div/div/div[2]/div/div/div[2]/button')))
+                element.click()
+            except Exception as e:
+                raise Exception('Input1 Validate fails')
+            
+            if (qcd.open_container(self.driver) == 1):
+                input1.click()
+                
+            # Data Profile
+            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Data Profile", 500, -200)
+            data_profile = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component1"]')))
+            qcd.connect_elements(self.driver, input1, 1, data_profile, 1)
 
             # execute
-            qcd.save_excute_workflow(self.driver, 'TC_008_ALEX')
+            qcd.save_excute_workflow(self.driver, 'TC_062_ALEX')
+            
         except Exception as e:
             qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
             raise Exception(e)
@@ -121,9 +96,25 @@ class TC008:
 
     def check_result(self):
         try:
-            qcd.check_summary_in_final_result(self.driver, self.__class__.__name__, '')
+            summary_table = self.driver.find_element_by_xpath('/html/body/div[2]/div[3]/div/div/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[2]')
+            table_trs = summary_table.find_elements_by_xpath('./div')
+
+            flag = 0
+            try:
+                for tr in table_trs:
+                    inner_tr = tr.find_element_by_xpath('./div')
+                    tds = inner_tr.find_elements_by_xpath('./div')
+
+                    output = ''
+                    find = 0
+                    print("Count:{}, Min:{}, Max{}".format(tds[1].text, tds[4].text, tds[5].text))
+            except Exception as ex:
+                print(ex)
+                pass
+
             qcd.click_result_close(self.driver)
         except Exception as e:
             qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
             raise Exception(e)
             pass
+        return

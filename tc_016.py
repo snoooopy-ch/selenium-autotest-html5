@@ -72,10 +72,10 @@ class TC016:
             time.sleep(qcd.WAIT5)
             qcd.select_db_with_index(self.driver, "userdb")
             time.sleep(qcd.WAIT3)
-            element = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div[5]/button')))
+            element = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div[1]/div[5]/button')))
             element.click()
             
-            element = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div[2]/div/div[1]/div/div/input')))
+            element = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div[2]/div[1]/div/div/div[1]/div/div/input')))
             element.send_keys("me")
             
             qcd.select_table(self.driver, "medicine")
@@ -92,7 +92,7 @@ class TC016:
             qcd.select_dbset_input(self.driver, 'demodb_dest')
             qcd.select_db(self.driver)
             
-            element = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div[2]/div/div[1]/div/div/input')))
+            element = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div[2]/div[1]/div/div/div[1]/div/div/input')))
             element.send_keys("m")
             
             qcd.select_table(self.driver, "medicine")

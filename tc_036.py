@@ -38,6 +38,7 @@ class TC036:
 
     def open_workspace(self):
         try:
+            time.sleep(qcd.WAIT1)
             qcd.onUploadJsonFlowFile(self.driver, "dp_resck_036.json")
             qcd.click_action_on_first_flow(self.driver, 1)
             

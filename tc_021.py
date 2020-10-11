@@ -175,13 +175,13 @@ class TC021:
             qcd.select_key_for_warning_mapping_tableitem(self.driver, 1)
                     
             qcd.select_mapping_table_item(self.driver, 1)
-            data_type = self.driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[3]/div/div[2]/div/div[2]/div/div[1]/div[2]/div[2]/div/div[2]/img').get_attribute("title")
+            data_type = self.driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[3]/div/div[2]/div/div[3]/div/div[1]/div[2]/div[2]/div/div[2]/img').get_attribute("title")
             print("colleage_code_Varchar's type is " + data_type)
             
             qcd.select_mapping_table_item(self.driver, 3)
             qcd.add_columns_in_datacompare_tableitem(self.driver)
             
-            data_type = self.driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[3]/div/div[2]/div/div[2]/div/div[1]/div[2]/div[5]/div/div[2]/img').get_attribute("title")
+            data_type = self.driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[3]/div/div[2]/div/div[3]/div/div[1]/div[2]/div[5]/div/div[2]/img').get_attribute("title")
             print("gradePoints_int's type is " + data_type)
 
             # execute

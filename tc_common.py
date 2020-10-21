@@ -325,21 +325,28 @@ def close_maximize_for_select_columns(driver):
 
 
 # action to select table item for 'select columns' or 'remove_duplicate'
-def click_select_tableitem_for_select_columns(driver, index):
+def click_select_tableitem_for_select_columns(driver, value):
     db_select = driver.find_element_by_xpath(table_sc_xpath)
     db_select.click()
     time.sleep(WAIT1)
 
-    db_value = driver.find_element_by_xpath(table_sc_val_xpath + '[' + str(index) + ']')
-    db_value.click()
-    time.sleep(WAIT1)
+    items = driver.find_elements_by_xpath(table_sc_val_xpath)
+    
+    for item in items:
+        if (item.text == value):
+            item.click()
+            time.sleep(WAIT1)
+            break
+        
+    # db_value = driver.find_element_by_xpath(table_sc_val_xpath + '[' + str(index) + ']')
+    # db_value.click()
+    # time.sleep(WAIT1)
     print('select table item')
     return
     
 # action to click one item of table
 def select_table(driver, index):
     xpath = '//input[@id="' + index + '"]'
-#    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, xpath)))
     element = driver.find_element_by_xpath(xpath);
     element.click()
     print('select table ' + str(index))
@@ -561,11 +568,11 @@ def input_random_sample_on_data_compare(driver, value):
 def select_rule_on_dataquality(driver, index):
     driver.execute_script("document.getElementById('dataContainerId').scrollTop = 0;")
     
-    select_rule = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[3]/div[2]/div/div[1]/div[1]/div/div/div[1]')
+    select_rule = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div[1]/div[1]/div[1]/div/div/div[1]')
     select_rule.click()
     time.sleep(WAIT1)
 
-    select_rule_item = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[3]/div[2]/div/div[1]/div[1]/div/div[2]/div/div[' + str(index) + ']')
+    select_rule_item = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div[1]/div[1]/div[1]/div/div[2]/div/div[' + str(index) + ']')
     select_rule_item.click()
     print('select rule on data quality')
     return
@@ -650,30 +657,30 @@ def add_sql_on_dataquality(driver, index, sql, job):
     
 # apply sql rule on data quality
 def apply_sql_rul_dataquality(driver, sql, name):
-    driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[3]/div[2]/div/div[2]/div/div[1]/textarea[1]').send_keys(sql)
-    driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[3]/div[2]/div/div[2]/div/div[1]/input').send_keys(name)
-    driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[3]/div[2]/div/div[2]/div/div[1]/div[2]/button').click()
+    driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div[2]/div/div[1]/textarea[1]').send_keys(sql)
+    driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div[2]/div/div[1]/input').send_keys(name)
+    driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div[2]/div/div[1]/div[2]/button').click()
     
     print('new sql rul is added')
     return
     
 # modify sql rule on data quality
 def modify_sql_rul_dataquality(driver, index, sql, name):
-    driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[3]/div[2]/div/div[2]/div/div[2]/div/div/div[1]/div[2]/div[' + str(index) + ']/div/div[5]/div/*[name()="svg"]').click()
+    driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div[2]/div/div[2]/div/div/div[1]/div[2]/div[' + str(index) + ']/div/div[5]/div/*[name()="svg"]').click()
     
     if sql != "":
-        element = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[3]/div[2]/div/div[2]/div/div[1]/textarea[1]')
+        element = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div[2]/div/div[1]/textarea[1]')
         element.send_keys(Keys.CONTROL + 'a')
         element.send_keys(Keys.DELETE)
         element.send_keys(sql)
     
     if name != "":  
-        element = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[3]/div[2]/div/div[2]/div/div[1]/input')
+        element = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div[2]/div/div[1]/input')
         element.send_keys(Keys.CONTROL + 'a')
         element.send_keys(Keys.DELETE)
         element.send_keys(name)
     
-    driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[3]/div[2]/div/div[2]/div/div[1]/div[2]/button').click()
+    driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div[2]/div/div[1]/div[2]/button').click()
     
     print('sql rul is updated')
     return
@@ -1091,8 +1098,8 @@ def select_tableitem_on_datasearch(driver, index):
 # input sql on sql column
 def input_sql_on_sqlcolumn(driver):
     driver.find_element_by_xpath(sql_column_xpath).click()
-    driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[3]/div/div[2]/div/div[2]/div/div[2]/div/div[2]/div/div/input').send_keys('lower(city_name)')
-    driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[3]/div/div[2]/div/div[2]/div/div[1]/span[2]').click()
+    driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[3]/div/div[2]/div/div[3]/div/div[2]/div/div[2]/div/div/input').send_keys('lower(city_name)')
+    driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[3]/div/div[2]/div/div[3]/div/div[1]/span[2]').click()
     time.sleep(WAIT1)
     print('insert sql transformation')
     return
@@ -1255,9 +1262,9 @@ def isElementPresentForResult(driver, index):
 
 # checkCompleteness
 def checkCompletenessOnDataQuality(driver, index):
-    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[3]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index) + ']/div/div[2]/span/span[1]')))
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index) + ']/div/div[2]/span/span[1]')))
     if index > 7:
-        target = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[3]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index - 1) + ']/div/div[2]/span/span[1]')))
+        target = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index - 1) + ']/div/div[2]/span/span[1]')))
         driver.execute_script("arguments[0].scrollIntoView();", target)
     element.click()
     return
@@ -1265,63 +1272,64 @@ def checkCompletenessOnDataQuality(driver, index):
 
 # nullCheckOnDataQuality
 def nullCheckOnDataQuality(driver, index):
-    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[3]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index) + ']/div/div[3]/div/div/span')))
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index) + ']/div/div[3]/div/div/span')))
+    
     if index > 7:
-        target = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[3]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index - 1) + ']/div/div[3]/div/div/span')))
+        target = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index - 1) + ']/div/div[3]/div/div/span')))
         driver.execute_script("arguments[0].scrollIntoView();", target)
     element.click()
     return
         
 # uniqueCheckOnDataQuality
 def uniqueCheckOnDataQuality(driver, index):
-    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[3]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index) + ']/div/div[4]/div/div/span')))
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index) + ']/div/div[4]/div/div/span')))
     if index > 7:
-        target = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[3]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index - 1) + ']/div/div[4]/div/div/span')))
+        target = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index - 1) + ']/div/div[4]/div/div/span')))
         driver.execute_script("arguments[0].scrollIntoView();", target)
     element.click()
     return
 
 # checkLeftSpacesOnDataQuality
 def checkLeftSpacesOnDataQuality(driver, index):
-    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[3]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index) + ']/div/div[5]/span')))
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index) + ']/div/div[5]/span')))
     if index > 7:
-        target = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[3]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index - 1) + ']/div/div[5]/span')))
+        target = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index - 1) + ']/div/div[5]/span')))
         driver.execute_script("arguments[0].scrollIntoView();", target)
     element.click()
     return
 
 # checkRightSpacesOnDataQuality
 def checkRightSpacesOnDataQuality(driver, index):
-    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[3]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index) + ']/div/div[6]/span')))
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index) + ']/div/div[6]/span')))
     if index > 7:
-        target = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[3]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index -1) + ']/div/div[6]/span')))
+        target = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index -1) + ']/div/div[6]/span')))
         driver.execute_script("arguments[0].scrollIntoView();", target)
     element.click()
     return
 
 # inputMaxLengthOnDataQuality
 def inputMaxLengthOnDataQuality(driver, index, value):
-    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[3]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index) + ']/div/div[7]/div/div/input')))
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index) + ']/div/div[7]/div/div/input')))
     if index > 7:
-        target = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[3]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index -1) + ']/div/div[7]/div')))
+        target = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index -1) + ']/div/div[7]/div')))
         driver.execute_script("arguments[0].scrollIntoView();", target)
     element.send_keys(value);
     return
 
 # inputMinLengthOnDataQuality
 def inputMinLengthOnDataQuality(driver, index, value):
-    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[3]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index) + ']/div/div[8]/div/div/input')))
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index) + ']/div/div[8]/div/div/input')))
     if index > 7:
-        target = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[3]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index - 1) + ']/div/div[8]/div')))
+        target = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index - 1) + ']/div/div[8]/div')))
         driver.execute_script("arguments[0].scrollIntoView();", target)
     element.send_keys(value)
     return
 
 # inputRegularExpressOnDataQuality
 def inputRegularExpressOnDataQuality(driver, index, value):
-    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[3]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index) + ']/div/div[12]/div/div/textarea')))
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index) + ']/div/div[12]/div/div/textarea')))
     if index > 7:
-        target = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[3]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index - 1) + ']/div/div[12]/div')))
+        target = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index - 1) + ']/div/div[12]/div')))
                                                                                                 
         driver.execute_script("arguments[0].scrollIntoView();", target)
     element.send_keys(value)
@@ -1329,41 +1337,41 @@ def inputRegularExpressOnDataQuality(driver, index, value):
 
 # inputSQLWhereConditionOnDataQuality
 def inputSQLWhereConditionOnDataQuality(driver, index, value):
-    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[3]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index) + ']/div/div[11]/div/div/textarea')))
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index) + ']/div/div[11]/div/div/textarea')))
     if index > 7:
-        target = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[3]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index - 1) + ']/div/div[11]/div')))
+        target = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index - 1) + ']/div/div[11]/div')))
         driver.execute_script("arguments[0].scrollIntoView();", target)
     element.send_keys(value)
     return
 
 # inputMaxValueOnDataQuality
 def inputMaxValueOnDataQuality(driver, index, value):
-    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[3]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index) + ']/div/div[9]/div/div/input')))
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index) + ']/div/div[9]/div/div/input')))
     if index > 7:
-        target = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[3]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index - 1) + ']/div/div[9]/div')))
+        target = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index - 1) + ']/div/div[9]/div')))
         driver.execute_script("arguments[0].scrollIntoView();", target)
     element.send_keys(value)
     return
 
 # inputMinValueOnDataQuality
 def inputMinValueOnDataQuality(driver, index, value):
-    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[3]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index) + ']/div/div[10]/div/div/input')))
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index) + ']/div/div[10]/div/div/input')))
     if index > 7:
-        target = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[3]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index - 1) + ']/div/div[10]/div')))
+        target = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[' + str(index - 1) + ']/div/div[10]/div')))
         driver.execute_script("arguments[0].scrollIntoView();", target)
     element.send_keys(value)
     return
 
 # clickNextButtonOnDataQuality
 def clickNextButtonOnDataQuality(driver):
-    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[3]/div[2]/div/div[1]/div[2]/div/div[2]/div/div[3]/button')))
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div/div[1]/div[2]/div/div[2]/div/div[3]/button')))
     driver.execute_script("arguments[0].scrollIntoView();", element)
     element.click()
     return
 
 # scrollToTop
 def scrollToTop(driver):
-    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[3]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[1]')))
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[1]')))
     driver.execute_script("arguments[0].scrollIntoView();", element)
     return
 

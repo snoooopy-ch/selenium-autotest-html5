@@ -71,7 +71,7 @@ class TC043:
             qcd.select_table(self.driver, "Claimslist")
             qcd.click_add_select_btn(self.driver)
 
-            # selet columns
+            # select columns
             qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Select Columns", 500, -40)
             selectcolumns = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component1"]')))
 
@@ -80,10 +80,10 @@ class TC043:
             if (qcd.open_container(self.driver) != 1):
                 selectcolumns.click()
 
-            qcd.click_select_tableitem_for_select_columns(self.driver, 1)
+            qcd.click_select_tableitem_for_select_columns(self.driver, "Claimslist")
             qcd.setInputSelectColumnValue(self.driver, "amount_paid")
 
-            qcd.click_select_tableitem_for_select_columns(self.driver, 2)
+            qcd.click_select_tableitem_for_select_columns(self.driver, "City")
             value = qcd.getInputSelectColumnValue(self.driver)
             
             if value == "":

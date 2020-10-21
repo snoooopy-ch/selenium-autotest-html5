@@ -90,7 +90,7 @@ class TC008:
             if (qcd.open_container(self.driver) != 1):
                 selectcolumns.click()
 
-            qcd.click_select_tableitem_for_select_columns(self.driver, 1)
+            qcd.click_select_tableitem_for_select_columns(self.driver, "c_id")
 
             qcd.select_item_from_column_type(self.driver, "c_id")
             qcd.select_item_from_column_data_type(self.driver, 9)

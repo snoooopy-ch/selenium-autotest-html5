@@ -90,16 +90,16 @@ class TC021:
             if (qcd.open_container(self.driver) != 1):
                 selectcolumns.click()
 
-            qcd.click_select_tableitem_for_select_columns(self.driver, 1)
+            qcd.click_select_tableitem_for_select_columns(self.driver, "collegedetails_zero_records")
             qcd.click_save_on_cp(self.driver)
 
-            qcd.click_select_tableitem_for_select_columns(self.driver, 3)
+            qcd.click_select_tableitem_for_select_columns(self.driver, "college_zero_records")
             qcd.click_save_on_cp(self.driver)
 
-            qcd.click_select_tableitem_for_select_columns(self.driver, 5)
+            qcd.click_select_tableitem_for_select_columns(self.driver, "tolerance")
             qcd.click_save_on_cp(self.driver)
 
-            qcd.click_select_tableitem_for_select_columns(self.driver, 6)
+            qcd.click_select_tableitem_for_select_columns(self.driver, "joining_details")
             qcd.select_table(self.driver, "joining_date")
             qcd.click_save_on_cp(self.driver)
 
@@ -113,22 +113,22 @@ class TC021:
                 commontype.click()
 
             qcd.click_maximize_for_select_columns(self.driver)
-            qcd.click_select_tableitem_for_select_columns(self.driver, 1)
+            qcd.click_select_tableitem_for_select_columns(self.driver, "collegedetails_zero_records")
             qcd.click_select_all_for_commontype(self.driver)
             qcd.select_item_from_column_data_type_list(self.driver, 2, 1)
             qcd.select_item_from_column_data_type_list(self.driver, 5, 1)
             qcd.click_save_on_cp(self.driver)
 
-            qcd.click_select_tableitem_for_select_columns(self.driver, 3)
+            qcd.click_select_tableitem_for_select_columns(self.driver, "college_zero_records")
             qcd.click_select_all_for_commontype(self.driver)
             qcd.click_save_on_cp(self.driver)
 
-            qcd.click_select_tableitem_for_select_columns(self.driver, 5)
+            qcd.click_select_tableitem_for_select_columns(self.driver, "tolerance")
             qcd.click_select_all_for_commontype(self.driver)
             qcd.select_item_from_column_data_type_list(self.driver, 7, 5)
             qcd.click_save_on_cp(self.driver)
 
-            qcd.click_select_tableitem_for_select_columns(self.driver, 6)
+            qcd.click_select_tableitem_for_select_columns(self.driver, "joining_details")
             qcd.click_select_all_for_commontype(self.driver)
             qcd.click_save_on_cp(self.driver)
 
@@ -141,19 +141,19 @@ class TC021:
                 removeduplicates.click()
 
             qcd.click_maximize_for_select_columns(self.driver)
-            qcd.click_select_tableitem_for_select_columns(self.driver, 1)
+            qcd.click_select_tableitem_for_select_columns(self.driver, "collegedetails_zero_records")
             qcd.click_select_all_for_commontype(self.driver)
             qcd.click_save_on_cp(self.driver)
 
-            qcd.click_select_tableitem_for_select_columns(self.driver, 3)
+            qcd.click_select_tableitem_for_select_columns(self.driver, "college_zero_records")
             qcd.click_select_all_for_commontype(self.driver)
             qcd.click_save_on_cp(self.driver)
 
-            qcd.click_select_tableitem_for_select_columns(self.driver, 5)
+            qcd.click_select_tableitem_for_select_columns(self.driver, "tolerance")
             qcd.click_select_all_for_commontype(self.driver)
             qcd.click_save_on_cp(self.driver)
 
-            qcd.click_select_tableitem_for_select_columns(self.driver, 6)
+            qcd.click_select_tableitem_for_select_columns(self.driver, "joining_details")
             qcd.click_select_all_for_commontype(self.driver)
             qcd.click_save_on_cp(self.driver)
 
@@ -178,7 +178,7 @@ class TC021:
             data_type = self.driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[3]/div/div[2]/div/div[3]/div/div[1]/div[2]/div[2]/div/div[2]/img').get_attribute("title")
             print("colleage_code_Varchar's type is " + data_type)
             
-            qcd.select_mapping_table_item(self.driver, 3)
+            qcd.select_mapping_table_item(self.driver, 2)
             qcd.add_columns_in_datacompare_tableitem(self.driver)
             
             data_type = self.driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[3]/div/div[2]/div/div[3]/div/div[1]/div[2]/div[5]/div/div[2]/img').get_attribute("title")

@@ -92,10 +92,10 @@ class TC019:
             if (qcd.open_container(self.driver) != 1):
                 selectcolumns.click()
 
-            qcd.click_select_tableitem_for_select_columns(self.driver, 1)
+            qcd.click_select_tableitem_for_select_columns(self.driver, "City")
             qcd.click_save_on_cp(self.driver)
 
-            qcd.click_select_tableitem_for_select_columns(self.driver, 2)
+            qcd.click_select_tableitem_for_select_columns(self.driver, "Doctor")
             qcd.click_save_on_cp(self.driver)
 
             # data compare

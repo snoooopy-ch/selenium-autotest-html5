@@ -79,7 +79,7 @@ class TC051:
             if (qcd.open_container(self.driver) != 1):
                 data_quality.click()
 
-            qcd.clickAutoSuggestOnDataQuality(self.driver)
+            # qcd.clickAutoSuggestOnDataQuality(self.driver)
             
             # execute
             name_field = self.driver.find_element_by_xpath(qcd.name_xpath)

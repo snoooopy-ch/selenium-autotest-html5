@@ -78,14 +78,14 @@ class TC049:
             if (qcd.open_container(self.driver) != 1):
                 selectcolumns.click()
 
-            qcd.click_select_tableitem_for_select_columns(self.driver, 1)
+            qcd.click_select_tableitem_for_select_columns(self.driver, "PII_SRC")
             qcd.click_save_on_cp(self.driver)
 
-            qcd.click_select_tableitem_for_select_columns(self.driver, 2)
+            qcd.click_select_tableitem_for_select_columns(self.driver, "JAN_2020_ONTIME")
             qcd.select_table(self.driver, "ORIGIN_AIRPORT_SEQ_ID")
             qcd.click_save_on_cp(self.driver)
             
-            qcd.click_select_tableitem_for_select_columns(self.driver, 3)
+            qcd.click_select_tableitem_for_select_columns(self.driver, "PII_TARGET")
             qcd.click_save_on_cp(self.driver)
             
             # Remove Duplicate
@@ -97,15 +97,15 @@ class TC049:
                 removeduplicates.click()
 
             qcd.click_maximize_for_select_columns(self.driver)
-            qcd.click_select_tableitem_for_select_columns(self.driver, 1)
+            qcd.click_select_tableitem_for_select_columns(self.driver, "PII_SRC")
             qcd.click_select_all_for_commontype(self.driver)
             qcd.click_save_on_cp(self.driver)
 
-            qcd.click_select_tableitem_for_select_columns(self.driver, 2)
+            qcd.click_select_tableitem_for_select_columns(self.driver, "JAN_2020_ONTIME")
             qcd.click_select_all_for_commontype(self.driver)
             qcd.click_save_on_cp(self.driver)
 
-            qcd.click_select_tableitem_for_select_columns(self.driver, 3)
+            qcd.click_select_tableitem_for_select_columns(self.driver, "PII_TARGET")
             qcd.click_select_all_for_commontype(self.driver)
             qcd.click_save_on_cp(self.driver)
 

@@ -79,10 +79,10 @@ class TC050:
             if (qcd.open_container(self.driver) != 1):
                 selectcolumns.click()
 
-            qcd.click_select_tableitem_for_select_columns(self.driver, 1)
+            qcd.click_select_tableitem_for_select_columns(self.driver, "Claims")
             qcd.click_save_on_cp(self.driver)
 
-            qcd.click_select_tableitem_for_select_columns(self.driver, 2)
+            qcd.click_select_tableitem_for_select_columns(self.driver, "City")
             qcd.select_table(self.driver, "zipcode")
             qcd.click_save_on_cp(self.driver)
             
@@ -97,12 +97,12 @@ class TC050:
 
             qcd.click_maximize_for_select_columns(self.driver)
             
-            qcd.click_select_tableitem_for_select_columns(self.driver, 1)
+            qcd.click_select_tableitem_for_select_columns(self.driver, "Claims")
             qcd.click_select_all_for_commontype(self.driver)
             qcd.select_item_from_column_data_type_list(self.driver, 2, 1)
             qcd.click_save_on_cp(self.driver)
             
-            qcd.click_select_tableitem_for_select_columns(self.driver, 2)
+            qcd.click_select_tableitem_for_select_columns(self.driver, "City")
             qcd.click_select_all_for_commontype(self.driver)
             qcd.select_item_from_column_data_type_list(self.driver, 1, 1)
             qcd.click_save_on_cp(self.driver)
@@ -116,11 +116,11 @@ class TC050:
                 removeduplicates.click()
 
             qcd.click_maximize_for_select_columns(self.driver)
-            qcd.click_select_tableitem_for_select_columns(self.driver, 1)
+            qcd.click_select_tableitem_for_select_columns(self.driver, "Claims")
             qcd.click_select_all_for_commontype(self.driver)
             qcd.click_save_on_cp(self.driver)
 
-            qcd.click_select_tableitem_for_select_columns(self.driver, 2)
+            qcd.click_select_tableitem_for_select_columns(self.driver, "City")
             qcd.click_select_all_for_commontype(self.driver)
             qcd.click_save_on_cp(self.driver)
 

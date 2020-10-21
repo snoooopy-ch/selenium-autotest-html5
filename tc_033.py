@@ -81,7 +81,7 @@ class TC033:
             qcd.select_table(self.driver, "medicine_students_finalreport")
             qcd.click_add_select_btn(self.driver)
 
-            # Column type
+            # Common type
             qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Column type", 300, -50)
             selectcolumns = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component2"]')))
 
@@ -90,7 +90,7 @@ class TC033:
             if (qcd.open_container(self.driver) != 1):
                 selectcolumns.click()
 
-            qcd.click_select_tableitem_for_select_columns(self.driver, 1)
+            qcd.click_select_tableitem_for_select_columns(self.driver, "assessment_report")
 
             qcd.click_select_all_for_commontype(self.driver)
             qcd.click_save_on_cp(self.driver)

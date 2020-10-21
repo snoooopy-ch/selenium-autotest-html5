@@ -91,7 +91,7 @@ class TC009:
             if (qcd.open_container(self.driver) != 1):
                 removeDuplicate.click()
 
-            qcd.click_select_tableitem_for_select_columns(self.driver, 1)
+            qcd.click_select_tableitem_for_select_columns(self.driver, "Patient")
 
             qcd.select_item_from_column_type(self.driver, "birth_date")
             qcd.click_save_on_cp(self.driver)

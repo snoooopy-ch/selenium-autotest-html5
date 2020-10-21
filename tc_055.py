@@ -67,9 +67,10 @@ class TC055:
             qcd.select_dbset_input(self.driver, 'sampledb_dest')
             qcd.select_db(self.driver)
             qcd.select_table(self.driver, "Jan_2019_ontime")
+            qcd.select_table(self.driver, "college_withdata")
             qcd.click_add_select_btn(self.driver)
             
-            # selet columns
+            # select columns
             qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Select Columns", 500, -80)
             selectcolumns = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component1"]')))
 
@@ -78,7 +79,7 @@ class TC055:
             if (qcd.open_container(self.driver) != 1):
                 selectcolumns.click()
 
-            qcd.click_select_tableitem_for_select_columns(self.driver, 1)
+            qcd.click_select_tableitem_for_select_columns(self.driver, "Jan_2019_ontime")
             qcd.click_save_on_cp(self.driver)
             
             # Filter Rows
@@ -104,6 +105,7 @@ class TC055:
             qcd.select_dbset_input(self.driver, 'sampledb_dest')
             qcd.select_db(self.driver)
             qcd.select_table(self.driver, "Jan_2019_ontime")
+            qcd.select_table(self.driver, "college_withdata")
             qcd.click_add_select_btn(self.driver)
 
             # data compare

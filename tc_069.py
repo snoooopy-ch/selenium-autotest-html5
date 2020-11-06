@@ -21,7 +21,7 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.webdriver.common.action_chains import ActionChains
 
-class TC066:
+class TC069:
     def __init__(self, drv):
         self.driver = drv
 
@@ -65,13 +65,23 @@ class TC066:
                 input1.click()
                 
             qcd.click_maximize_for_select_columns(self.driver)
-            qcd.select_dbset_input(self.driver, 'marketing_dev')
+            qcd.select_dbset_input(self.driver, 'sampledb_src')
             qcd.select_db(self.driver)
             qcd.click_all_select(self.driver)
             qcd.click_add_select_btn(self.driver)
             
+            qcd.click_select_column_change(self.driver, 2, 'DAY_OF_WEEK')
+            qcd.input_min_max_numberpart(self.driver, 2, 1, 3, '')
+            
+            qcd.click_select_column_change(self.driver, 4, 'person_Id')
+            qcd.input_min_max_numberpart(self.driver, 4, 1, 7, '')
+            
+            qcd.click_select_column_change(self.driver, 6, 'joining_details_bigint_pk')
+            qcd.input_min_max_numberpart(self.driver, 6, 20, 27, '')
+            
             if (qcd.open_container(self.driver) == 1):
                 input1.click()
+                
             
             # input 2
             qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Input", 300, 150)
@@ -81,13 +91,21 @@ class TC066:
                 input2.click()
                 
             qcd.click_maximize_for_select_columns(self.driver)
-            qcd.select_dbset_input(self.driver, 'demodb_dest')
+            qcd.select_dbset_input(self.driver, 'sampledb_dest')
             qcd.select_db(self.driver)
             qcd.click_all_select(self.driver)
             qcd.click_add_select_btn(self.driver)
             
-            if (qcd.open_container(self.driver) == 1):
-                input1.click()
+            qcd.click_select_column_change(self.driver, 2, 'DAY_OF_WEEK')
+            qcd.input_min_max_numberpart(self.driver, 2, 1, 3, '')
+            
+            qcd.click_select_column_change(self.driver, 4, 'person_Id')
+            qcd.input_min_max_numberpart(self.driver, 4, 1, 7, '')
+            
+            qcd.click_select_column_change(self.driver, 6, 'joining_details_bigint_pk')
+            qcd.input_min_max_numberpart(self.driver, 6, 20, 27, '')
+            
+            qcd.close_maximize_for_select_columns(self.driver)
             
             # data compare
             qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Data Compare", 400, 80)
@@ -99,14 +117,15 @@ class TC066:
             if (qcd.open_container(self.driver) != 1):
                 compare1.click()
             
-            qcd.cell_by_cell_compare(self.driver, 1)
-            qcd.check_data_migration_input(self.driver)
-            
+            qcd.cell_by_cell_compare(self.driver, 2)
             qcd.select_mapping_tab(self.driver)
-            qcd.select_key_for_warning_mapping_tableitem(self.driver, 1)
             
+            qcd.add_mapping_table_for_type_compare(self.driver)
+            qcd.add_mapping_table_for_type_compare(self.driver)
+            qcd.select_key_for_warning_mapping_tableitem(self.driver, 1)
+
             # execute
-            qcd.save_excute_workflow(self.driver, 'TC_066_ALEX')
+            qcd.save_excute_workflow(self.driver, 'TC_069_ALEX')
             
         except Exception as e:
             qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))

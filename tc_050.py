@@ -136,10 +136,10 @@ class TC050:
                 quality.click()
                 
             time.sleep(qcd.WAIT1)
-            qcd.checkCompletenessOnDataQualityHeader(self.driver)
-            qcd.nullCheckOnDataQualityHeader(self.driver)
-            qcd.checkLeftSpacesOnDataQualityHeader(self.driver)
-            qcd.checkRightSpacesOnDataQualityHeader(self.driver)
+            qcd.check_completeness_on_dataqualityheader(self.driver)
+            qcd.check_nullcheck_on_dataqualityheader(self.driver)
+            qcd.check_leftspaces_on_dataqualityheader(self.driver)
+            qcd.check_rightspaces_on_dataqualityheader(self.driver)
 
             # execute
             qcd.save_excute_workflow(self.driver, 'TC_050_ALEX')

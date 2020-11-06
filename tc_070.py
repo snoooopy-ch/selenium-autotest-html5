@@ -21,7 +21,7 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.webdriver.common.action_chains import ActionChains
 
-class TC066:
+class TC070:
     def __init__(self, drv):
         self.driver = drv
 
@@ -65,48 +65,40 @@ class TC066:
                 input1.click()
                 
             qcd.click_maximize_for_select_columns(self.driver)
-            qcd.select_dbset_input(self.driver, 'marketing_dev')
-            qcd.select_db(self.driver)
-            qcd.click_all_select(self.driver)
-            qcd.click_add_select_btn(self.driver)
+            qcd.click_sql_input(self.driver)
+            qcd.select_dbset_sql_input(self.driver, 'hims')
+            qcd.select_db_sql(self.driver)
+            qcd.add_sql_title_content(self.driver, 'courses_info', "select upper(Courses) as Courses from courses_info")
+            
+            try:
+                element = WebDriverWait(self.driver, qcd.WAIT50).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="root"]/div/div/div[2]/div')))
+                time.sleep(qcd.WAIT3)
+                element = WebDriverWait(self.driver, qcd.WAIT20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="root"]/div/div/div[2]/div/div/div[2]/button')))
+                element.click()
+            except Exception as e:
+                raise Exception('Input1 Validate fails')
             
             if (qcd.open_container(self.driver) == 1):
                 input1.click()
             
-            # input 2
-            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Input", 300, 150)
-            input2 = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component1"]')))
+            # Output 2
+            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Output", 500, -250)
+            output = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component1"]')))
+            qcd.connect_elements(self.driver, input1, 1, output, 1)
 
             if (qcd.open_container(self.driver) != 1):
-                input2.click()
+                output.click()
                 
             qcd.click_maximize_for_select_columns(self.driver)
-            qcd.select_dbset_input(self.driver, 'demodb_dest')
-            qcd.select_db(self.driver)
-            qcd.click_all_select(self.driver)
-            qcd.click_add_select_btn(self.driver)
+            qcd.select_dbset_output(self.driver, 'test_db')
+            qcd.select_db_output(self.driver)
             
-            if (qcd.open_container(self.driver) == 1):
-                input1.click()
-            
-            # data compare
-            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Data Compare", 400, 80)
-            compare1 = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component2"]')))
-
-            qcd.connect_elements(self.driver, input1, 1, compare1, 1)
-            qcd.connect_elements(self.driver, input2, 1, compare1, 1)
-
-            if (qcd.open_container(self.driver) != 1):
-                compare1.click()
-            
-            qcd.cell_by_cell_compare(self.driver, 1)
-            qcd.check_data_migration_input(self.driver)
-            
-            qcd.select_mapping_tab(self.driver)
-            qcd.select_key_for_warning_mapping_tableitem(self.driver, 1)
+            qcd.add_output_table_or(self.driver, 'courses_info', 'Course_Name')
+            qcd.add_output_table_or(self.driver, 'courses_info', 'test_table')
+            qcd.click_output_overwrite(self.driver, 2)
             
             # execute
-            qcd.save_excute_workflow(self.driver, 'TC_066_ALEX')
+            qcd.save_excute_workflow(self.driver, 'TC_070_ALEX')
             
         except Exception as e:
             qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))

@@ -79,9 +79,9 @@ class TC051:
             if (qcd.open_container(self.driver) != 1):
                 data_quality.click()
 
-            # qcd.clickAutoSuggestOnDataQuality(self.driver)
+            qcd.clickAutoSuggestOnDataQuality(self.driver)
             
-            # execute
+            # save
             name_field = self.driver.find_element_by_xpath(qcd.name_xpath)
             name_field.send_keys(Keys.CONTROL + 'a') 
             name_field.send_keys(Keys.DELETE)
@@ -122,9 +122,12 @@ class TC051:
                 print(e)
                 raise Exception('Autofill failed')
             
+            qcd.click_back_execute_log_panel(self.driver)
             
             if self.driver.find_element_by_xpath('/html/body/div/div/div/div[1]/div/div/div/div/div/div[2]/div[2]/div/div/div[3]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[2]/div/div[2]/span/span[1]/input').is_selected():
                 print('all checked')
+                qcd.uniqueCheckOnDataQuality(self.driver, 8)
+                qcd.click_back_execute_log_panel(self.driver)
                 
                 # execute
                 qcd.save_excute_workflow(self.driver, 'TC_051_ALEX')

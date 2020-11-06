@@ -89,7 +89,10 @@ class TC067:
             if (qcd.open_container(self.driver) != 1):
                 data_quality.click()
             
-            qcd.checkCompletenessOnDataQualityHeader(self.driver)
+            qcd.check_completeness_on_dataqualityheader(self.driver)
+            qcd.check_nullcheck_on_dataqualityheader(self.driver)
+            qcd.check_leftspaces_on_dataqualityheader(self.driver)
+            qcd.check_rightspaces_on_dataqualityheader(self.driver)
             
             if (qcd.open_container(self.driver) == 1):
                 data_quality.click()
@@ -117,7 +120,7 @@ class TC067:
                 data_quality.click()
             
             time.sleep(1)
-            qcd.checkCompletenessOnDataQualityHeader(self.driver)
+            qcd.check_completeness_on_dataqualityheader(self.driver)
             
             # execute
             qcd.save_excute_workflow(self.driver, 'TC_067_ALEX')

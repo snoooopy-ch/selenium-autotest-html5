@@ -94,8 +94,8 @@ class TC061:
             if (qcd.open_container(self.driver) != 1):
                 data_quality.click()
 
-            qcd.checkCompletenessOnDataQualityHeader(self.driver)
-            qcd.checkLeftSpacesOnDataQualityHeader(self.driver)
+            qcd.check_completeness_on_dataqualityheader(self.driver)
+            qcd.check_leftspaces_on_dataqualityheader(self.driver)
             
             # close panel
             data_quality.click()

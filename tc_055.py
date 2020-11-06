@@ -92,9 +92,9 @@ class TC055:
                 filterrow.click()
 
             qcd.click_select_tableitem_for_fiter_rows(self.driver, 1)
-            qcd.insertSQLIntoFilterRowTextarea(self.driver, 'select * from Jan_2019_ontime where DAY_OF_WEEK = 2')
+            qcd.insertSQLIntoFilterRowTextarea(self.driver, 'select * from Jan_2019_ontime where DAY_OF_WEEK=2')
             qcd.click_save_on_cp(self.driver)
-
+            
             # input 2
             qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Input", 300, 160)
             input2 = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component3"]')))

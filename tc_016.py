@@ -114,10 +114,7 @@ class TC016:
             qcd.select_mapping_tab(self.driver)
             
             qcd.add_mapping_table_name(self.driver)
-            qcd.select_mapping_table_item(self.driver, 1)
-            qcd.select_key_for_table_item(self.driver, 1)
-            qcd.select_mapping_table_item(self.driver, 2)
-            qcd.select_key_for_table_item(self.driver, 1)
+            qcd.select_key_for_warning_mapping_tableitem(self.driver, 1)
 
             # execute
             qcd.save_excute_workflow(self.driver, 'TC_016_ALEX')

@@ -1100,8 +1100,8 @@ def select_tableitem_on_datasearch(driver, index):
 # input sql on sql column
 def input_sql_on_sqlcolumn(driver):
     driver.find_element_by_xpath(sql_column_xpath).click()
-    driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[3]/div/div[2]/div/div[3]/div/div[2]/div/div[2]/div/div/input').send_keys('lower(city_name)')
-    driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[3]/div/div[2]/div/div[3]/div/div[1]/span[2]').click()
+    driver.find_element_by_xpath('/html/body/div[2]/div[3]/div/div[2]/div[1]/div/div/input').send_keys('lower(city_name)')
+    driver.find_element_by_xpath('/html/body/div[2]/div[3]/div/div[3]/button[2]').click()
     time.sleep(WAIT1)
     print('insert sql transformation')
     return

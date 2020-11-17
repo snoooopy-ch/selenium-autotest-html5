@@ -109,6 +109,24 @@ class TC061:
             qcd.add_columns_manualupload(self.driver, "zipcode,c_id")
             qcd.click_manual_upload_validate(self.driver, '/html/body/div/div/div/div[1]/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[3]/div/div/div[1]/button')
             
+            try:
+                element = WebDriverWait(self.driver, qcd.WAIT50).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="root"]/div/div/div[2]/div')))
+                time.sleep(qcd.WAIT3)
+                element = WebDriverWait(self.driver, qcd.WAIT20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="root"]/div/div/div[2]/div/div/div[2]/button')))
+                element.click()
+            except Exception as e:
+                raise Exception('Input1 Validate fails')
+            
+            # close panel
+            input1.click()
+            
+            data_quality.click()
+            qcd.check_completeness_on_dataqualityheader(self.driver)
+            qcd.check_leftspaces_on_dataqualityheader(self.driver)
+            qcd.check_nullcheck_on_dataqualityheader(self.driver)
+            qcd.inputMinValueOnDataQuality(self.driver, 2, 101)
+            
+            time.sleep(qcd.WAIT3)
             # execute
             qcd.save_excute_workflow(self.driver, 'TC_061_ALEX')
         except Exception as e:

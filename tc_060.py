@@ -79,14 +79,15 @@ class TC060:
 
             if (qcd.open_container(self.driver) != 1):
                 data_quality.click()
+            time.sleep(qcd.WAIT3)
             
-            qcd.select_mapping_tab(self.driver)
+            qcd.select_sql_mapping_tab(self.driver)
             
             qcd.apply_sql_rul_dataquality(self.driver, "SELECT Patient_name,Patient_blood_group,diagnosis_session, Patient_healthcard_no FROM Patient WHERE Patient_healthcard_no BETWEEN 47 AND 48 LIMIT 49", "sql1")
             qcd.apply_sql_rul_dataquality(self.driver, "SELECT I_id,I_name,I_address FROM Insurance where active=1", "sql2")
-            qcd.apply_sql_rul_dataquality(self.driver, "Select doc_name,Specialization From Doctor ORDER BY doc_name", "sql3")
+            qcd.apply_sql_rul_dataquality(self.driver, "SELECT doc_name,Specialization From Doctor ORDER BY doc_name", "sql3")
             qcd.apply_sql_rul_dataquality(self.driver, "SELECT Patient_name from Patient where Patient_blood_group='A+ve'", "sql4")
-            qcd.apply_sql_rul_dataquality(self.driver, "Select birth_date from Patient where Patient_name='Ratna'", "sql5")
+            qcd.apply_sql_rul_dataquality(self.driver, "SELECT birth_date from Patient where Patient_name='Ratna'", "sql5")
             
             qcd.modify_sql_rul_dataquality(self.driver, 5, "Select birth_date from Patient where Patient_name='Vithika'", "")
 

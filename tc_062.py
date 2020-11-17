@@ -107,7 +107,7 @@ class TC062:
 
                     output = ''
                     find = 0
-                    print("Count:{}, Min:{}, Max{}".format(tds[1].text, tds[4].text, tds[5].text))
+                    print("Count:{}, Min:{}, Max:{}".format(tds[1].text, tds[4].text, tds[5].text))
             except Exception as ex:
                 print(ex)
                 pass

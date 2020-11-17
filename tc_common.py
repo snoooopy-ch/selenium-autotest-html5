@@ -239,7 +239,7 @@ def select_dbset_input(driver, db):
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div[2]/div/div/div[1]')))
     element.click()
 
-    time.sleep(WAIT1)
+    time.sleep(WAIT3)
     db_value = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div[2]/div/div[2]/div')))
     items = db_value.find_elements_by_xpath('./div')
     
@@ -278,6 +278,7 @@ def select_dbset_sql_input(driver, db):
 def select_db(driver):
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div[3]/div/div/div[1]')))
     element.click()
+    time.sleep(WAIT1)
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div[3]/div/div[2]/div/div')))
     element.click()
     time.sleep(WAIT3)
@@ -298,6 +299,7 @@ def select_db_sql(driver):
 def select_db_with_index(driver, db):
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div[3]/div/div/div[1]')))
     element.click()
+    time.sleep(WAIT1)
     
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div[3]/div/div[2]/div')))
     items = element.find_elements_by_xpath('./div')
@@ -463,16 +465,16 @@ def select_mapping_tab(driver):
     return
 
 # select sql tab
-def select_mapping_tab(driver):
-    tab_mapping = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, tabmapping_xpath)))
-    tab_mapping.click()
+def select_sql_mapping_tab(driver):
+    sql_mapping = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[3]/div[1]/div/div/button[2]')))
+    sql_mapping.click()
     print('sql tab selected')
     return
 
 # select compare tab
 def select_compare_tab(driver):
-    tab_mapping = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, tabcompare_xpath)))
-    tab_mapping.click()
+    compare_mapping = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, tabcompare_xpath)))
+    compare.click()
     print('compare tab selected')
     return
 
@@ -541,7 +543,9 @@ def select_key_for_table_item(driver, index):
 def select_key_for_warning_mapping_tableitem(driver, keyindex):
     tables_tr = driver.find_elements_by_xpath('//*[@id="tableContainer"]/table/tbody/tr')
     count = len(tables_tr)
+    print(count)
     for i in range(count):
+        print(i)
         try:
             img = driver.find_element_by_xpath('//*[@id="tableContainer"]/table/tbody/tr[' + str(i + 1) + ']/td[4]/img')
             table_item = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="tableContainer"]/table/tbody/tr[' + str(i + 1) + ']/td[2]/span[1]')))
@@ -659,30 +663,30 @@ def add_sql_on_dataquality(driver, index, sql, job):
     
 # apply sql rule on data quality
 def apply_sql_rul_dataquality(driver, sql, name):
-    driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div[2]/div/div[1]/textarea[1]').send_keys(sql)
-    driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div[2]/div/div[1]/input').send_keys(name)
-    driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div[2]/div/div[1]/div[2]/button').click()
+    driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[3]/div[2]/div/div[2]/div/div[1]/textarea[1]').send_keys(sql)
+    driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[3]/div[2]/div/div[2]/div/div[1]/input').send_keys(name)
+    driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[3]/div[2]/div/div[2]/div/div[1]/div[2]/button').click()
     
     print('new sql rul is added')
     return
     
 # modify sql rule on data quality
 def modify_sql_rul_dataquality(driver, index, sql, name):
-    driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div[2]/div/div[2]/div/div/div[1]/div[2]/div[' + str(index) + ']/div/div[5]/div/*[name()="svg"]').click()
+    driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[3]/div[2]/div/div[2]/div/div[2]/div/div/div[1]/div[2]/div[' + str(index) + ']/div/div[5]/div/*[name()="svg"]').click()
     
     if sql != "":
-        element = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div[2]/div/div[1]/textarea[1]')
+        element = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[3]/div[2]/div/div[2]/div/div[1]/textarea[1]')
         element.send_keys(Keys.CONTROL + 'a')
         element.send_keys(Keys.DELETE)
         element.send_keys(sql)
     
     if name != "":  
-        element = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div[2]/div/div[1]/input')
+        element = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[3]/div[2]/div/div[2]/div/div[1]/input')
         element.send_keys(Keys.CONTROL + 'a')
         element.send_keys(Keys.DELETE)
         element.send_keys(name)
     
-    driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div[2]/div/div[1]/div[2]/button').click()
+    driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[3]/div[2]/div/div[2]/div/div[1]/div[2]/button').click()
     
     print('sql rul is updated')
     return
@@ -1663,7 +1667,7 @@ def set_multiline_api_input(driver, value):
     return
     
 def add_columns_api_input(driver, text):
-    textarea = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div/div[4]/textarea[1]')
+    textarea = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div/div[3]/textarea[1]')
     textarea.send_keys(Keys.CONTROL + 'a')
     textarea.send_keys(Keys.DELETE)
     textarea.send_keys(text)

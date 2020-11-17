@@ -68,7 +68,7 @@ class TC063:
             qcd.click_maximize_for_select_columns(self.driver)
             qcd.click_api_input(self.driver)
             qcd.add_curl_command_api_input(self.driver, 'https://jsonplaceholder.typicode.com/todos')
-            qcd.set_multiline_api_input(self.driver, "true")
+            # qcd.set_multiline_api_input(self.driver, "true")
             qcd.click_validate_api_input(self.driver)
             
             try:

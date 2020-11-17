@@ -66,7 +66,8 @@ from tc_060 import TC060
 from tc_061 import TC061
 from tc_062 import TC062
 from tc_063 import TC063
-
+from tc_064 import TC064
+from tc_065 import TC065
 from tc_066 import TC066
 from tc_067 import TC067
 from tc_068 import TC068
@@ -75,15 +76,12 @@ from tc_069 import TC069
 from tc_070 import TC070
 from tc_071 import TC071
 
-#BASE_URL = 'http://dataq-frontend.s3-website.us-east-2.amazonaws.com/#/user-home/flow'
-#BASE_URL = 'http://dataq-automation-alb-1598668034.us-east-1.elb.amazonaws.com:7000'
-
 def str2Class(str):
     return getattr(sys.modules[__name__], str)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument("-r", "--url", help="input site url, default 'http://dataq-frontend.s3-website.us-east-2.amazonaws.com/#/user-home'")
+    parser.add_argument("-r", "--url", help="input site url, default 'http://dataq1-dev-app-alb-590168242.us-east-1.elb.amazonaws.com'")
     parser.add_argument("-u", "--user", help="input login user, default 'john'")
     parser.add_argument("-p", "--password", help="input login pass, default 'dataq'")
     parser.add_argument("-s", "--scripts", help="input script number to execute using comma")
@@ -93,7 +91,7 @@ if __name__ == '__main__':
     if args.url:
         url = agrs.url
     else:
-        url = 'http://dataq-frontend.s3-website.us-east-2.amazonaws.com/#/user-home'
+        url = 'http://dataq1-dev-app-alb-590168242.us-east-1.elb.amazonaws.com'
     
     print(url)
 
@@ -114,10 +112,10 @@ if __name__ == '__main__':
     if args.scripts:
         scpt_number = [int(item) for item in args.scripts.split(',')]
     else:
-        scpt_number = [1,2,3,4,5,6,7,8,9,11,12,13,15,16,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,50,51,52,53,54,55,56,57,58,59,60,61,62,63,66,67,68,69,70,71]
+        scpt_number = [1,2,3,4,5,6,7,8,9,11,12,13,15,16,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71]
         
     if args.all:
-        scpt_number = [1,2,3,4,5,6,7,8,9,11,12,13,15,16,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,50,51,52,53,54,55,56,57,58,59,60,61,62,63,66,67,68,69,70,71]
+        scpt_number = [1,2,3,4,5,6,7,8,9,11,12,13,15,16,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71]
 
     print(scpt_number)
 

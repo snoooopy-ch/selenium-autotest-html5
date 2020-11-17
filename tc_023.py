@@ -109,7 +109,6 @@ class TC023:
             qcd.save_excute_workflow(self.driver, 'TC_023_ALEX')
         except Exception as e:
             qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
-            time.sleep(1000)
             raise Exception(e)
             pass
 

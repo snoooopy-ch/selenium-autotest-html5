@@ -90,11 +90,12 @@ class TC008:
             if (qcd.open_container(self.driver) != 1):
                 selectcolumns.click()
 
-            qcd.click_select_tableitem_for_select_columns(self.driver, "c_id")
-
-            qcd.select_item_from_column_type(self.driver, "c_id")
-            qcd.select_item_from_column_data_type(self.driver, 9)
+            qcd.click_maximize_for_select_columns(self.driver)
+            qcd.click_select_tableitem_for_select_columns(self.driver, "City")
+            qcd.select_table(self.driver, "c_id")
+            qcd.select_item_from_column_data_type_list(self.driver, 1, 9)
             qcd.click_save_on_cp(self.driver)
+            qcd.close_maximize_for_select_columns(self.driver)
 
             # data compare
             qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Data Compare", 700, 80)
@@ -109,8 +110,7 @@ class TC008:
             qcd.cell_by_cell_compare(self.driver, 1)
             qcd.select_mapping_tab(self.driver)
 
-            qcd.select_mapping_table_item(self.driver, 1)
-            qcd.select_key_for_table_item(self.driver, 1)
+            qcd.select_key_for_warning_mapping_tableitem(self.driver, 1)
 
             # execute
             qcd.save_excute_workflow(self.driver, 'TC_008_ALEX')

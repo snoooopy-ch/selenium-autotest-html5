@@ -62,7 +62,7 @@ class TC042:
             input1 = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component0"]')))
 
             qcd.click_notification(self.driver)
-            qcd.select_cluster_execute_job(self.driver, 2)
+            qcd.select_cluster_execute_job(self.driver, "AWS_HADOOP")
             qcd.save_close_execute_tab(self.driver)
 
             if (qcd.open_container(self.driver) != 1):

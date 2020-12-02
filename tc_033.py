@@ -83,12 +83,12 @@ class TC033:
 
             # Common type
             qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Column type", 300, -50)
-            selectcolumns = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component2"]')))
+            commontype = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component2"]')))
 
-            qcd.connect_elements(self.driver, input1, 1, selectcolumns, 1)
+            qcd.connect_elements(self.driver, input1, 1, commontype, 1)
 
             if (qcd.open_container(self.driver) != 1):
-                selectcolumns.click()
+                commontype.click()
 
             qcd.click_select_tableitem_for_select_columns(self.driver, "assessment_report")
 
@@ -99,7 +99,7 @@ class TC033:
             qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Data Compare", 700, 80)
             compare1 = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component3"]')))
 
-            qcd.connect_elements(self.driver, selectcolumns, 2, compare1, 1)
+            qcd.connect_elements(self.driver, commontype, 2, compare1, 1)
             qcd.connect_elements(self.driver, input2, 1, compare1, 1)
 
             if (qcd.open_container(self.driver) != 1):

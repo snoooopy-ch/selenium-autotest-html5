@@ -45,12 +45,29 @@ class TC041:
             print("Redirecting to Flow page is failed")
             
         qcd.logout(self.driver)
+        print("qcd.logout")
         
         self.driver.back()
         print("back button clicked")
         
+        time.sleep(qcd.WAIT3)
+        
+        try:
+            alert = driver.switch_to.alert
+            alert.accept()
+        except:
+            pass
+        
         if (qcd.login(self.driver, "user", "password") != 1):
-            raise Exception('fail to login')
+            try:
+                element = WebDriverWait(self.driver, qcd.WAIT3).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="root"]/div/div/div[2]/div')))
+                element = WebDriverWait(self.driver, qcd.WAIT3).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="client-snackbar"]')))
+                text = re.compile(r'<[^>]+>').sub('', element.text)
+                print(text)
+                element = WebDriverWait(self.driver, qcd.WAIT20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="root"]/div/div/div[2]/div/div/div[2]/button')))
+                element.click()
+            except Exception as e:
+                print("Login failed")
         
         currentUrl = self.driver.current_url
         if currentUrl == "http://dataq-frontend.s3-website.us-east-2.amazonaws.com/#/":

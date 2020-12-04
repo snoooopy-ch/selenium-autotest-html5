@@ -79,34 +79,35 @@ class TC074:
                 data_quality.click()
 
             time.sleep(qcd.WAIT1)
-            qcd.clickAutoSuggestOnDataQuality(self.driver)
-            print('clickAutoSuggestOnDataQuality')
-            time.sleep(qcd.WAIT1)
             
             # save
             name_field = self.driver.find_element_by_xpath(qcd.name_xpath)
             name_field.send_keys(Keys.CONTROL + 'a') 
             name_field.send_keys(Keys.DELETE)
             name_field.send_keys('TC_074_ALEX')
-
-            btn_save = self.driver.find_element_by_xpath(qcd.save_xpath)
-            btn_save.click()
-            print('save click');
             
-            try:
-                element = WebDriverWait(self.driver, qcd.WAIT100).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="root"]/div/div/div[2]/div')))
-                element = WebDriverWait(self.driver, qcd.WAIT20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="root"]/div/div/div[2]/div/div/div[2]/button')))
-                element.click()
-                print('save dailog click');
-            except Exception as e:
-                print(e)
+            qcd.clickAutoSuggestOnDataQuality(self.driver)
+            print('clickAutoSuggestOnDataQuality')
+            time.sleep(qcd.WAIT1)
 
-            qcd.click_back_execute_log_panel(self.driver)
+            # btn_save = self.driver.find_element_by_xpath(qcd.save_xpath)
+            # btn_save.click()
+            # print('save click');
             
-            print('executing...')
-            btn_execute = self.driver.find_element_by_xpath(qcd.excute_xpath)
-            btn_execute.click()
-            print('execute click');
+            # try:
+            #     element = WebDriverWait(self.driver, qcd.WAIT100).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="root"]/div/div/div[2]/div')))
+            #     element = WebDriverWait(self.driver, qcd.WAIT20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="root"]/div/div/div[2]/div/div/div[2]/button')))
+            #     element.click()
+            #     print('save dailog click');
+            # except Exception as e:
+            #     print(e)
+
+            # qcd.click_back_execute_log_panel(self.driver)
+            
+            # print('executing...')
+            # btn_execute = self.driver.find_element_by_xpath(qcd.excute_xpath)
+            # btn_execute.click()
+            # print('execute click');
             
             try:
                 element = WebDriverWait(self.driver, qcd.WAIT100).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="root"]/div/div/div[2]/div')))
@@ -135,10 +136,9 @@ class TC074:
             
             qcd.click_back_execute_log_panel(self.driver)
             
-            if self.driver.find_element_by_xpath('/html/body/div/div/div/div[1]/div/div/div/div/div/div[2]/div[2]/div/div/div[3]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[2]/div/div[2]/span/span[1]/input').is_selected():
+            if self.driver.find_element_by_xpath('/html/body/div/div/div/div[1]/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div/div[1]/div[2]/div/div[1]/div[1]/div/div[3]/div/div/span[1]/span[1]/input').is_selected():
                 print('all checked')
                 qcd.check_leftspaces_on_dataqualityheader(self.driver)
-                qcd.click_back_execute_log_panel(self.driver)
                 
                 # execute
                 qcd.save_excute_workflow(self.driver, 'TC_074_ALEX')

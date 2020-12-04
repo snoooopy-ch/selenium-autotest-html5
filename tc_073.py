@@ -143,10 +143,6 @@ class TC073:
             input1 = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component0"]')))
             data_quality = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component1"]')))
             
-            
-            
-            
-            
             first_parent = input1.find_element_by_xpath('..')
             entry1 = first_parent.find_element_by_xpath("./following-sibling::div/following-sibling::div")
             second_parent = column_type.find_element_by_xpath('..')
@@ -154,9 +150,6 @@ class TC073:
             action = ActionChains(self.driver)
             action.click_and_hold(entry1).move_to_element(entry2).release(entry2).perform()
             time.sleep(qcd.WAIT1)
-            
-    
-    
             
             if (qcd.open_container(self.driver) != 1):
                 column_type.click()
@@ -172,10 +165,6 @@ class TC073:
             
             qcd.click_save_on_cp(self.driver)
                 
-            
-            
-            
-            
             first_parent = column_type.find_element_by_xpath('..')
             entry1 = first_parent.find_element_by_xpath("./following-sibling::div/following-sibling::div")
             second_parent = data_quality.find_element_by_xpath('..')
@@ -183,9 +172,6 @@ class TC073:
             action = ActionChains(self.driver)
             action.click_and_hold(entry1).move_to_element(entry2).release(entry2).perform()
             time.sleep(qcd.WAIT1)
-            
-            
-            
             
             if (qcd.open_container(self.driver) != 1):
                 data_quality.click()

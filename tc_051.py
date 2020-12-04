@@ -79,55 +79,29 @@ class TC051:
             if (qcd.open_container(self.driver) != 1):
                 data_quality.click()
 
-            qcd.clickAutoSuggestOnDataQuality(self.driver)
-            
+
             # save
             name_field = self.driver.find_element_by_xpath(qcd.name_xpath)
             name_field.send_keys(Keys.CONTROL + 'a') 
             name_field.send_keys(Keys.DELETE)
             name_field.send_keys('TC_051_ALEX')
-
-            btn_save = self.driver.find_element_by_xpath(qcd.save_xpath)
-            btn_save.click()
-            print('save click');
-            time.sleep(qcd.WAIT3)
+            
+            qcd.clickAutoSuggestOnDataQuality(self.driver)
+            time.sleep(qcd.WAIT5)
             
             try:
                 element = WebDriverWait(self.driver, qcd.WAIT100).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="root"]/div/div/div[2]/div')))
                 element = WebDriverWait(self.driver, qcd.WAIT20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="root"]/div/div/div[2]/div/div/div[2]/button')))
-                print('save dailog click');
-            except Exception as e:
-                print(e)
-
-            print('executing...')
-            btn_execute = self.driver.find_element_by_xpath(qcd.excute_xpath)
-            btn_execute.click()
-            time.sleep(qcd.WAIT3)
-            print('execute click');
-            
-            try:
-                element = WebDriverWait(self.driver, qcd.WAIT100).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="root"]/div/div/div[2]/div')))
-                element = WebDriverWait(self.driver, qcd.WAIT20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="root"]/div/div/div[2]/div/div/div[2]/button')))
-                
+                element.click()
                 print('initial dialog click');
             except Exception as e:
                 pass
 
-            try:
-                element = WebDriverWait(self.driver, qcd.WAIT100).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="root"]/div/div/div[2]/div')))
-                element = WebDriverWait(self.driver, qcd.WAIT20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="root"]/div/div/div[2]/div/div/div[2]/button')))
-                
-                print('execute dialog click');
-            except Exception as e:
-                print(e)
-                raise Exception('Autofill failed')
-            
             qcd.click_back_execute_log_panel(self.driver)
             
-            if self.driver.find_element_by_xpath('/html/body/div/div/div/div[1]/div/div/div/div/div/div[2]/div[2]/div/div/div[3]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[2]/div/div[2]/span/span[1]/input').is_selected():
+            if self.driver.find_element_by_xpath('/html/body/div/div/div/div[1]/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div/div[1]/div[2]/div/div[1]/div[1]/div/div[3]/div/div/span[1]/span[1]/input').is_selected():
                 print('all checked')
                 qcd.uniqueCheckOnDataQuality(self.driver, 8)
-                qcd.click_back_execute_log_panel(self.driver)
                 
                 # execute
                 qcd.save_excute_workflow(self.driver, 'TC_051_ALEX')

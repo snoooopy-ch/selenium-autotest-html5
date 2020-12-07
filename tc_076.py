@@ -83,7 +83,7 @@ class TC076:
             qcd.click_save_on_cp(self.driver)
             
             # Column type
-            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Column type", 500, -150)
+            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Column type", 500, -100)
             commontype = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component2"]')))
 
             qcd.connect_elements(self.driver, selectcolumns, 2, commontype, 1)
@@ -99,7 +99,7 @@ class TC076:
             qcd.close_maximize_for_select_columns(self.driver)
                 
             # Data Quality
-            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Data Quality", 700, -200)
+            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Data Quality", 850, -250)
             data_quality = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component3"]')))
             qcd.connect_elements(self.driver, commontype, 2, data_quality, 1)
 
@@ -147,8 +147,6 @@ class TC076:
                 
             # Data Quality
             data_quality = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component3"]')))
-            qcd.connect_elements(self.driver, commontype, 2, data_quality, 1)
-
             if (qcd.open_container(self.driver) != 1):
                 data_quality.click()
 

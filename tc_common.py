@@ -1092,7 +1092,7 @@ def search_in_settings(driver, keyword):
 # delete on settings board
 def click_delete_settings_search(driver):
     try:
-        driver.find_element_by_xpath('//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div/div[2]/div[1]/div[2]/div[1]/div/div[6]/div/button[2]').click()
+        driver.find_element_by_xpath('//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div/div[2]/div[1]/div[2]/div[1]/div/div[5]/div/button[2]').click()
         driver.find_element_by_xpath('/html/body/div[2]/div[3]/div/div[3]/button[2]').click()
         time.sleep(WAIT3)
     except Exception as e:
@@ -1109,17 +1109,17 @@ def add_new_connection(driver, index, name, url, user, password):
     time.sleep(WAIT3)
     driver.find_element_by_xpath('//*[@id="outlined-bare"]').send_keys(name)
     
-    dateTimeObj = datetime.now()
-    database_name = 'employee_' + str(dateTimeObj.microsecond)
-    driver.find_element_by_xpath('//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div/div[2]/div/div/section[1]/div[2]/div[3]/div[1]/div/input').send_keys(database_name)
+    # dateTimeObj = datetime.now()
+    # database_name = 'employee_' + str(dateTimeObj.microsecond)
+    # driver.find_element_by_xpath('//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div/div[2]/div/div/section[1]/div[2]/div[3]/div[1]/div/input').send_keys(database_name)
     
-    driver.find_element_by_xpath('//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div/div[2]/div/div/section[1]/div[2]/p/span').click()
+    # driver.find_element_by_xpath('//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div/div[2]/div/div/section[1]/div[2]/p/span').click()
 
     driver.find_element_by_xpath('//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div/div[2]/div/div/section[1]/div[2]/div/div/div[1]/div/input').send_keys(Keys.CONTROL + 'a') 
     driver.find_element_by_xpath('//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div/div[2]/div/div/section[1]/div[2]/div/div/div[1]/div/input').send_keys(Keys.DELETE)
     driver.find_element_by_xpath('//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div/div[2]/div/div/section[1]/div[2]/div/div/div[1]/div/input').send_keys(url)
 
-    absolute_file_path = os.path.abspath("files/mysql-connector-java-8.0.12.jar")
+    absolute_file_path = os.path.abspath("files/mysql-connector-java-8.0.20.jar")
     driver.find_element_by_xpath('//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div/div[2]/div/div/section[1]/div[2]/input').send_keys(absolute_file_path)
 
     driver.find_element_by_xpath('//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div/div[2]/div/div/section[2]/div[1]/div/div/input').send_keys(user)

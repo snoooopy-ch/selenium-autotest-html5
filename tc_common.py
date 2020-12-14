@@ -720,7 +720,8 @@ def add_sql_on_dataquality(driver, index, sql, job):
 def apply_sql_rul_dataquality(driver, sql, name):
     driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div[2]/div/div[1]/textarea[1]').send_keys(sql)
     driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div[2]/div/div[1]/input').send_keys(name)
-    driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div[2]/div/div[1]/div[2]/button').click()
+    driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div[2]/div/div[1]/div[4]/button').click()
+                                  
     
     print('new sql rul is added')
     return
@@ -741,7 +742,7 @@ def modify_sql_rul_dataquality(driver, index, sql, name):
         element.send_keys(Keys.DELETE)
         element.send_keys(name)
     
-    driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div[2]/div/div[1]/div[2]/button').click()
+    driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div[2]/div/div[1]/div[4]/button').click()
     
     print('sql rul is updated')
     return

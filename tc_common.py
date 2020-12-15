@@ -1277,14 +1277,14 @@ def check_multiline_manual_upload_input(driver, value):
 
 # check multiline manual upload on input with out aws_hadoop
 def check_multiline_manual_upload_input_without_awshadoop(driver, value):
-    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '/html/body/div/div/div/div[1]/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[3]/div/div/div[1]/div[3]/div[1]/div[2]/div/div[1]')))
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div[1]/div[5]/div[1]/div[2]/div/div[1]')))
     element.click()
     
     if value == "true":
         index = "1"
     else:
         index = "2"
-    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '/html/body/div/div/div/div[1]/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[3]/div/div/div[1]/div[3]/div[1]/div[2]/div[2]/div/div[' + index + ']')))
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div[1]/div[5]/div[1]/div[2]/div[2]/div/div[' + index + ']')))
     element.click()
     return
 
@@ -1297,25 +1297,25 @@ def click_manual_upload_validate(driver, xpath):
 
 # input delimiter on input
 def input_delimiter_on_input(driver, value):
-    element = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div/div[3]/div[1]/div[2]/div/input')
+    element = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div/div[5]/div[1]/div[2]/div/input')
     element.send_keys(value)
     return
 
 # set header as true or false on input
 def set_header_on_input(driver, index):
-    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '/html/body/div/div/div/div[1]/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[3]/div/div/div/div[3]/div[2]/div[2]/div/div[1]')))
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '/html/body/div/div/div/div[1]/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[3]/div/div/div/div[5]/div[2]/div[2]/div/div[1]')))
     element.click()
-    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '/html/body/div/div/div/div[1]/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[3]/div/div/div/div[3]/div[2]/div[2]/div[2]/div/div[' + str(index) + ']')))
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '/html/body/div/div/div/div[1]/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[3]/div/div/div/div[5]/div[2]/div[2]/div[2]/div/div[' + str(index) + ']')))
     element.click()
     return
 
 # set interschema as true or false on input
 def set_interschema_on_input(driver, index):
-    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '/html/body/div/div/div/div[1]/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[3]/div/div/div/div[3]/div[3]/div[2]/div/div[1]')))
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '/html/body/div/div/div/div[1]/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[3]/div/div/div/div[5]/div[3]/div[2]/div/div[1]')))
     element.click()
-    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '/html/body/div/div/div/div[1]/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[3]/div/div/div/div[3]/div[3]/div[2]/div[2]/div/div[' + str(index) + ']')))
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '/html/body/div/div/div/div[1]/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[3]/div/div/div/div[5]/div[3]/div[2]/div[2]/div/div[' + str(index) + ']')))
     element.click()
-    return
+    return     
 
 
 # check element present in UI
@@ -1687,7 +1687,7 @@ def insertSQLIntoFilterRowTextarea(driver, text):
     return
 
 def add_columns_manualupload(driver, text):
-    textarea = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div[1]/div[3]/div[3]/textarea[1]')
+    textarea = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div[1]/div[5]/div[3]/textarea[1]')
     textarea.send_keys(Keys.CONTROL + 'a')
     textarea.send_keys(Keys.DELETE)
     textarea.send_keys(text)
@@ -1715,7 +1715,7 @@ def add_curl_command_api_input(driver, command):
     return
 
 def check_flatten_data(driver):
-    element = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div/div[2]/span')
+    element = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div[1]/div[5]/div[2]/span')
     element.click()
     return
 

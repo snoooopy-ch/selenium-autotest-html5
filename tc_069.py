@@ -120,8 +120,8 @@ class TC069:
             qcd.cell_by_cell_compare(self.driver, 2)
             qcd.select_mapping_tab(self.driver)
             
-            qcd.add_mapping_table_for_type_compare(self.driver)
-            qcd.add_mapping_table_for_type_compare(self.driver)
+            qcd.add_mapping_table_for_type_compare_with_index(self.driver, 'Jan_2020_ontime', 'Jan_2019_ontime')
+            qcd.add_mapping_table_for_type_compare_with_index(self.driver, 'college_zero_records', 'college_withdata')
             qcd.select_key_for_warning_mapping_tableitem(self.driver, 1)
 
             # execute

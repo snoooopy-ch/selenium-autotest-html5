@@ -1661,6 +1661,9 @@ def logout(driver):
 def clickAutoSuggestOnDataQuality(driver):
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[1]/div[2]/button')))
     element.click()
+    time.sleep(WAIT1)
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[2]/div[3]/div/div[2]/button[1]')))
+    element.click()
     print('auto suggest')
     return
 

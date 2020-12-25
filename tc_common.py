@@ -66,7 +66,7 @@ container_xpath             = '//*[@id="root"]/div/div/div[1]/div/div/div/div/di
 selectcolumn_xpath          = '//div[@id="component2"]/img'
 select_all_xpath            = '//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div[2]/div[1]/div/div/div[4]/button'
 selecttype_xpath            = '//div[@id="component3"]/img'
-btn_addSelected             = '//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div[2]/div[1]/div/div/div[2]/button'
+btn_addSelected             = '//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div[2]/div[1]/div/div/div[4]/button[2]'
 compare_xpath               = '//div[@id="component1"]/img'
 removeDup_xpath             = '//div[@id="component4"]/img'
 data_quality_xpath          = '//div[@id="component6"]/img'
@@ -107,7 +107,7 @@ input_data_tag_xpath        = '//*[@id="simple-tab-1"]'
 input_config_tag_xpath      = '//*[@id="simple-tab-0"]'
 data_search_table_xpath     = '//*[@id="top_panel"]/div/div[2]/div[3]/div[1]/div/div/div/div[1]'
 sql_column_xpath            = '//*[@id="top_panel"]/div/div[2]/div[3]/div/div[2]/div/div[3]/div/div[1]/div[2]/div[1]/div/div[6]/span/*[name()="svg"]'
-detail_xpath                = '/html/body/div[2]/div[3]/div/div/div/div/div[1]/div[3]/span[2]'
+detail_xpath                = '/html/body/div[2]/div[3]/div/div/div/div/div[1]/div[2]/div/span[2]'
 summary_select_xpath        = '/html/body/div[2]/div[3]/div/div/div/div/div[1]/div[2]/div/div/div[1]'
 action_on_first_flow_xpath  = '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/div/div[2]/div/div[1]/div[2]/div[1]/div/div[1]/div/div/button'
 search_flow_xpath           = '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/div/div[1]/div[2]/div[1]/div/div/input'
@@ -1175,12 +1175,9 @@ def input_sql_on_sqlcolumn(driver):
 
 # click summary index
 def click_summary_index(driver, index):
-    driver.find_element_by_xpath('/html/body/div[2]/div[3]/div/div/div/div/div/div[3]/span[2]').click()
+    driver.find_element_by_xpath('/html/body/div[2]/div[3]/div/div/div/div/div[1]/div[2]/div/span[2]').click()
 
-    driver.find_element_by_xpath('/html/body/div[2]/div[3]/div/div/div/div/div[1]/div[2]/div/div/div[1]').click()
-    driver.find_element_by_xpath('/html/body/div[2]/div[3]/div/div/div/div/div[1]/div[2]/div/div[2]/div/div[' + str(index) + ']').click()
-
-    rows = driver.find_elements_by_xpath('/html/body/div[2]/div[3]/div/div/div/div/div[2]/div/div/div[1]/div[2]/div')
+    rows = driver.find_elements_by_xpath('/html/body/div[2]/div[3]/div/div/div/div/div[2]/div/div[2]/div[1]/div[2]/div')
     for row in rows:
         try:
             typevalue = row.find_element_by_xpath('./div/div[1]/div/div[1]').text

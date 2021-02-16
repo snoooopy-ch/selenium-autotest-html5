@@ -76,6 +76,8 @@ class TC029:
 
             if (qcd.open_container(self.driver) != 1):
                 data_quality.click()
+                
+            qcd.select_rules_tab(self.driver)
 
             qcd.checkCompletenessOnDataQuality(self.driver, 1)
             qcd.nullCheckOnDataQuality(self.driver, 1)

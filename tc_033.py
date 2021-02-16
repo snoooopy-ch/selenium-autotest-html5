@@ -110,7 +110,7 @@ class TC033:
 
             qcd.add_mapping_table_for_type_compare(self.driver)
             qcd.select_mapping_table_item(self.driver, 1)
-            qcd.select_primary_key_for_type_compare(self.driver, 1)
+            qcd.select_key_for_table_item(self.driver, 1)
 
             # execute
             qcd.save_excute_workflow(self.driver, 'TC_033_ALEX')

@@ -77,11 +77,14 @@ class TC028:
             if (qcd.open_container(self.driver) != 1):
                 data_quality.click()
 
+            qcd.select_rules_tab(self.driver)
+            
             # claims_id
             qcd.nullCheckOnDataQuality(self.driver, 1)
             qcd.uniqueCheckOnDataQuality(self.driver, 1)
             qcd.inputMaxValueOnDataQuality(self.driver, 1, 210)
             qcd.inputMinValueOnDataQuality(self.driver, 1, 200)
+            
             
             # c_status
             qcd.inputMaxLengthOnDataQuality(self.driver, 2, 4)

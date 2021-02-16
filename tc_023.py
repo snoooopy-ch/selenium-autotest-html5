@@ -71,7 +71,6 @@ class TC023:
             qcd.select_table(self.driver, "City")
             qcd.click_add_select_btn(self.driver)
             qcd.click_datatab_input(self.driver)
-            # qcd.select_tableitem_on_datasearch(self.driver, 1)
 
             # input 2
             qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Input", 300, 160)
@@ -85,7 +84,6 @@ class TC023:
             qcd.select_table(self.driver, "City")
             qcd.click_add_select_btn(self.driver)
             qcd.click_datatab_input(self.driver)
-            # qcd.select_tableitem_on_datasearch(self.driver, 1)
 
             # data compare
             qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Data Compare", 400, 80)
@@ -101,8 +99,7 @@ class TC023:
 
             qcd.select_mapping_tab(self.driver)
 
-            qcd.select_mapping_table_item(self.driver, 1)
-            qcd.select_key_for_table_item(self.driver, 1)
+            qcd.select_key_for_warning_mapping_tableitem(self.driver, 1)
             
             qcd.input_sql_on_sqlcolumn(self.driver)
             # execute

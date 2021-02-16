@@ -77,6 +77,8 @@ class TC030:
             if (qcd.open_container(self.driver) != 1):
                 data_quality.click()
 
+            qcd.select_rules_tab(self.driver)
+            
             qcd.checkCompletenessOnDataQuality(self.driver, 1)
             qcd.nullCheckOnDataQuality(self.driver, 1)
             qcd.uniqueCheckOnDataQuality(self.driver, 1)
@@ -102,7 +104,6 @@ class TC030:
             
             qcd.nullCheckOnDataQuality(self.driver, 9)
             qcd.uniqueCheckOnDataQuality(self.driver, 9)
-#            qcd.inputSQLWhereConditionOnDataQuality(self.driver, 9, "Microbiology_examDate='2005-04-01'")
             
             time.sleep(qcd.WAIT1)
             
@@ -111,10 +112,6 @@ class TC030:
             qcd.checkLeftSpacesOnDataQuality(self.driver, 19)
             
             qcd.checkLeftSpacesOnDataQuality(self.driver, 22)
-            
-            # qcd.nullCheckOnDataQuality(self.driver, 23)
-            # qcd.uniqueCheckOnDataQuality(self.driver, 23)
-            # qcd.inputSQLWhereConditionOnDataQuality(self.driver, 23, "RadioLogy IS NULL")
             
             qcd.clickNextButtonOnDataQuality(self.driver)
             qcd.scrollToTop(self.driver)
@@ -152,10 +149,10 @@ class TC030:
             detail_span_xpath = '/html/body/div[2]/div[3]/div/div/div/div/div[1]/span[2]'
             try:
                 if qcd.isElementPresentForResult(self.driver, detail_span_xpath) != True:
-                    raise Exception()
+                    raise Exception("Not present")
                 
                 detail_span = self.driver.find_elements_by_xpath(detail_span_xpath)
-                if (len(detail_span) == 1):
+                if len(detail_span) == 1:
                     detail_span[0].click()
                     time.sleep(qcd.WAIT3)
             except Exception as e:

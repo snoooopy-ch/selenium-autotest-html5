@@ -67,36 +67,51 @@ class TC063:
                 
             qcd.click_maximize_for_select_columns(self.driver)
             qcd.click_api_input(self.driver)
-            qcd.add_curl_command_api_input(self.driver, 'https://jsonplaceholder.typicode.com/todos')
-            # qcd.set_multiline_api_input(self.driver, "true")
+            code = """
+import requests
+import json
+
+
+API_KEY = "d25a07df6199416b87816551ebf80b0744c50b8c2fa385909c0820cfde80a3c5"
+PDL_VERSION = "v5"
+PDL_URL = "https://dataq-testing-data.s3.amazonaws.com/conversation.json"
+
+
+params = {
+    "api_key": API_KEY,
+    "name": ["sean thorne"],
+    "company": ["peopledatalabs.com"]
+}
+
+json_response = requests.get(PDL_URL, params=params).json()
+json_text = json.dumps(json_response)
+f = open("/tmp/dq_output_file_name.json", "w")
+f.write(json_text)
+f.close()
+            """
+            qcd.add_python_code_api_input(self.driver, code)
+            
+            # qcd.add_curl_command_api_input(self.driver, 'https://jsonplaceholder.typicode.com/todos')
+            
+            element = self.driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div/div[2]/label/span[1]/input')
+            absolute_file_path = os.path.abspath("files/sample_063.json")
+            element.send_keys(absolute_file_path)
+            
+            self.driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div/div[3]/div[2]/div/input').send_keys('sam2')
+            self.driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div/div[4]/span/span[1]').click()
+            time.sleep(qcd.WAIT3)
             qcd.click_validate_api_input(self.driver)
             
             try:
-                element = WebDriverWait(self.driver, qcd.WAIT50).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="root"]/div/div/div[2]/div')))
-                time.sleep(qcd.WAIT3)
-                element = WebDriverWait(self.driver, qcd.WAIT3).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="client-snackbar"]')))
+                element = WebDriverWait(self.driver, qcd.WAIT20).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="root"]/div/div/div[2]/div')))
+                element = WebDriverWait(self.driver, qcd.WAIT20).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="client-snackbar"]')))
                 text = re.compile(r'<[^>]+>').sub('', element.text)
                 print(text)
                 element = WebDriverWait(self.driver, qcd.WAIT20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="root"]/div/div/div[2]/div/div/div[2]/button')))
                 element.click()
             except Exception as e:
-                raise Exception('Input1 Validate fails')
-            
-            qcd.add_columns_api_input(self.driver, 'id,title')
-            qcd.click_validate_api_input(self.driver)
-            
-            try:
-                element = WebDriverWait(self.driver, qcd.WAIT50).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="root"]/div/div/div[2]/div')))
-                time.sleep(qcd.WAIT3)
-                element = WebDriverWait(self.driver, qcd.WAIT3).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="client-snackbar"]')))
-                text = re.compile(r'<[^>]+>').sub('', element.text)
-                print(text)
-                element = WebDriverWait(self.driver, qcd.WAIT20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="root"]/div/div/div[2]/div/div/div[2]/button')))
-                element.click()
-            except Exception as e:
-                raise Exception('Input1 Validate fails')
-            
-            
+                print("Validate failed")
+                
             # Data Profile
             qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Data Profile", 500, -300)
             data_profile = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component1"]')))
@@ -123,7 +138,7 @@ class TC063:
 
                     output = ''
                     find = 0
-                    print("Count:{}, Min:{}, Max{}".format(tds[1].find_element_by_xpath('./div').text, tds[4].find_element_by_xpath('./div').text, tds[5].find_element_by_xpath('./div/span').text))
+                    print("Count:{}, Min:{}, Max{}".format(tds[1].text, tds[4].text, tds[5].text))
             except Exception as ex:
                 print(ex)
                 pass

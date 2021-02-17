@@ -60,10 +60,11 @@ class TC058:
             if (qcd.open_container(self.driver) != 1):
                 data_quality.click()
                 
+            qcd.select_rules_tab(self.driver)
             
             # Check
             try:
-                if self.driver.find_element_by_xpath('/html/body/div/div/div/div[1]/div/div/div/div/div/div[2]/div[2]/div/div/div[3]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[2]/div/div[2]/span/span[1]/input').is_selected():
+                if self.driver.find_element_by_xpath('/html/body/div/div/div/div[1]/div/div/div/div/div/div[2]/div[3]/div/div/div[2]/div[2]/div/div[2]/div[2]/div/div[1]/div[1]/div/div[3]/div/div/span[1]/span[1]/input').is_selected():
                     print('all checked')
                 else:
                     print('unchekced')
@@ -82,10 +83,10 @@ class TC058:
             if (qcd.open_container(self.driver) != 1):
                 data_quality.click()
                 
-            
+            qcd.select_rules_tab(self.driver)
             # Check
             try:
-                if self.driver.find_element_by_xpath('/html/body/div/div/div/div[1]/div/div/div/div/div/div[2]/div[2]/div/div/div[3]/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div[2]/div/div[2]/span/span[1]/input').is_selected():
+                if self.driver.find_element_by_xpath('/html/body/div/div/div/div[1]/div/div/div/div/div/div[2]/div[3]/div/div/div[2]/div[2]/div/div[2]/div[2]/div/div[1]/div[1]/div/div[3]/div/div/span[1]/span[1]/input').is_selected():
                     print('all checked')
                 else:
                     print('unchekced')

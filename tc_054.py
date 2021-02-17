@@ -93,10 +93,10 @@ class TC054:
             if (qcd.open_container(self.driver) != 1):
                 compare1.click()
             
-            qcd.cell_by_cell_compare(self.driver, 3)
+            qcd.select_datacompare_type(self.driver, 3)
 
             qcd.select_mapping_tab(self.driver)
-            qcd.add_mapping_table_name(self.driver)
+            qcd.add_mapping_table_for_type_compare_with_index(self.driver, 'Claims', 'Claimslist')
             qcd.select_key_for_warning_mapping_tableitem(self.driver, 1)
             
             # execute

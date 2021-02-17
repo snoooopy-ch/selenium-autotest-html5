@@ -105,7 +105,7 @@ class TC072:
             if (qcd.open_container(self.driver) != 1):
                 compare1.click()
             
-            qcd.cell_by_cell_compare(self.driver, 1)
+            qcd.select_datacompare_type(self.driver, 1)
             qcd.select_mapping_tab(self.driver)
             
             qcd.add_mapping_table_for_type_compare_with_index(self.driver, "Claims", "Claimslist")

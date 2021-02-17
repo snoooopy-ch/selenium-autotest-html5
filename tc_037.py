@@ -66,10 +66,11 @@ class TC037:
                 
             qcd.click_maximize_for_select_columns(self.driver)
             qcd.click_manual_upload_input(self.driver)
-            qcd.select_manual_upload_dataset_format(self.driver, 3)
+            qcd.select_manual_upload_dataset_format(self.driver, 'JSON')
             
             absolute_file_path = os.path.abspath("files/dp_resck_037.json")
-            qcd.set_dataset_path(self.driver, '//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div[2]/div[1]/div[2]/label/span[1]/input', absolute_file_path)
+            qcd.set_dataset_path(self.driver, '//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div[1]/div[1]/div[2]/div/div[2]/label/span[1]/input', absolute_file_path)
+                                               
             time.sleep(qcd.WAIT3)
             qcd.check_multiline_manual_upload_input_without_awshadoop(self.driver, "true")
             qcd.click_manual_upload_validate(self.driver, '//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div[1]/button')
@@ -93,35 +94,46 @@ class TC037:
             if (qcd.open_container(self.driver) != 1):
                 data_quality.click()
 
+            qcd.select_rules_tab(self.driver)
+            
+            # email
+            qcd.nullCheckOnDataQuality(self.driver, 1)
+            
+            # executeOn
             qcd.nullCheckOnDataQuality(self.driver, 2)
+            qcd.checkCompletenessOnDataQuality(self.driver, 2)
+            qcd.checkLeftSpacesOnDataQuality(self.driver, 2)
+            qcd.checkRightSpacesOnDataQuality(self.driver, 2)
             
+            # executorCores
             qcd.nullCheckOnDataQuality(self.driver, 3)
-            qcd.checkCompletenessOnDataQuality(self.driver, 3)
-            qcd.checkLeftSpacesOnDataQuality(self.driver, 3)
-            qcd.checkRightSpacesOnDataQuality(self.driver, 3)
             
+            #executorMemory
             qcd.nullCheckOnDataQuality(self.driver, 4)
+            qcd.checkCompletenessOnDataQuality(self.driver, 4)
+            qcd.checkLeftSpacesOnDataQuality(self.driver, 4)
+            qcd.checkRightSpacesOnDataQuality(self.driver, 4)
             
+            #flowName
             qcd.nullCheckOnDataQuality(self.driver, 5)
             qcd.checkCompletenessOnDataQuality(self.driver, 5)
             qcd.checkLeftSpacesOnDataQuality(self.driver, 5)
             qcd.checkRightSpacesOnDataQuality(self.driver, 5)
             
+            #hadoop
             qcd.nullCheckOnDataQuality(self.driver, 6)
-            qcd.checkCompletenessOnDataQuality(self.driver, 6)
-            qcd.checkLeftSpacesOnDataQuality(self.driver, 6)
-            qcd.checkRightSpacesOnDataQuality(self.driver, 6)
             
+            #livy
             qcd.nullCheckOnDataQuality(self.driver, 7)
             
+            #numExecutors
             qcd.nullCheckOnDataQuality(self.driver, 8)
             
+            #root
             qcd.nullCheckOnDataQuality(self.driver, 9)
-            
-            qcd.nullCheckOnDataQuality(self.driver, 10)
-            qcd.checkCompletenessOnDataQuality(self.driver, 10)
-            qcd.checkLeftSpacesOnDataQuality(self.driver, 10)
-            qcd.checkRightSpacesOnDataQuality(self.driver, 10)
+            qcd.checkCompletenessOnDataQuality(self.driver, 9)
+            qcd.checkLeftSpacesOnDataQuality(self.driver, 9)
+            qcd.checkRightSpacesOnDataQuality(self.driver, 9)
             
             # execute
             qcd.save_excute_workflow(self.driver, 'TC_037_ALEX')

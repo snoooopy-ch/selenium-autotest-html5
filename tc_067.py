@@ -89,6 +89,7 @@ class TC067:
             if (qcd.open_container(self.driver) != 1):
                 data_quality.click()
             
+            qcd.select_rules_tab(self.driver)
             qcd.check_completeness_on_dataqualityheader(self.driver)
             qcd.check_nullcheck_on_dataqualityheader(self.driver)
             qcd.check_leftspaces_on_dataqualityheader(self.driver)

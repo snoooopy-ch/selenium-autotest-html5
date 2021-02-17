@@ -83,32 +83,33 @@ class TC033:
 
             # Common type
             qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Column type", 300, -50)
-            commontype = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component2"]')))
+            columntype = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component2"]')))
 
-            qcd.connect_elements(self.driver, input1, 1, commontype, 1)
+            qcd.connect_elements(self.driver, input1, 1, columntype, 1)
 
             if (qcd.open_container(self.driver) != 1):
-                commontype.click()
+                columntype.click()
 
             qcd.click_select_tableitem_for_select_columns(self.driver, "assessment_report")
 
-            qcd.click_select_all_for_commontype(self.driver)
+            qcd.click_select_all_for_columntype(self.driver)
             qcd.click_save_on_cp(self.driver)
 
             # data compare
             qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Data Compare", 700, 80)
             compare1 = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component3"]')))
 
-            qcd.connect_elements(self.driver, commontype, 2, compare1, 1)
+            qcd.connect_elements(self.driver, columntype, 2, compare1, 1)
             qcd.connect_elements(self.driver, input2, 1, compare1, 1)
 
             if (qcd.open_container(self.driver) != 1):
                 compare1.click()
                 
-            qcd.cell_by_cell_compare(self.driver, 1)
+            qcd.select_datacompare_type(self.driver, 1)
             qcd.select_mapping_tab(self.driver)
 
-            qcd.add_mapping_table_for_type_compare(self.driver)
+            # qcd.add_mapping_table_for_type_compare(self.driver)
+            qcd.add_mapping_table_for_type_compare_with_index(self.driver, 'assessment_report', 'medicine_students_finalreport')
             qcd.select_mapping_table_item(self.driver, 1)
             qcd.select_key_for_table_item(self.driver, 1)
 

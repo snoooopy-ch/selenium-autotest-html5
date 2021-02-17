@@ -130,6 +130,7 @@ class TC032:
             if (qcd.open_container(self.driver) != 1):
                 data_quality.click()
                 
+            qcd.select_rules_tab(self.driver)
             qcd.select_rule_on_dataquality(self.driver, 'medicine_students_finalreport')
             qcd.clickNextButtonOnDataQuality(self.driver)
             qcd.inputRegularExpressOnDataQuality(self.driver, 11, "[a-z A-Z]{2}")

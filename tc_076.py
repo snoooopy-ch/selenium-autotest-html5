@@ -84,16 +84,16 @@ class TC076:
             
             # Column type
             qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Column type", 500, -100)
-            commontype = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component2"]')))
+            columntype = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component2"]')))
 
-            qcd.connect_elements(self.driver, selectcolumns, 2, commontype, 1)
+            qcd.connect_elements(self.driver, selectcolumns, 2, columntype, 1)
 
             if (qcd.open_container(self.driver) != 1):
-                commontype.click()
+                columntype.click()
 
             qcd.click_maximize_for_select_columns(self.driver)
             qcd.click_select_tableitem_for_select_columns(self.driver, "City")
-            qcd.click_select_all_for_commontype(self.driver)
+            qcd.click_select_all_for_columntype(self.driver)
             qcd.click_save_on_cp(self.driver)
             
             qcd.close_maximize_for_select_columns(self.driver)
@@ -101,11 +101,12 @@ class TC076:
             # Data Quality
             qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Data Quality", 850, -250)
             data_quality = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component3"]')))
-            qcd.connect_elements(self.driver, commontype, 2, data_quality, 1)
+            qcd.connect_elements(self.driver, columntype, 2, data_quality, 1)
 
             if (qcd.open_container(self.driver) != 1):
                 data_quality.click()
 
+            qcd.select_rules_tab(self.driver)
             qcd.check_completeness_on_dataqualityheader(self.driver)
             qcd.check_nullcheck_on_dataqualityheader(self.driver)
             qcd.check_leftspaces_on_dataqualityheader(self.driver)
@@ -136,20 +137,21 @@ class TC076:
                 selectcolumns.click()
             
             # Column type
-            commontype = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component2"]')))
+            columntype = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component2"]')))
             if (qcd.open_container(self.driver) != 1):
-                commontype.click()
+                columntype.click()
                 
             qcd.click_save_on_cp(self.driver)
             
             if (qcd.open_container(self.driver) == 1):
-                commontype.click()
+                columntype.click()
                 
             # Data Quality
             data_quality = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component3"]')))
             if (qcd.open_container(self.driver) != 1):
                 data_quality.click()
 
+            qcd.select_rules_tab(self.driver)
             qcd.nullCheckOnDataQuality(self.driver, 3)
             qcd.uniqueCheckOnDataQuality(self.driver, 3)
             qcd.inputMinValueOnDataQuality(self.driver, 3, 1)

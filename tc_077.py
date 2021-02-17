@@ -93,7 +93,7 @@ class TC077:
             if (qcd.open_container(self.driver) != 1):
                 compare1.click()
             
-            qcd.cell_by_cell_compare(self.driver, 1)
+            qcd.select_datacompare_type(self.driver, 1)
             qcd.select_mapping_tab(self.driver)
             
             # Prescription

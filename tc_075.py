@@ -91,12 +91,12 @@ class TC075:
             
             # Column type
             qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Column type", 500, -100)
-            commontype = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component2"]')))
+            columntype = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component2"]')))
 
-            qcd.connect_elements(self.driver, selectcolumn, 2, commontype, 1)
+            qcd.connect_elements(self.driver, selectcolumn, 2, columntype, 1)
 
             if (qcd.open_container(self.driver) != 1):
-                commontype.click()
+                columntype.click()
 
             qcd.click_maximize_for_select_columns(self.driver)
             qcd.click_select_tableitem_for_select_columns(self.driver, "city")
@@ -107,11 +107,12 @@ class TC075:
             # Data Quality
             qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Data Quality", 900, -300)
             data_quality = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component3"]')))
-            qcd.connect_elements(self.driver, commontype, 2, data_quality, 1)
+            qcd.connect_elements(self.driver, columntype, 2, data_quality, 1)
             
             if (qcd.open_container(self.driver) != 1):
                 data_quality.click()
 
+            qcd.select_rules_tab(self.driver)
             qcd.select_rule_on_dataquality(self.driver, 4)
             qcd.check_leftspaces_on_dataqualityheader(self.driver)
             qcd.check_rightspaces_on_dataqualityheader(self.driver)

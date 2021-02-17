@@ -98,15 +98,15 @@ class TC049:
 
             qcd.click_maximize_for_select_columns(self.driver)
             qcd.click_select_tableitem_for_select_columns(self.driver, "PII_SRC")
-            qcd.click_select_all_for_commontype(self.driver)
+            qcd.click_select_all_for_columntype(self.driver)
             qcd.click_save_on_cp(self.driver)
 
             qcd.click_select_tableitem_for_select_columns(self.driver, "JAN_2020_ONTIME")
-            qcd.click_select_all_for_commontype(self.driver)
+            qcd.click_select_all_for_columntype(self.driver)
             qcd.click_save_on_cp(self.driver)
 
             qcd.click_select_tableitem_for_select_columns(self.driver, "PII_TARGET")
-            qcd.click_select_all_for_commontype(self.driver)
+            qcd.click_select_all_for_columntype(self.driver)
             qcd.click_save_on_cp(self.driver)
 
             qcd.close_maximize_for_select_columns(self.driver)
@@ -121,6 +121,7 @@ class TC049:
                 data_quality.click()
                 
             time.sleep(qcd.WAIT1)
+            qcd.select_rules_tab(self.driver)
             qcd.check_completeness_on_dataqualityheader(self.driver)
             qcd.check_nullcheck_on_dataqualityheader(self.driver)
             qcd.check_leftspaces_on_dataqualityheader(self.driver)

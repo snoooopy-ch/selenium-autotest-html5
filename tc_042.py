@@ -69,10 +69,10 @@ class TC042:
                 input1.click()
                 
             qcd.click_manual_upload_input(self.driver)
-            qcd.select_manual_upload_dataset_format(self.driver, 3)
+            qcd.select_manual_upload_dataset_format(self.driver, "JSON")
             qcd.set_dataset_path(self.driver, qcd.input_manualupload_dataset_xpath, '/tmp/sale_details_bad.json')
-            qcd.check_multiline_manual_upload_input(self.driver, "true")
-            qcd.click_manual_upload_validate(self.driver, '/html/body/div/div/div/div[1]/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[3]/div/div[2]/div[1]/button')
+            qcd.check_multiline_manual_upload_input_with_awshadoop(self.driver, "true")
+            qcd.click_manual_upload_validate(self.driver, '//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div[1]/button')
             
             try:
                 element = WebDriverWait(self.driver, qcd.WAIT50).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="root"]/div/div/div[2]/div')))
@@ -90,9 +90,9 @@ class TC042:
                 input2.click()
                 
             qcd.click_manual_upload_input(self.driver)
-            qcd.select_manual_upload_dataset_format(self.driver, 3)
+            qcd.select_manual_upload_dataset_format(self.driver, "JSON")
             qcd.set_dataset_path(self.driver, qcd.input_manualupload_dataset_xpath, '/tmp/medicine.json')
-            qcd.check_multiline_manual_upload_input(self.driver, "true")
+            qcd.check_multiline_manual_upload_input_with_awshadoop(self.driver, "true")
             qcd.click_manual_upload_validate(self.driver, '/html/body/div/div/div/div[1]/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[3]/div/div[2]/div[1]/button')
             
             try:
@@ -115,11 +115,11 @@ class TC042:
                 
             qcd.click_maximize_for_select_columns(self.driver)
             
-            qcd.cell_by_cell_compare(self.driver, 1)
+            qcd.select_datacompare_type(self.driver, 1)
             qcd.select_mapping_tab(self.driver)
             qcd.add_mapping_table_name(self.driver)
             qcd.select_mapping_table_item(self.driver, 1)
-            qcd.add_mappingcolumns_in_datacompare_tableitem(self.driver)
+            qcd.add_mappingproperties_in_datacompare_selected_table(self.driver, '', '')
             qcd.select_key_for_table_item(self.driver, 1)
 
             # execute

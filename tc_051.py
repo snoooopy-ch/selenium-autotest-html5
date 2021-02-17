@@ -79,7 +79,7 @@ class TC051:
             if (qcd.open_container(self.driver) != 1):
                 data_quality.click()
 
-
+            qcd.select_rules_tab(self.driver)
             # save
             name_field = self.driver.find_element_by_xpath(qcd.name_xpath)
             name_field.send_keys(Keys.CONTROL + 'a') 
@@ -99,7 +99,7 @@ class TC051:
 
             qcd.click_back_execute_log_panel(self.driver)
             
-            if self.driver.find_element_by_xpath('/html/body/div/div/div/div[1]/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div/div[1]/div[2]/div/div[1]/div[1]/div/div[3]/div/div/span[1]/span[1]/input').is_selected():
+            if self.driver.find_element_by_xpath('/html/body/div/div/div/div[1]/div/div/div/div/div/div[2]/div[3]/div/div/div[2]/div[2]/div/div[2]/div[2]/div/div[1]/div[1]/div/div[3]/div/div/span[1]/span[1]/input').is_selected():
                 print('all checked')
                 qcd.uniqueCheckOnDataQuality(self.driver, 8)
                 

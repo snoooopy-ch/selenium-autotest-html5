@@ -97,7 +97,7 @@ notification_create_xpath   = '//*[@id="root"]/div/div/div[1]/div/div/div/div/di
 notification_close_xpath    = '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/div[2]/div/div[1]/header/div/div[1]'
 result_close_xpath          = '/html/body/div[2]/div[3]/div/header/div/button'
 save_execute_on_xpath       = '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/div[2]/div/div[2]/div[2]/div/button'
-select_all_commontype_xpath = '//*[@id="top_panel"]/div/div[2]/div[1]/div/div[2]/div[4]/button'
+select_all_columntype_xpath = '//*[@id="top_panel"]/div/div[2]/div[1]/div/div[2]/div[4]/button'
 share_btn_xpath             = '/html/body/div[2]/div[3]/div/header/div/div/button'
 flow_xpath                  = '//*[@id="root"]/div/div/div[1]/div/div/header/div/div[2]/div/div/div/button[1]'
 excution_xpath              = '//*[@id="root"]/div/div/div[1]/div/div/header/div/div[2]/div/div/div/button[2]'
@@ -112,10 +112,10 @@ detail_xpath                = '/html/body/div[2]/div[3]/div/div/div/div/div[1]/d
 summary_select_xpath        = '/html/body/div[2]/div[3]/div/div/div/div/div[1]/div[2]/div/div/div[1]'
 action_on_first_flow_xpath  = '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/div/div[2]/div/div[1]/div[2]/div[1]/div/div[1]/div/div/button'
 search_flow_xpath           = '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/div/div[1]/div[2]/div[1]/div/div/input'
-manual_upload_xpath         = '//*[@id="top_panel"]/div/div[2]/div[2]/div[1]/div/div/button[2]'
-sql_input_xpath             = '//*[@id="top_panel"]/div/div[2]/div[2]/div[1]/div/div/button[3]'
+sql_input_xpath             = '//*[@id="top_panel"]/div/div[2]/div[2]/div[1]/div/div/button[2]'
+manual_upload_xpath         = '//*[@id="top_panel"]/div/div[2]/div[2]/div[1]/div/div/button[3]'
 api_input_xpath             = '//*[@id="top_panel"]/div/div[2]/div[2]/div[1]/div/div/button[4]'
-dataset_format_xpath        = '/html/body/div/div/div/div[1]/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[3]/div/div[2]/div/div[1]/div[2]/div/div[1]'
+dataset_format_xpath        = '//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div/div[1]/div[1]/div/div[2]/div/div/div[1]'
 manual_upload_validate_xpath = '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div/div[1]/button'
 viewedit_xpath              = '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/div[2]/div/div[1]/div[2]/div[1]/div/div[8]/div/div/*[name()="svg"]'
 exportToPDF_xpath           = '/html/body/div[2]/div[3]/div/div/div/div/div[2]/div/div[1]/a/button'
@@ -127,7 +127,7 @@ rules_xpath                 = '//*[@id="root"]/div/div/div[1]/div/div/div/div/di
 add_rule_button_xpath       = '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div/div[2]/div/div/section[2]/div/div/button'
 vieweditaction_rule_xpath     = '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div/div[2]/div/div[1]/div[2]/div[1]/div/div[5]/div/button[1]'
 deleteaction_rule_xpath     = '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div/div[2]/div/div[1]/div[2]/div[1]/div/div[5]/div/button[2]'
-input_manualupload_dataset_xpath = '//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div[2]/div[1]/div[2]/div[2]/div/input'                              
+input_manualupload_dataset_xpath = '//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div[1]/div[1]/div[2]/div/div[2]/div/div/input'                              
 add_rule_search_xpath       = '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div/div[1]/div[1]/div/input'
 normal_result_summary_xpath = '/html/body/div[2]/div[3]/div/div/div/div/div[4]/div[1]/div[2]'
                               
@@ -459,7 +459,7 @@ def connect_elements(driver, element1, n, element2, m):
     return
 
 # select 'cell By cell Compare' item
-def cell_by_cell_compare(driver, index):
+def select_datacompare_type(driver, index):
     db_select3 = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div/div/div/div/div[1]')))
     db_select3.click()
     print("db open")
@@ -478,7 +478,7 @@ def select_mapping_tab(driver):
 
 # select sql tab
 def select_sql_mapping_tab(driver):
-    sql_mapping = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[1]/div[1]/div/div/button[2]')))
+    sql_mapping = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[1]/div[1]/div/div/button[3]')))
     sql_mapping.click()
     print('sql tab selected')
     return
@@ -733,31 +733,29 @@ def add_sql_on_dataquality(driver, index, sql, job):
     
 # apply sql rule on data quality
 def apply_sql_rul_dataquality(driver, sql, name):
-    driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div[2]/div/div[1]/textarea[1]').send_keys(sql)
-    driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div[2]/div/div[1]/input').send_keys(name)
-    driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div[2]/div/div[1]/div[4]/button').click()
-                                  
-    
+    driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div[3]/div/div[1]/textarea[1]').send_keys(sql)
+    driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div[3]/div/div[1]/input').send_keys(name)
+    driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div[3]/div/div[1]/div[4]/button').click()
     print('new sql rul is added')
     return
     
 # modify sql rule on data quality
 def modify_sql_rul_dataquality(driver, index, sql, name):
-    driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div[2]/div/div[2]/div/div/div[1]/div[2]/div[' + str(index) + ']/div/div[5]/div/*[name()="svg"]').click()
+    driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div[3]/div/div[2]/div/div/div[1]/div[2]/div[' + str(index) + ']/div/div[5]/div/*[name()="svg"]').click()
     
     if sql != "":
-        element = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div[2]/div/div[1]/textarea[1]')
+        element = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div[3]/div/div[1]/textarea[1]')
         element.send_keys(Keys.CONTROL + 'a')
         element.send_keys(Keys.DELETE)
         element.send_keys(sql)
     
     if name != "":  
-        element = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div[2]/div/div[1]/input')
+        element = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div[3]/div/div[1]/input')
         element.send_keys(Keys.CONTROL + 'a')
         element.send_keys(Keys.DELETE)
         element.send_keys(name)
     
-    driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div[2]/div/div[1]/div[4]/button').click()
+    driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div[3]/div/div[1]/div[4]/button').click()
     
     print('sql rul is updated')
     return
@@ -790,7 +788,7 @@ def save_excute_workflow(driver, flow_name):
     btn_execute.click()
 
     try:
-        btn_result = WebDriverWait(driver, 300).until(EC.element_to_be_clickable((By.XPATH, result_xpath)))
+        btn_result = WebDriverWait(driver, 100).until(EC.element_to_be_clickable((By.XPATH, result_xpath)))
         btn_result.click()
     except Exception as e:
         pass
@@ -821,8 +819,8 @@ def save_excute_workflow_without_rename(driver):
     return
 
 # select all for Column type and select column
-def click_select_all_for_commontype(driver):
-    select_all_button = driver.find_element_by_xpath(select_all_commontype_xpath)
+def click_select_all_for_columntype(driver):
+    select_all_button = driver.find_element_by_xpath(select_all_columntype_xpath)
     select_all_button.click()
     print('select all the table')
     time.sleep(WAIT1)
@@ -910,17 +908,39 @@ def add_columns_in_datacompare_tableitem(driver):
     driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[3]/div/div[2]/div/div/div[1]/div[3]').click()
     return
 
-# add mapping columns for datacompare's table item
-def add_mappingcolumns_in_datacompare_tableitem(driver):
-    column1 = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[3]/div/div[2]/div/div[1]/div[1]/div/div/div[1]')
-    column1.click()
-    driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[3]/div/div[2]/div/div[1]/div[1]/div/div[2]/div/div[1]').click()
+# add mapping property for datacompare's selected table
+def add_mappingproperties_in_datacompare_selected_table(driver, name1, name2):
+    table = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[3]/div/div[2]/div/div/div[1]/div[1]/div/div/div[1]')))
+    table.click()
+    
+    db_value = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[3]/div/div[2]/div/div/div[1]/div[1]/div/div[2]/div')))
+    items = db_value.find_elements_by_xpath('./div')
+    
+    index = 1
+    for item in items:
+        if (item.text == name1):
+            item.click()
+            break
+        index += 1
+    
+    
+    table = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[3]/div/div[2]/div/div/div[1]/div[2]/div/div/div[1]')))
+    table.click()
 
-    column2 = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[3]/div/div[2]/div/div[1]/div[2]/div/div/div[1]')
-    column2.click()
-    driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[3]/div/div[2]/div/div[1]/div[2]/div/div[2]/div/div[1]').click()
+    db_value = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[3]/div/div[2]/div/div/div[1]/div[2]/div/div[2]/div')))
+    items = db_value.find_elements_by_xpath('./div')
+    
+    index = 1
+    for item in items:
+        if (item.text == name2):
+            item.click()
+            break
+        index += 1
 
-    driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[3]/div/div[2]/div/div[1]/div[3]').click()
+    plus = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[3]/div/div[2]/div/div/div[1]/div[3]/img')))
+    plus.click()
+
+    print('adding mapping table')
     return
 
 # click to share button
@@ -1125,12 +1145,6 @@ def add_new_connection(driver, index, name, url, user, password):
     time.sleep(WAIT3)
     driver.find_element_by_xpath('//*[@id="outlined-bare"]').send_keys(name)
     
-    # dateTimeObj = datetime.now()
-    # database_name = 'employee_' + str(dateTimeObj.microsecond)
-    # driver.find_element_by_xpath('//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div/div[2]/div/div/section[1]/div[2]/div[3]/div[1]/div/input').send_keys(database_name)
-    
-    # driver.find_element_by_xpath('//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div/div[2]/div/div/section[1]/div[2]/p/span').click()
-
     driver.find_element_by_xpath('//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div/div[2]/div/div/section[1]/div[2]/div/div/div[1]/div/input').send_keys(Keys.CONTROL + 'a') 
     driver.find_element_by_xpath('//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div/div[2]/div/div/section[1]/div[2]/div/div/div[1]/div/input').send_keys(Keys.DELETE)
     driver.find_element_by_xpath('//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div/div[2]/div/div/section[1]/div[2]/div/div/div[1]/div/input').send_keys(url)
@@ -1261,12 +1275,21 @@ def click_api_input(driver):
     return
 
 # select manual upload dataset format
-def select_manual_upload_dataset_format(driver, index):
+def select_manual_upload_dataset_format(driver, format):
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, dataset_format_xpath)))
     element.click()
-    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '/html/body/div/div/div/div[1]/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[3]/div/div[2]/div/div[1]/div[2]/div[2]/div/div[' + str(index) + ']')))
-    element.click()
-    return;
+    
+    db_value = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div/div[1]/div[1]/div/div[2]/div/div[2]/div')))
+    items = db_value.find_elements_by_xpath('./div')
+    
+    for item in items:
+        if item.text == format:
+            item.click()
+            break
+    
+    time.sleep(WAIT1)
+    print('select file format')
+    return
 
 # set dataset path
 def set_dataset_path(driver, xpath, path):
@@ -1275,31 +1298,30 @@ def set_dataset_path(driver, xpath, path):
     return
 
 # check multiline manual upload on input
-def check_multiline_manual_upload_input(driver, value):
-    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '/html/body/div/div/div/div[1]/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[3]/div/div[2]/div[1]/div[3]/div[1]/div[2]/div/div[1]')))
+def check_multiline_manual_upload_input_with_awshadoop(driver, value):
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div[1]/div[2]/div/div[2]/div/div/div[1]')))
     element.click()
     
     if value == "true":
         index = "1"
     else:
         index = "2"
-    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '/html/body/div/div/div/div[1]/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[3]/div/div[2]/div[1]/div[3]/div[1]/div[2]/div[2]/div/div[' + index + ']')))
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div[1]/div[2]/div/div[2]/div/div[2]/div/div[' + index + ']')))
     element.click()
     return
 
 # check multiline manual upload on input with out aws_hadoop
 def check_multiline_manual_upload_input_without_awshadoop(driver, value):
-    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div[1]/div[5]/div[1]/div[2]/div/div[1]')))
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div[1]/div[2]/div/div[2]/div/div/div[1]')))
     element.click()
     
     if value == "true":
         index = "1"
     else:
         index = "2"
-    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div[1]/div[5]/div[1]/div[2]/div[2]/div/div[' + index + ']')))
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div[1]/div[2]/div/div[2]/div/div[2]/div/div[' + index + ']')))
     element.click()
     return
-
 
 # click manual upload validate
 def click_manual_upload_validate(driver, xpath):
@@ -1309,26 +1331,25 @@ def click_manual_upload_validate(driver, xpath):
 
 # input delimiter on input
 def input_delimiter_on_input(driver, value):
-    element = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div/div[5]/div[1]/div[2]/div/input')
+    element = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div/div[2]/div/div[2]/div/div/input')
     element.send_keys(value)
     return
 
 # set header as true or false on input
 def set_header_on_input(driver, index):
-    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '/html/body/div/div/div/div[1]/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[3]/div/div/div/div[5]/div[2]/div[2]/div/div[1]')))
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div/div[3]/div/div[2]/div/div/div[1]')))
     element.click()
-    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '/html/body/div/div/div/div[1]/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[3]/div/div/div/div[5]/div[2]/div[2]/div[2]/div/div[' + str(index) + ']')))
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div/div[3]/div/div[2]/div/div[2]/div/div[' + str(index) + ']')))
     element.click()
     return
 
 # set interschema as true or false on input
 def set_interschema_on_input(driver, index):
-    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '/html/body/div/div/div/div[1]/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[3]/div/div/div/div[5]/div[3]/div[2]/div/div[1]')))
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div/div[4]/div/div[2]/div/div/div[1]')))
     element.click()
-    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '/html/body/div/div/div/div[1]/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[3]/div/div/div/div[5]/div[3]/div[2]/div[2]/div/div[' + str(index) + ']')))
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div/div[4]/div/div[2]/div/div[2]/div/div[' + str(index) + ']')))
     element.click()
     return     
-
 
 # check element present in UI
 def isElementPresentForResult(driver, index):
@@ -1535,6 +1556,7 @@ def check_summary_statue_in_TC028_result(driver, class_name, summary_xpath):
 
 # Upload Json Flow File
 def onUploadJsonFlowFile(driver, filePath):
+    time.sleep(WAIT3)
     element = driver.find_element_by_xpath('//*[@id="upload-image1"]')
     absolute_file_path = os.path.abspath("files/" + filePath)
     element.send_keys(absolute_file_path)
@@ -1569,6 +1591,7 @@ def inputValueAndSaveOnDailog(driver, value):
     length = len(divs)
     print(length)
     print('/html/body/div[' + str(length) + ']/div[3]/div/div[2]/div/div/input')
+    
     element = driver.find_element_by_xpath('/html/body/div[' + str(length) + ']/div[3]/div/div[2]/div/div/input')
     element.send_keys(Keys.CONTROL + 'a')
     element.send_keys(Keys.DELETE)
@@ -1600,7 +1623,7 @@ def clickAddNewRuleButton(driver):
     return
 
 # add New Rule
-def addNewRule(driver, ruleName, type, description):
+def addNewRule(driver, ruleName, description, type):
     if ruleName != "":
         element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div/div[2]/div/div/section[1]/div[1]/div[2]/div/div/input')))
         clearInputValue(element)
@@ -1709,7 +1732,7 @@ def insertSQLIntoFilterRowTextarea(driver, text):
     return
 
 def add_columns_manualupload(driver, text):
-    textarea = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div[1]/div[5]/div[3]/textarea[1]')
+    textarea = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div[1]/div[4]/div/div[2]/textarea[1]')
     textarea.send_keys(Keys.CONTROL + 'a')
     textarea.send_keys(Keys.DELETE)
     textarea.send_keys(text)
@@ -1736,8 +1759,13 @@ def add_curl_command_api_input(driver, command):
     textarea.send_keys(command)
     return
 
+def add_python_code_api_input(driver, code):
+    textarea = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div/div[1]/textarea[1]')
+    textarea.send_keys(code)
+    return
+
 def check_flatten_data(driver):
-    element = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div[1]/div[5]/div[2]/span')
+    element = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div[1]/div[3]/div/div[2]/span/span[1]')
     element.click()
     return
 
@@ -1754,7 +1782,7 @@ def set_multiline_api_input(driver, value):
     return
     
 def add_columns_api_input(driver, text):
-    textarea = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div/div[3]/textarea[1]')
+    textarea = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div/div[5]/textarea[1]')
     textarea.send_keys(Keys.CONTROL + 'a')
     textarea.send_keys(Keys.DELETE)
     textarea.send_keys(text)
@@ -1838,7 +1866,7 @@ def select_db_output(driver):
     return
 
 def click_select_column_change(driver, index, value):
-    element = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div[2]/div[2]/div/div/div[1]/div[2]/div[' + str(index) + ']/div/div[2]/button')
+    element = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div[2]/div[3]/div/div[2]/div/div[1]/div[2]/div[' + str(index) + ']/div/div[2]/button')
     element.click()
     
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[2]/div[3]/div/div[2]/div/div/div/div/div[1]')))
@@ -1863,16 +1891,14 @@ def click_select_column_change(driver, index, value):
 
 def input_min_max_numberpart(driver, index, min, max, part):
     if min != '':
-        element = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div[2]/div[2]/div/div/div[1]/div[2]/div[' + str(index) + ']/div/div[3]/div/div/input')
+        element = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div[2]/div[3]/div/div[2]/div/div[1]/div[2]/div[' + str(index) + ']/div/div[3]/div/div/input')
         element.send_keys(min)
     
     if max != '':
-        element = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div[2]/div[2]/div/div/div[1]/div[2]/div[' + str(index) + ']/div/div[4]/div/div/input')
+        element = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div[2]/div[3]/div/div[2]/div/div[1]/div[2]/div[' + str(index) + ']/div/div[4]/div/div/input')
         element.send_keys(max)
         
     if part != '':
-        element = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div[2]/div[2]/div/div/div[1]/div[2]/div[' + str(index) + ']/div/div[5]/div/div/input')
+        element = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div[2]/div[3]/div/div[2]/div/div[1]/div[2]/div[' + str(index) + ']/div/div[5]/div/div/input')
         element.send_keys(part)
-    
-    return
     

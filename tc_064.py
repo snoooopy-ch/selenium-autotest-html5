@@ -66,15 +66,14 @@ class TC064:
                 
             qcd.click_maximize_for_select_columns(self.driver)
             qcd.click_manual_upload_input(self.driver)
-            qcd.select_manual_upload_dataset_format(self.driver, 2)
+            qcd.select_manual_upload_dataset_format(self.driver, 'CSV')
             
             absolute_file_path = os.path.abspath("files/FlightDelayPrediction_2019.csv")
-            qcd.set_dataset_path(self.driver, '/html/body/div/div/div/div[1]/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[3]/div/div/div/div[2]/label/span[1]/input', absolute_file_path)
+            qcd.set_dataset_path(self.driver, '//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div/div[1]/div[2]/div/div[2]/label/span[1]/input', absolute_file_path)
             time.sleep(qcd.WAIT3)
             qcd.input_delimiter_on_input(self.driver, ",")
             qcd.set_header_on_input(self.driver, 1)
-            # qcd.set_interschema_on_input(self.driver, 1)
-            self.driver.find_element_by_xpath('/html/body/div/div/div/div[1]/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[3]/div/div/div/button').click()
+            self.driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div/button').click()
             
             try:
                 element = WebDriverWait(self.driver, qcd.WAIT50).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="root"]/div/div/div[2]/div')))
@@ -96,15 +95,15 @@ class TC064:
                 
             qcd.click_maximize_for_select_columns(self.driver)
             qcd.click_manual_upload_input(self.driver)
-            qcd.select_manual_upload_dataset_format(self.driver, 2)
+            qcd.select_manual_upload_dataset_format(self.driver, 'CSV')
             
             absolute_file_path = os.path.abspath("files/FlightDelayPrediction_2019.csv")
-            qcd.set_dataset_path(self.driver, '/html/body/div/div/div/div[1]/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[3]/div/div/div/div[2]/label/span[1]/input', absolute_file_path)
+            qcd.set_dataset_path(self.driver, '//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div/div[1]/div[2]/div/div[2]/label/span[1]/input', absolute_file_path)
             time.sleep(qcd.WAIT3)
             qcd.input_delimiter_on_input(self.driver, ",")
             qcd.set_header_on_input(self.driver, 1)
             # qcd.set_interschema_on_input(self.driver, 1)
-            self.driver.find_element_by_xpath('/html/body/div/div/div/div[1]/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[3]/div/div/div/button').click()
+            self.driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div/button').click()
             
             try:
                 element = WebDriverWait(self.driver, qcd.WAIT50).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="root"]/div/div/div[2]/div')))
@@ -127,7 +126,7 @@ class TC064:
             if (qcd.open_container(self.driver) != 1):
                 compare1.click()
             
-            qcd.cell_by_cell_compare(self.driver, 1)
+            qcd.select_datacompare_type(self.driver, 1)
             qcd.select_mapping_tab(self.driver)
             qcd.select_key_for_warning_mapping_tableitem(self.driver, 1)
 

@@ -119,7 +119,7 @@ class TC079:
             if (qcd.open_container(self.driver) != 1):
                 compare1.click()
                 
-            qcd.cell_by_cell_compare(self.driver, 1)
+            qcd.select_datacompare_type(self.driver, 1)
             qcd.select_mapping_tab(self.driver)
             qcd.select_key_for_warning_mapping_tableitem(self.driver, 1)
             
@@ -134,8 +134,9 @@ class TC079:
 
     def check_result(self):
         try:
-            summary_xpath = '/html/body/div[2]/div[3]/div/div/div/div/div[4]/div[1]/div[2]'
-            qcd.check_summary_in_fianl_mismatched_count(self.driver, self.__class__.__name__, summary_xpath)
+            # summary_xpath = '/html/body/div[2]/div[3]/div/div/div/div/div[4]/div[1]/div[2]'
+            # qcd.check_summary_in_fianl_mismatched_count(self.driver, self.__class__.__name__, summary_xpath)
+            qcd.check_summary_in_final_result(self.driver, self.__class__.__name__, qcd.normal_result_summary_xpath)
             qcd.click_result_close(self.driver)
         except Exception as e:
             qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))

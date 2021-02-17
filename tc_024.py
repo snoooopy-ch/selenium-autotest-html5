@@ -70,9 +70,9 @@ class TC024:
                 input1.click()
                 
             qcd.click_manual_upload_input(self.driver)
-            qcd.select_manual_upload_dataset_format(self.driver, 3)
+            qcd.select_manual_upload_dataset_format(self.driver, 'JSON')
             qcd.set_dataset_path(self.driver, qcd.input_manualupload_dataset_xpath, '/tmp/sale_details.json')
-            qcd.check_multiline_manual_upload_input(self.driver, "true")
+            qcd.check_multiline_manual_upload_input_with_awshadoop(self.driver, "true")
             qcd.click_manual_upload_validate(self.driver, '/html/body/div/div/div/div[1]/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[3]/div/div[2]/div[1]/button')
             
             try:
@@ -91,9 +91,9 @@ class TC024:
                 input2.click()
                 
             qcd.click_manual_upload_input(self.driver)
-            qcd.select_manual_upload_dataset_format(self.driver, 3)
+            qcd.select_manual_upload_dataset_format(self.driver, 'JSON')
             qcd.set_dataset_path(self.driver, qcd.input_manualupload_dataset_xpath, '/tmp/sale_details.json')
-            qcd.check_multiline_manual_upload_input(self.driver, "true")
+            qcd.check_multiline_manual_upload_input_with_awshadoop(self.driver, "true")
             qcd.click_manual_upload_validate(self.driver, '/html/body/div/div/div/div[1]/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[3]/div/div[2]/div[1]/button')
             
             try:
@@ -114,7 +114,7 @@ class TC024:
             if (qcd.open_container(self.driver) != 1):
                 compare1.click()
                 
-            qcd.cell_by_cell_compare(self.driver, 1)
+            qcd.select_datacompare_type(self.driver, 1)
             qcd.select_mapping_tab(self.driver)
             qcd.select_mapping_table_item(self.driver, 1)
             qcd.select_key_for_table_item(self.driver, 1)

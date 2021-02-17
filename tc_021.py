@@ -105,56 +105,56 @@ class TC021:
 
             # Column type
             qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Column type", 500, -150)
-            commontype = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component3"]')))
+            columntype = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component3"]')))
 
-            qcd.connect_elements(self.driver, selectcolumns, 2, commontype, 1)
+            qcd.connect_elements(self.driver, selectcolumns, 2, columntype, 1)
 
             if (qcd.open_container(self.driver) != 1):
-                commontype.click()
+                columntype.click()
 
             qcd.click_maximize_for_select_columns(self.driver)
             qcd.click_select_tableitem_for_select_columns(self.driver, "collegedetails_zero_records")
-            qcd.click_select_all_for_commontype(self.driver)
+            qcd.click_select_all_for_columntype(self.driver)
             qcd.select_item_from_column_data_type_list(self.driver, 2, 1)
             qcd.select_item_from_column_data_type_list(self.driver, 5, 1)
             qcd.click_save_on_cp(self.driver)
 
             qcd.click_select_tableitem_for_select_columns(self.driver, "college_zero_records")
-            qcd.click_select_all_for_commontype(self.driver)
+            qcd.click_select_all_for_columntype(self.driver)
             qcd.click_save_on_cp(self.driver)
 
             qcd.click_select_tableitem_for_select_columns(self.driver, "tolerance")
-            qcd.click_select_all_for_commontype(self.driver)
+            qcd.click_select_all_for_columntype(self.driver)
             qcd.select_item_from_column_data_type_list(self.driver, 7, 5)
             qcd.click_save_on_cp(self.driver)
 
             qcd.click_select_tableitem_for_select_columns(self.driver, "joining_details")
-            qcd.click_select_all_for_commontype(self.driver)
+            qcd.click_select_all_for_columntype(self.driver)
             qcd.click_save_on_cp(self.driver)
 
             # Remove Duplicate
             qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Remove Duplicates", 700, -200)
             removeduplicates = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component4"]')))
 
-            qcd.connect_elements(self.driver, commontype, 2, removeduplicates, 1)
+            qcd.connect_elements(self.driver, columntype, 2, removeduplicates, 1)
             if (qcd.open_container(self.driver) != 1):
                 removeduplicates.click()
 
             qcd.click_maximize_for_select_columns(self.driver)
             qcd.click_select_tableitem_for_select_columns(self.driver, "collegedetails_zero_records")
-            qcd.click_select_all_for_commontype(self.driver)
+            qcd.click_select_all_for_columntype(self.driver)
             qcd.click_save_on_cp(self.driver)
 
             qcd.click_select_tableitem_for_select_columns(self.driver, "college_zero_records")
-            qcd.click_select_all_for_commontype(self.driver)
+            qcd.click_select_all_for_columntype(self.driver)
             qcd.click_save_on_cp(self.driver)
 
             qcd.click_select_tableitem_for_select_columns(self.driver, "tolerance")
-            qcd.click_select_all_for_commontype(self.driver)
+            qcd.click_select_all_for_columntype(self.driver)
             qcd.click_save_on_cp(self.driver)
 
             qcd.click_select_tableitem_for_select_columns(self.driver, "joining_details")
-            qcd.click_select_all_for_commontype(self.driver)
+            qcd.click_select_all_for_columntype(self.driver)
             qcd.click_save_on_cp(self.driver)
 
             # Data Compare
@@ -168,7 +168,7 @@ class TC021:
                 compare1.click()
             qcd.click_maximize_for_select_columns(self.driver)
 
-            qcd.cell_by_cell_compare(self.driver, 1)
+            qcd.select_datacompare_type(self.driver, 1)
             qcd.select_mapping_tab(self.driver)
             # qcd.add_mapping_table_name(self.driver)
             qcd.add_mapping_table_for_type_compare_with_index(self.driver, 'college_zero_records', 'college_withdata')

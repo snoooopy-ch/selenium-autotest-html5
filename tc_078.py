@@ -64,12 +64,12 @@ class TC078:
             
             input1 = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component0"]')))
             selectcolumns = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component1"]')))
-            commontype = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component2"]')))
+            columntype = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component2"]')))
             data_quality = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component3"]')))
             
             qcd.connect_elements(self.driver, input1, 1, selectcolumns, 1)
-            qcd.connect_elements(self.driver, selectcolumns, 2, commontype, 1)
-            qcd.connect_elements(self.driver, commontype, 2, data_quality, 1)
+            qcd.connect_elements(self.driver, selectcolumns, 2, columntype, 1)
+            qcd.connect_elements(self.driver, columntype, 2, data_quality, 1)
             
             # input 1
             if (qcd.open_container(self.driver) != 1):
@@ -96,11 +96,11 @@ class TC078:
             
             # Column type
             if (qcd.open_container(self.driver) != 1):
-                commontype.click()
+                columntype.click()
 
             qcd.click_maximize_for_select_columns(self.driver)
             qcd.click_select_tableitem_for_select_columns(self.driver, "City")
-            qcd.click_select_all_for_commontype(self.driver)
+            qcd.click_select_all_for_columntype(self.driver)
             qcd.select_item_from_column_data_type_list(self.driver, 1, 1)
             qcd.select_item_from_column_data_type_list(self.driver, 2, 9)
             qcd.click_save_on_cp(self.driver)
@@ -108,12 +108,13 @@ class TC078:
             qcd.close_maximize_for_select_columns(self.driver)
             
             if (qcd.open_container(self.driver) == 1):
-                commontype.click()
+                columntype.click()
                 
             # Data Quality
             if (qcd.open_container(self.driver) != 1):
                 data_quality.click()
 
+            qcd.select_rules_tab(self.driver)
             qcd.check_completeness_on_dataqualityheader(self.driver)
             qcd.check_nullcheck_on_dataqualityheader(self.driver)
             qcd.check_leftspaces_on_dataqualityheader(self.driver)
@@ -132,9 +133,9 @@ class TC078:
             qcd.click_action_on_first_flow(self.driver, 1)
             
             # Column type
-            commontype = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component2"]')))
+            columntype = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component2"]')))
             if (qcd.open_container(self.driver) != 1):
-                commontype.click()
+                columntype.click()
                 
             qcd.select_item_from_column_data_type_list(self.driver, 1, 9)
             qcd.select_item_from_column_data_type_list(self.driver, 2, 1)
@@ -142,13 +143,14 @@ class TC078:
             qcd.click_save_on_cp(self.driver)
             
             if (qcd.open_container(self.driver) == 1):
-                commontype.click()
+                columntype.click()
                 
             # Data Quality
             data_quality = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component3"]')))
             if (qcd.open_container(self.driver) != 1):
                 data_quality.click()
 
+            qcd.select_rules_tab(self.driver)
             qcd.check_completeness_on_dataqualityheader(self.driver)
             qcd.check_completeness_on_dataqualityheader(self.driver)
             qcd.check_nullcheck_on_dataqualityheader(self.driver)
@@ -158,7 +160,7 @@ class TC078:
                 
             # execute
             qcd.save_excute_workflow(self.driver, 'TC_078_ALEX')
-            qcd.qcd.click_result_close(self.driver)
+            qcd.click_result_close(self.driver)
             pass
         except Exception as e:
             raise Exception(e)

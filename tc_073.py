@@ -94,6 +94,7 @@ class TC073:
             if (qcd.open_container(self.driver) != 1):
                 data_quality.click()
                 
+            qcd.select_rules_tab(self.driver)
             qcd.inputMinValueOnDataQuality(self.driver, 1, 1)
             qcd.inputMaxValueOnDataQuality(self.driver, 1, 10)
 
@@ -176,6 +177,7 @@ class TC073:
             if (qcd.open_container(self.driver) != 1):
                 data_quality.click()
             
+            qcd.select_rules_tab(self.driver)
             qcd.check_completeness_on_dataqualityheader(self.driver)
             qcd.check_nullcheck_on_dataqualityheader(self.driver)
             

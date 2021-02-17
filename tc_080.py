@@ -66,10 +66,10 @@ class TC080:
                 
             qcd.click_maximize_for_select_columns(self.driver)
             qcd.click_manual_upload_input(self.driver)
-            qcd.select_manual_upload_dataset_format(self.driver, 3)
+            qcd.select_manual_upload_dataset_format(self.driver, 'JSON')
             
             absolute_file_path = os.path.abspath("files/City_json1_80.json")
-            qcd.set_dataset_path(self.driver, '//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div[2]/div[1]/div[2]/label/span[1]/input', absolute_file_path)
+            qcd.set_dataset_path(self.driver, '//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div[1]/div[1]/div[2]/div/div[2]/label/span[1]/input', absolute_file_path)
             time.sleep(qcd.WAIT3)
             qcd.check_multiline_manual_upload_input_without_awshadoop(self.driver, "true")
             qcd.click_manual_upload_validate(self.driver, '//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div[1]/button')
@@ -119,7 +119,7 @@ class TC080:
             if (qcd.open_container(self.driver) != 1):
                 compare1.click()
             
-            qcd.cell_by_cell_compare(self.driver, 2)
+            qcd.select_datacompare_type(self.driver, 2)
             qcd.select_mapping_tab(self.driver)
             
             qcd.add_mapping_table_for_type_compare_with_index(self.driver, 'City_json1_80json', 'City')

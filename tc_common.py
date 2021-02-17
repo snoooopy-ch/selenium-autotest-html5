@@ -253,7 +253,6 @@ def select_dbset_input(driver, db):
     
     time.sleep(WAIT3)
     print('select db set')
-    return
 
 # action to select db set on sql input tab.
 def select_dbset_sql_input(driver, db):
@@ -284,7 +283,6 @@ def select_db(driver):
     element.click()
     time.sleep(WAIT3)
     print('select db name')
-    return
 
 # action to select db on sql input tab
 def select_db_sql(driver):
@@ -294,7 +292,6 @@ def select_db_sql(driver):
     element.click()
     time.sleep(WAIT3)
     print('select db name')
-    return
 
 # action to select db table
 def select_db_with_index(driver, db):
@@ -314,19 +311,16 @@ def select_db_with_index(driver, db):
     
     time.sleep(WAIT5)
     print('select db name')    
-    return
 
 # click to maximize button on select columns, data_compare
 def click_maximize_for_select_columns(driver):
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[1]/header/div/div/*[name()="svg"]')))
     element.click()
-    return
 
 # click to maximize button on select columns, data_compare
 def close_maximize_for_select_columns(driver):
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[1]/header/div/div')))
     element.click()
-    return
 
 
 # action to select table item for 'select columns' or 'remove_duplicate'
@@ -344,7 +338,6 @@ def click_select_tableitem_for_select_columns(driver, value):
             break
         
     print('select table item')
-    return
 
 def click_select_first_tableitem_for_select_columns(driver):
     db_select = driver.find_element_by_xpath(table_sc_xpath)
@@ -359,7 +352,6 @@ def click_select_first_tableitem_for_select_columns(driver):
         break
         
     print('select table item')
-    return
 
 # action to click one item of table
 def select_table(driver, index):
@@ -367,7 +359,6 @@ def select_table(driver, index):
     element = driver.find_element_by_xpath(xpath);
     element.click()
     print('select table ' + str(index))
-    return
 
 # action to click one item of column type
 def select_item_from_column_type(driver, index):
@@ -376,7 +367,6 @@ def select_item_from_column_type(driver, index):
     city.click()
 
     print('select item from column type ' + str(index))
-    return
 
 # action to click data type of column type
 def select_item_from_column_data_type(driver, index):
@@ -389,7 +379,6 @@ def select_item_from_column_data_type(driver, index):
     item_value.click()
     time.sleep(WAIT1)
     print('select item from column type ' + str(index))
-    return
 
 # action to click data type of column type list
 def select_item_from_column_data_type_list(driver, index1, index2):
@@ -403,7 +392,6 @@ def select_item_from_column_data_type_list(driver, index1, index2):
     item_value.click()
     time.sleep(WAIT1)
     print('select item from column type ' + str(index1) + ":" + str(index2))
-    return
 
 # action to click all check of table
 def click_all_select(driver):
@@ -412,7 +400,6 @@ def click_all_select(driver):
     
     print('select all the table')
     time.sleep(WAIT1)
-    return
 
 # action to click 'Add Selected' button
 def click_add_select_btn(driver):
@@ -421,7 +408,6 @@ def click_add_select_btn(driver):
     time.sleep(WAIT3)
 
     print('add selected click')
-    return
 
 # connecting
 def connect_all_elements(driver):
@@ -437,7 +423,6 @@ def connect_all_elements(driver):
     time.sleep(WAIT1)
 
     print('element selected')
-    return
 
 # connecting_two_element
 def connect_elements(driver, element1, n, element2, m):
@@ -456,7 +441,6 @@ def connect_elements(driver, element1, n, element2, m):
     time.sleep(WAIT1)
 
     print('connected')
-    return
 
 # select 'cell By cell Compare' item
 def select_datacompare_type(driver, index):
@@ -467,28 +451,24 @@ def select_datacompare_type(driver, index):
     db_select_val3 = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div/div/div/div[2]/div/div[' + str(index) + ']')))
     db_select_val3.click()
     print("selected")
-    return
 
 # select mapping tab
 def select_mapping_tab(driver):
     tab_mapping = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, tabmapping_xpath)))
     tab_mapping.click()
     print('mapping tab selected')
-    return
 
 # select sql tab
 def select_sql_mapping_tab(driver):
     sql_mapping = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[1]/div[1]/div/div/button[3]')))
     sql_mapping.click()
     print('sql tab selected')
-    return
 
 # select compare tab
 def select_compare_tab(driver):
     compare_mapping = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, tabcompare_xpath)))
     compare_mapping.click()
     print('compare tab selected')
-    return
 
 # selct mapping table name
 def add_mapping_table_name(driver):
@@ -506,9 +486,7 @@ def add_mapping_table_name(driver):
 
     plus = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, mapplus_xpath)))
     plus.click()
-
     print('mapping table names')
-    return
 
 # adding table on type compare mapping tab
 def add_mapping_table_for_type_compare(driver):
@@ -526,9 +504,7 @@ def add_mapping_table_for_type_compare(driver):
 
     plus = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="tableContainer"]/div[2]/div[3]/img')))
     plus.click()
-
     print('adding mapping table')
-    return
 
 # adding table on type compare mapping tab with name
 def add_mapping_table_for_type_compare_with_index(driver, name1, name2):
@@ -561,9 +537,7 @@ def add_mapping_table_for_type_compare_with_index(driver, name1, name2):
 
     plus = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="tableContainer"]/div[2]/div[3]/img')))
     plus.click()
-
     print('adding mapping table')
-    return
 
 
 # select mapping table item
@@ -571,15 +545,12 @@ def select_mapping_table_item(driver, index):
     table_item = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="tableContainer"]/table/tbody/tr[' + str(index) + ']/td[2]/span[1]')))
     table_item.click()
     print('select mapping table item')
-    return
 
 # close mapping table item
 def close_mapping_table_item(driver, index):
     table_item = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="tableContainer"]/table/tbody/tr[' + str(index) + ']/td[3]')))
     table_item.click()
     print('close mapping table item')
-    return
-
 
 # select key for table item
 def select_key_for_table_item(driver, index):
@@ -588,7 +559,6 @@ def select_key_for_table_item(driver, index):
     input_key = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[3]/div/div[2]/div/div/div[3]/div/div[1]/div[2]/div[' + str(index) + ']/div/div[1]/span/span[1]')))
     input_key.click()
     print('select key for table item')
-    return
 
 def select_key_for_warning_mapping_tableitem(driver, keyindex):
     tables_tr = driver.find_elements_by_xpath('//*[@id="tableContainer"]/table/tbody/tr')
@@ -603,25 +573,21 @@ def select_key_for_warning_mapping_tableitem(driver, keyindex):
             time.sleep(WAIT1)
         except Exception as e:
             pass
-    return
 
 # action to click save button
 def click_save_on_cp(driver):
     btn_done = driver.find_element_by_xpath(done_sc_xapth)
     btn_done.click()
     print('click done')
-    return    
 
 # action to input random on data compare
 def input_random_sample_on_data_compare(driver, value):
     input_random = driver.find_element_by_xpath(random_input_xpath)
     input_random.send_keys(value)
-    return
 
 # select rule on data quality
 def select_rule_on_dataquality(driver, table):
     driver.execute_script("document.getElementById('dataContainerId').scrollTop = 0;")
-    
     
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div/div[2]/div[1]/div[1]/div/div/div[1]')))
     element.click()
@@ -639,19 +605,6 @@ def select_rule_on_dataquality(driver, table):
     
     time.sleep(WAIT3)
     print('select table for rules')
-    return
-
-
-
-
-    # select_rule = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div[1]/div[1]/div[1]/div/div/div[1]')
-    # select_rule.click()
-    # time.sleep(WAIT1)
-
-    # select_rule_item = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div[1]/div[1]/div[1]/div/div[2]/div/div[' + str(index) + ']')
-    # select_rule_item.click()
-    # print('select rule on data quality')
-    return
 
 # select table on data quality
 def select_table_on_dataquality(driver, index):
@@ -661,7 +614,6 @@ def select_table_on_dataquality(driver, index):
     select_table_item = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div[1]/div[2]/div[1]/div/div[2]/div/div[' + str(index) + ']')
     select_table_item.click()
     print('select table on data quality')
-    return
 
 # select column on data quality
 def select_column_on_dataquality(driver, index):
@@ -671,7 +623,6 @@ def select_column_on_dataquality(driver, index):
     select_column_item = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div[1]/div[2]/div[2]/div/div[2]/div/div[' + str(index) + ']')
     select_column_item.click()
     print('select column on data quality')
-    return
 
 # select operator on data quality
 def select_operator_on_dataquality(driver, index):
@@ -681,21 +632,18 @@ def select_operator_on_dataquality(driver, index):
     select_operator_item = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div[1]/div[3]/div/div[2]/div/div[' + str(index) + ']')
     select_operator_item.click()
     print('select operator on data quality')
-    return
 
 # insert rule value on data quality
 def insert_rulevalue_on_dataquality(driver, value):
     rule_value = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div[1]/input')
     rule_value.send_keys(value)
     print('insert value on data quality')
-    return
 
 # apply button on data quality
 def apply_button_on_dataquality(driver):
     apply_button = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div[1]/div[5]/button')
     apply_button.click()
     print('apply on data quality')
-    return
 
 # initialize on data quality
 def initialize_on_dataquality(driver, index1, index2, index3, index4, value):
@@ -705,7 +653,6 @@ def initialize_on_dataquality(driver, index1, index2, index3, index4, value):
     select_operator_on_dataquality(driver, index4)    
     apply_button_on_dataquality(driver)
     time.sleep(WAIT3)
-    return
 
 # initialize on data quality
 def initialize_on_dataquality_for_select_rule(driver, index1, index2, index3, value):
@@ -715,7 +662,6 @@ def initialize_on_dataquality_for_select_rule(driver, index1, index2, index3, va
     select_operator_on_dataquality(driver, index3)    
     apply_button_on_dataquality(driver)
     time.sleep(WAIT3)
-    return
 
 # insert sql on data quality
 def insert_sql_on_dataquality(driver, sql):
@@ -737,7 +683,6 @@ def apply_sql_rul_dataquality(driver, sql, name):
     driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div[3]/div/div[1]/input').send_keys(name)
     driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div[3]/div/div[1]/div[4]/button').click()
     print('new sql rul is added')
-    return
     
 # modify sql rule on data quality
 def modify_sql_rul_dataquality(driver, index, sql, name):
@@ -756,9 +701,7 @@ def modify_sql_rul_dataquality(driver, index, sql, name):
         element.send_keys(name)
     
     driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div[3]/div/div[1]/div[4]/button').click()
-    
     print('sql rul is updated')
-    return
 
 # save workflow
 def save_workflow(driver, flow_name):
@@ -777,7 +720,6 @@ def save_workflow(driver, flow_name):
         element.click()
     except Exception as e:
         raise Exception('Input1 Validate fails')
-    return
 
 # save and excute workflow
 def save_excute_workflow(driver, flow_name):
@@ -795,8 +737,6 @@ def save_excute_workflow(driver, flow_name):
     
     WebDriverWait(driver, WAITDRIVER).until(EC.url_contains("show-result"))
     time.sleep(WAIT3)
-
-    return
 
 def save_excute_workflow_without_rename(driver):
     btn_save = driver.find_element_by_xpath(save_xpath)
@@ -816,15 +756,12 @@ def save_excute_workflow_without_rename(driver):
     WebDriverWait(driver, WAITDRIVER).until(EC.url_contains("show-result"))
     time.sleep(WAIT3)
 
-    return
-
 # select all for Column type and select column
 def click_select_all_for_columntype(driver):
     select_all_button = driver.find_element_by_xpath(select_all_columntype_xpath)
     select_all_button.click()
     print('select all the table')
     time.sleep(WAIT1)
-    return
 
 # check summary in final result
 def check_summary_in_final_result(driver, class_name, summary_xpath):
@@ -893,7 +830,6 @@ def check_summary_in_final_result(driver, class_name, summary_xpath):
     
     if (flag == 0):
         print('No mismatch in the table')
-    return
 
 # add columns for datacompare's table item
 def add_columns_in_datacompare_tableitem(driver):
@@ -906,7 +842,6 @@ def add_columns_in_datacompare_tableitem(driver):
     driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[3]/div/div[2]/div/div/div[1]/div[2]/div/div[2]/div/div[3]').click()
 
     driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[3]/div/div[2]/div/div/div[1]/div[3]').click()
-    return
 
 # add mapping property for datacompare's selected table
 def add_mappingproperties_in_datacompare_selected_table(driver, name1, name2):
@@ -939,9 +874,7 @@ def add_mappingproperties_in_datacompare_selected_table(driver, name1, name2):
 
     plus = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[3]/div/div[2]/div/div/div[1]/div[3]/img')))
     plus.click()
-
     print('adding mapping table')
-    return
 
 # click to share button
 def click_share_button_and_close(driver):
@@ -953,7 +886,6 @@ def click_share_button_and_close(driver):
     copy_btn.click()
     close_btn = driver.find_element_by_xpath('/html/body/div[3]/div[3]/div/div[3]/button[2]')
     close_btn.click()
-    return
 
 # check summary in final result for TC014
 def check_summary_statue_in_final_result(driver, class_name, summary_xpath):
@@ -974,9 +906,7 @@ def check_summary_statue_in_final_result(driver, class_name, summary_xpath):
     except Exception as ex:
         print(ex)
         pass
-
     time.sleep(WAIT10)
-    return
 
 # check summary in final result for TC060
 def check_summary_statue_in_final_tc60_result(driver, class_name, summary_xpath):
@@ -1000,10 +930,7 @@ def check_summary_statue_in_final_tc60_result(driver, class_name, summary_xpath)
     except Exception as ex:
         print(ex)
         pass
-
     time.sleep(WAIT1)
-    return
-
 
 # check summary in final result for TC007, TC009
 def check_summary_in_fianl_mismatched_count(driver, class_name, summary_xpath):
@@ -1019,9 +946,7 @@ def check_summary_in_fianl_mismatched_count(driver, class_name, summary_xpath):
             print(columnname + ' mismatch count is ' + count)
     except Exception as ex:
         pass
-
     time.sleep(WAIT10)
-    return
 
 # action to search on dashboard
 def input_searchbox_on_dashboard(driver, value):
@@ -1046,14 +971,12 @@ def click_notification(driver):
     except Exception as e:
         print(e)
         pass
-    return
 
 # action to click tab on notification board
 def click_tab_on_notification_board(driver, index):
     button = driver.find_element_by_xpath(notification_button_xpath + '/button[' + str(index) + ']')
     button.click()
     print('open notification dialog')
-    return
 
 # action to set start time    
 def set_start_time_with10(driver):
@@ -1066,7 +989,6 @@ def set_start_time_with10(driver):
     driver.find_element_by_xpath(notification_create_xpath).click()
     driver.find_element_by_xpath(notification_close_xpath).click()
     print('set time')
-    return
 
 # action to click result close
 def click_result_close(driver):
@@ -1076,7 +998,6 @@ def click_result_close(driver):
         time.sleep(WAIT3)
     except Exception as e:
         print(e)
-    return
 
 # action select cluster on notification dialog
 def select_cluster_execute_job(driver, name):
@@ -1094,7 +1015,6 @@ def select_cluster_execute_job(driver, name):
     except Exception as e:
         raise Exception(e)
         pass
-    return
 
 # action save and close on execute tab
 def save_close_execute_tab(driver):
@@ -1102,28 +1022,24 @@ def save_close_execute_tab(driver):
     driver.find_element_by_xpath(notification_close_xpath).click()
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="root"]/div/div/div[2]/div/div/div[2]/button')))
     element.click()
-    return
 
 # open excutions
 def open_excutions(driver):
     excutions_btn = driver.find_element_by_xpath(excution_xpath)
     excutions_btn.click()
     time.sleep(WAIT5)
-    return
 
 # open settings
 def open_settings(driver):
     settings_btn = driver.find_element_by_xpath(settings_xpath)
     settings_btn.click()
     time.sleep(WAIT5)
-    return
 
 # input keywords to search box in settings board
 def search_in_settings(driver, keyword):
     search_input = driver.find_element_by_xpath(settings_searchbox_xpath)
     search_input.send_keys(keyword)
     time.sleep(WAIT3)
-    return
 
 # delete on settings board
 def click_delete_settings_search(driver):
@@ -1133,7 +1049,6 @@ def click_delete_settings_search(driver):
         time.sleep(WAIT3)
     except Exception as e:
         pass
-    return
 
 # add new connection on settings board
 def add_new_connection(driver, index, name, url, user, password):
@@ -1174,7 +1089,6 @@ def add_new_connection(driver, index, name, url, user, password):
 
     print('new connection added')
     time.sleep(WAIT3)
-    return
 
 # click data tab on input
 def click_datatab_input(driver):
@@ -1182,7 +1096,6 @@ def click_datatab_input(driver):
     driver.find_element_by_xpath(input_data_tag_xpath).click()
     time.sleep(WAIT1)
     print('datatab clicked')
-    return
 
 # select table item on data tab
 def select_tableitem_on_datasearch(driver, index):
@@ -1191,7 +1104,6 @@ def select_tableitem_on_datasearch(driver, index):
     driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[3]/div[1]/div/div/div[2]/div/div[' +  str(index)+ ']').click()
     time.sleep(WAIT1)
     print('select table item on data search')
-    return
 
 # input sql on sql column
 def input_sql_on_sqlcolumn(driver):
@@ -1200,7 +1112,6 @@ def input_sql_on_sqlcolumn(driver):
     driver.find_element_by_xpath('/html/body/div[2]/div[3]/div/div[3]/button[2]').click()
     time.sleep(WAIT1)
     print('insert sql transformation')
-    return
 
 # click summary index
 def click_summary_index(driver, index):
@@ -1215,27 +1126,22 @@ def click_summary_index(driver, index):
                 print('city name is converted to lower case: ' + city_name)
         except:
             break
-    return
-
 
 # clear entry before inputing value
 def entry_clear(self, element):
     element.send_keys(Keys.CONTROL + 'a') 
     element.send_keys(Keys.DELETE)
-    return
 
 # open config tab on input
 def open_config_tab_on_input(driver):
     driver.find_element_by_xpath(input_config_tag_xpath).click()
     time.sleep(WAIT1)
-    return
 
 # action to flow page
 def click_action_on_flow_page(driver):
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, flow_xpath)))
     element.click()
     time.sleep(WAIT5)
-    return
 
 # action to first flow
 def click_action_on_first_flow(driver, index):
@@ -1245,7 +1151,6 @@ def click_action_on_first_flow(driver, index):
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="long-menu"]/div[3]/ul/li[' + str(index) + ']')))
     element.click()
     time.sleep(WAIT5)
-    return
 
 # action to find flow
 def find_specific_flow(driver, keys):
@@ -1254,25 +1159,21 @@ def find_specific_flow(driver, keys):
     element.send_keys(Keys.DELETE)
     element.send_keys(keys)
     time.sleep(WAIT3)
-    return
 
 # action to click manual upload in input
 def click_manual_upload_input(driver):
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, manual_upload_xpath)))
     element.click()
-    return
 
 # action to click sql input in input
 def click_sql_input(driver):
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, sql_input_xpath)))
     element.click()
-    return
 
 # action to click api upload in input
 def click_api_input(driver):
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, api_input_xpath)))
     element.click()
-    return
 
 # select manual upload dataset format
 def select_manual_upload_dataset_format(driver, format):
@@ -1289,13 +1190,11 @@ def select_manual_upload_dataset_format(driver, format):
     
     time.sleep(WAIT1)
     print('select file format')
-    return
 
 # set dataset path
 def set_dataset_path(driver, xpath, path):
     element = driver.find_element_by_xpath(xpath)
     element.send_keys(path)
-    return
 
 # check multiline manual upload on input
 def check_multiline_manual_upload_input_with_awshadoop(driver, value):
@@ -1308,7 +1207,6 @@ def check_multiline_manual_upload_input_with_awshadoop(driver, value):
         index = "2"
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div[1]/div[2]/div/div[2]/div/div[2]/div/div[' + index + ']')))
     element.click()
-    return
 
 # check multiline manual upload on input with out aws_hadoop
 def check_multiline_manual_upload_input_without_awshadoop(driver, value):
@@ -1321,19 +1219,16 @@ def check_multiline_manual_upload_input_without_awshadoop(driver, value):
         index = "2"
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div[1]/div[2]/div/div[2]/div/div[2]/div/div[' + index + ']')))
     element.click()
-    return
 
 # click manual upload validate
 def click_manual_upload_validate(driver, xpath):
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, xpath)))
     element.click()
-    return
 
 # input delimiter on input
 def input_delimiter_on_input(driver, value):
     element = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div/div[2]/div/div[2]/div/div/input')
     element.send_keys(value)
-    return
 
 # set header as true or false on input
 def set_header_on_input(driver, index):
@@ -1341,7 +1236,6 @@ def set_header_on_input(driver, index):
     element.click()
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div/div[3]/div/div[2]/div/div[2]/div/div[' + str(index) + ']')))
     element.click()
-    return
 
 # set interschema as true or false on input
 def set_interschema_on_input(driver, index):
@@ -1349,7 +1243,6 @@ def set_interschema_on_input(driver, index):
     element.click()
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div/div[4]/div/div[2]/div/div[2]/div/div[' + str(index) + ']')))
     element.click()
-    return     
 
 # check element present in UI
 def isElementPresentForResult(driver, index):
@@ -1368,7 +1261,6 @@ def select_rules_tab(driver):
     tab_mapping.click()
     print('rules tab selected')
     time.sleep(WAIT1)
-    return
 
 # checkCompleteness
 def checkCompletenessOnDataQuality(driver, index):
@@ -1377,8 +1269,6 @@ def checkCompletenessOnDataQuality(driver, index):
         target = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div/div[2]/div[2]/div/div[1]/div[2]/div[' + str(index - 1) + ']/div/div[2]/span/span[1]')))
         driver.execute_script("arguments[0].scrollIntoView();", target)
     element.click()
-    return
-
 
 # nullCheckOnDataQuality
 def nullCheckOnDataQuality(driver, index):
@@ -1387,7 +1277,6 @@ def nullCheckOnDataQuality(driver, index):
         target = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div/div[2]/div[2]/div/div[1]/div[2]/div[' + str(index - 1) + ']/div/div[3]/div/div/span')))
         driver.execute_script("arguments[0].scrollIntoView();", target)
     element.click()
-    return
         
 # uniqueCheckOnDataQuality
 def uniqueCheckOnDataQuality(driver, index):
@@ -1397,7 +1286,6 @@ def uniqueCheckOnDataQuality(driver, index):
         driver.execute_script("arguments[0].scrollIntoView();", target)
         time.sleep(WAIT1)
     element.click()
-    return
 
 # checkLeftSpacesOnDataQuality
 def checkLeftSpacesOnDataQuality(driver, index):
@@ -1406,7 +1294,6 @@ def checkLeftSpacesOnDataQuality(driver, index):
         target = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div/div[2]/div[2]/div/div[1]/div[2]/div[' + str(index - 1) + ']/div/div[5]/span')))
         driver.execute_script("arguments[0].scrollIntoView();", target)
     element.click()
-    return
 
 # checkRightSpacesOnDataQuality
 def checkRightSpacesOnDataQuality(driver, index):
@@ -1415,7 +1302,6 @@ def checkRightSpacesOnDataQuality(driver, index):
         target = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div/div[2]/div[2]/div/div[1]/div[2]/div[' + str(index -1) + ']/div/div[6]/span')))
         driver.execute_script("arguments[0].scrollIntoView();", target)
     element.click()
-    return
 
 # inputMaxLengthOnDataQuality
 def inputMaxLengthOnDataQuality(driver, index, value):
@@ -1424,7 +1310,6 @@ def inputMaxLengthOnDataQuality(driver, index, value):
         target = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div/div[2]/div[2]/div/div[1]/div[2]/div[' + str(index -1) + ']/div/div[7]/div')))
         driver.execute_script("arguments[0].scrollIntoView();", target)
     element.send_keys(value);
-    return
 
 # inputMinLengthOnDataQuality
 def inputMinLengthOnDataQuality(driver, index, value):
@@ -1433,7 +1318,6 @@ def inputMinLengthOnDataQuality(driver, index, value):
         target = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div/div[2]/div[2]/div/div[1]/div[2]/div[' + str(index - 1) + ']/div/div[8]/div')))
         driver.execute_script("arguments[0].scrollIntoView();", target)
     element.send_keys(value)
-    return
 
 # inputRegularExpressOnDataQuality
 def inputRegularExpressOnDataQuality(driver, index, value):
@@ -1443,7 +1327,6 @@ def inputRegularExpressOnDataQuality(driver, index, value):
                                                                                                 
         driver.execute_script("arguments[0].scrollIntoView();", target)
     element.send_keys(value)
-    return
 
 # inputSQLWhereConditionOnDataQuality
 def inputSQLWhereConditionOnDataQuality(driver, index, value):
@@ -1452,7 +1335,6 @@ def inputSQLWhereConditionOnDataQuality(driver, index, value):
         target = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div/div[2]/div[2]/div/div[1]/div[2]/div[' + str(index - 1) + ']/div/div[11]/div')))
         driver.execute_script("arguments[0].scrollIntoView();", target)
     element.send_keys(value)
-    return
 
 # inputMaxValueOnDataQuality
 def inputMaxValueOnDataQuality(driver, index, value):
@@ -1461,7 +1343,6 @@ def inputMaxValueOnDataQuality(driver, index, value):
         target = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div/div[2]/div[2]/div/div[1]/div[2]/div[' + str(index - 1) + ']/div/div[9]/div')))
         driver.execute_script("arguments[0].scrollIntoView();", target)
     element.send_keys(value)
-    return
 
 # inputMinValueOnDataQuality
 def inputMinValueOnDataQuality(driver, index, value):
@@ -1470,50 +1351,42 @@ def inputMinValueOnDataQuality(driver, index, value):
         target = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div/div[2]/div[2]/div/div[1]/div[2]/div[' + str(index - 1) + ']/div/div[10]/div')))
         driver.execute_script("arguments[0].scrollIntoView();", target)
     element.send_keys(value)
-    return
 
 # clickNextButtonOnDataQuality
 def clickNextButtonOnDataQuality(driver):
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div/div[2]/div[2]/div/div[2]/div/div[3]/button')))
     driver.execute_script("arguments[0].scrollIntoView();", element)
     element.click()
-    return
 
 # scrollToTop
 def scrollToTop(driver):
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div/div[2]/div[2]/div/div[1]/div[2]/div[1]')))
     driver.execute_script("arguments[0].scrollIntoView();", element)
-    return
 
 # checkCompletenessOnDataQualityHeader
 def check_completeness_on_dataqualityheader(driver):
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div/div[2]/div[2]/div/div[1]/div[1]/div/div[2]/div/div/span[1]/span[1]')))
     element.click()
-    return
 
 # nullCheckOnDataQualityHeader
 def check_nullcheck_on_dataqualityheader(driver):
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div/div[2]/div[2]/div/div[1]/div[1]/div/div[3]/div/div/span[1]/span[1]')))
     element.click()
-    return
 
 # checkLeftSpacesOnDataQualityHeader
 def check_leftspaces_on_dataqualityheader(driver):
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div/div[2]/div[2]/div/div[1]/div[1]/div/div[5]/div/div/span[1]/span[1]')))
     element.click()
-    return
 
 # checkRightSpacesOnDataQualityHeader
 def check_rightspaces_on_dataqualityheader(driver):
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div/div[2]/div[2]/div/div[1]/div[1]/div/div[6]/div/div/span[1]/span[1]')))
     element.click()
-    return
 
 # clickViewEditActionOnExcutions
 def clickFirstViewEditActionOnExcutions(driver):
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, viewedit_xpath)))
     element.click()
-    return
 
 # check summary in final result for TC028
 def check_summary_statue_in_TC028_result(driver, class_name, summary_xpath):
@@ -1549,10 +1422,7 @@ def check_summary_statue_in_TC028_result(driver, class_name, summary_xpath):
     except Exception as ex:
         print(ex)
         pass
-
     time.sleep(WAIT10)
-
-    return
 
 # Upload Json Flow File
 def onUploadJsonFlowFile(driver, filePath):
@@ -1560,15 +1430,12 @@ def onUploadJsonFlowFile(driver, filePath):
     element = driver.find_element_by_xpath('//*[@id="upload-image1"]')
     absolute_file_path = os.path.abspath("files/" + filePath)
     element.send_keys(absolute_file_path)
-    
     inputValueAndSaveOnDailog(driver, "TC_036_JSON")
-    return
     
 # Set Input Select Column
 def setInputSelectColumnValue(driver, value):
     element = driver.find_element_by_xpath(input_select_column_xpath)
     element.send_keys(value)
-    return
 
 # Get Input Select Column
 def getInputSelectColumnValue(driver):
@@ -1598,29 +1465,24 @@ def inputValueAndSaveOnDailog(driver, value):
     element.send_keys(value)
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[' + str(length) + ']/div[3]/div/div[3]/button[1]')))
     element.click()
-    return
 
 # check Message and close on Dialog
 def checkMessageAndClose(driver):
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="client-snackbar"]')))
     element.click()
     print("MessageBox: " + element.text)
-    
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="root"]/div/div/div[2]/div/div/div[2]/button')))
     element.click()
-    return
 
 # select rule on settings page
 def selectRuleOnSettings(driver):
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/div/div/ul/div[2]')))
     element.click()
-    return
 
 # click add new rule
 def clickAddNewRuleButton(driver):
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/main/div[2]/div/div/div[1]/div[2]/button')))
     element.click()
-    return
 
 # add New Rule
 def addNewRule(driver, ruleName, description, type):
@@ -1648,16 +1510,12 @@ def addNewRule(driver, ruleName, description, type):
         clearInputValue(element)
         element.send_keys(description)
     
-    
-    
     clickAddRuleButton(driver)
-    return
 
 # clear input element
 def clearInputValue(element):
     element.send_keys(Keys.CONTROL + 'a')
     element.send_keys(Keys.DELETE)
-    return
 
 # delete Rule
 def deleteRule(driver, keyword):
@@ -1670,8 +1528,6 @@ def deleteRule(driver, keyword):
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[2]/div[3]/div/div[3]/button[2]')))
     element.click()
     
-    return
-
 # click edit&view button
 def clickEditViewRuleButton(driver, keyword):
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, add_rule_search_xpath)))
@@ -1679,12 +1535,10 @@ def clickEditViewRuleButton(driver, keyword):
     
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, vieweditaction_rule_xpath)))
     element.click()
-    return
     
 def clickAddRuleButton(driver):
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, add_rule_button_xpath)))
     element.click()
-    return
 
 def logout(driver):
     click_result_close(driver)
@@ -1698,7 +1552,6 @@ def logout(driver):
         alert.accept()
     except:
         pass
-    return
 
 def clickAutoSuggestOnDataQuality(driver):
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[1]/div[2]/button')))
@@ -1707,8 +1560,6 @@ def clickAutoSuggestOnDataQuality(driver):
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[2]/div[3]/div/div[2]/button[1]')))
     element.click()
     print('auto suggest')
-    return
-
 
 # action to select table item for 'filter rows'
 def click_select_tableitem_for_fiter_rows(driver, index):
@@ -1719,7 +1570,6 @@ def click_select_tableitem_for_fiter_rows(driver, index):
     db_value = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[3]/div[1]/div[1]/div/div[2]/div/div[' + str(index) + ']')
     db_value.click()
     time.sleep(WAIT1)
-    return
 
 # insert sql into filter row textarea
 def insertSQLIntoFilterRowTextarea(driver, text):
@@ -1727,16 +1577,13 @@ def insertSQLIntoFilterRowTextarea(driver, text):
     textarea.send_keys(Keys.CONTROL + 'a')
     textarea.send_keys(Keys.DELETE)
     textarea.send_keys(text)
-    
     driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[3]/div[1]/div[3]/button').click()
-    return
 
 def add_columns_manualupload(driver, text):
     textarea = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div[1]/div[4]/div/div[2]/textarea[1]')
     textarea.send_keys(Keys.CONTROL + 'a')
     textarea.send_keys(Keys.DELETE)
     textarea.send_keys(text)
-    return
 
 def add_sql_title_content(driver, title, content):
     if title !='':
@@ -1752,22 +1599,18 @@ def add_sql_title_content(driver, title, content):
         sql_content.send_keys(content)
     
     driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div[2]/div/div[1]/div[2]/button[1]').click()
-    return
 
 def add_curl_command_api_input(driver, command):
     textarea = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div/div[1]/textarea')
     textarea.send_keys(command)
-    return
 
 def add_python_code_api_input(driver, code):
     textarea = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div/div[1]/textarea[1]')
     textarea.send_keys(code)
-    return
 
 def check_flatten_data(driver):
     element = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div[1]/div[3]/div/div[2]/span/span[1]')
     element.click()
-    return
 
 def set_multiline_api_input(driver, value):
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div/div[2]/div[2]/div/div[1]')))
@@ -1779,23 +1622,19 @@ def set_multiline_api_input(driver, value):
         index = "2"
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div/div[2]/div[2]/div[2]/div/div[' + index + ']')))
     element.click()
-    return
     
 def add_columns_api_input(driver, text):
     textarea = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div/div[5]/textarea[1]')
     textarea.send_keys(Keys.CONTROL + 'a')
     textarea.send_keys(Keys.DELETE)
     textarea.send_keys(text)
-    return
 
 def click_validate_api_input(driver):
     driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div/button').click();
-    return
 
 def check_data_migration_input(driver):
     element = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div[4]/div/span/span[1]/input')
     element.click()
-    return
 
 def click_back_execute_log_panel(driver):
     try:
@@ -1803,7 +1642,6 @@ def click_back_execute_log_panel(driver):
         element.click()
     except:
         pass
-    return
 
 # output element
 def add_output_table_or(driver, table1, table2):
@@ -1828,12 +1666,10 @@ def add_output_table_or(driver, table1, table2):
     
     element = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div/div[3]/div[2]/div[1]/div[3]')
     element.click()
-    return
     
 def click_output_overwrite(driver, index):
     element = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div/div[3]/div[2]/div[2]/div/div[' + str(index) + ']/div[4]/label/span[1]/span[1]/span[1]/input')
     element.click()
-    return
 
 # action to select db set on output element
 def select_dbset_output(driver, db):
@@ -1853,7 +1689,6 @@ def select_dbset_output(driver, db):
     
     time.sleep(WAIT3)
     print('select db set on output')
-    return
 
 # action to select db on output element
 def select_db_output(driver):
@@ -1863,7 +1698,6 @@ def select_db_output(driver):
     element.click()
     time.sleep(WAIT3)
     print('select db name on output')
-    return
 
 def click_select_column_change(driver, index, value):
     element = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div[2]/div[3]/div/div[2]/div/div[1]/div[2]/div[' + str(index) + ']/div/div[2]/button')
@@ -1887,7 +1721,6 @@ def click_select_column_change(driver, index, value):
     
     driver.find_element_by_xpath('/html/body/div[2]/div[3]/div/div[1]/button').click()
     print('select column changed')
-    return
 
 def input_min_max_numberpart(driver, index, min, max, part):
     if min != '':

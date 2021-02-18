@@ -114,13 +114,13 @@ class TC060:
             if (qcd.open_container(self.driver) != 1):
                 data_quality.click()
             
-            qcd.select_mapping_tab(self.driver)
+            qcd.select_sql_mapping_tab(self.driver)
             qcd.apply_sql_rul_dataquality(self.driver, "Select doc_name From Doctor where age=40", "sql6")
             
-            self.driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div[2]/div/div[2]/div/div/div[1]/div[2]/div[6]/div/div[5]/div/div').click()
+            self.driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div[3]/div/div[2]/div/div/div[1]/div[2]/div[6]/div/div[5]/div/div').click()
             
             # execute
-            qcd.save_excute_workflow(self.driver, 'TC_060_ALEX')
+            qcd.save_excute_workflow(self.driver, 'TC_060_ALEX', 500)
             
             self.printResultTable()
         except Exception as e:

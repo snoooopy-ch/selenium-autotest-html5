@@ -95,9 +95,6 @@ class TC002:
             qcd.select_datacompare_type(self.driver, 1)
             qcd.select_mapping_tab(self.driver)
 
-            # qcd.select_mapping_table_item(self.driver, 1)
-            # qcd.select_key_for_table_item(self.driver, 1)
-            
             qcd.select_key_for_warning_mapping_tableitem(self.driver, 1)
             
             # execute

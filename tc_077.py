@@ -153,7 +153,7 @@ class TC077:
             # qcd.close_mapping_table_item(self.driver, 15)
 
             # execute
-            qcd.save_excute_workflow(self.driver, 'TC_077_ALEX')
+            qcd.save_excute_workflow(self.driver, 'TC_077_ALEX', 500)
 
         except Exception as e:
             qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))

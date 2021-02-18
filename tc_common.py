@@ -682,7 +682,7 @@ def apply_sql_rul_dataquality(driver, sql, name):
     driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div[3]/div/div[1]/textarea[1]').send_keys(sql)
     driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div[3]/div/div[1]/input').send_keys(name)
     driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div[3]/div/div[1]/div[4]/button').click()
-    print('new sql rul is added')
+    print('new sql rule is added')
     
 # modify sql rule on data quality
 def modify_sql_rul_dataquality(driver, index, sql, name):
@@ -722,7 +722,7 @@ def save_workflow(driver, flow_name):
         raise Exception('Input1 Validate fails')
 
 # save and excute workflow
-def save_excute_workflow(driver, flow_name):
+def save_excute_workflow(driver, flow_name, wait = 100):
     save_workflow(driver, flow_name)
 
     print('executing...')
@@ -730,7 +730,7 @@ def save_excute_workflow(driver, flow_name):
     btn_execute.click()
 
     try:
-        btn_result = WebDriverWait(driver, 100).until(EC.element_to_be_clickable((By.XPATH, result_xpath)))
+        btn_result = WebDriverWait(driver, wait).until(EC.element_to_be_clickable((By.XPATH, result_xpath)))
         btn_result.click()
     except Exception as e:
         pass

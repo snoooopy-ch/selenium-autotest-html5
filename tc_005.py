@@ -97,21 +97,10 @@ class TC005:
             qcd.select_datacompare_type(self.driver, 1)
             qcd.select_mapping_tab(self.driver)
 
-            # qcd.select_mapping_table_item(self.driver, 1)
-            # qcd.select_key_for_table_item(self.driver, 1)
-
-            # qcd.select_mapping_table_item(self.driver, 3)
-            # qcd.select_key_for_table_item(self.driver, 1)
-
-            # qcd.select_mapping_table_item(self.driver, 9)
-            # qcd.select_key_for_table_item(self.driver, 1)
-
-            # qcd.select_mapping_table_item(self.driver, 10)
-            # qcd.select_key_for_table_item(self.driver, 1)
             qcd.select_key_for_warning_mapping_tableitem(self.driver, 1)
            
             # execute
-            qcd.save_excute_workflow(self.driver, 'TC_005_ALEX')
+            qcd.save_excute_workflow(self.driver, 'TC_005_ALEX', 500)
             
         except Exception as e:
             qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))

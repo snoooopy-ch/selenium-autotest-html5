@@ -65,7 +65,7 @@ class TC080:
                 input1.click()
                 
             qcd.click_maximize_for_select_columns(self.driver)
-            qcd.click_manual_upload_input(self.driver)
+            qcd.click_file_upload_input(self.driver)
             qcd.select_manual_upload_dataset_format(self.driver, 'JSON')
             
             absolute_file_path = os.path.abspath("files/City_json1_80.json")

@@ -68,7 +68,7 @@ class TC042:
             if (qcd.open_container(self.driver) != 1):
                 input1.click()
                 
-            qcd.click_manual_upload_input(self.driver)
+            qcd.click_file_upload_input(self.driver)
             qcd.select_manual_upload_dataset_format(self.driver, "JSON")
             qcd.set_dataset_path(self.driver, qcd.input_manualupload_dataset_xpath, '/tmp/sale_details_bad.json')
             qcd.check_multiline_manual_upload_input_with_awshadoop(self.driver, "true")
@@ -89,7 +89,7 @@ class TC042:
             if (qcd.open_container(self.driver) != 1):
                 input2.click()
                 
-            qcd.click_manual_upload_input(self.driver)
+            qcd.click_file_upload_input(self.driver)
             qcd.select_manual_upload_dataset_format(self.driver, "JSON")
             qcd.set_dataset_path(self.driver, qcd.input_manualupload_dataset_xpath, '/tmp/medicine.json')
             qcd.check_multiline_manual_upload_input_with_awshadoop(self.driver, "true")

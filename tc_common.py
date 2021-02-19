@@ -1161,7 +1161,7 @@ def find_specific_flow(driver, keys):
     time.sleep(WAIT3)
 
 # action to click manual upload in input
-def click_manual_upload_input(driver):
+def click_file_upload_input(driver):
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, manual_upload_xpath)))
     element.click()
 
@@ -1238,9 +1238,10 @@ def set_header_on_input(driver, index):
     element.click()
 
 # set interschema as true or false on input
-def set_interschema_on_input(driver, index):
+def set_interschema_on_input(driver, value):
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div/div[4]/div/div[2]/div/div/div[1]')))
     element.click()
+    index = value.lower() == 'true' and 1 or 2
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div/div[4]/div/div[2]/div/div[2]/div/div[' + str(index) + ']')))
     element.click()
 
@@ -1735,3 +1736,10 @@ def input_min_max_numberpart(driver, index, min, max, part):
         element = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div[2]/div[3]/div/div[2]/div/div[1]/div[2]/div[' + str(index) + ']/div/div[5]/div/div/input')
         element.send_keys(part)
     
+def select_compare_type(driver, index):
+    element = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div[3]/div/div/label[' + str(index) + ']/span[1]/span[1]/input')
+    element.click()
+    
+def check_compare_data_profile(driver):
+    element = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div[5]/div/span/span[1]/input')
+    element.click()

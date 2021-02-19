@@ -65,7 +65,7 @@ class TC038:
                 input1.click()
                 
             qcd.click_maximize_for_select_columns(self.driver)
-            qcd.click_manual_upload_input(self.driver)
+            qcd.click_file_upload_input(self.driver)
             qcd.select_manual_upload_dataset_format(self.driver, "CSV")
             
             absolute_file_path = os.path.abspath("files/FlightDelayPrediction_2019.csv")
@@ -73,7 +73,7 @@ class TC038:
             time.sleep(qcd.WAIT3)
             qcd.input_delimiter_on_input(self.driver, ",")
             qcd.set_header_on_input(self.driver, 1)
-            qcd.set_interschema_on_input(self.driver, 1)
+            qcd.set_interschema_on_input(self.driver, 'true')
             self.driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div/button').click()
             
             try:

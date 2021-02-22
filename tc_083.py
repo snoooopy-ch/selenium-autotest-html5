@@ -115,13 +115,13 @@ class TC083:
 
     def check_result(self):
         try:
-        	for i in range(1, 5):
+            for i in range(1, 5):
                 item = self.driver.find_element_by_xpath('//*[@id="select1"]/div/div/div[1]/div[1]')
                 item.click()
                 item = self.driver.find_element_by_xpath('//*[@id="select1"]/div/div[2]/div/div[' + str(i) + ']')
                 item_txt = item.text
                 item.click()
-                
+
                 histogram = self.driver.find_element_by_xpath('//*[@id="histogramResult"]')
                 try:
                     chart = histogram.find_element_by_xpath('./div')

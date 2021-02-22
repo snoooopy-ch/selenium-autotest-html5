@@ -85,7 +85,7 @@ class TC083:
             qcd.select_table(self.driver, "SALES_DATA_5M")
             qcd.select_table(self.driver, "SALES_DATA_2M_B")
             qcd.select_table(self.driver, "SALES_TBL")
-            qcd.select_table(self.driver, "SALES_DATA_2M")
+            qcd.select_table(self.driver, "SALES_DATA_5M_B")
             qcd.click_add_select_btn(self.driver)
 
             # data compare
@@ -105,7 +105,7 @@ class TC083:
             qcd.select_key_for_warning_mapping_tableitem(self.driver, 1)
             
             # execute
-            qcd.save_excute_workflow(self.driver, 'TC_001_ALEX')
+            qcd.save_excute_workflow(self.driver, 'TC_083_ALEX', 700)
         except Exception as e:
             qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
             raise Exception(e)
@@ -115,8 +115,21 @@ class TC083:
 
     def check_result(self):
         try:
-            qcd.check_summary_in_final_result(self.driver, self.__class__.__name__, qcd.normal_result_summary_xpath)
-            qcd.click_result_close(self.driver)
+        	for i in range(1, 5):
+                item = self.driver.find_element_by_xpath('//*[@id="select1"]/div/div/div[1]/div[1]')
+                item.click()
+                item = self.driver.find_element_by_xpath('//*[@id="select1"]/div/div[2]/div/div[' + str(i) + ']')
+                item_txt = item.text
+                item.click()
+                
+                histogram = self.driver.find_element_by_xpath('//*[@id="histogramResult"]')
+                try:
+                    chart = histogram.find_element_by_xpath('./div')
+                    print("{0} : {1}".format(item_txt, "graph"))
+                except Exception as e:
+                    print("{0} : {1}".format(item_txt, "NA"))
+                    pass
+                	
         except Exception as e:
             qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
             raise Exception(e)

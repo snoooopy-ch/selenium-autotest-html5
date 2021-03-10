@@ -58,7 +58,7 @@ class TC021:
                 drag_and_drop_js = f.read()
             
             # input 1
-            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Input", 300, 0)
+            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Source", 300, 0)
             input1 = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component0"]')))
 
             if (qcd.open_container(self.driver) != 1):
@@ -70,7 +70,7 @@ class TC021:
             qcd.click_add_select_btn(self.driver)
 
             # input 2
-            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Input", 300, 160)
+            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Source", 300, 160)
             input2 = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component1"]')))
 
             if (qcd.open_container(self.driver) != 1):
@@ -82,7 +82,7 @@ class TC021:
             qcd.click_add_select_btn(self.driver)
 
             # select columns
-            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Select Columns", 500, -150)
+            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Select Columns", 350, -50)
             selectcolumns = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component2"]')))
 
             qcd.connect_elements(self.driver, input1, 1, selectcolumns, 1)
@@ -104,7 +104,7 @@ class TC021:
             qcd.click_save_on_cp(self.driver)
 
             # Column type
-            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Column type", 500, -150)
+            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Column type", 700, -100)
             columntype = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component3"]')))
 
             qcd.connect_elements(self.driver, selectcolumns, 2, columntype, 1)
@@ -133,7 +133,7 @@ class TC021:
             qcd.click_save_on_cp(self.driver)
 
             # Remove Duplicate
-            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Remove Duplicates", 700, -200)
+            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Remove Duplicates", 850, -250)
             removeduplicates = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component4"]')))
 
             qcd.connect_elements(self.driver, columntype, 2, removeduplicates, 1)
@@ -158,7 +158,7 @@ class TC021:
             qcd.click_save_on_cp(self.driver)
 
             # Data Compare
-            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Data Compare", 850, 0)
+            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Data Compare", 850, 50)
             compare1 = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component5"]')))
 
             qcd.connect_elements(self.driver, removeduplicates, 2, compare1, 1)

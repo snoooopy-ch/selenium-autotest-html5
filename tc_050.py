@@ -58,7 +58,7 @@ class TC050:
                 drag_and_drop_js = f.read()
             
             # input 1
-            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Input", 300, 0)
+            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Source", 300, 0)
             input1 = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component0"]')))
 
             if (qcd.open_container(self.driver) != 1):
@@ -71,7 +71,7 @@ class TC050:
             qcd.click_add_select_btn(self.driver)
 
             # select columns
-            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Select Columns", 500, -80)
+            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Select Columns", 400, -80)
             selectcolumns = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component1"]')))
 
             qcd.connect_elements(self.driver, input1, 1, selectcolumns, 1)
@@ -87,7 +87,7 @@ class TC050:
             qcd.click_save_on_cp(self.driver)
             
             # Column type
-            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Column type", 500, -100)
+            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Column type", 800, -150)
             columntype = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component2"]')))
 
             qcd.connect_elements(self.driver, selectcolumns, 2, columntype, 1)
@@ -108,7 +108,7 @@ class TC050:
             qcd.click_save_on_cp(self.driver)
 
             # Remove Duplicate
-            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Remove Duplicates", 750, -200)
+            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Remove Duplicates", 1000, -250)
             removeduplicates = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component3"]')))
 
             qcd.connect_elements(self.driver, columntype, 2, removeduplicates, 1)
@@ -127,7 +127,7 @@ class TC050:
             qcd.close_maximize_for_select_columns(self.driver)
                 
             # Data Quality
-            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Data Quality", 1050, -250)
+            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Data Quality", 1150, -250)
             quality = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component4"]')))
 
             qcd.connect_elements(self.driver, removeduplicates, 2, quality, 1)

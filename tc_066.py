@@ -58,7 +58,7 @@ class TC066:
                 drag_and_drop_js = f.read()
             
             # input 1
-            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Input", 300, 0)
+            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Source", 300, 0)
             input1 = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component0"]')))
 
             if (qcd.open_container(self.driver) != 1):
@@ -74,7 +74,7 @@ class TC066:
                 input1.click()
             
             # input 2
-            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Input", 300, 150)
+            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Source", 300, 150)
             input2 = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component1"]')))
 
             if (qcd.open_container(self.driver) != 1):
@@ -99,6 +99,7 @@ class TC066:
             if (qcd.open_container(self.driver) != 1):
                 compare1.click()
             
+            qcd.click_maximize_for_select_columns(self.driver)
             qcd.select_datacompare_type(self.driver, 1)
             qcd.check_data_migration_input(self.driver)
             

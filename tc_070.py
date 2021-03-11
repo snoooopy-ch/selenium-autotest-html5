@@ -58,7 +58,7 @@ class TC070:
                 drag_and_drop_js = f.read()
             
             # input 1
-            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Input", 300, 0)
+            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Source", 300, 0)
             input1 = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component0"]')))
 
             if (qcd.open_container(self.driver) != 1):
@@ -82,7 +82,7 @@ class TC070:
                 input1.click()
             
             # Output 2
-            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Output", 500, -250)
+            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Output", 400, -250)
             output = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component1"]')))
             qcd.connect_elements(self.driver, input1, 1, output, 1)
 

@@ -59,7 +59,7 @@ class TC073:
                 drag_and_drop_js = f.read()
             
             # input 1
-            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Input", 300, 0)
+            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Source", 300, 0)
             input1 = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component0"]')))
 
             if (qcd.open_container(self.driver) != 1):
@@ -68,6 +68,14 @@ class TC073:
             qcd.click_maximize_for_select_columns(self.driver)
             qcd.click_api_input(self.driver)
             qcd.add_curl_command_api_input(self.driver, 'https://jsonplaceholder.typicode.com/todos')
+            
+            self.driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div/div[3]/div[2]/div/input').send_keys('John')
+            
+            element = self.driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div/div[2]/label/span[1]/input')
+            absolute_file_path = os.path.abspath("files/sample_073.json")
+            element.send_keys(absolute_file_path)
+            time.sleep(qcd.WAIT1)
+            
             qcd.check_flatten_data(self.driver)
             qcd.add_columns_api_input(self.driver, "id,title")
             qcd.click_validate_api_input(self.driver)
@@ -87,7 +95,7 @@ class TC073:
             
             
             # Data Quality
-            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Data Quality", 700, -300)
+            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Data Quality", 600, -300)
             data_quality = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component1"]')))
             qcd.connect_elements(self.driver, input1, 1, data_quality, 1)
             
@@ -138,7 +146,7 @@ class TC073:
             self.driver.find_element_by_xpath('//*[@id="drop-location"]/*[name()="svg"]/following-sibling::img').click()
                     
             # Column Type
-            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Column type", 300, -100)
+            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Column type", 400, -150)
             
             column_type = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component2"]')))
             input1 = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component0"]')))

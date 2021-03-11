@@ -57,10 +57,10 @@ class TC078:
             with open("js/drag_and_drop.js") as f:
                 drag_and_drop_js = f.read()
             
-            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Input", 300, 0)
-            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Select Columns", 500, -80)
-            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Column type", 500, -150)
-            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Data Quality", 700, -200)
+            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Source", 300, 0)
+            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Select Columns", 300, -80)
+            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Column type", 700, -100)
+            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Data Quality", 800, -200)
             
             input1 = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component0"]')))
             selectcolumns = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component1"]')))

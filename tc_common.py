@@ -43,7 +43,7 @@ WAIT50                      = 50
 WAIT100                     = 100
 WAITDRIVER                  = 20
 
-elements                    = ["Input", "Data Compare", "Select Columns", "Column type", 
+elements                    = ["Source", "Data Compare", "Target", "Select Columns", "Column type", 
                                "Filter Rows", "Remove Duplicates", "Data Quality", "Data Profile",
                                "Output"]
 element_xpath               = ['//div[@id="component0"]/img', 
@@ -54,8 +54,8 @@ element_xpath               = ['//div[@id="component0"]/img',
                                '//div[@id="component5"]/img', 
                                '//div[@id="component6"]/img', 
                                '//div[@id="component7"]/img',
-                               '//div[@id="component8"]/img'
-                               ]
+                               '//div[@id="component8"]/img',
+                               '//div[@id="component9"]/img']
 
 user_xpath                  = '//*[@id="root"]/div/div/div[1]/div/div[1]/div/div/div[2]/div[1]/div/input'
 pass_xpath                  = '//*[@id="root"]/div/div/div[1]/div/div[1]/div/div/div[2]/div[2]/div/input'
@@ -715,14 +715,19 @@ def save_workflow(driver, flow_name):
     
     try:
         element = WebDriverWait(driver, WAIT50).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="root"]/div/div/div[2]/div')))
-        time.sleep(WAIT3)
-        element = WebDriverWait(driver, WAIT20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="root"]/div/div/div[2]/div/div/div[2]/button')))
+        time.sleep(WAIT1)
+        
+        element = WebDriverWait(self.driver, qcd.WAIT3).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="client-snackbar"]')))
+        text = re.compile(r'<[^>]+>').sub('', element.text)
+        print(text)
+        
+        element = WebDriverWait(driver, WAIT50).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="root"]/div/div/div[2]/div/div/div[2]/button')))
         element.click()
     except Exception as e:
         raise Exception('Input1 Validate fails')
 
 # save and excute workflow
-def save_excute_workflow(driver, flow_name, wait = 100):
+def save_excute_workflow(driver, flow_name, wait = 200):
     save_workflow(driver, flow_name)
 
     print('executing...')
@@ -815,16 +820,22 @@ def check_summary_in_final_result(driver, class_name, summary_xpath):
                     if (tmp.find('umnatch') != -1):
                         find = 1
                         flag = 1
+                    
+                    if (tmp.find('warning') != -1):
+                        find = 2
+                        flag = 2
                 except Exception as e:
                     pass
 
-                if (find == 1):
+                if (find == 1 or find == 2):
                     break
                 else:
                     output= output + ' ' + td.text
 
-            if (find == 1):
+            if find == 1:
                 print(output + ' is unmatched')
+            if find == 2:
+                print(output + ' is warning')
     except Exception as ex:
         pass
     
@@ -1247,7 +1258,7 @@ def set_interschema_on_input(driver, value):
 
 # check element present in UI
 def isElementPresentForResult(driver, index):
-    driver.implicitly_wait(1)
+    driver.implicitly_wait(3)
     try:
         driver.find_element_by_xpath(index)
         return True
@@ -1455,16 +1466,11 @@ def columnRowCounts(driver):
 
 # Input value on Dailog
 def inputValueAndSaveOnDailog(driver, value):
-    divs = driver.find_elements_by_xpath('/html/body/div')
-    length = len(divs)
-    print(length)
-    print('/html/body/div[' + str(length) + ']/div[3]/div/div[2]/div/div/input')
-    
-    element = driver.find_element_by_xpath('/html/body/div[' + str(length) + ']/div[3]/div/div[2]/div/div/input')
+    element = driver.find_element_by_xpath("//div[@id='form-dialog-title']/following-sibling::div/div/div/input")
     element.send_keys(Keys.CONTROL + 'a')
     element.send_keys(Keys.DELETE)
     element.send_keys(value)
-    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[' + str(length) + ']/div[3]/div/div[3]/button[1]')))
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, "//div[@id='form-dialog-title']/following-sibling::div[2]/button")))
     element.click()
 
 # check Message and close on Dialog
@@ -1610,7 +1616,8 @@ def add_python_code_api_input(driver, code):
     textarea.send_keys(code)
 
 def check_flatten_data(driver):
-    element = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div[1]/div[3]/div/div[2]/span/span[1]')
+    element = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div/div[4]/span/span[1]')
+                                            
     element.click()
 
 def set_multiline_api_input(driver, value):
@@ -1741,5 +1748,5 @@ def select_compare_type(driver, index):
     element.click()
     
 def check_compare_data_profile(driver):
-    element = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div[5]/div/span/span[1]/input')
+    element = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div[4]/div/span/span[1]/input')
     element.click()

@@ -717,7 +717,7 @@ def save_workflow(driver, flow_name):
         element = WebDriverWait(driver, WAIT50).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="root"]/div/div/div[2]/div')))
         time.sleep(WAIT1)
         
-        element = WebDriverWait(self.driver, qcd.WAIT3).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="client-snackbar"]')))
+        element = WebDriverWait(driver, WAIT3).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="client-snackbar"]')))
         text = re.compile(r'<[^>]+>').sub('', element.text)
         print(text)
         

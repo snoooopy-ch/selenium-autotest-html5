@@ -67,17 +67,45 @@ class TC073:
                 
             qcd.click_maximize_for_select_columns(self.driver)
             qcd.click_api_input(self.driver)
-            qcd.add_curl_command_api_input(self.driver, 'https://jsonplaceholder.typicode.com/todos')
             
-            self.driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div/div[3]/div[2]/div/input').send_keys('John')
+            python_code = """
+            
+import requests
+import json
+
+ 
+API_KEY = "d25a07df6199416b87816551ebf80b0744c50b8c2fa385909c0820cfde80a3c5"
+PDL_VERSION = "v5"
+PDL_URL = "https://dataq-testing-data.s3.amazonaws.com/conversation.json"
+ 
+ 
+params = {
+   "api_key": API_KEY,
+   "name": ["sean thorne"],
+   "company": ["peopledatalabs.com"]
+}
+ 
+json_response = requests.get(PDL_URL, params=params).json()
+json_text = json.dumps(json_response)
+f = open("/tmp/dq_output_file_name.json", "w")
+f.write(json_text)
+f.close()   """
+            
+            qcd.add_python_code_api_input(self.driver, python_code)
+
+            # qcd.add_curl_command_api_input(self.driver, 'https://jsonplaceholder.typicode.com/todos')
+            
+            
             
             element = self.driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div/div[2]/label/span[1]/input')
             absolute_file_path = os.path.abspath("files/sample_073.json")
             element.send_keys(absolute_file_path)
             time.sleep(qcd.WAIT1)
             
+            self.driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div/div[3]/div[2]/div/input').send_keys('John')
+            
             qcd.check_flatten_data(self.driver)
-            qcd.add_columns_api_input(self.driver, "id,title")
+            qcd.add_columns_api_input(self.driver, "data_education_school_type, dataset_version")
             qcd.click_validate_api_input(self.driver)
             
             try:
@@ -152,13 +180,15 @@ class TC073:
             input1 = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component0"]')))
             data_quality = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component1"]')))
             
-            first_parent = input1.find_element_by_xpath('..')
-            entry1 = first_parent.find_element_by_xpath("./following-sibling::div/following-sibling::div")
-            second_parent = column_type.find_element_by_xpath('..')
-            entry2 = second_parent.find_element_by_xpath("./following-sibling::div")
-            action = ActionChains(self.driver)
-            action.click_and_hold(entry1).move_to_element(entry2).release(entry2).perform()
-            time.sleep(qcd.WAIT1)
+            # first_parent = input1.find_element_by_xpath('..')
+            # entry1 = first_parent.find_element_by_xpath("./following-sibling::div/following-sibling::div")
+            # second_parent = column_type.find_element_by_xpath('..')
+            # entry2 = second_parent.find_element_by_xpath("./following-sibling::div")
+            # action = ActionChains(self.driver)
+            # action.click_and_hold(entry1).move_to_element(entry2).release(entry2).perform()
+            # time.sleep(qcd.WAIT1)
+            qcd.remove_connection_between(self.driver, input1, data_quality)
+            
             
             if (qcd.open_container(self.driver) != 1):
                 column_type.click()
@@ -174,13 +204,14 @@ class TC073:
             
             qcd.click_save_on_cp(self.driver)
                 
-            first_parent = column_type.find_element_by_xpath('..')
-            entry1 = first_parent.find_element_by_xpath("./following-sibling::div/following-sibling::div")
-            second_parent = data_quality.find_element_by_xpath('..')
-            entry2 = second_parent.find_element_by_xpath("./following-sibling::div/following-sibling::div")
-            action = ActionChains(self.driver)
-            action.click_and_hold(entry1).move_to_element(entry2).release(entry2).perform()
-            time.sleep(qcd.WAIT1)
+            # first_parent = column_type.find_element_by_xpath('..')
+            # entry1 = first_parent.find_element_by_xpath("./following-sibling::div/following-sibling::div")
+            # second_parent = data_quality.find_element_by_xpath('..')
+            # entry2 = second_parent.find_element_by_xpath("./following-sibling::div/following-sibling::div")
+            # action = ActionChains(self.driver)
+            # action.click_and_hold(entry1).move_to_element(entry2).release(entry2).perform()
+            # time.sleep(qcd.WAIT1)
+            qcd.remove_connection_between(self.driver, column_type, data_quality)
             
             if (qcd.open_container(self.driver) != 1):
                 data_quality.click()

@@ -1443,6 +1443,7 @@ def onUploadJsonFlowFile(driver, filePath):
     absolute_file_path = os.path.abspath("files/" + filePath)
     element.send_keys(absolute_file_path)
     inputValueAndSaveOnDailog(driver, "TC_036_JSON")
+    time.sleep(WAIT5)
     
 # Set Input Select Column
 def setInputSelectColumnValue(driver, value):
@@ -1750,3 +1751,12 @@ def select_compare_type(driver, index):
 def check_compare_data_profile(driver):
     element = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div[4]/div/span/span[1]/input')
     element.click()
+    
+def remove_connection_between(driver, element1, element2):
+    first_parent = element1.find_element_by_xpath('..')
+    entry1 = first_parent.find_element_by_xpath("./following-sibling::div/following-sibling::div")
+    second_parent = element2.find_element_by_xpath('..')
+    entry2 = second_parent.find_element_by_xpath("./following-sibling::div")
+    action = ActionChains(driver)
+    action.click_and_hold(entry1).move_to_element(entry2).release(entry2).perform()
+    time.sleep(qcd.WAIT1)

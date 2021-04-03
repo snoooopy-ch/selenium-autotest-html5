@@ -86,6 +86,7 @@ from tc_080 import TC080
 from tc_081 import TC081
 from tc_082 import TC082
 from tc_083 import TC083
+from tc_084 import TC084
 from tester import DTESTER
 
 def str2Class(str):
@@ -94,8 +95,8 @@ def str2Class(str):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("-r", "--url", help="input site url, default 'http://dataq-frontend.s3-website.us-east-2.amazonaws.com/#/user-home/flow'")
-    parser.add_argument("-u", "--user", help="input login user, default 'john'")
-    parser.add_argument("-p", "--password", help="input login pass, default 'dataq'")
+    parser.add_argument("-u", "--user", help="input login user, default 'tarun'")
+    parser.add_argument("-p", "--password", help="input login pass, default 'dataq123'")
     parser.add_argument("-s", "--scripts", help="input script number to execute using comma")
     parser.add_argument("-a", "--all", help="input for all scripts", action="store_true")
     parser.add_argument("-t", "--tester", help="test saved scripts", action="store_true")
@@ -111,24 +112,24 @@ if __name__ == '__main__':
     if args.user:
         user = args.user
     else:
-        user = "john"
+        user = "tarun"
 
     print(user)
 
     if args.password:
         password = args.password
     else:
-        password = "dataq"
+        password = "dataq123"
 
     print(password)
 
     if args.scripts:
         scpt_number = [int(item) for item in args.scripts.split(',')]
     else:
-        scpt_number = [1,2,3,4,5,6,7,8,9,11,12,13,15,16,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83]
+        scpt_number = [1,2,3,4,5,6,7,8,9,11,12,13,15,16,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84]
         
     if args.all:
-        scpt_number = [1,2,3,4,5,6,7,8,9,11,12,13,15,16,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83]
+        scpt_number = [1,2,3,4,5,6,7,8,9,11,12,13,15,16,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84]
 
     if args.tester:
         scpt_number = ['tester']

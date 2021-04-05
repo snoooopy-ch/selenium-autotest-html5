@@ -8,7 +8,7 @@ WORKDIR /app
 RUN wget -q https://artifacts.elastic.co/GPG-KEY-elasticsearch
 RUN apt-key add GPG-KEY-elasticsearch
 
-RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 78BD65473CB3BD13
+RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 78BD65473CB3BD13
 
 RUN sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
 
@@ -29,4 +29,4 @@ RUN pip install --upgrade pip
 # install selenium
 RUN pip install selenium
 
-CMD python dataq.py -s 2
+CMD python dataq.py -a

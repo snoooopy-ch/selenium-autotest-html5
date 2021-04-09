@@ -119,7 +119,7 @@ dataset_format_xpath        = '//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div
 manual_upload_validate_xpath = '//*[@id="top_panel"]/div/div[2]/div[2]/div[2]/div/div/div[1]/button'
 viewedit_xpath              = '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/div[2]/div/div[1]/div[2]/div[1]/div/div[8]/div/div/*[name()="svg"]'
 exportToPDF_xpath           = '/html/body/div[2]/div[3]/div/div/div/div/div[2]/div/div[1]/a/button'
-logout_xpath                = '//*[@id="root"]/div/div/div[1]/div/div/header/div/div[3]/button'
+logout_xpath                = '//*[@id="root"]/div/div/div[1]/div/div/header/div/div[4]/button'
 input_select_column_xpath   = '//*[@id="top_panel"]/div/div[2]/div[1]/div/div[2]/div[2]/div/div/input'
 dialog_input_xpath          = '/html/body/div[5]/div[3]/div/div[2]/div/div/input'
 dialog_savebtn_xpath        = '/html/body/div[5]/div[3]/div/div[3]/button[1]'
@@ -733,6 +733,8 @@ def save_excute_workflow(driver, flow_name, wait = 200):
     print('executing...')
     btn_execute = driver.find_element_by_xpath(excute_xpath)
     btn_execute.click()
+    
+    click_back_execute_log_panel(driver)
 
     try:
         btn_result = WebDriverWait(driver, wait).until(EC.element_to_be_clickable((By.XPATH, result_xpath)))

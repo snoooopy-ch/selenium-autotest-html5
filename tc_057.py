@@ -95,7 +95,7 @@ class TC057:
                 data_profile.click()
 
             # execute
-            qcd.save_excute_workflow(self.driver, 'TC_057_ALEX')
+            qcd.save_excute_workflow(self.driver, 'TC_057_Morimura')
             
         except Exception as e:
             qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
@@ -119,7 +119,7 @@ class TC057:
             qcd.set_interschema_on_input(self.driver, 'true')
             
             # execute
-            qcd.save_excute_workflow(self.driver, 'TC_057_ALEX')
+            qcd.save_excute_workflow(self.driver, 'TC_057_Morimura')
             pass
         except Exception as e:
             raise Exception(e)

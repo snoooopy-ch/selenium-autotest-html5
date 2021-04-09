@@ -137,7 +137,7 @@ class TC030:
             qcd.checkLeftSpacesOnDataQuality(self.driver, 12)
             
             # execute
-            qcd.save_excute_workflow(self.driver, 'TC_030_ALEX')
+            qcd.save_excute_workflow(self.driver, 'TC_030_Morimura')
             
         except Exception as e:
             qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))

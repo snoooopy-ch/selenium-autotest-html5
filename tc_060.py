@@ -92,7 +92,7 @@ class TC060:
             qcd.modify_sql_rul_dataquality(self.driver, 5, "Select birth_date from Patient where Patient_name='Vithika'", "")
 
             # execute
-            qcd.save_excute_workflow(self.driver, 'TC_060_ALEX')
+            qcd.save_excute_workflow(self.driver, 'TC_060_Morimura')
             
         except Exception as e:
             qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
@@ -120,7 +120,7 @@ class TC060:
             self.driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div[3]/div/div[2]/div/div/div[1]/div[2]/div[6]/div/div[5]/div/div').click()
             
             # execute
-            qcd.save_excute_workflow(self.driver, 'TC_060_ALEX', 500)
+            qcd.save_excute_workflow(self.driver, 'TC_060_Morimura', 500)
             
             self.printResultTable()
         except Exception as e:

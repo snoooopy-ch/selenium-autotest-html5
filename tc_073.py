@@ -135,7 +135,7 @@ f.close()   """
             qcd.inputMaxValueOnDataQuality(self.driver, 1, 10)
 
             # execute
-            qcd.save_excute_workflow(self.driver, 'TC_073_ALEX')
+            qcd.save_excute_workflow(self.driver, 'TC_073_Morimura')
             
             detail_span_xpath = '/html/body/div[2]/div[3]/div/div/div/div/div[1]/span[2]'
             try:
@@ -221,7 +221,7 @@ f.close()   """
             qcd.check_nullcheck_on_dataqualityheader(self.driver)
             
             # execute
-            qcd.save_excute_workflow(self.driver, 'TC_073_ALEX')
+            qcd.save_excute_workflow(self.driver, 'TC_073_Morimura')
             
         except Exception as e:
             qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))

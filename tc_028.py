@@ -101,7 +101,7 @@ class TC028:
             qcd.inputMinValueOnDataQuality(self.driver, 7, 33000)
 
             # execute
-            qcd.save_excute_workflow(self.driver, 'TC_028_ALEX')
+            qcd.save_excute_workflow(self.driver, 'TC_028_Morimura')
             
         except Exception as e:
             qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))

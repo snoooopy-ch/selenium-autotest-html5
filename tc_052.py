@@ -79,7 +79,7 @@ class TC052:
                 data_profile.click()
             
             # execute
-            qcd.save_excute_workflow(self.driver, 'TC_052_ALEX')
+            qcd.save_excute_workflow(self.driver, 'TC_052_Morimura')
 
         except Exception as e:
             qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))

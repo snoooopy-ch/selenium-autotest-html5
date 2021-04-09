@@ -99,7 +99,7 @@ class TC067:
                 data_quality.click()
 
             # save
-            qcd.save_workflow(self.driver, 'TC_067_ALEX')
+            qcd.save_workflow(self.driver, 'TC_067_Morimura')
             
             if (qcd.open_container(self.driver) != 1):
                 input1.click()
@@ -124,7 +124,7 @@ class TC067:
             qcd.check_completeness_on_dataqualityheader(self.driver)
             
             # execute
-            qcd.save_excute_workflow(self.driver, 'TC_067_ALEX')
+            qcd.save_excute_workflow(self.driver, 'TC_067_Morimura')
             
         except Exception as e:
             qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))

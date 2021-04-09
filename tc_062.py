@@ -87,7 +87,7 @@ class TC062:
             qcd.connect_elements(self.driver, input1, 1, data_profile, 1)
 
             # execute
-            qcd.save_excute_workflow(self.driver, 'TC_062_ALEX')
+            qcd.save_excute_workflow(self.driver, 'TC_062_Morimura')
             
         except Exception as e:
             qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))

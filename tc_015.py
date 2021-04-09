@@ -88,7 +88,7 @@ class TC015:
                 print("TC015: {0} table are selected", item.text)
 
             # execute
-            qcd.save_excute_workflow(self.driver, 'TC_015_ALEX')
+            qcd.save_excute_workflow(self.driver, 'TC_015_Morimura')
 
         except Exception as e:
             qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))

@@ -101,7 +101,7 @@ class TC053:
             name_field = self.driver.find_element_by_xpath(qcd.name_xpath)
             name_field.send_keys(Keys.CONTROL + 'a') 
             name_field.send_keys(Keys.DELETE)
-            name_field.send_keys('TC_053_ALEX')
+            name_field.send_keys('TC_053_Morimura')
             
             btn_save = self.driver.find_element_by_xpath(qcd.save_xpath)
             btn_save.click()
@@ -125,7 +125,7 @@ class TC053:
             qcd.add_columns_in_datacompare_tableitem(self.driver)
 
             # execute
-            qcd.save_excute_workflow(self.driver, 'TC_053_ALEX')
+            qcd.save_excute_workflow(self.driver, 'TC_053_Morimura')
         except Exception as e:
             qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
             raise Exception(e)
@@ -160,7 +160,7 @@ class TC053:
             qcd.select_datacompare_type(self.driver, 1)
             
             # execute
-            qcd.save_excute_workflow(self.driver, 'TC_053_ALEX')
+            qcd.save_excute_workflow(self.driver, 'TC_053_Morimura')
             qcd.click_result_close(self.driver)
         except Exception as e:
             qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))

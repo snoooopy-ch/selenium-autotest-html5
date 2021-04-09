@@ -102,7 +102,7 @@ class TC061:
             data_quality.click()
             
             # save
-            qcd.save_workflow(self.driver, 'TC_061_ALEX')
+            qcd.save_workflow(self.driver, 'TC_061_Morimura')
             
             # open panel
             input1.click()
@@ -130,7 +130,7 @@ class TC061:
             
             time.sleep(qcd.WAIT3)
             # execute
-            qcd.save_excute_workflow(self.driver, 'TC_061_ALEX')
+            qcd.save_excute_workflow(self.driver, 'TC_061_Morimura')
         except Exception as e:
             qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
             raise Exception(e)

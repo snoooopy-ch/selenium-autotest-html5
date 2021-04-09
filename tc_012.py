@@ -98,7 +98,7 @@ class TC012:
             qcd.add_mapping_table_name(self.driver)
 
             # execute
-            qcd.save_excute_workflow(self.driver, 'TC_012_ALEX')
+            qcd.save_excute_workflow(self.driver, 'TC_012_Morimura')
             
         except Exception as e:
             qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))

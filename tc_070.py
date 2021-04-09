@@ -98,7 +98,7 @@ class TC070:
             qcd.click_output_overwrite(self.driver, 2)
             
             # execute
-            qcd.save_excute_workflow(self.driver, 'TC_070_ALEX', 500)
+            qcd.save_excute_workflow(self.driver, 'TC_070_Morimura', 500)
             
         except Exception as e:
             qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))

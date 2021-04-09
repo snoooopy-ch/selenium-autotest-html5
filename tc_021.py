@@ -186,7 +186,7 @@ class TC021:
             print("gradePoints_int's type is " + data_type)
 
             # execute
-            qcd.save_excute_workflow(self.driver, 'TC_021_ALEX')
+            qcd.save_excute_workflow(self.driver, 'TC_021_Morimura')
 
         except Exception as e:
             qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))

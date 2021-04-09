@@ -120,7 +120,7 @@ class TC078:
             qcd.check_leftspaces_on_dataqualityheader(self.driver)
             
             # execute
-            qcd.save_excute_workflow(self.driver, 'TC_078_ALEX')
+            qcd.save_excute_workflow(self.driver, 'TC_078_Morimura')
 
         except Exception as e:
             qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
@@ -159,7 +159,7 @@ class TC078:
             qcd.check_leftspaces_on_dataqualityheader(self.driver)
                 
             # execute
-            qcd.save_excute_workflow(self.driver, 'TC_078_ALEX')
+            qcd.save_excute_workflow(self.driver, 'TC_078_Morimura')
             qcd.click_result_close(self.driver)
             pass
         except Exception as e:

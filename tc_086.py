@@ -22,8 +22,7 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.webdriver.common.action_chains import ActionChains
 
-
-class TC077:
+class TC086:
     def __init__(self, drv):
         self.driver = drv
 
@@ -66,21 +65,21 @@ class TC077:
             if (qcd.open_container(self.driver) != 1):
                 input1.click()
 
-            qcd.select_dbset_input(self.driver, 'marketing_dev')
-            qcd.select_db(self.driver)
-            qcd.click_all_select(self.driver)
+            qcd.select_dbset_input(self.driver, 'sampledb_src')
+            qcd.select_db_with_index(self.driver, 'sampledb_src')
+            qcd.select_table(self.driver, "tolerance")
             qcd.click_add_select_btn(self.driver)
 
-            # input 2
-            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Source", 300, 160)
-            input2 = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component1"]')))
+            # Target
+            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Target", 300, 60)
+            target = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component1"]')))
 
             if (qcd.open_container(self.driver) != 1):
-                input2.click()
+                target.click()
 
-            qcd.select_dbset_input(self.driver, 'marketing_dev')
-            qcd.select_db(self.driver)
-            qcd.click_all_select(self.driver)
+            qcd.select_dbset_input(self.driver, 'sampledb_dest')
+            qcd.select_db_with_index(self.driver, 'sampledb_dest')
+            qcd.select_table(self.driver, "tolerance")
             qcd.click_add_select_btn(self.driver)
 
             # data compare
@@ -88,80 +87,25 @@ class TC077:
             compare1 = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component2"]')))
 
             qcd.connect_elements(self.driver, input1, 1, compare1, 1)
-            qcd.connect_elements(self.driver, input2, 1, compare1, 1)
+            qcd.connect_elements(self.driver, target, 1, compare1, 1)
 
             if (qcd.open_container(self.driver) != 1):
                 compare1.click()
             
+            qcd.click_maximize_for_select_columns(self.driver)
             qcd.select_datacompare_type(self.driver, 1)
+
             qcd.select_mapping_tab(self.driver)
+            qcd.select_mapping_table_item(self.driver, 1)
+            add_mapping_table_for_type_compare_with_index(self.driver, "gradePoints_int", "student_id_bright_pk")
             
-            # Prescription
-            qcd.select_mapping_table_item(self.driver, 2)
-            qcd.select_key_for_table_item(self.driver, 1)
-            
-            # medicines
-            qcd.select_mapping_table_item(self.driver, 3)
-            qcd.select_key_for_table_item(self.driver, 1)
-            
-            # sales_dev_input
-            qcd.select_mapping_table_item(self.driver, 8)
-            qcd.select_key_for_table_item(self.driver, 1)
-            
-            # Claims
-            qcd.select_mapping_table_item(self.driver, 12)
-            qcd.select_key_for_table_item(self.driver, 1)
-            
-            # sales_dev_bad_output
-            qcd.select_mapping_table_item(self.driver, 14)
-            qcd.select_key_for_table_item(self.driver, 1)
-            
-            # City
-            qcd.select_mapping_table_item(self.driver, 17)
-            qcd.select_key_for_table_item(self.driver, 1)
-            
-            # sales_dev_output
-            qcd.select_mapping_table_item(self.driver, 20)
-            qcd.select_key_for_table_item(self.driver, 1)
-            
-            # pii_src
-            qcd.select_mapping_table_item(self.driver, 22)
-            qcd.select_key_for_table_item(self.driver, 1)
-            
-            # record
-            qcd.close_mapping_table_item(self.driver, 9)
-            
-            # pii_target
-            qcd.close_mapping_table_item(self.driver, 10)
-            
-            # item_desc
-            qcd.close_mapping_table_item(self.driver, 11)
-            
-            # Patient
-            qcd.close_mapping_table_item(self.driver, 12)
-            
-            # bill
-            qcd.close_mapping_table_item(self.driver, 12)
-            
-            # Student
-            qcd.close_mapping_table_item(self.driver, 14)
-            
-            # Hospital_Info
-            qcd.close_mapping_table_item(self.driver, 15)
-            
-            # # record
-            # qcd.close_mapping_table_item(self.driver, 15)
-
             # execute
-            qcd.save_excute_workflow(self.driver, 'TC_077_Morimura', 500)
-
+            qcd.save_excute_workflow(self.driver, 'TC_085_Morimura', 700)
         except Exception as e:
             qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
             raise Exception(e)
             pass
 
-        time.sleep(qcd.WAIT1)
-        print('finish')
 
     def check_result(self):
         try:
@@ -173,7 +117,7 @@ class TC077:
                 
                 columns = innerRecord.find_elements_by_xpath('./div')
                 if recordClass.find('-padRow') == -1:
-                    print("Src Table:{}, Dest Table:{}, Match:{}".format(columns[0].text, columns[1].text, columns[2].find_element_by_xpath('./img').get_attribute('alt')))
+                    print("Src Table:{}, Dest Table:{}, Match:{}, Src Record Count:{}, Src Record Mismatch:{}, Src Orphan Records:{}, Dest Record Count:{}, Dest Record Mismatch:{}, Dest Orphan Records".format(columns[0].text, columns[1].text, columns[2].find_element_by_xpath('./img').get_attribute('alt'), columns[3].text, columns[4].text, columns[5].text, columns[6].text, columns[7].text, columns[8].text))
                 else:
                     break
             qcd.click_result_close(self.driver)
@@ -181,5 +125,32 @@ class TC077:
             qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
             raise Exception(e)
             pass
+        
+        qcd.click_result_close(self.driver)
+        qcd.click_action_on_first_flow(self.driver, 1)
+        
+        compare1 = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component2"]')))
+        
+        if (qcd.open_container(self.driver) != 1):
+            column_type.click()
+        qcd.select_mapping_tab(self.driver)
+            
+        qcd.click_maximize_for_select_columns(self.driver)
+        qcd.click_select_tableitem_for_select_columns(self.driver, "Claims")
+        qcd.click_select_all_for_columntype(self.driver)
+        qcd.select_item_from_column_data_type_list(self.driver, 1, 9)
+        qcd.click_save_on_cp(self.driver)
+        qcd.close_maximize_for_select_columns(self.driver)
+        
+        if (qcd.open_container(self.driver) == 1):
+            column_type.click()
+            
+        if (qcd.open_container(self.driver) == 1):
+            data_compare.click()
+        
+        qcd.select_compare_tab(self.driver)
+        qcd.select_datacompare_type(self.driver, 3)
+        
+        print('finished')
+        
         return
-

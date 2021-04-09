@@ -87,7 +87,7 @@ class TC014:
             qcd.initialize_on_dataquality(self.driver, 4, 1, 4, 3, 4)
 
             # execute
-            qcd.save_excute_workflow(self.driver, 'TC_014_ALEX')
+            qcd.save_excute_workflow(self.driver, 'TC_014_Morimura')
         except Exception as e:
             qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
             raise Exception(e)

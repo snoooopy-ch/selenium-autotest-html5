@@ -107,7 +107,7 @@ class TC066:
             qcd.select_key_for_warning_mapping_tableitem(self.driver, 1)
             
             # execute
-            qcd.save_excute_workflow(self.driver, 'TC_066_ALEX', 500)
+            qcd.save_excute_workflow(self.driver, 'TC_066_Morimura', 500)
             
         except Exception as e:
             qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))

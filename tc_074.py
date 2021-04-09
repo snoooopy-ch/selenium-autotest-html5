@@ -85,7 +85,7 @@ class TC074:
             name_field = self.driver.find_element_by_xpath(qcd.name_xpath)
             name_field.send_keys(Keys.CONTROL + 'a') 
             name_field.send_keys(Keys.DELETE)
-            name_field.send_keys('TC_074_ALEX')
+            name_field.send_keys('TC_074_Morimura')
             
             qcd.clickAutoSuggestOnDataQuality(self.driver)
             print('clickAutoSuggestOnDataQuality')
@@ -142,7 +142,7 @@ class TC074:
                 qcd.check_leftspaces_on_dataqualityheader(self.driver)
                 
                 # execute
-                qcd.save_excute_workflow(self.driver, 'TC_074_ALEX')
+                qcd.save_excute_workflow(self.driver, 'TC_074_Morimura')
             else:
                 print('unchecked')
 

@@ -84,7 +84,7 @@ class TC051:
             name_field = self.driver.find_element_by_xpath(qcd.name_xpath)
             name_field.send_keys(Keys.CONTROL + 'a') 
             name_field.send_keys(Keys.DELETE)
-            name_field.send_keys('TC_051_ALEX')
+            name_field.send_keys('TC_051_Morimura')
             
             qcd.clickAutoSuggestOnDataQuality(self.driver)
             time.sleep(qcd.WAIT5)
@@ -104,7 +104,7 @@ class TC051:
                 qcd.uniqueCheckOnDataQuality(self.driver, 8)
                 
                 # execute
-                qcd.save_excute_workflow(self.driver, 'TC_051_ALEX')
+                qcd.save_excute_workflow(self.driver, 'TC_051_Morimura')
             else:
                 print('unchecked')
 

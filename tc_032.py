@@ -101,7 +101,7 @@ class TC032:
             qcd.inputRegularExpressOnDataQuality(self.driver, 2, "[B][0-9]{4,6}")
             
             # execute
-            qcd.save_excute_workflow(self.driver, 'TC_032_ALEX')
+            qcd.save_excute_workflow(self.driver, 'TC_032_Morimura')
             
         except Exception as e:
             qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
@@ -135,7 +135,7 @@ class TC032:
             qcd.clickNextButtonOnDataQuality(self.driver)
             qcd.inputRegularExpressOnDataQuality(self.driver, 11, "[a-z A-Z]{2}")
             
-            qcd.save_excute_workflow(self.driver, 'TC_032_ALEX')
+            qcd.save_excute_workflow(self.driver, 'TC_032_Morimura')
             
         except Exception as e:
             qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))

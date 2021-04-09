@@ -107,7 +107,7 @@ class TC007:
             qcd.select_datacompare_type(self.driver, 1)
             
             # execute
-            qcd.save_excute_workflow(self.driver, 'TC_007_ALEX')
+            qcd.save_excute_workflow(self.driver, 'TC_007_Morimura')
         except Exception as e:
             qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
             raise Exception(e)

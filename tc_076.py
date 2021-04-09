@@ -112,7 +112,7 @@ class TC076:
             qcd.check_leftspaces_on_dataqualityheader(self.driver)
             
             # execute
-            qcd.save_excute_workflow(self.driver, 'TC_076_ALEX')
+            qcd.save_excute_workflow(self.driver, 'TC_076_Morimura')
 
         except Exception as e:
             
@@ -158,7 +158,7 @@ class TC076:
             qcd.inputMaxValueOnDataQuality(self.driver, 3, 10)
 
             # execute
-            qcd.save_excute_workflow(self.driver, 'TC_076_ALEX')
+            qcd.save_excute_workflow(self.driver, 'TC_076_Morimura')
             pass
         except Exception as e:
             raise Exception(e)

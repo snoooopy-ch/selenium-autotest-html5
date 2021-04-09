@@ -143,7 +143,7 @@ class TC050:
             qcd.check_rightspaces_on_dataqualityheader(self.driver)
 
             # execute
-            qcd.save_excute_workflow(self.driver, 'TC_050_ALEX')
+            qcd.save_excute_workflow(self.driver, 'TC_050_Morimura')
 
         except Exception as e:
             qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))

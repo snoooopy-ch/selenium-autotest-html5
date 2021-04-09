@@ -85,7 +85,7 @@ class TC017:
             qcd.add_sql_on_dataquality(self.driver, 11, "SELECT COUNT(DISTINCT active) FROM Insurance", "job3")
 
             # execute
-            qcd.save_excute_workflow(self.driver, 'TC_017_ALEX')
+            qcd.save_excute_workflow(self.driver, 'TC_017_Morimura')
             
         except Exception as e:
             qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))

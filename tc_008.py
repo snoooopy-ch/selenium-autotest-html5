@@ -91,7 +91,7 @@ class TC008:
                 selectcolumns.click()
 
             qcd.click_maximize_for_select_columns(self.driver)
-            qcd.click_select_tableitem_for_select_columns(self.driver, "City")
+            qcd.click_select_tableitem_for_select_columns(self.driver, "City - marketing_dev/ demodb")
             qcd.select_table(self.driver, "c_id")
             qcd.select_item_from_column_data_type_list(self.driver, 1, 9)
             qcd.click_save_on_cp(self.driver)

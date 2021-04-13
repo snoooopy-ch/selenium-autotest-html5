@@ -110,8 +110,9 @@ class TC033:
 
             # qcd.add_mapping_table_for_type_compare(self.driver)
             qcd.add_mapping_table_for_type_compare_with_index(self.driver, 'assessment_report', 'medicine_students_finalreport')
-            qcd.select_mapping_table_item(self.driver, 1)
-            qcd.select_key_for_table_item(self.driver, 1)
+            qcd.select_key_for_warning_mapping_tableitem(self.driver, 1)
+            # qcd.select_mapping_table_item(self.driver, 1)
+            # qcd.select_key_for_table_item(self.driver, 1)
 
             # execute
             qcd.save_excute_workflow(self.driver, 'TC_033_Morimura', 300)

@@ -99,7 +99,7 @@ class TC076:
             qcd.close_maximize_for_select_columns(self.driver)
                 
             # Data Quality
-            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Data Quality", 850, -250)
+            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Data Quality", 1000, -250)
             data_quality = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component3"]')))
             qcd.connect_elements(self.driver, columntype, 2, data_quality, 1)
 

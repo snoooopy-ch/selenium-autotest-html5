@@ -80,11 +80,11 @@ class TC032:
                 data_quality.click()
 
             qcd.select_rules_tab(self.driver)
-            qcd.select_rule_on_dataquality(self.driver, 'Student_Information')
+            qcd.select_rule_on_dataquality(self.driver, 'Student_Information - hims/ hims_db')
             qcd.inputRegularExpressOnDataQuality(self.driver, 3, "[a-z A-Z]{2}")
             qcd.inputRegularExpressOnDataQuality(self.driver, 4, "[A-Z][a-z]*[0-9][-]")
             
-            qcd.select_rule_on_dataquality(self.driver, 'medicine_students_finalreport')
+            qcd.select_rule_on_dataquality(self.driver, 'medicine_students_finalreport - hims/ hims_db')
             qcd.inputRegularExpressOnDataQuality(self.driver, 1, "[A-Z][a-z]+")
             qcd.inputRegularExpressOnDataQuality(self.driver, 2, "[A-Z]{1}")
             qcd.inputRegularExpressOnDataQuality(self.driver, 3, "[0-9]{1,3}")
@@ -97,7 +97,7 @@ class TC032:
             qcd.inputRegularExpressOnDataQuality(self.driver, 12, "[\w]+")
             qcd.inputRegularExpressOnDataQuality(self.driver, 14, "[A-Z][a-z]+")
             
-            qcd.select_rule_on_dataquality(self.driver, 'courses_info')
+            qcd.select_rule_on_dataquality(self.driver, 'courses_info - hims/ hims_db')
             qcd.inputRegularExpressOnDataQuality(self.driver, 2, "[B][0-9]{4,6}")
             
             # execute
@@ -131,7 +131,7 @@ class TC032:
                 data_quality.click()
                 
             qcd.select_rules_tab(self.driver)
-            qcd.select_rule_on_dataquality(self.driver, 'medicine_students_finalreport')
+            qcd.select_rule_on_dataquality(self.driver, 'medicine_students_finalreport - hims/ hims_db')
             qcd.clickNextButtonOnDataQuality(self.driver)
             qcd.inputRegularExpressOnDataQuality(self.driver, 11, "[a-z A-Z]{2}")
             

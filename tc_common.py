@@ -44,7 +44,7 @@ WAIT100                     = 100
 WAITDRIVER                  = 20
 
 elements                    = ["Source", "Data Compare", "Target", "Select Columns", "Column type", 
-                               "Filter Rows", "Remove Duplicates", "Data Quality", "Data Profile",
+                               "Filter Rows", "Data Quality", "Data Profile",
                                "Output"]
 element_xpath               = ['//div[@id="component0"]/img', 
                                '//div[@id="component1"]/img', 
@@ -246,7 +246,7 @@ def select_dbset_input(driver, db):
     
     index = 1
     for item in items:
-        if (item.text == db):
+        if item.text.startswith(db):
             item.click()
             break
         index += 1
@@ -265,7 +265,7 @@ def select_dbset_sql_input(driver, db):
     
     index = 1
     for item in items:
-        if (item.text == db):
+        if item.text.startswith(db):
             item.click()
             break
         index += 1
@@ -304,7 +304,7 @@ def select_db_with_index(driver, db):
     
     index = 1
     for item in items:
-        if (item.text == db):
+        if item.text.startswith(db):
             item.click()
             break
         index += 1
@@ -332,7 +332,7 @@ def click_select_tableitem_for_select_columns(driver, value):
     items = driver.find_elements_by_xpath(table_sc_val_xpath)
     
     for item in items:
-        if (item.text == value):
+        if item.text.startswith(value):
             item.click()
             time.sleep(WAIT1)
             break
@@ -516,7 +516,7 @@ def add_mapping_table_for_type_compare_with_index(driver, name1, name2):
     
     index = 1
     for item in items:
-        if (item.text == name1):
+        if item.text.startswith(name1):
             item.click()
             break
         index += 1
@@ -530,7 +530,7 @@ def add_mapping_table_for_type_compare_with_index(driver, name1, name2):
     
     index = 1
     for item in items:
-        if (item.text == name2):
+        if item.text.startswith(name2):
             item.click()
             break
         index += 1
@@ -598,7 +598,7 @@ def select_rule_on_dataquality(driver, table):
     
     index = 1
     for item in items:
-        if item.text == table:
+        if item.text.startswith(table):
             item.click()
             break
         index += 1
@@ -866,7 +866,7 @@ def add_mappingproperties_in_datacompare_selected_table(driver, name1, name2):
     
     index = 1
     for item in items:
-        if (item.text == name1):
+        if item.text.startswith(name1):
             item.click()
             break
         index += 1
@@ -880,7 +880,7 @@ def add_mappingproperties_in_datacompare_selected_table(driver, name1, name2):
     
     index = 1
     for item in items:
-        if (item.text == name2):
+        if item.text.startswith(name2):
             item.click()
             break
         index += 1
@@ -1189,7 +1189,7 @@ def click_api_input(driver):
     element.click()
 
 # select manual upload dataset format
-def select_manual_upload_dataset_format(driver, format):
+def select_manual_upload_dataset_format(driver, strFormat):
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, dataset_format_xpath)))
     element.click()
     
@@ -1197,7 +1197,7 @@ def select_manual_upload_dataset_format(driver, format):
     items = db_value.find_elements_by_xpath('./div')
     
     for item in items:
-        if item.text == format:
+        if item.text.startswith(strFormat):
             item.click()
             break
     
@@ -1469,11 +1469,7 @@ def columnRowCounts(driver):
 
 # Input value on Dailog
 def inputValueAndSaveOnDailog(driver, value):
-    element = driver.find_element_by_xpath("//div[@id='form-dialog-title']/following-sibling::div/div/div/input")
-    element.send_keys(Keys.CONTROL + 'a')
-    element.send_keys(Keys.DELETE)
-    element.send_keys(value)
-    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, "//div[@id='form-dialog-title']/following-sibling::div[2]/button")))
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, "/html/body/div[27]/div[3]/div/div[2]/button[1]")))
     element.click()
 
 # check Message and close on Dialog
@@ -1665,7 +1661,7 @@ def add_output_table_or(driver, table1, table2):
     
     index = 1
     for item in items:
-        if (item.text == table1):
+        if item.text.startswith(table1):
             item.click()
             break
         index += 1
@@ -1693,7 +1689,7 @@ def select_dbset_output(driver, db):
     
     index = 1
     for item in items:
-        if (item.text == db):
+        if item.text.startswith(db):
             item.click()
             break
         index += 1
@@ -1723,7 +1719,7 @@ def click_select_column_change(driver, index, value):
     
     index = 1
     for item in items:
-        if (item.text == value):
+        if item.text.startswith(value):
             item.click()
             break
         index += 1

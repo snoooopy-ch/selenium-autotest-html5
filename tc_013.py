@@ -70,7 +70,7 @@ class TC013:
             qcd.click_add_select_btn(self.driver)
 
             # input 2
-            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Source", 300, 160)
+            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Target", 300, 160)
             input2 = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component1"]')))
 
             if (qcd.open_container(self.driver) != 1):

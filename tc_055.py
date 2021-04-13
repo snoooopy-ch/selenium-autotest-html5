@@ -96,7 +96,7 @@ class TC055:
             qcd.click_save_on_cp(self.driver)
             
             # input 2
-            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Source", 300, 160)
+            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Target", 300, 160)
             input2 = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component3"]')))
 
             if (qcd.open_container(self.driver) != 1):

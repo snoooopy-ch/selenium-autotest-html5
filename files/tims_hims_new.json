@@ -1,0 +1,588 @@
+{
+  "executorCores": 3,
+  "executorMemory": "2g",
+  "email": [],
+  "flowName": "dataq1615366048002",
+  "hadoop": false,
+  "livy": false,
+  "numExecutors": 2,
+  "root": "component2",
+  "executeOn": "LOCAL",
+  "UIDataModel": {
+    "component0": {
+      "name": "Input Source",
+      "icon": "/assets/images/components/input (grey).svg",
+      "hasOutput": true,
+      "type": "InputSource",
+      "active": true,
+      "top": 78,
+      "left": 47,
+      "isLeft": true,
+      "showProgressInput": false,
+      "query": "",
+      "databases": [
+        "tims_db"
+      ],
+      "selectedTables": [
+        "courses_info"
+      ],
+      "selectedTablesSqlInput": [],
+      "filterTab": true,
+      "selectedDatabase": [
+        {
+          "label": "tims_db",
+          "value": "tims_db"
+        }
+      ],
+      "checkedTables": [
+        {
+          "value": "assessment_report",
+          "checked": false
+        },
+        {
+          "value": "courses_info",
+          "checked": true
+        },
+        {
+          "value": "students_info",
+          "checked": false
+        }
+      ],
+      "selectedTablesOptions": [
+        "courses_info"
+      ],
+      "selectedTablesOptionsSqlInput": [],
+      "tables": [
+        "assessment_report",
+        "courses_info",
+        "students_info"
+      ],
+      "result": {
+        "courses_info": {
+          "schema": [
+            {
+              "columnName": "courses",
+              "columnType": "string",
+              "actualColumnType": "VARCHAR",
+              "nullable": false
+            },
+            {
+              "columnName": "Courseid",
+              "columnType": "int",
+              "actualColumnType": "INT",
+              "nullable": false
+            },
+            {
+              "columnName": "code",
+              "columnType": "string",
+              "actualColumnType": "VARCHAR",
+              "nullable": false
+            }
+          ],
+          "sampleData": [],
+          "sqlexection": null,
+          "primarykey": [
+            "code"
+          ],
+          "foreignkey": null,
+          "count": 32,
+          "tableSize": 32,
+          "nunberofpartition": 0,
+          "partitioncolumn": [],
+          "connectionName": "tims",
+          "dbName": "tims_db"
+        }
+      },
+      "enableDataTab": false,
+      "checkBox": false,
+      "selectedConnection": "tims",
+      "sqlInputQueries": [
+        {
+          "queryName": "",
+          "queryVal": ""
+        }
+      ],
+      "sqlQueryArray": [],
+      "dataBaseName": "tims_db",
+      "tableName": "",
+      "sqlQuery": "",
+      "tableNamesList": {
+        "courses_info": {
+          "primarykey": [
+            "code"
+          ],
+          "schema": [
+            {
+              "columnName": "courses",
+              "columnType": "string",
+              "actualColumnType": "VARCHAR",
+              "nullable": false
+            },
+            {
+              "columnName": "Courseid",
+              "columnType": "int",
+              "actualColumnType": "INT",
+              "nullable": false
+            },
+            {
+              "columnName": "code",
+              "columnType": "string",
+              "actualColumnType": "VARCHAR",
+              "nullable": false
+            }
+          ],
+          "tableSize": 32,
+          "count": 32,
+          "column": {},
+          "nunberofpartition": ""
+        }
+      },
+      "tableNamesListSqlInput": {},
+      "selectedTableForPreview": "courses_info",
+      "selectedTableOptions": {
+        "value": "courses_info",
+        "label": "courses_info"
+      },
+      "manualFlow": false,
+      "inputType": "table"
+    },
+    "component1": {
+      "name": "Input Source",
+      "icon": "/assets/images/components/target (grey).svg",
+      "hasOutput": true,
+      "type": "InputSource",
+      "active": true,
+      "top": 205,
+      "left": 55,
+      "isLeft": false,
+      "showProgressInput": false,
+      "query": "",
+      "databases": [
+        "hims_db"
+      ],
+      "selectedTables": [
+        "courses_info"
+      ],
+      "selectedTablesSqlInput": [],
+      "filterTab": true,
+      "selectedDatabase": [
+        {
+          "label": "hims_db",
+          "value": "hims_db"
+        }
+      ],
+      "checkedTables": [
+        {
+          "value": "Student_Information",
+          "checked": false
+        },
+        {
+          "value": "courses_info",
+          "checked": true
+        },
+        {
+          "value": "courses_info_copy",
+          "checked": false
+        },
+        {
+          "value": "medicine_students_finalreport",
+          "checked": false
+        },
+        {
+          "value": "store_sales",
+          "checked": false
+        },
+        {
+          "value": "store_sales_1M",
+          "checked": false
+        },
+        {
+          "value": "store_sales_5M",
+          "checked": false
+        }
+      ],
+      "selectedTablesOptions": [
+        "courses_info"
+      ],
+      "selectedTablesOptionsSqlInput": [],
+      "tables": [
+        "Student_Information",
+        "courses_info",
+        "courses_info_copy",
+        "medicine_students_finalreport",
+        "store_sales",
+        "store_sales_1M",
+        "store_sales_5M"
+      ],
+      "result": {
+        "courses_info": {
+          "schema": [
+            {
+              "columnName": "Courses",
+              "columnType": "string",
+              "actualColumnType": "VARCHAR",
+              "nullable": false
+            },
+            {
+              "columnName": "Code",
+              "columnType": "string",
+              "actualColumnType": "VARCHAR",
+              "nullable": false
+            },
+            {
+              "columnName": "Courses_ID",
+              "columnType": "string",
+              "actualColumnType": "VARCHAR",
+              "nullable": false
+            }
+          ],
+          "sampleData": [],
+          "sqlexection": null,
+          "primarykey": [
+            "Courses_ID"
+          ],
+          "foreignkey": null,
+          "count": 32,
+          "tableSize": 32,
+          "nunberofpartition": 0,
+          "partitioncolumn": [],
+          "connectionName": "hims",
+          "dbName": "hims_db"
+        }
+      },
+      "enableDataTab": false,
+      "checkBox": false,
+      "selectedConnection": "hims",
+      "sqlInputQueries": [
+        {
+          "queryName": "",
+          "queryVal": ""
+        }
+      ],
+      "sqlQueryArray": [],
+      "dataBaseName": "hims_db",
+      "tableName": "",
+      "sqlQuery": "",
+      "tableNamesList": {
+        "courses_info": {
+          "primarykey": [
+            "Courses_ID"
+          ],
+          "schema": [
+            {
+              "columnName": "Courses",
+              "columnType": "string",
+              "actualColumnType": "VARCHAR",
+              "nullable": false
+            },
+            {
+              "columnName": "Code",
+              "columnType": "string",
+              "actualColumnType": "VARCHAR",
+              "nullable": false
+            },
+            {
+              "columnName": "Courses_ID",
+              "columnType": "string",
+              "actualColumnType": "VARCHAR",
+              "nullable": false
+            }
+          ],
+          "tableSize": 32,
+          "count": 32,
+          "column": {},
+          "nunberofpartition": ""
+        }
+      },
+      "tableNamesListSqlInput": {},
+      "selectedTableForPreview": "courses_info",
+      "selectedTableOptions": {
+        "value": "courses_info",
+        "label": "courses_info"
+      },
+      "manualFlow": false,
+      "inputType": "table"
+    },
+    "component2": {
+      "name": "Data Compare",
+      "icon": "/assets/images/components/Data Compare (grey).svg",
+      "hasInput": true,
+      "hasOutput": false,
+      "active": true,
+      "maxConnections": 2,
+      "type": "DataCompare",
+      "isRoot": true,
+      "top": 138,
+      "left": 471,
+      "dependsOn": {
+        "component0": true,
+        "component1": true
+      },
+      "srcConnection": "tims",
+      "destConnection": "hims",
+      "addedTable1": [],
+      "addedTable2": [],
+      "addedColumn1": [
+        {
+          "columnName": "Courseid",
+          "columnType": "int"
+        }
+      ],
+      "addedColumn2": [
+        {
+          "columnName": "Courses_ID",
+          "columnType": "string"
+        }
+      ],
+      "commanOptionsDisplay": [
+        "courses_info"
+      ],
+      "commanActive": [
+        true
+      ],
+      "tableData1": {
+        "schema": [
+          {
+            "columnName": "courses",
+            "columnType": "string",
+            "actualColumnType": "VARCHAR",
+            "nullable": false
+          },
+          {
+            "columnName": "Courseid",
+            "columnType": "int",
+            "actualColumnType": "INT",
+            "nullable": false
+          },
+          {
+            "columnName": "code",
+            "columnType": "string",
+            "actualColumnType": "VARCHAR",
+            "nullable": false
+          }
+        ],
+        "sampleData": [
+          {
+            "courses": "Biochemistry",
+            "Courseid": "1",
+            "code": "A0101"
+          },
+          {
+            "courses": "Genetics",
+            "Courseid": "2",
+            "code": "A0102"
+          },
+          {
+            "courses": "Anatomy",
+            "Courseid": "3",
+            "code": "A0103"
+          },
+          {
+            "courses": "Histology",
+            "Courseid": "4",
+            "code": "A0104"
+          },
+          {
+            "courses": "Microbiology",
+            "Courseid": "5",
+            "code": "A0105"
+          }
+        ],
+        "sqlexection": null,
+        "primarykey": [
+          "code"
+        ],
+        "foreignkey": null,
+        "count": 32,
+        "tableSize": 32,
+        "nunberofpartition": 0,
+        "partitioncolumn": [],
+        "connectionName": "tims",
+        "dbName": "tims_db"
+      },
+      "tableData2": {
+        "schema": [
+          {
+            "columnName": "Courses",
+            "columnType": "string",
+            "actualColumnType": "VARCHAR",
+            "nullable": false
+          },
+          {
+            "columnName": "Code",
+            "columnType": "string",
+            "actualColumnType": "VARCHAR",
+            "nullable": false
+          },
+          {
+            "columnName": "Courses_ID",
+            "columnType": "string",
+            "actualColumnType": "VARCHAR",
+            "nullable": false
+          }
+        ],
+        "sampleData": [
+          {
+            "Courses": "Biochemistry",
+            "Code": "B0201",
+            "Courses_ID": "1"
+          },
+          {
+            "Courses": "pathoLogy",
+            "Code": "B0210",
+            "Courses_ID": "10"
+          },
+          {
+            "Courses": "Pharmacology",
+            "Code": "B0211",
+            "Courses_ID": "11"
+          },
+          {
+            "Courses": "Pediatrics",
+            "Code": "B0212",
+            "Courses_ID": "12"
+          },
+          {
+            "Courses": "physical_Diagnosis",
+            "Code": "B0213",
+            "Courses_ID": "13"
+          }
+        ],
+        "sqlexection": null,
+        "primarykey": [
+          "Courses_ID"
+        ],
+        "foreignkey": null,
+        "count": 32,
+        "tableSize": 32,
+        "nunberofpartition": 0,
+        "partitioncolumn": [],
+        "connectionName": "hims",
+        "dbName": "hims_db"
+      },
+      "selectedTables0": [
+        "courses_info"
+      ],
+      "selectedTables1": [
+        "courses_info"
+      ],
+      "selectedTable1": "courses_info",
+      "selectedTable2": "courses_info",
+      "id": "component2",
+      "columnCompare": true,
+      "isDeleted": [],
+      "commanOptionsUpdated": [],
+      "inputSource1": "",
+      "inputSource2": "",
+      "result": {
+        "courses_info+courses_info": {
+          "addedColumns": [
+            {
+              "isDropdownValue1": false,
+              "isDropdownValue2": false,
+              "sqlTransValue1": "",
+              "sqlTransValue2": "",
+              "columnName": "courses",
+              "columnName2": "Courses",
+              "columnType": "string",
+              "columnType2": "string",
+              "dest": "courses_info"
+            },
+            {
+              "isDropdownValue1": false,
+              "isDropdownValue2": false,
+              "sqlTransValue1": "",
+              "sqlTransValue2": "",
+              "columnName": "code",
+              "columnName2": "Code",
+              "columnType": "string",
+              "columnType2": "string",
+              "dest": "courses_info"
+            },
+            {
+              "isDropdownValue1": false,
+              "isDropdownValue2": false,
+              "columnName": "Courseid",
+              "dest": "courses_info",
+              "columnName2": "Courses_ID",
+              "columnType": "int",
+              "columnType2": "string",
+              "sqlTransValue1": "",
+              "sqlTransValue2": ""
+            }
+          ],
+          "selectedColumnArray": [
+            {
+              "value": "Courseid",
+              "clicked": true,
+              "dest": "courses_info",
+              "value2": "Courses_ID",
+              "splChk": true
+            }
+          ],
+          "commonColumns": [],
+          "srcDest": [
+            "courses_info",
+            "courses_info"
+          ]
+        }
+      },
+      "src": "component0",
+      "dest": "component1",
+      "compareValue": {
+        "value": "CELL_BY_CELL_COMPARE",
+        "label": "CELL_BY_CELL_COMPARE"
+      },
+      "dataMigration": false,
+      "selectedTab": 1,
+      "addedActive": [],
+      "columnValue1": "",
+      "columnValue2": "",
+      "showSql": false,
+      "searchText": "",
+      "commonColumnValue": [],
+      "finalColumnsWithData": {
+        "courses_info+courses_info": []
+      },
+      "selectedColumnArray": []
+    }
+  },
+  "API_APP_BUILD": "Mar 9, 2021 7:43:06 AM",
+  "UI_VERSION": "103-c2f12216ba",
+  "APP_VERSION": "493-1ca388ff32",
+  "LicensedName": "dataq_dev",
+  "tags": {
+    "sourceConnections": [
+      "tims"
+    ],
+    "sourceDatabases": [
+      "tims_db"
+    ],
+    "sourceInputTypes": [
+      "table"
+    ],
+    "sourceTables": [
+      {
+        "tableName": "courses_info",
+        "tableSize": 32,
+        "count": 32
+      }
+    ],
+    "destConnections": [
+      "hims"
+    ],
+    "destDatabases": [
+      "hims_db"
+    ],
+    "destInputTypes": [
+      "table"
+    ],
+    "destTables": [
+      {
+        "tableName": "courses_info",
+        "tableSize": 32,
+        "count": 32
+      }
+    ]
+  }
+}

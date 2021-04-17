@@ -88,7 +88,7 @@ class TC071:
                 input1.click()
                 
             # Data Profile
-            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Data Profile", 600, -350)
+            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Data Profile", 600, -200)
             data_profile = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component1"]')))
             qcd.connect_elements(self.driver, input1, 1, data_profile, 1)
 

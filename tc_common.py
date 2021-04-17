@@ -1469,8 +1469,11 @@ def columnRowCounts(driver):
 
 # Input value on Dailog
 def inputValueAndSaveOnDailog(driver, value):
-    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, "/html/body/div[27]/div[3]/div/div[2]/button[1]")))
-    element.click()
+    time.sleep(WAIT1)
+    divs = driver.find_elements_by_xpath('/html/body/div')
+    last_div = divs[-1]
+    last_div.find_element_by_xpath('./div[3]/div/div[2]/div/div/input').send_keys(value)
+    last_div.find_element_by_xpath('./div[3]/div/div[3]/button[1]').click()
 
 # check Message and close on Dialog
 def checkMessageAndClose(driver):
@@ -1586,7 +1589,7 @@ def insertSQLIntoFilterRowTextarea(driver, text):
     driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[3]/div[1]/div[3]/button').click()
 
 def add_columns_manualupload(driver, text):
-    textarea = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div[1]/div[4]/div/div[2]/textarea[1]')
+    textarea = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div[1]/div[3]/div/div[2]/textarea[1]')
     textarea.send_keys(Keys.CONTROL + 'a')
     textarea.send_keys(Keys.DELETE)
     textarea.send_keys(text)
@@ -1611,7 +1614,7 @@ def add_curl_command_api_input(driver, command):
     textarea.send_keys(command)
 
 def add_python_code_api_input(driver, code):
-    textarea = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div/div[1]/textarea[1]')
+    textarea = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div/div/div/div/div[1]/div/div[2]/textarea')
     textarea.send_keys(code)
 
 def check_flatten_data(driver):
@@ -1637,7 +1640,7 @@ def add_columns_api_input(driver, text):
     textarea.send_keys(text)
 
 def click_validate_api_input(driver):
-    driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div/button').click();
+    driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div/div/div/div/button').click();
 
 def check_data_migration_input(driver):
     element = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div[4]/div/span/span[1]/input')

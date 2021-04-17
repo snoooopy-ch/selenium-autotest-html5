@@ -93,16 +93,10 @@ f.close()   """
             
             qcd.add_python_code_api_input(self.driver, python_code)
 
-            # qcd.add_curl_command_api_input(self.driver, 'https://jsonplaceholder.typicode.com/todos')
-            
-            
-            
-            element = self.driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div/div[2]/label/span[1]/input')
+            element = self.driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div/div/div/div/div[2]/div/div[2]/label/span[1]/input')
             absolute_file_path = os.path.abspath("files/sample_073.json")
             element.send_keys(absolute_file_path)
             time.sleep(qcd.WAIT1)
-            
-            self.driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div/div[3]/div[2]/div/input').send_keys('John')
             
             qcd.check_flatten_data(self.driver)
             qcd.add_columns_api_input(self.driver, "data_education_school_type, dataset_version")

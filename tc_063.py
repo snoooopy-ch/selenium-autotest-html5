@@ -93,12 +93,11 @@ f.close()
             
             # qcd.add_curl_command_api_input(self.driver, 'https://jsonplaceholder.typicode.com/todos')
             
-            element = self.driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div/div[2]/label/span[1]/input')
+            element = self.driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div/div/div/div/div[2]/div/div[2]/label/span[1]/input')
             absolute_file_path = os.path.abspath("files/sample_063.json")
             element.send_keys(absolute_file_path)
             
-            self.driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div/div[3]/div[2]/div/input').send_keys('sam2')
-            self.driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div/div[4]/span/span[1]').click()
+            self.driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div/div/div/div/div[5]/div/div[2]/span/span[1]').click()
             time.sleep(qcd.WAIT3)
             qcd.click_validate_api_input(self.driver)
             

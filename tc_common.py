@@ -1468,12 +1468,11 @@ def columnRowCounts(driver):
     return numbersOfColumn
 
 # Input value on Dailog
-def inputValueAndSaveOnDailog(driver, value):
+def inputValueAndSaveOnDailog(driver):
     time.sleep(WAIT1)
     divs = driver.find_elements_by_xpath('/html/body/div')
     last_div = divs[-1]
-    last_div.find_element_by_xpath('./div[3]/div/div[2]/div/div/input').send_keys(value)
-    last_div.find_element_by_xpath('./div[3]/div/div[3]/button[1]').click()
+    last_div.find_element_by_xpath('./div[3]/div/div[2]/button[1]').click()
 
 # check Message and close on Dialog
 def checkMessageAndClose(driver):

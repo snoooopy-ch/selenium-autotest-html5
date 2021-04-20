@@ -41,12 +41,12 @@ class TC045:
 
     def workflow(self):
         try:
-            # open
+            # publish
             qcd.click_action_on_flow_page(self.driver)
             
             qcd.click_action_on_first_flow(self.driver, 7)
             time.sleep(qcd.WAIT1)
-            qcd.inputValueAndSaveOnDailog(self.driver, "ragini")
+            qcd.inputValueAndSaveOnDailog(self.driver)
             qcd.checkMessageAndClose(self.driver)
             time.sleep(qcd.WAIT3)
             
@@ -54,11 +54,9 @@ class TC045:
             qcd.click_action_on_flow_page(self.driver)
             qcd.click_action_on_first_flow(self.driver, 7)
             time.sleep(qcd.WAIT1)
-            qcd.inputValueAndSaveOnDailog(self.driver, "ragini")
+            qcd.inputValueAndSaveOnDailog(self.driver)
             qcd.checkMessageAndClose(self.driver)
             
-            qcd.click_action_on_first_flow(self.driver, 3)
-            print("deleted")
         except Exception as e:
             qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
             raise Exception(e)

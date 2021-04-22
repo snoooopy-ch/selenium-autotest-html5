@@ -74,7 +74,7 @@ class TC081:
             qcd.input_delimiter_on_input(self.driver, ",")
             qcd.set_header_on_input(self.driver, 1)
             qcd.set_interschema_on_input(self.driver, 'false')
-            self.driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div/button').click()
+            self.driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div[1]/div[8]/button[1]').click()
             
             try:
                 element = WebDriverWait(self.driver, qcd.WAIT50).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="root"]/div/div/div[2]/div')))
@@ -105,7 +105,7 @@ class TC081:
             qcd.input_delimiter_on_input(self.driver, ",")
             qcd.set_header_on_input(self.driver, 1)
             qcd.set_interschema_on_input(self.driver, 'false')
-            self.driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div/button').click()
+            self.driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div[1]/div[8]/button[1]').click()
             
             try:
                 element = WebDriverWait(self.driver, qcd.WAIT50).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="root"]/div/div/div[2]/div')))
@@ -131,7 +131,7 @@ class TC081:
             qcd.select_compare_type(self.driver, 2)
 
             qcd.select_mapping_tab(self.driver)
-            qcd.add_mapping_table_for_type_compare_with_index(self.driver, "3_records_81csv", "2_records_81csv")
+            qcd.add_mapping_table_for_type_compare_with_index(self.driver, "3records81csv", "2records81csv")
             qcd.select_key_for_warning_mapping_tableitem(self.driver, 1)
             
             # execute

@@ -93,13 +93,14 @@ f.close()   """
             
             qcd.add_python_code_api_input(self.driver, python_code)
 
-            element = self.driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div/div/div/div/div[2]/div/div[2]/label/span[1]/input')
-            absolute_file_path = os.path.abspath("files/sample_073.json")
+            element = self.driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div[1]/div/div[2]/div/div[2]/label/span[1]/input')
+                                                         
+            absolute_file_path = os.path.abspath("files/conversation_073.json")
             element.send_keys(absolute_file_path)
             time.sleep(qcd.WAIT1)
             
             qcd.check_flatten_data(self.driver)
-            qcd.add_columns_api_input(self.driver, "data_education_school_type, dataset_version")
+            # qcd.add_columns_api_input(self.driver, "data_education_school_type, dataset_version")
             qcd.click_validate_api_input(self.driver)
             
             try:
@@ -174,15 +175,7 @@ f.close()   """
             input1 = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component0"]')))
             data_quality = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component1"]')))
             
-            # first_parent = input1.find_element_by_xpath('..')
-            # entry1 = first_parent.find_element_by_xpath("./following-sibling::div/following-sibling::div")
-            # second_parent = column_type.find_element_by_xpath('..')
-            # entry2 = second_parent.find_element_by_xpath("./following-sibling::div")
-            # action = ActionChains(self.driver)
-            # action.click_and_hold(entry1).move_to_element(entry2).release(entry2).perform()
-            # time.sleep(qcd.WAIT1)
             qcd.remove_connection_between(self.driver, input1, data_quality)
-            
             
             if (qcd.open_container(self.driver) != 1):
                 column_type.click()
@@ -198,13 +191,6 @@ f.close()   """
             
             qcd.click_save_on_cp(self.driver)
                 
-            # first_parent = column_type.find_element_by_xpath('..')
-            # entry1 = first_parent.find_element_by_xpath("./following-sibling::div/following-sibling::div")
-            # second_parent = data_quality.find_element_by_xpath('..')
-            # entry2 = second_parent.find_element_by_xpath("./following-sibling::div/following-sibling::div")
-            # action = ActionChains(self.driver)
-            # action.click_and_hold(entry1).move_to_element(entry2).release(entry2).perform()
-            # time.sleep(qcd.WAIT1)
             qcd.remove_connection_between(self.driver, column_type, data_quality)
             
             if (qcd.open_container(self.driver) != 1):

@@ -1613,12 +1613,11 @@ def add_curl_command_api_input(driver, command):
     textarea.send_keys(command)
 
 def add_python_code_api_input(driver, code):
-    textarea = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div/div/div/div/div[1]/div/div[2]/textarea')
+    textarea = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div[1]/div/div[1]/div/div[2]/textarea')
     textarea.send_keys(code)
 
 def check_flatten_data(driver):
-    element = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div/div[4]/span/span[1]')
-                                            
+    element = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div[1]/div/div[5]/div/div[2]/span/span[1]')
     element.click()
 
 def set_multiline_api_input(driver, value):
@@ -1633,13 +1632,13 @@ def set_multiline_api_input(driver, value):
     element.click()
     
 def add_columns_api_input(driver, text):
-    textarea = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div/div[5]/textarea[1]')
+    textarea = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div[1]/div/div[4]/div/div[2]/textarea[1]')
     textarea.send_keys(Keys.CONTROL + 'a')
     textarea.send_keys(Keys.DELETE)
     textarea.send_keys(text)
 
 def click_validate_api_input(driver):
-    driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div/div/div/div/button').click();
+    driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div[1]/div/button[1]').click();
 
 def check_data_migration_input(driver):
     element = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div[4]/div/span/span[1]/input')
@@ -1708,15 +1707,15 @@ def select_db_output(driver):
     time.sleep(WAIT3)
     print('select db name on output')
 
-def click_select_column_change(driver, index, value):
-    element = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div[2]/div[3]/div/div[2]/div/div[1]/div[2]/div[' + str(index) + ']/div/div[2]/button')
+def click_select_column_change_and_min_max(driver, index, value, min, max, part):
+    element = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div[2]/div[3]/div/div[2]/div/div[1]/div[2]/div[' + str(index) + ']/div/div[4]/p')
     element.click()
     
-    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[2]/div[3]/div/div[2]/div/div/div/div/div[1]')))
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[2]/div[3]/div/div[2]/div/div[1]/div/div/div/div/div[1]')))
     element.click()
 
     time.sleep(WAIT1)
-    db_value = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[2]/div[3]/div/div[2]/div/div[2]/div')))
+    db_value = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '/html/body/div[2]/div[3]/div/div[2]/div/div[1]/div/div[2]/div')))
     items = db_value.find_elements_by_xpath('./div')
     
     index = 1
@@ -1728,22 +1727,21 @@ def click_select_column_change(driver, index, value):
     
     time.sleep(WAIT3)
     
-    driver.find_element_by_xpath('/html/body/div[2]/div[3]/div/div[1]/button').click()
-    print('select column changed')
-
-def input_min_max_numberpart(driver, index, min, max, part):
     if min != '':
-        element = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div[2]/div[3]/div/div[2]/div/div[1]/div[2]/div[' + str(index) + ']/div/div[3]/div/div/input')
+        element = driver.find_element_by_xpath('/html/body/div[2]/div[3]/div/div[2]/div/div[3]/div/div/input')
         element.send_keys(min)
     
     if max != '':
-        element = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div[2]/div[3]/div/div[2]/div/div[1]/div[2]/div[' + str(index) + ']/div/div[4]/div/div/input')
+        element = driver.find_element_by_xpath('/html/body/div[2]/div[3]/div/div[2]/div/div[4]/div/div/input')
         element.send_keys(max)
         
     if part != '':
-        element = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div[2]/div[3]/div/div[2]/div/div[1]/div[2]/div[' + str(index) + ']/div/div[5]/div/div/input')
+        element = driver.find_element_by_xpath('/html/body/div[2]/div[3]/div/div[2]/div/div[2]/div/div/input')
         element.send_keys(part)
-    
+        
+    driver.find_element_by_xpath('/html/body/div[2]/div[3]/div/div[3]/button').click()    
+    print('select column changed')
+
 def select_compare_type(driver, index):
     element = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div/div[3]/div/div/label[' + str(index) + ']/span[1]/span[1]/input')
     element.click()
@@ -1754,9 +1752,36 @@ def check_compare_data_profile(driver):
     
 def remove_connection_between(driver, element1, element2):
     first_parent = element1.find_element_by_xpath('..')
-    entry1 = first_parent.find_element_by_xpath("./following-sibling::div/following-sibling::div")
+    entry1 = first_parent.find_element_by_xpath("./following-sibling::div/following-sibling::div/following-sibling::div")
+
     second_parent = element2.find_element_by_xpath('..')
-    entry2 = second_parent.find_element_by_xpath("./following-sibling::div")
+    entry2 = second_parent.find_element_by_xpath("./following-sibling::div/following-sibling::div/following-sibling::div")
     action = ActionChains(driver)
     action.click_and_hold(entry1).move_to_element(entry2).release(entry2).perform()
-    time.sleep(qcd.WAIT1)
+    time.sleep(WAIT1)
+    
+# connecting_two_element_with_reopen
+def connect_elements_with_redraw(driver, element1, n, element2, m):
+    if n == 1 and m == 1:
+        first_parent = element1.find_element_by_xpath('..')
+        entry1 = first_parent.find_element_by_xpath("./following-sibling::div/following-sibling::div/following-sibling::div")
+        second_parent = element2.find_element_by_xpath('..')
+        entry2 = second_parent.find_element_by_xpath("./following-sibling::div")
+        action = ActionChains(driver)
+        action.click_and_hold(entry1).move_to_element(entry2).release(entry2).perform()
+        time.sleep(WAIT1)
+        
+    if n == 2 and m == 1:
+        first_parent = element1.find_element_by_xpath('..')
+        entry1 = first_parent.find_element_by_xpath("./following-sibling::div/following-sibling::div")
+        second_parent = element2.find_element_by_xpath('..')
+        entry2 = second_parent.find_element_by_xpath("./following-sibling::div/following-sibling::div/following-sibling::div")
+        action = ActionChains(driver)
+        action.click_and_hold(entry1).move_to_element(entry2).release(entry2).perform()
+        time.sleep(WAIT1)
+
+    print('connected')
+    
+def click_edit_in_table_properties(driver, index):
+    element = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div[2]/div[2]/div/div[1]/div[2]/div/div[' + str(index) + ']/div[4]/div/button')
+    element.click()

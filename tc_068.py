@@ -118,8 +118,8 @@ class TC068:
             qcd.select_datacompare_type(self.driver, 1)
             
             qcd.select_mapping_tab(self.driver)
-            qcd.add_mappingproperties_in_datacompare_selected_table(self.driver, 'doc_name', 'doctor_name')
             qcd.select_mapping_table_item(self.driver, 1)
+            qcd.add_mappingproperties_in_datacompare_selected_table(self.driver, 'doc_name', 'doctor_name')
             qcd.select_key_for_table_item(self.driver, 1)
             
             # execute

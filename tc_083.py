@@ -80,7 +80,7 @@ class TC083:
             if (qcd.open_container(self.driver) != 1):
                 input2.click()
 
-            qcd.select_dbset_input(self.driver, 'SNOWFLAKE_3.8.0')
+            qcd.select_dbset_input(self.driver, 'snowflake_NYC_TAXI_DATA')
             qcd.select_db_with_index(self.driver, 'PUBLIC')
             qcd.select_table(self.driver, "SALES_DATA_5M")
             qcd.select_table(self.driver, "SALES_DATA_2M_B")
@@ -101,7 +101,7 @@ class TC083:
             qcd.select_datacompare_type(self.driver, 4)
 
             qcd.select_mapping_tab(self.driver)
-            qcd.add_mapping_table_for_type_compare_with_index(self.driver, "sales_data_2m", "SALES_DATA_2M_B")
+            qcd.add_mapping_table_for_type_compare_with_index(self.driver, "sales_data_2m -", "SALES_DATA_2M_B -")
             qcd.select_key_for_warning_mapping_tableitem(self.driver, 1)
             
             # execute

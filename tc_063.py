@@ -91,9 +91,7 @@ f.close()
             """
             qcd.add_python_code_api_input(self.driver, code)
             
-            # qcd.add_curl_command_api_input(self.driver, 'https://jsonplaceholder.typicode.com/todos')
-            
-            element = self.driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div/div/div/div/div[2]/div/div[2]/label/span[1]/input')
+            element = self.driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div[1]/div/div[2]/div/div[2]/label/span[1]/input')
             absolute_file_path = os.path.abspath("files/sample_063.json")
             element.send_keys(absolute_file_path)
             

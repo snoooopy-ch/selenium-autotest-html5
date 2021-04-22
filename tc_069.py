@@ -70,14 +70,9 @@ class TC069:
             qcd.click_all_select(self.driver)
             qcd.click_add_select_btn(self.driver)
             
-            qcd.click_select_column_change(self.driver, 2, 'DAY_OF_WEEK')
-            qcd.input_min_max_numberpart(self.driver, 2, 1, 3, '')
-            
-            qcd.click_select_column_change(self.driver, 4, 'person_Id')
-            qcd.input_min_max_numberpart(self.driver, 4, 1, 7, '')
-            
-            qcd.click_select_column_change(self.driver, 6, 'joining_details_bigint_pk')
-            qcd.input_min_max_numberpart(self.driver, 6, 20, 27, '')
+            qcd.click_select_column_change_and_min_max(self.driver, 2, 'DAY_OF_WEEK', 1, 3, '')
+            qcd.click_select_column_change_and_min_max(self.driver, 4, 'person_Id', 1, 7, '')
+            qcd.click_select_column_change_and_min_max(self.driver, 6, 'joining_details_bigint_pk', 20, 27, '')
             
             if (qcd.open_container(self.driver) == 1):
                 input1.click()
@@ -96,14 +91,9 @@ class TC069:
             qcd.click_all_select(self.driver)
             qcd.click_add_select_btn(self.driver)
             
-            qcd.click_select_column_change(self.driver, 2, 'DAY_OF_WEEK')
-            qcd.input_min_max_numberpart(self.driver, 2, 1, 3, '')
-            
-            qcd.click_select_column_change(self.driver, 4, 'person_Id')
-            qcd.input_min_max_numberpart(self.driver, 4, 1, 7, '')
-            
-            qcd.click_select_column_change(self.driver, 6, 'joining_details_bigint_pk')
-            qcd.input_min_max_numberpart(self.driver, 6, 20, 27, '')
+            qcd.click_select_column_change_and_min_max(self.driver, 2, 'DAY_OF_WEEK', 1, 3, '')
+            qcd.click_select_column_change_and_min_max(self.driver, 4, 'person_Id', 1, 7, '')
+            qcd.click_select_column_change_and_min_max(self.driver, 6, 'joining_details_bigint_pk', 20, 27, '')
             
             qcd.close_maximize_for_select_columns(self.driver)
             

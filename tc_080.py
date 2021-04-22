@@ -72,7 +72,8 @@ class TC080:
             qcd.set_dataset_path(self.driver, '//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div[1]/div[1]/div[2]/div/div[2]/label/span[1]/input', absolute_file_path)
             time.sleep(qcd.WAIT3)
             qcd.check_multiline_manual_upload_input_without_awshadoop(self.driver, "true")
-            qcd.click_manual_upload_validate(self.driver, '//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div[1]/button')
+            qcd.click_manual_upload_validate(self.driver, '//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div[1]/div[8]/button[1]')
+                                                            
             
             try:
                 element = WebDriverWait(self.driver, qcd.WAIT50).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="root"]/div/div/div[2]/div')))
@@ -122,7 +123,7 @@ class TC080:
             qcd.select_datacompare_type(self.driver, 2)
             qcd.select_mapping_tab(self.driver)
             
-            qcd.add_mapping_table_for_type_compare_with_index(self.driver, 'City_json1_80json', 'City')
+            qcd.add_mapping_table_for_type_compare_with_index(self.driver, 'Cityjson180json', 'City')
             qcd.select_key_for_warning_mapping_tableitem(self.driver, 1)
             
             # execute

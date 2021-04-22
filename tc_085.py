@@ -138,7 +138,7 @@ class TC085:
         data_compare = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component2"]')))
         qcd.remove_connection_between(self.driver, target, data_compare)
         
-        qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Column Type", 400, 80)
+        qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Column type", 400, 80)
         column_type = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component3"]')))
         
         qcd.connect_elements(self.driver, target, 1, column_type, 1)

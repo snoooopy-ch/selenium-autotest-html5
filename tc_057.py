@@ -73,7 +73,7 @@ class TC057:
             time.sleep(qcd.WAIT3)
             qcd.input_delimiter_on_input(self.driver, ",")
             qcd.set_header_on_input(self.driver, 1)
-            self.driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div/button').click()
+            self.driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div[1]/div[8]/button[1]').click()
             
             try:
                 element = WebDriverWait(self.driver, qcd.WAIT50).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="root"]/div/div/div[2]/div')))
@@ -116,6 +116,8 @@ class TC057:
                 
             if (qcd.open_container(self.driver) != 1):
                 input1.click()
+                
+            qcd.click_edit_in_table_properties(self.driver, 1)
             qcd.set_interschema_on_input(self.driver, 'true')
             
             # execute

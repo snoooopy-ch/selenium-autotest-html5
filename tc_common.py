@@ -1468,7 +1468,15 @@ def columnRowCounts(driver):
     return numbersOfColumn
 
 # Input value on Dailog
-def inputValueAndSaveOnDailog(driver):
+def inputValueAndSaveOnDailog(driver, name):
+    time.sleep(WAIT1)
+    divs = driver.find_elements_by_xpath('/html/body/div')
+    last_div = divs[-1]
+    name_input = last_div.find_element_by_xpath('./div[3]/div/div[2]/div/div/input')
+    name_input.send_keys(name)
+    last_div.find_element_by_xpath('./div[3]/div/div[3]/button[1]').click()
+    
+def publishFlow(driver):
     time.sleep(WAIT1)
     divs = driver.find_elements_by_xpath('/html/body/div')
     last_div = divs[-1]

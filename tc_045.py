@@ -46,7 +46,7 @@ class TC045:
             
             qcd.click_action_on_first_flow(self.driver, 7)
             time.sleep(qcd.WAIT1)
-            qcd.inputValueAndSaveOnDailog(self.driver)
+            qcd.publishFlow(self.driver)
             qcd.checkMessageAndClose(self.driver)
             time.sleep(qcd.WAIT3)
             
@@ -54,7 +54,7 @@ class TC045:
             qcd.click_action_on_flow_page(self.driver)
             qcd.click_action_on_first_flow(self.driver, 7)
             time.sleep(qcd.WAIT1)
-            qcd.inputValueAndSaveOnDailog(self.driver)
+            qcd.publishFlow(self.driver)
             qcd.checkMessageAndClose(self.driver)
             
         except Exception as e:

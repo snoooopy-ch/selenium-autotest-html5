@@ -66,7 +66,7 @@ class TC083:
                 input1.click()
 
             qcd.select_dbset_input(self.driver, 'postgres')
-            qcd.select_db_with_index(self.driver, 'dataq_demo')
+            qcd.select_db_with_index(self.driver, 'public')
             qcd.select_table(self.driver, "sales_data_2m")
             qcd.select_table(self.driver, "sales_data_2m_b")
             qcd.select_table(self.driver, "sales_data_5m")

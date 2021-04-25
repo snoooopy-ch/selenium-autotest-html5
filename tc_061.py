@@ -107,6 +107,7 @@ class TC061:
             # open panel
             input1.click()
             
+            qcd.click_edit_in_table_properties(self.driver, 1)
             qcd.add_columns_manualupload(self.driver, "zipcode,c_id")
             qcd.click_manual_upload_validate(self.driver, '//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div[1]/div[8]/button[1]')
             

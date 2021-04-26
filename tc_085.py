@@ -134,33 +134,38 @@ class TC085:
         qcd.click_result_close(self.driver)
         qcd.click_action_on_first_flow(self.driver, 1)
         
-        target = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component1"]')))
-        data_compare = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component2"]')))
-        qcd.remove_connection_between(self.driver, target, data_compare)
-        
-        qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Column type", 400, 80)
-        column_type = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component3"]')))
-        
-        qcd.connect_elements(self.driver, target, 1, column_type, 1)
-        qcd.connect_elements(self.driver, column_type, 2, data_compare, 1)
-        
+        target = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component2"]')))
         if (qcd.open_container(self.driver) != 1):
-            column_type.click()
-            
+            target.click()
+        
         qcd.click_maximize_for_select_columns(self.driver)
-        qcd.click_select_tableitem_for_select_columns(self.driver, "Claims")
-        qcd.click_select_all_for_columntype(self.driver)
-        qcd.select_item_from_column_data_type_list(self.driver, 1, 9)
-        qcd.click_save_on_cp(self.driver)
-        qcd.close_maximize_for_select_columns(self.driver)
+        qcd.set_tolerance_data_compare(self.driver, 2, '==', "1")
+        qcd.set_tolerance_data_compare(self.driver, 3, '<=', "0.1")
+        qcd.set_tolerance_data_compare(self.driver, 4, '>', "5")
+        qcd.set_tolerance_data_compare(self.driver, 5, '<=', "0.3")
+        qcd.set_tolerance_data_compare(self.driver, 6, '>=', "27")
+        qcd.set_tolerance_data_compare(self.driver, 7, 'abs>=', "50.1")
+        qcd.set_tolerance_data_compare(self.driver, 8, '==', "56.8")
+        qcd.set_tolerance_data_compare(self.driver, 9, '>=', "4.5")
         
-        if (qcd.open_container(self.driver) == 1):
-            column_type.click()
-            
-        if (qcd.open_container(self.driver) == 1):
-            data_compare.click()
+        # execute
+        qcd.save_excute_workflow(self.driver, 'TC_085_Morimura', 700)
         
-        qcd.select_compare_tab(self.driver)
-        qcd.select_datacompare_type(self.driver, 3)
-        
+        try:
+            records = self.driver.find_elements_by_xpath('/html/body/div[2]/div[3]/div/div/div/div/div[4]/div[1]/div[2]/div')
+                
+            for record in records:
+                innerRecord = record.find_element_by_xpath('./div')
+                recordClass = innerRecord.get_attribute("class")
+                
+                columns = innerRecord.find_elements_by_xpath('./div')
+                if recordClass.find('-padRow') == -1:
+                    print("Src Table:{}, Dest Table:{}, Match:{}, Src Record Count:{}, Src Record Mismatch:{}, Src Orphan Records:{}, Dest Record Count:{}, Dest Record Mismatch:{}, Dest Orphan Records".format(columns[0].text, columns[1].text, columns[2].find_element_by_xpath('./img').get_attribute('alt'), columns[3].text, columns[4].text, columns[5].text, columns[6].text, columns[7].text, columns[8].text))
+                else:
+                    break
+            qcd.click_result_close(self.driver)
+        except Exception as e:
+            qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
+            raise Exception(e)
+            pass
         return

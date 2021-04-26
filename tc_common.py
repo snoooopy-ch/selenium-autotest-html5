@@ -1793,3 +1793,44 @@ def connect_elements_with_redraw(driver, element1, n, element2, m):
 def click_edit_in_table_properties(driver, index):
     element = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div[2]/div[2]/div/div[1]/div[2]/div/div[' + str(index) + ']/div[4]/div/button')
     element.click()
+    
+def set_tolerance_data_compare(driver, index, operator, value):
+    tolerance = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[3]/div/div[2]/div/div/div[3]/div/div[1]/div[2]/div[' + str(index) + ']/div/div[3]/span')
+    tolerance.click()
+    time.sleep(WAIT1)
+    
+    operator_box = driver.find_element_by_xpath('/html/body/div[2]/div[3]/div/div[2]/div/div[1]/div/div/div[1]')
+    operator_box.click()
+    operator_list = driver.find_elements_by_xpath('/html/body/div[2]/div[3]/div/div[2]/div/div[1]/div/div[2]/div/div')
+    for item in operator_list:
+        if item.text.startswith(operator):
+            item.click()
+            break
+    
+    value_input = driver.find_element_by_xpath('/html/body/div[2]/div[3]/div/div[2]/div/div[2]/div/input')
+    value_input.send_keys(value)
+    
+    done_button = driver.find_element_by_xpath('/html/body/div[2]/div[3]/div/div[3]/button[2]')
+    done_button.click()
+    
+def set_sql_data_compare(driver, index, value):
+    tolerance = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[3]/div/div[2]/div/div/div[3]/div/div[1]/div[2]/div[' + str(index) + ']/div/div[4]/span')
+    tolerance.click()
+    time.sleep(WAIT1)
+    
+    value_input = driver.find_element_by_xpath('/html/body/div[2]/div[3]/div/div[2]/div[1]/div/div/input')
+    value_input.send_keys(value)
+    
+    done_button = driver.find_element_by_xpath('/html/body/div[2]/div[3]/div/div[3]/button[2]')
+    done_button.click()
+    
+def set_target_sql_data_compare(driver, index, value):
+    tolerance = driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[3]/div/div[2]/div/div/div[3]/div/div[1]/div[2]/div[' + str(index) + ']/div/div[6]/span')
+    tolerance.click()
+    time.sleep(WAIT1)
+    
+    value_input = driver.find_element_by_xpath('/html/body/div[2]/div[3]/div/div[2]/div[1]/div/div/input')
+    value_input.send_keys(value)
+    
+    done_button = driver.find_element_by_xpath('/html/body/div[2]/div[3]/div/div[3]/button[2]')
+    done_button.click()

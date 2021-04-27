@@ -132,12 +132,11 @@ f.close()   """
             # execute
             qcd.save_excute_workflow(self.driver, 'TC_073_Morimura')
             
-            detail_span_xpath = '/html/body/div[2]/div[3]/div/div/div/div/div[1]/span[2]'
             try:
-                if qcd.isElementPresentForResult(self.driver, detail_span_xpath) != True:
+                if qcd.isElementPresentForResult(self.driver, qcd.detail_span_xpath) != True:
                     raise Exception()
                 
-                detail_span = self.driver.find_elements_by_xpath(detail_span_xpath)
+                detail_span = self.driver.find_elements_by_xpath(qcd.detail_span_xpath)
                 if (len(detail_span) == 1):
                     detail_span[0].click()
                     time.sleep(qcd.WAIT3)
@@ -209,12 +208,11 @@ f.close()   """
             pass
                 
     def check_result(self):
-        detail_span_xpath = '/html/body/div[2]/div[3]/div/div/div/div/div[1]/span[2]'
         try:
-            if qcd.isElementPresentForResult(self.driver, detail_span_xpath) != True:
+            if qcd.isElementPresentForResult(self.driver, qcd.detail_span_xpath) != True:
                 raise Exception()
             
-            detail_span = self.driver.find_elements_by_xpath(detail_span_xpath)
+            detail_span = self.driver.find_elements_by_xpath(qcd.detail_span_xpath)
             if (len(detail_span) == 1):
                 detail_span[0].click()
                 time.sleep(qcd.WAIT3)

@@ -39,7 +39,7 @@ class TC036:
     def open_workspace(self):
         try:
             time.sleep(qcd.WAIT1)
-            qcd.onUploadJsonFlowFile(self.driver, "tims_hims.json")
+            qcd.onUploadJsonFlowFile(self.driver, "Import_Flow_036.json")
             qcd.click_action_on_first_flow(self.driver, 1)
             
         except Exception as e:
@@ -75,7 +75,7 @@ class TC036:
         
         qcd.clickFirstViewEditActionOnExcutions(self.driver)
         
-        input1 = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component1"]')))
+        input1 = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component0"]')))
 
         if (qcd.open_container(self.driver) != 1):
             input1.click()

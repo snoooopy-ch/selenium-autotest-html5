@@ -72,7 +72,7 @@ class TC042:
             qcd.select_manual_upload_dataset_format(self.driver, "JSON")
             qcd.set_dataset_path(self.driver, qcd.input_manualupload_dataset_xpath, '/tmp/sale_details_bad.json')
             qcd.check_multiline_manual_upload_input_with_awshadoop(self.driver, "true")
-            qcd.click_manual_upload_validate(self.driver, '//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div[1]/div[8]/button[1]')
+            qcd.click_manual_upload_validate(self.driver, qcd.validate_btn_file_input_json)
             
             try:
                 element = WebDriverWait(self.driver, qcd.WAIT50).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="root"]/div/div/div[2]/div')))

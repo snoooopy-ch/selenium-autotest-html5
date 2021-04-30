@@ -73,8 +73,8 @@ class TC038:
             time.sleep(qcd.WAIT3)
             qcd.input_delimiter_on_input(self.driver, ",")
             qcd.set_header_on_input(self.driver, 1)
-            qcd.set_interschema_on_input(self.driver, 'true')
-            self.driver.find_element_by_xpath('//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div[1]/div[8]/button[1]').click()
+            # qcd.set_interschema_on_input(self.driver, 'true')
+            self.driver.find_element_by_xpath(qcd.validate_btn_file_input_csv).click()
             
             try:
                 element = WebDriverWait(self.driver, qcd.WAIT50).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="root"]/div/div/div[2]/div')))

@@ -1,0 +1,178 @@
+{
+  "executorCores": 3,
+  "executorMemory": "2g",
+  "email": [],
+  "flowName": "dataq1617770565409",
+  "hadoop": false,
+  "livy": false,
+  "numExecutors": 2,
+  "root": "component1",
+  "executeOn": "LOCAL",
+  "UIDataModel": {
+    "component0": {
+      "name": "Input Source",
+      "icon": "/assets/images/components/input (grey).svg",
+      "hasOutput": true,
+      "type": "InputSource",
+      "active": true,
+      "top": 68,
+      "left": 135,
+      "isLeft": true,
+      "showProgressInput": false,
+      "query": "",
+      "databases": [
+        "hims_db"
+      ],
+      "selectedTables": [
+        "courses_info"
+      ],
+      "selectedDatabase": [
+        {
+          "label": "hims_db",
+          "value": "hims_db"
+        }
+      ],
+      "checkedTables": [
+        {
+          "value": "Student_Information",
+          "checked": false
+        },
+        {
+          "value": "courses_info",
+          "checked": true
+        },
+        {
+          "value": "courses_info_copy",
+          "checked": false
+        },
+        {
+          "value": "medicine_students_finalreport",
+          "checked": false
+        },
+        {
+          "value": "store_sales",
+          "checked": false
+        },
+        {
+          "value": "store_sales_1M",
+          "checked": false
+        },
+        {
+          "value": "store_sales_5M",
+          "checked": false
+        }
+      ],
+      "selectedTablesOptions": [
+        "courses_info"
+      ],
+      "tables": [
+        "Student_Information",
+        "courses_info",
+        "courses_info_copy",
+        "medicine_students_finalreport",
+        "store_sales",
+        "store_sales_1M",
+        "store_sales_5M"
+      ],
+      "enableDataTab": false,
+      "checkBox": false,
+      "selectedConnection": "hims",
+      "dataBaseName": "hims_db",
+      "tableName": "",
+      "selectedTableForPreview": "courses_info",
+      "result": {
+        "courses_info": {
+          "schema": [
+            {
+              "columnName": "Courses",
+              "columnType": "string",
+              "actualColumnType": "VARCHAR",
+              "nullable": false
+            },
+            {
+              "columnName": "Code",
+              "columnType": "string",
+              "actualColumnType": "VARCHAR",
+              "nullable": false
+            },
+            {
+              "columnName": "Courses_ID",
+              "columnType": "string",
+              "actualColumnType": "VARCHAR",
+              "nullable": false
+            }
+          ],
+          "sampleData": [],
+          "sqlexection": null,
+          "primarykey": [
+            "Courses_ID"
+          ],
+          "foreignkey": null,
+          "count": 32,
+          "tableSize": 32,
+          "nunberofpartition": 0,
+          "partitioncolumn": [],
+          "connectionName": "hims",
+          "dbName": "hims_db"
+        }
+      },
+      "selectedTableOptions": {
+        "value": "courses_info",
+        "label": "courses_info"
+      },
+      "tableNamesList": {
+        "hims": {
+          "courses_info": {
+            "primarykey": [
+              "Courses_ID"
+            ],
+            "schema": [
+              {
+                "columnName": "Courses",
+                "columnType": "string",
+                "actualColumnType": "VARCHAR",
+                "nullable": false
+              },
+              {
+                "columnName": "Code",
+                "columnType": "string",
+                "actualColumnType": "VARCHAR",
+                "nullable": false
+              },
+              {
+                "columnName": "Courses_ID",
+                "columnType": "string",
+                "actualColumnType": "VARCHAR",
+                "nullable": false
+              }
+            ],
+            "tableSize": 32,
+            "count": 32,
+            "column": {},
+            "database": "hims_db",
+            "nunberofpartition": ""
+          }
+        }
+      },
+      "manualFlow": false,
+      "inputType": "table"
+    },
+    "component1": {
+      "name": "Data Profile",
+      "icon": "/assets/images/components/Data Profile (grey).svg",
+      "hasInput": true,
+      "hasOutput": false,
+      "type": "DataProfile",
+      "isRoot": true,
+      "top": 84,
+      "left": 489,
+      "dependsOn": {
+        "component0": true
+      }
+    }
+  },
+  "API_APP_BUILD": "Apr 2, 2021 2:10:06 PM",
+  "UI_VERSION": "103-c2f12216ba",
+  "APP_VERSION": "514-07609ff16f",
+  "LicensedName": "INITIAL_SETUP"
+}

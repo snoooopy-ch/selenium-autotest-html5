@@ -733,6 +733,7 @@ def save_excute_workflow(driver, flow_name, wait = 200):
     save_workflow(driver, flow_name)
 
     print('executing...')
+    time.sleep(WAIT1)
     btn_execute = driver.find_element_by_xpath(excute_xpath)
     btn_execute.click()
     

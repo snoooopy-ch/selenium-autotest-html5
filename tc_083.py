@@ -67,10 +67,10 @@ class TC083:
 
             qcd.select_dbset_input(self.driver, 'postgres')
             qcd.select_db_with_index(self.driver, 'public')
-            qcd.select_table(self.driver, "sales_data_2m")
-            qcd.select_table(self.driver, "sales_data_2m_b")
-            qcd.select_table(self.driver, "sales_data_5m")
+            qcd.select_table(self.driver, "sales_data_5m_b")
+            qcd.select_table(self.driver, "sales_cust_tbl")
             qcd.select_table(self.driver, "sales_tbl")
+            qcd.select_table(self.driver, "sales_cust_tbl_1")
             qcd.click_add_select_btn(self.driver)
 
             # input 2
@@ -97,15 +97,21 @@ class TC083:
 
             if (qcd.open_container(self.driver) != 1):
                 compare1.click()
-            
+            qcd.click_maximize_for_select_columns(self.driver)
             qcd.select_datacompare_type(self.driver, 4)
 
             qcd.select_mapping_tab(self.driver)
-            qcd.add_mapping_table_for_type_compare_with_index(self.driver, "sales_data_2m -", "SALES_DATA_2M_B -")
-            qcd.select_key_for_warning_mapping_tableitem(self.driver, 1)
+            qcd.add_mapping_table_for_type_compare_with_index(self.driver, "sales_tbl -", "SALES_TBL -")
+            qcd.add_mapping_table_for_type_compare_with_index(self.driver, "sales_data_5m_b -", "SALES_DATA_5M_B -")
+            qcd.add_mapping_table_for_type_compare_with_index(self.driver, "sales_cust_tbl -", "SALES_TBL -")
+            qcd.add_mapping_table_for_type_compare_with_index(self.driver, "sales_cust_tbl_1 -", "SALES_DATA_2M_B -")
+            qcd.add_mapping_table_for_type_compare_with_index(self.driver, "sales_data_5m_b -", "SALES_DATA_2M_B -")
+            qcd.add_mapping_table_for_type_compare_with_index(self.driver, "sales_data_5m_b -", "SALES_DATA_5M -")
+            qcd.add_mapping_table_for_type_compare_with_index(self.driver, "sales_cust_tbl_1 -", "SALES_TBL -")
             
+            time.sleep(qcd.WAIT5)
             # execute
-            qcd.save_excute_workflow(self.driver, 'TC_083_Morimura', 700)
+            qcd.save_excute_workflow(self.driver, 'TC_083_Morimura', 1000)
         except Exception as e:
             qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
             raise Exception(e)

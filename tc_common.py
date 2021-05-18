@@ -57,9 +57,9 @@ element_xpath               = ['//div[@id="component0"]/img',
                                '//div[@id="component8"]/img',
                                '//div[@id="component9"]/img']
 
-user_xpath                  = '//*[@id="root"]/div/div/div[1]/div/div[1]/div/div/div[2]/div[1]/div/input'
-pass_xpath                  = '//*[@id="root"]/div/div/div[1]/div/div[1]/div/div/div[2]/div[2]/div/input'
-loginbtn_xpath              = '//*[@id="root"]/div/div/div[1]/div/div[1]/div/div/div[2]/div[3]/button'
+user_xpath                  = '//*[@id="root"]/div/div/div/div[1]/div/div[1]/div/div/div[2]/div[1]/div/input'
+pass_xpath                  = '//*[@id="root"]/div/div/div/div[1]/div/div[1]/div/div/div[2]/div[2]/div/input'
+loginbtn_xpath              = '//*[@id="root"]/div/div/div/div[1]/div/div[1]/div/div/div[2]/div[3]/button'
 open_xpath                  = '//button[@class="MuiButtonBase-root MuiFab-root MuiFab-sizeSmall MuiFab-primary"]'
 input_xpath                 = '//div[@id="component0"]/img'
 container_xpath             = '//*[@id="dataContainerId"]'
@@ -82,15 +82,15 @@ table_sc_xpath              = '//*[@id="top_panel"]/div/div[2]/div[1]/div/div[1]
 table_sc_val_xpath          = '//*[@id="top_panel"]/div/div[2]/div[1]/div/div[1]/div/div[2]/div/div'
 done_sc_xapth               = '//*[@id="top_panel"]/div/div[1]/header/div/button'
 mapplus_xpath               = '//*[@id="top_panel"]/div/div[2]/div[3]/div/div[1]/div[2]/div[3]'
-name_xpath                  = '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/div[1]/header/div/div/div/input'
-save_xpath                  = '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/div[1]/header/div/button[1]'
-excute_xpath                = '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/div[1]/header/div/button[2]'
-result_xpath                = '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/div[1]/header/div/button[3]'
+name_xpath                  = '//*[@id="root"]/div/div/div/div[1]/div/div/div/div/div/div[1]/header/div/div/div/input'
+save_xpath                  = '//*[@id="root"]/div/div/div/div[1]/div/div/div/div/div/div[1]/header/div/button[1]'
+excute_xpath                = '//*[@id="root"]/div/div/div/div[1]/div/div/div/div/div/div[1]/header/div/button[2]'
+result_xpath                = '//*[@id="root"]/div/div/div/div[1]/div/div/div/div/div/div[1]/header/div/button[3]'
 result_txt_xpath            = '/html/body/div[2]/div[3]/div/div/div/div/table/tr[8]/span'
 random_input_xpath          = '//*[@id="top_panel"]/div/div[2]/div[2]/div/div[2]/div/div/input'
 searchbox_dashboard_xpath   = '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/div[1]/div[3]/div[1]/div/div/input'
 search_table_recod_xpath    = '//*[@id="root"]/div/div[1]/div/div/div/div/div/div/div[2]/div/div[1]/div[2]/div'
-notification_xpath          = '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/div[1]/header/div/img[1]'
+notification_xpath          = '//*[@id="root"]/div/div/div/div[1]/div/div/div/div/div/div[1]/header/div/img[1]'
 notification_button_xpath   = '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/div[2]/div/div[2]/div[1]/div/div'
 start_at_xapth              = '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/div[2]/div/div[2]/div[5]/div/div[1]/div/div[2]/div/div[2]/div/div/span/span[1]/input'
 notification_create_xpath   = '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/div[2]/div/div[2]/div[5]/div/div[3]/div[1]/button'
@@ -133,6 +133,9 @@ normal_result_summary_xpath = '/html/body/div[2]/div[3]/div/div/div/div/div[4]/d
 detail_span_xpath = '/html/body/div[2]/div[3]/div/div/div[2]/div/div[1]/span[2]'
 validate_btn_file_input_csv = '//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div[1]/div[7]/button[1]'
 validate_btn_file_input_json = '//*[@id="top_panel"]/div/div[2]/div[2]/div[3]/div/div/div[1]/div[8]/button[1]'
+alert_button_xpath = '//*[@id="root"]/div/div/div/div[2]/div/div/div[2]/button'
+alert_body_xpath  = '//*[@id="root"]/div/div/div/div[2]/div'
+alert_text_xpath = '//*[@id="client-snackbar"]'
                               
 def init_selenium():
     chromeOptions = webdriver.ChromeOptions()
@@ -446,11 +449,11 @@ def connect_elements(driver, element1, n, element2, m):
 
 # select 'cell By cell Compare' item
 def select_datacompare_type(driver, index):
-    db_select3 = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div/div/div/div/div[1]')))
+    time.sleep(WAIT1)
+    db_select3 = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div/div[2]/div/div[1]/div/div/div[1]')))
     db_select3.click()
     print("db open")
-
-    db_select_val3 = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[2]/div/div/div/div[2]/div/div[' + str(index) + ']')))
+    db_select_val3 = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div/div[2]/div/div[1]/div/div[2]/div/div[' + str(index) + ']')))
     db_select_val3.click()
     print("selected")
 
@@ -570,7 +573,7 @@ def select_key_for_warning_mapping_tableitem(driver, keyindex):
             img = driver.find_element_by_xpath('//*[@id="tableContainer"]/table/tbody/tr[' + str(i + 1) + ']/td[4]/img')
             table_item = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="tableContainer"]/table/tbody/tr[' + str(i + 1) + ']/td[2]/span[1]')))
             table_item.click()
-            input_key = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[3]/div/div[2]/div/div/div[3]/div/div[1]/div[2]/div[' + str(keyindex) + ']/div/div[1]/span/span[1]')))
+            input_key = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="top_panel"]/div/div[2]/div/div[3]/div/div[2]/div/div/div[3]/div/div[1]/div[2]/div[' + str(keyindex) + ']/div/div[1]/span/span[1]')))
             input_key.click()
             time.sleep(WAIT1)
         except Exception as e:
@@ -716,14 +719,15 @@ def save_workflow(driver, flow_name):
     btn_save.click()
     
     try:
-        element = WebDriverWait(driver, WAIT50).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="root"]/div/div/div[2]/div')))
+        element = WebDriverWait(driver, WAIT50).until(EC.visibility_of_element_located((By.XPATH, alert_body_xpath)))
         time.sleep(WAIT1)
         
-        element = WebDriverWait(driver, WAIT3).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="client-snackbar"]')))
+        element = WebDriverWait(driver, WAIT3).until(EC.visibility_of_element_located((By.XPATH, alert_text_xpath)))
         text = re.compile(r'<[^>]+>').sub('', element.text)
         print(text)
         
-        element = WebDriverWait(driver, WAIT50).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="root"]/div/div/div[2]/div/div/div[2]/button')))
+        element = WebDriverWait(driver, WAIT50).until(EC.element_to_be_clickable((By.XPATH, alert_button_xpath)))
+                                                                                             
         element.click()
     except Exception as e:
         raise Exception('Input1 Validate fails')
@@ -1036,7 +1040,7 @@ def select_cluster_execute_job(driver, name):
 def save_close_execute_tab(driver):
     driver.find_element_by_xpath(save_execute_on_xpath).click()
     driver.find_element_by_xpath(notification_close_xpath).click()
-    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="root"]/div/div/div[2]/div/div/div[2]/button')))
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, alert_button_xpath)))
     element.click()
 
 # open excutions
@@ -1091,7 +1095,7 @@ def add_new_connection(driver, index, name, url, user, password):
                                                                                                 
         test_btn.click()
         
-        WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="root"]/div/div/div[2]/div/div/div[2]/button'))).click()
+        WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, alert_button_xpath))).click()
     except Exception as e:
         print(e)
         pass
@@ -1487,10 +1491,10 @@ def publishFlow(driver):
 
 # check Message and close on Dialog
 def checkMessageAndClose(driver):
-    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="client-snackbar"]')))
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, alert_text_xpath)))
     element.click()
     print("MessageBox: " + element.text)
-    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="root"]/div/div/div[2]/div/div/div[2]/button')))
+    element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, alert_button_xpath)))
     element.click()
 
 # select rule on settings page

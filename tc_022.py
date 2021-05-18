@@ -61,7 +61,7 @@ class TC022:
             
             qcd.search_in_settings(self.driver, "employee_demo")
             qcd.click_delete_settings_search(self.driver)
-            qcd.add_new_connection(self.driver, 6, 'employee_demo', 'jdbc:mysql://54.196.223.91:3306/employee?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC', 'demouser1', 'demopassword')
+            qcd.add_new_connection(self.driver, 6, 'employee_demo', 'jdbc:mysql://34.207.81.26:3306/employee?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC', 'demouser1', 'demopassword')
             
             qcd.open_dashboard(self.driver)
             qcd.clickFirstViewEditActionOnExcutions(self.driver)

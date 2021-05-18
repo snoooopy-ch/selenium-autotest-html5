@@ -108,15 +108,15 @@ class TC053:
             print('save click');
             
             try:
-                element = WebDriverWait(self.driver, qcd.WAIT100).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="root"]/div/div/div[2]/div')))
-                element = WebDriverWait(self.driver, qcd.WAIT3).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="client-snackbar"]')))
+                element = WebDriverWait(self.driver, qcd.WAIT100).until(EC.visibility_of_element_located((By.XPATH, qcd.alert_body_xpath)))
+                element = WebDriverWait(self.driver, qcd.WAIT3).until(EC.visibility_of_element_located((By.XPATH, qcd.alert_text_xpath)))
                 text = re.compile(r'<[^>]+>').sub('', element.text)
                 print(text)
                 
                 if text != 'Please select the columns':
                     return
                     
-                element = WebDriverWait(self.driver, qcd.WAIT20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="root"]/div/div/div[2]/div/div/div[2]/button')))
+                element = WebDriverWait(self.driver, qcd.WAIT20).until(EC.element_to_be_clickable((By.XPATH, qcd.alert_button_xpath)))
                 element.click()
             except Exception as e:
                 pass

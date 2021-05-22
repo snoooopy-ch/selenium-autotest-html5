@@ -131,7 +131,7 @@ class TC024:
         try:
             qcd.click_share_button_and_close(self.driver)
             qcd.click_result_close(self.driver)
-            element = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/div/div[2]/div/div[1]/div[2]/div[1]/div/div[8]/div/div')))
+            element = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="root"]/div/div/div/div[1]/div/div/div/div/div/div/div[2]/div/div[1]/div[2]/div[1]/div/div[8]/div/div')))
             print(1)
             html = element.get_attribute('innerHTML')
             html = re.compile(r'<[^>]+>').sub('', html)

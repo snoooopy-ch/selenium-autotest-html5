@@ -33,7 +33,8 @@ class TC059:
             self.workflow()
             self.check_result()
         except Exception as e:
-            qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
+            qcd.logger.warning("Exception : {} : {}".format(
+                e, traceback.format_exc()))
             raise Exception(e)
             pass
 
@@ -43,7 +44,8 @@ class TC059:
             if (qcd.open_workspace(self.driver) != 1):
                 raise Exception('fail to open workspace')
         except Exception as e:
-            qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
+            qcd.logger.warning("Exception : {} : {}".format(
+                e, traceback.format_exc()))
             raise Exception(e)
             pass
 
@@ -52,22 +54,24 @@ class TC059:
             dateTimeObj = datetime.now()
             timestamp = str(dateTimeObj.microsecond)
             name = "TC_059_" + timestamp
-            
+
             qcd.click_action_on_flow_page(self.driver)
             qcd.click_action_on_first_flow(self.driver, 4)
             qcd.inputValueAndSaveOnDailog(self.driver, name)
             time.sleep(qcd.WAIT10)
-            
+
             # Check
             qcd.find_specific_flow(self.driver, name)
-            element = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="root"]/div/div/div[1]/div/div/div/div/div/div/div[2]/div/div[1]/div[2]/div[1]/div/div[2]/div/span')))
+            element = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable(
+                (By.XPATH, '//*[@id="root"]/div/div/div/div[1]/div/div/div/div/div/div/div[2]/div/div[1]/div[2]/div[1]/div/div[2]/div/span')))
             if (element.text == name):
                 print('Rename is working')
             else:
                 print('Rename is not working')
 
         except Exception as e:
-            qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
+            qcd.logger.warning("Exception : {} : {}".format(
+                e, traceback.format_exc()))
             raise Exception(e)
             pass
 
@@ -77,6 +81,7 @@ class TC059:
         try:
             pass
         except Exception as e:
-            qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
+            qcd.logger.warning("Exception : {} : {}".format(
+                e, traceback.format_exc()))
             raise Exception(e)
             pass

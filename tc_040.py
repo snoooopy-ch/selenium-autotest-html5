@@ -23,6 +23,7 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.webdriver.common.action_chains import ActionChains
 
+
 class TC040:
     def __init__(self, drv):
         self.driver = drv
@@ -33,7 +34,8 @@ class TC040:
             self.workflow()
             self.check_result()
         except Exception as e:
-            qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
+            qcd.logger.warning("Exception : {} : {}".format(
+                e, traceback.format_exc()))
             raise Exception(e)
             pass
 
@@ -42,65 +44,74 @@ class TC040:
             # open
             qcd.click_action_on_flow_page(self.driver)
         except Exception as e:
-            qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
+            qcd.logger.warning("Exception : {} : {}".format(
+                e, traceback.format_exc()))
             raise Exception(e)
             pass
 
     def workflow(self):
         try:
-            fieldsName = ["Name", "Job Type", "Create Date", "Last Executed Time", "Last Executed Status"];
-            filedsIndex = [2, 3, 5, 6, 7];
+            fieldsName = ["Name", "Job Type", "Create Date",
+                          "Last Executed Time", "Last Executed Status"]
+            filedsIndex = [2, 3, 5, 6, 7]
             fieldsXpath = [
                 '/div/div[2]/div/span',
                 '/div/div[3]/div',
                 '/div/div[5]/div',
                 '/div/div[6]/div',
-                '/div/div[7]/div/div'                
-            ];
-            
+                '/div/div[7]/div/div'
+            ]
+
             for i in range(5):
-                searchbox = self.driver.find_element_by_xpath(qcd.search_flow_xpath)
+                searchbox = self.driver.find_element_by_xpath(
+                    qcd.search_flow_xpath)
                 searchbox.send_keys(Keys.CONTROL + 'a')
                 searchbox.send_keys(Keys.DELETE)
-                
+
                 p = str(i + 1)
-                firstElement = self.driver.find_element_by_xpath('//*[@id="root"]/div/div/div[1]/div/div/div/div/div/div/div[2]/div/div[1]/div[2]/div[1]' + fieldsXpath[i])
-                keyword = firstElement.text;
-                
+                firstElement = self.driver.find_element_by_xpath(
+                    '//*[@id="root"]/div/div/div/div[1]/div/div/div/div/div/div/div[2]/div/div[1]/div[2]/div[1]' + fieldsXpath[i])
+                keyword = firstElement.text
+
                 if i == 4:
                     html = firstElement.get_attribute('innerHTML')
                     html = re.compile(r'<[^>]+>').sub('', html)
                     keyword = html
-                    
+
                 searchbox.send_keys(keyword)
                 time.sleep(qcd.WAIT1)
-                records = self.driver.find_elements_by_xpath('//*[@id="root"]/div/div/div[1]/div/div/div/div/div/div/div[2]/div/div[1]/div[2]/div')
-                
+                records = self.driver.find_elements_by_xpath(
+                    '//*[@id="root"]/div/div/div/div[1]/div/div/div/div/div/div/div[2]/div/div[1]/div[2]/div')
+
                 start = 0
                 for record in records:
                     innerRecord = record.find_element_by_xpath('./div')
                     recordClass = innerRecord.get_attribute("class")
                     if recordClass.find('-padRow') == -1:
                         start = 1
-                        idElement = record.find_element_by_xpath('.' + fieldsXpath[i])
-                        
+                        idElement = record.find_element_by_xpath(
+                            '.' + fieldsXpath[i])
+
                         target = idElement.text
                         if i == 4:
                             html = idElement.get_attribute('innerHTML')
                             html = re.compile(r'<[^>]+>').sub('', html)
                             target = html
-                    
+
                         if target.find(keyword) == -1:
-                            print("{} search not working".format(fieldsName[i]))
+                            print("{} search not working".format(
+                                fieldsName[i]))
                             break
-                        
+
                     else:
                         if start == 0:
-                            print("{} search not working".format(fieldsName[i]))
+                            print("{} search not working".format(
+                                fieldsName[i]))
                         break
-            
+
         except Exception as e:
-            qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
+            qcd.logger.warning("Exception : {} : {}".format(
+                e, traceback.format_exc()))
             raise Exception(e)
             pass
 

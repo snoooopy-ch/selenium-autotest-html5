@@ -22,6 +22,7 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.webdriver.common.action_chains import ActionChains
 
+
 class TC052:
     def __init__(self, drv):
         self.driver = drv
@@ -32,7 +33,8 @@ class TC052:
             self.workflow()
             self.check_result()
         except Exception as e:
-            qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
+            qcd.logger.warning("Exception : {} : {}".format(
+                e, traceback.format_exc()))
             raise Exception(e)
             pass
 
@@ -42,7 +44,8 @@ class TC052:
             if (qcd.open_workspace(self.driver) != 1):
                 raise Exception('fail to open workspace')
         except Exception as e:
-            qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
+            qcd.logger.warning("Exception : {} : {}".format(
+                e, traceback.format_exc()))
             raise Exception(e)
             pass
 
@@ -54,55 +57,60 @@ class TC052:
                 load_jquery_js = f.read()
 
             self.driver.execute_async_script(load_jquery_js, jquery_url)
-                
+
             with open("js/drag_and_drop.js") as f:
                 drag_and_drop_js = f.read()
-            
+
             # input 1
-            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Source", 300, 0)
-            input1 = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component0"]')))
+            qcd.drop_element_to_position(
+                self.driver, drag_and_drop_js, "Source", 300, 0)
+            input1 = WebDriverWait(self.driver, qcd.WAITDRIVER).until(
+                EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component0"]')))
 
             if (qcd.open_container(self.driver) != 1):
                 input1.click()
 
             qcd.select_dbset_input(self.driver, 'tims')
-            qcd.select_db(self.driver)
+            qcd.select_db_with_index(self.driver, 'tims_db')
             qcd.select_table(self.driver, "assessment_report")
             qcd.click_add_select_btn(self.driver)
 
             # data profile
-            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Data Profile", 500, -210)
-            data_profile = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component1"]')))
+            qcd.drop_element_to_position(
+                self.driver, drag_and_drop_js, "Data Profile", 500, -210)
+            data_profile = WebDriverWait(self.driver, qcd.WAITDRIVER).until(
+                EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component1"]')))
             qcd.connect_elements(self.driver, input1, 1, data_profile, 1)
 
             if (qcd.open_container(self.driver) != 1):
                 data_profile.click()
-            
+
             # execute
             qcd.save_excute_workflow(self.driver, 'TC_052_Morimura')
 
         except Exception as e:
-            qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
+            qcd.logger.warning("Exception : {} : {}".format(
+                e, traceback.format_exc()))
             raise Exception(e)
             pass
 
     def check_result(self):
-        table = self.driver.find_element_by_xpath('/html/body/div[2]/div[3]/div/div/div/div/div[2]/div/div[1]/div/div/div[1]/div[2]')
+        table = self.driver.find_element_by_xpath(
+            '/html/body/div[2]/div[3]/div/div/div/div/div[2]/div/div[1]/div/div/div[1]/div[2]')
         table_trs = table.find_elements_by_xpath('./div')
-        
+
         for tr in table_trs:
             tr_body = tr.find_element_by_xpath('./div')
-            
-            tr_name_tmp = tr_body.find_element_by_xpath('./div[1]/div/div/div/div').get_attribute('innerHTML')
+
+            tr_name_tmp = tr_body.find_element_by_xpath(
+                './div[1]/div/div/div/div').get_attribute('innerHTML')
             tr_name = re.compile(r'<[^>]+>').sub('', tr_name_tmp)
-            
+
             if "physical_Diagnosis_no_data" in tr_name:
                 tr_min = tr_body.find_element_by_xpath('./div[5]').text
                 tr_max = tr_body.find_element_by_xpath('./div[6]').text
-                print("Min is :".format(tr_min if tr_min  else 'NA'))
-                print("Max is :".format(tr_max if tr_max  else 'NA'))
+                print("Min is :".format(tr_min if tr_min else 'NA'))
+                print("Max is :".format(tr_max if tr_max else 'NA'))
                 break
-        
+
         pass
-        
-        

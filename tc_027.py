@@ -33,7 +33,8 @@ class TC027:
             self.workflow()
             self.check_result()
         except Exception as e:
-            qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
+            qcd.logger.warning("Exception : {} : {}".format(
+                e, traceback.format_exc()))
             raise Exception(e)
             pass
 
@@ -43,7 +44,8 @@ class TC027:
             if (qcd.open_workspace(self.driver) != 1):
                 raise Exception('fail to open workspace')
         except Exception as e:
-            qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
+            qcd.logger.warning("Exception : {} : {}".format(
+                e, traceback.format_exc()))
             raise Exception(e)
             pass
 
@@ -55,31 +57,36 @@ class TC027:
                 load_jquery_js = f.read()
 
             self.driver.execute_async_script(load_jquery_js, jquery_url)
-                
+
             with open("js/drag_and_drop.js") as f:
                 drag_and_drop_js = f.read()
-            
+
             # input 1
-            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Source", 300, 0)
-            input1 = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component0"]')))
+            qcd.drop_element_to_position(
+                self.driver, drag_and_drop_js, "Source", 300, 0)
+            input1 = WebDriverWait(self.driver, qcd.WAITDRIVER).until(
+                EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component0"]')))
 
             if (qcd.open_container(self.driver) != 1):
                 input1.click()
 
             qcd.select_dbset_input(self.driver, 'hims')
-            qcd.select_db(self.driver)
+            qcd.select_db_with_index(self.driver, 'hims_db')
             qcd.select_table(self.driver, "courses_info")
             qcd.click_add_select_btn(self.driver)
-            
+
             # data profile
-            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Data Profile", 600, -210)
-            data_profile = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component1"]')))
+            qcd.drop_element_to_position(
+                self.driver, drag_and_drop_js, "Data Profile", 600, -210)
+            data_profile = WebDriverWait(self.driver, qcd.WAITDRIVER).until(
+                EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component1"]')))
             qcd.connect_elements(self.driver, input1, 1, data_profile, 1)
 
             # execute
             qcd.save_excute_workflow(self.driver, 'flow1')
         except Exception as e:
-            qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
+            qcd.logger.warning("Exception : {} : {}".format(
+                e, traceback.format_exc()))
             raise Exception(e)
             pass
 
@@ -89,19 +96,21 @@ class TC027:
         try:
             qcd.click_result_close(self.driver)
             qcd.click_action_on_flow_page(self.driver)
-            
+
             # Edit
             qcd.click_action_on_first_flow(self.driver, 1)
-            
-            input1 = self.driver.find_element_by_xpath('//div[@id="copy-component0"]')
+
+            input1 = self.driver.find_element_by_xpath(
+                '//div[@id="copy-component0"]')
             if (qcd.open_container(self.driver) != 1):
                 input1.click()
-                
+
             qcd.select_table(self.driver, "Student_Information")
             qcd.click_add_select_btn(self.driver)
             qcd.save_excute_workflow(self.driver, 'flow1')
-            
+
         except Exception as e:
-            qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
+            qcd.logger.warning("Exception : {} : {}".format(
+                e, traceback.format_exc()))
             raise Exception(e)
             pass

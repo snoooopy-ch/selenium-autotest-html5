@@ -21,6 +21,7 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.webdriver.common.action_chains import ActionChains
 
+
 class TC030:
     def __init__(self, drv):
         self.driver = drv
@@ -31,7 +32,8 @@ class TC030:
             self.workflow()
             self.check_result()
         except Exception as e:
-            qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
+            qcd.logger.warning("Exception : {} : {}".format(
+                e, traceback.format_exc()))
             raise Exception(e)
             pass
 
@@ -41,7 +43,8 @@ class TC030:
             if (qcd.open_workspace(self.driver) != 1):
                 raise Exception('fail to open workspace')
         except Exception as e:
-            qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
+            qcd.logger.warning("Exception : {} : {}".format(
+                e, traceback.format_exc()))
             raise Exception(e)
             pass
 
@@ -53,32 +56,36 @@ class TC030:
                 load_jquery_js = f.read()
 
             self.driver.execute_async_script(load_jquery_js, jquery_url)
-                
+
             with open("js/drag_and_drop.js") as f:
                 drag_and_drop_js = f.read()
-            
+
             # input 1
-            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Source", 300, 0)
-            input1 = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component0"]')))
+            qcd.drop_element_to_position(
+                self.driver, drag_and_drop_js, "Source", 300, 0)
+            input1 = WebDriverWait(self.driver, qcd.WAITDRIVER).until(
+                EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component0"]')))
 
             if (qcd.open_container(self.driver) != 1):
                 input1.click()
 
             qcd.select_dbset_input(self.driver, 'tims')
-            qcd.select_db(self.driver)
+            qcd.select_db_with_index(self.driver, 'tims_db')
             qcd.select_table(self.driver, "assessment_report")
             qcd.click_add_select_btn(self.driver)
 
             # Data Quality
-            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Data Quality", 400, -200)
-            data_quality = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component1"]')))
+            qcd.drop_element_to_position(
+                self.driver, drag_and_drop_js, "Data Quality", 400, -200)
+            data_quality = WebDriverWait(self.driver, qcd.WAITDRIVER).until(
+                EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component1"]')))
             qcd.connect_elements(self.driver, input1, 1, data_quality, 1)
 
             if (qcd.open_container(self.driver) != 1):
                 data_quality.click()
 
             qcd.select_rules_tab(self.driver)
-            
+
             qcd.checkCompletenessOnDataQuality(self.driver, 1)
             qcd.nullCheckOnDataQuality(self.driver, 1)
             qcd.uniqueCheckOnDataQuality(self.driver, 1)
@@ -87,82 +94,88 @@ class TC030:
             qcd.inputMaxLengthOnDataQuality(self.driver, 1, 12)
             qcd.inputMinLengthOnDataQuality(self.driver, 1, 3)
             qcd.inputRegularExpressOnDataQuality(self.driver, 1, "[0-9]{3}")
-            
+
             qcd.checkLeftSpacesOnDataQuality(self.driver, 2)
-            
-            qcd.nullCheckOnDataQuality(self.driver, 3);
-            qcd.uniqueCheckOnDataQuality(self.driver, 3);
+
+            qcd.nullCheckOnDataQuality(self.driver, 3)
+            qcd.uniqueCheckOnDataQuality(self.driver, 3)
             qcd.inputMaxValueOnDataQuality(self.driver, 3, 400)
             qcd.inputMinValueOnDataQuality(self.driver, 3, 400)
-            qcd.inputSQLWhereConditionOnDataQuality(self.driver, 3, "student_ID=372")
-            
+            qcd.inputSQLWhereConditionOnDataQuality(
+                self.driver, 3, "student_ID=372")
+
             qcd.checkLeftSpacesOnDataQuality(self.driver, 4)
-            
+
             qcd.nullCheckOnDataQuality(self.driver, 6)
             qcd.uniqueCheckOnDataQuality(self.driver, 6)
-            qcd.inputSQLWhereConditionOnDataQuality(self.driver, 6, "genetics_int<40")
-            
+            qcd.inputSQLWhereConditionOnDataQuality(
+                self.driver, 6, "genetics_int<40")
+
             qcd.nullCheckOnDataQuality(self.driver, 9)
             qcd.uniqueCheckOnDataQuality(self.driver, 9)
-            
+
             time.sleep(qcd.WAIT1)
-            
+
             qcd.checkLeftSpacesOnDataQuality(self.driver, 18)
 
             qcd.checkLeftSpacesOnDataQuality(self.driver, 19)
-            
+
             qcd.checkLeftSpacesOnDataQuality(self.driver, 22)
-            
+
             qcd.clickNextButtonOnDataQuality(self.driver)
             qcd.scrollToTop(self.driver)
-            
+
             qcd.checkLeftSpacesOnDataQuality(self.driver, 2)
-            
+
             qcd.checkLeftSpacesOnDataQuality(self.driver, 3)
-            
+
             qcd.checkLeftSpacesOnDataQuality(self.driver, 4)
-            
+
             qcd.checkLeftSpacesOnDataQuality(self.driver, 5)
-            
+
             qcd.checkLeftSpacesOnDataQuality(self.driver, 6)
-            
+
             qcd.checkLeftSpacesOnDataQuality(self.driver, 7)
-            
+
             qcd.checkLeftSpacesOnDataQuality(self.driver, 9)
-            
+
             qcd.checkLeftSpacesOnDataQuality(self.driver, 10)
-            
+
             qcd.checkLeftSpacesOnDataQuality(self.driver, 11)
-            
+
             qcd.checkLeftSpacesOnDataQuality(self.driver, 12)
-            
+
             # execute
             qcd.save_excute_workflow(self.driver, 'TC_030_Morimura')
-            
+
         except Exception as e:
-            qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
+            qcd.logger.warning("Exception : {} : {}".format(
+                e, traceback.format_exc()))
             raise Exception(e)
             pass
-        
+
     def check_result(self):
         try:
             try:
                 if qcd.isElementPresentForResult(self.driver, qcd.detail_span_xpath) != True:
                     raise Exception("Not present")
-                
-                detail_span = self.driver.find_elements_by_xpath(qcd.detail_span_xpath)
+
+                detail_span = self.driver.find_elements_by_xpath(
+                    qcd.detail_span_xpath)
                 if len(detail_span) == 1:
                     detail_span[0].click()
                     time.sleep(qcd.WAIT3)
             except Exception as e:
                 print(e)
                 pass
-            qcd.check_summary_statue_in_TC028_result(self.driver, self.__class__.__name__, qcd.normal_result_summary_xpath)
+            qcd.check_summary_statue_in_TC028_result(
+                self.driver, self.__class__.__name__, qcd.normal_result_summary_xpath)
             qcd.click_result_close(self.driver)
         except Exception as e:
-            qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
+            qcd.logger.warning("Exception : {} : {}".format(
+                e, traceback.format_exc()))
             raise Exception(e)
             pass
-            
+
         time.sleep(qcd.WAIT1)
         return

@@ -23,6 +23,7 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.webdriver.common.action_chains import ActionChains
 
+
 class TC054:
     def __init__(self, drv):
         self.driver = drv
@@ -33,7 +34,8 @@ class TC054:
             self.workflow()
             self.check_result()
         except Exception as e:
-            qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
+            qcd.logger.warning("Exception : {} : {}".format(
+                e, traceback.format_exc()))
             raise Exception(e)
             pass
 
@@ -43,7 +45,8 @@ class TC054:
             if (qcd.open_workspace(self.driver) != 1):
                 raise Exception('fail to open workspace')
         except Exception as e:
-            qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
+            qcd.logger.warning("Exception : {} : {}".format(
+                e, traceback.format_exc()))
             raise Exception(e)
             pass
 
@@ -55,54 +58,62 @@ class TC054:
                 load_jquery_js = f.read()
 
             self.driver.execute_async_script(load_jquery_js, jquery_url)
-                
+
             with open("js/drag_and_drop.js") as f:
                 drag_and_drop_js = f.read()
-            
+
             # input 1
-            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Source", 300, 0)
-            input1 = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component0"]')))
+            qcd.drop_element_to_position(
+                self.driver, drag_and_drop_js, "Source", 300, 0)
+            input1 = WebDriverWait(self.driver, qcd.WAITDRIVER).until(
+                EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component0"]')))
 
             if (qcd.open_container(self.driver) != 1):
                 input1.click()
 
             qcd.select_dbset_input(self.driver, 'marketing_dev')
-            qcd.select_db(self.driver)
+            qcd.select_db_with_index(self.driver, "demodb")
             qcd.select_table(self.driver, "City")
             qcd.click_add_select_btn(self.driver)
 
             # input 2
-            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Target", 300, 160)
-            input2 = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component1"]')))
+            qcd.drop_element_to_position(
+                self.driver, drag_and_drop_js, "Target", 300, 160)
+            input2 = WebDriverWait(self.driver, qcd.WAITDRIVER).until(
+                EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component1"]')))
 
             if (qcd.open_container(self.driver) != 1):
                 input2.click()
 
             qcd.select_dbset_input(self.driver, 'demodb_dest')
-            qcd.select_db(self.driver)
+            qcd.select_db_with_index(self.driver, "demodb")
             qcd.select_table(self.driver, "City")
             qcd.click_add_select_btn(self.driver)
 
             # data compare
-            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Data Compare", 400, 80)
-            compare1 = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component2"]')))
+            qcd.drop_element_to_position(
+                self.driver, drag_and_drop_js, "Data Compare", 400, 80)
+            compare1 = WebDriverWait(self.driver, qcd.WAITDRIVER).until(
+                EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component2"]')))
 
             qcd.connect_elements(self.driver, input1, 1, compare1, 1)
             qcd.connect_elements(self.driver, input2, 1, compare1, 1)
 
             if (qcd.open_container(self.driver) != 1):
                 compare1.click()
-            
+
             qcd.select_datacompare_type(self.driver, 3)
 
             qcd.select_mapping_tab(self.driver)
-            qcd.add_mapping_table_for_type_compare_with_index(self.driver, 'Claims', 'Claimslist')
+            qcd.add_mapping_table_for_type_compare_with_index(
+                self.driver, 'Claims', 'Claimslist')
             qcd.select_key_for_warning_mapping_tableitem(self.driver, 1)
-            
+
             # execute
             qcd.save_excute_workflow(self.driver, 'TC_054_Morimura')
         except Exception as e:
-            qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
+            qcd.logger.warning("Exception : {} : {}".format(
+                e, traceback.format_exc()))
             raise Exception(e)
             pass
 
@@ -111,7 +122,8 @@ class TC054:
             # show matching tables for TC003
             detail_span_xpath = '/html/body/div[2]/div[3]/div/div/div/div/div[1]/div[2]/span[2]'
             try:
-                detail_span = self.driver.find_elements_by_xpath(detail_span_xpath)
+                detail_span = self.driver.find_elements_by_xpath(
+                    detail_span_xpath)
                 if (len(detail_span) == 1):
                     detail_span[0].click()
                     time.sleep(qcd.WAIT3)
@@ -119,11 +131,12 @@ class TC054:
                 print(e)
                 pass
 
-            qcd.check_summary_in_final_result(self.driver, self.__class__.__name__, '/html/body/div[2]/div[3]/div/div/div/div/div[2]/div[3]/div[1]/div[2]')
+            qcd.check_summary_in_final_result(
+                self.driver, self.__class__.__name__, '/html/body/div[2]/div[3]/div/div/div/div/div[2]/div[3]/div[1]/div[2]')
             qcd.click_result_close(self.driver)
         except Exception as e:
-            qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
+            qcd.logger.warning("Exception : {} : {}".format(
+                e, traceback.format_exc()))
             raise Exception(e)
             time.sleep(qcd.WAIT1)
             pass
-        

@@ -71,7 +71,7 @@ class TC025:
                 input1.click()
 
             qcd.select_dbset_input(self.driver, 'tims')
-            qcd.select_db(self.driver)
+            qcd.select_db_with_index(self.driver, 'tims_db')
             qcd.select_table(self.driver, "assessment_report")
             qcd.click_add_select_btn(self.driver)
 
@@ -85,7 +85,7 @@ class TC025:
                 input2.click()
 
             qcd.select_dbset_input(self.driver, 'hims')
-            qcd.select_db(self.driver)
+            qcd.select_db_with_index(self.driver, 'hims_db')
             qcd.select_table(self.driver, "medicine_students_finalreport")
             qcd.click_add_select_btn(self.driver)
 

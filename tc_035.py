@@ -71,7 +71,7 @@ class TC035:
                 input1.click()
 
             qcd.select_dbset_input(self.driver, 'marketing_dev')
-            qcd.select_db(self.driver)
+            qcd.select_db_with_index(self.driver, "demodb")
             qcd.select_table(self.driver, "Policy")
             qcd.click_add_select_btn(self.driver)
             qcd.click_datatab_input(self.driver)

@@ -70,7 +70,7 @@ class TC012:
                 input1.click()
 
             qcd.select_dbset_input(self.driver, 'marketing_dev')
-            qcd.select_db(self.driver)
+            qcd.select_db_with_index(self.driver, "demodb")
             qcd.select_table(self.driver, "Doctor")
             qcd.click_add_select_btn(self.driver)
 
@@ -84,7 +84,7 @@ class TC012:
                 input2.click()
 
             qcd.select_dbset_input(self.driver, 'demodb_dest')
-            qcd.select_db(self.driver)
+            qcd.select_db_with_index(self.driver, 'demodb_dest')
             qcd.select_table(self.driver, "Patient")
             qcd.click_add_select_btn(self.driver)
 

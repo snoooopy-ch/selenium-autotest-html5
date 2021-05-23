@@ -21,6 +21,7 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.webdriver.common.action_chains import ActionChains
 
+
 class TC013:
     def __init__(self, drv):
         self.driver = drv
@@ -31,7 +32,8 @@ class TC013:
             self.workflow()
             self.check_result()
         except Exception as e:
-            qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
+            qcd.logger.warning("Exception : {} : {}".format(
+                e, traceback.format_exc()))
             raise Exception(e)
             pass
 
@@ -41,7 +43,8 @@ class TC013:
             if (qcd.open_workspace(self.driver) != 1):
                 raise Exception('fail to open workspace')
         except Exception as e:
-            qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
+            qcd.logger.warning("Exception : {} : {}".format(
+                e, traceback.format_exc()))
             raise Exception(e)
             pass
 
@@ -53,57 +56,65 @@ class TC013:
                 load_jquery_js = f.read()
 
             self.driver.execute_async_script(load_jquery_js, jquery_url)
-                
+
             with open("js/drag_and_drop.js") as f:
                 drag_and_drop_js = f.read()
-            
+
             # input 1
-            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Source", 300, 0)
-            input1 = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component0"]')))
+            qcd.drop_element_to_position(
+                self.driver, drag_and_drop_js, "Source", 300, 0)
+            input1 = WebDriverWait(self.driver, qcd.WAITDRIVER).until(
+                EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component0"]')))
 
             if (qcd.open_container(self.driver) != 1):
                 input1.click()
 
             qcd.select_dbset_input(self.driver, 'sampledb_src')
-            qcd.select_db(self.driver)
+            qcd.select_db_with_index(self.driver, 'sampledb_src')
             qcd.select_table(self.driver, "collegedetails_zero_records")
             qcd.click_add_select_btn(self.driver)
 
             # input 2
-            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Target", 300, 160)
-            input2 = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component1"]')))
+            qcd.drop_element_to_position(
+                self.driver, drag_and_drop_js, "Target", 300, 160)
+            input2 = WebDriverWait(self.driver, qcd.WAITDRIVER).until(
+                EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component1"]')))
 
             if (qcd.open_container(self.driver) != 1):
                 input2.click()
 
             qcd.select_dbset_input(self.driver, 'sampledb_dest')
-            qcd.select_db(self.driver)
+            qcd.select_db_with_index(self.driver, 'sampledb_dest')
             qcd.select_table(self.driver, "collegedetails_zero_records")
             qcd.click_add_select_btn(self.driver)
 
             # data compare
-            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Data Compare", 700, 80)
-            compare1 = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component2"]')))
+            qcd.drop_element_to_position(
+                self.driver, drag_and_drop_js, "Data Compare", 700, 80)
+            compare1 = WebDriverWait(self.driver, qcd.WAITDRIVER).until(
+                EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component2"]')))
 
             qcd.connect_elements(self.driver, input1, 1, compare1, 1)
             qcd.connect_elements(self.driver, input2, 1, compare1, 1)
 
             if (qcd.open_container(self.driver) != 1):
                 compare1.click()
-                
+
             qcd.select_datacompare_type(self.driver, 3)
             qcd.select_mapping_tab(self.driver)
 
             # custom
-            matching_items = self.driver.find_elements_by_xpath('//*[@id="top_panel"]/div/div[2]/div[3]/div/div[1]/table/tr')
-            matching_count = len(matching_items);
-            print("TC013: {} items are matched", matching_count);
+            matching_items = self.driver.find_elements_by_xpath(
+                '//*[@id="top_panel"]/div/div[2]/div[3]/div/div[1]/table/tr')
+            matching_count = len(matching_items)
+            print("TC013: {} items are matched", matching_count)
 
             # execute
             qcd.save_excute_workflow(self.driver, 'TC_013_Morimura')
-            
+
         except Exception as e:
-            qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
+            qcd.logger.warning("Exception : {} : {}".format(
+                e, traceback.format_exc()))
             raise Exception(e)
             pass
 
@@ -114,8 +125,9 @@ class TC013:
             try:
                 if qcd.isElementPresentForResult(self.driver, detail_span_xpath) != True:
                     raise Exception()
-                
-                detail_span = self.driver.find_elements_by_xpath(detail_span_xpath)
+
+                detail_span = self.driver.find_elements_by_xpath(
+                    detail_span_xpath)
                 if (len(detail_span) == 1):
                     detail_span[0].click()
                     time.sleep(qcd.WAIT3)
@@ -124,10 +136,12 @@ class TC013:
                 raise Exception(e)
                 pass
 
-            qcd.check_summary_in_final_result(self.driver, self.__class__.__name__, '/html/body/div[2]/div[3]/div/div/div/div/div[2]/div[3]/div[1]/div[2]')
+            qcd.check_summary_in_final_result(
+                self.driver, self.__class__.__name__, '/html/body/div[2]/div[3]/div/div/div/div/div[2]/div[3]/div[1]/div[2]')
             qcd.click_result_close(self.driver)
         except Exception as e:
-            qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
+            qcd.logger.warning("Exception : {} : {}".format(
+                e, traceback.format_exc()))
             raise Exception(e)
             pass
         return

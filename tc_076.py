@@ -21,6 +21,7 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.webdriver.common.action_chains import ActionChains
 
+
 class TC076:
     def __init__(self, drv):
         self.driver = drv
@@ -31,7 +32,8 @@ class TC076:
             self.workflow()
             self.check_result()
         except Exception as e:
-            qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
+            qcd.logger.warning("Exception : {} : {}".format(
+                e, traceback.format_exc()))
             raise Exception(e)
             pass
 
@@ -41,7 +43,8 @@ class TC076:
             if (qcd.open_workspace(self.driver) != 1):
                 raise Exception('fail to open workspace')
         except Exception as e:
-            qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
+            qcd.logger.warning("Exception : {} : {}".format(
+                e, traceback.format_exc()))
             raise Exception(e)
             pass
 
@@ -53,38 +56,44 @@ class TC076:
                 load_jquery_js = f.read()
 
             self.driver.execute_async_script(load_jquery_js, jquery_url)
-                
+
             with open("js/drag_and_drop.js") as f:
                 drag_and_drop_js = f.read()
-            
+
             # input 1
-            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Source", 300, 0)
-            input1 = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component0"]')))
+            qcd.drop_element_to_position(
+                self.driver, drag_and_drop_js, "Source", 300, 0)
+            input1 = WebDriverWait(self.driver, qcd.WAITDRIVER).until(
+                EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component0"]')))
 
             if (qcd.open_container(self.driver) != 1):
                 input1.click()
-                
+
             qcd.select_dbset_input(self.driver, 'marketing_dev')
-            qcd.select_db(self.driver)
+            qcd.select_db_with_index(self.driver, "demodb")
             qcd.select_table(self.driver, "City")
             qcd.click_add_select_btn(self.driver)
-            
+
             # select columns
-            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Select Columns", 400, -80)
-            selectcolumns = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component1"]')))
+            qcd.drop_element_to_position(
+                self.driver, drag_and_drop_js, "Select Columns", 400, -80)
+            selectcolumns = WebDriverWait(self.driver, qcd.WAITDRIVER).until(
+                EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component1"]')))
 
             qcd.connect_elements(self.driver, input1, 1, selectcolumns, 1)
-            
+
             if (qcd.open_container(self.driver) != 1):
                 selectcolumns.click()
 
             qcd.click_select_tableitem_for_select_columns(self.driver, "City")
             qcd.select_table(self.driver, "city_name")
             qcd.click_save_on_cp(self.driver)
-            
+
             # Column type
-            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Column type", 800, -150)
-            columntype = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component2"]')))
+            qcd.drop_element_to_position(
+                self.driver, drag_and_drop_js, "Column type", 800, -150)
+            columntype = WebDriverWait(self.driver, qcd.WAITDRIVER).until(
+                EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component2"]')))
 
             qcd.connect_elements(self.driver, selectcolumns, 2, columntype, 1)
 
@@ -95,12 +104,14 @@ class TC076:
             qcd.click_select_tableitem_for_select_columns(self.driver, "City")
             qcd.click_select_all_for_columntype(self.driver)
             qcd.click_save_on_cp(self.driver)
-            
+
             qcd.close_maximize_for_select_columns(self.driver)
-                
+
             # Data Quality
-            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Data Quality", 1000, -250)
-            data_quality = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component3"]')))
+            qcd.drop_element_to_position(
+                self.driver, drag_and_drop_js, "Data Quality", 1000, -250)
+            data_quality = WebDriverWait(self.driver, qcd.WAITDRIVER).until(
+                EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component3"]')))
             qcd.connect_elements(self.driver, columntype, 2, data_quality, 1)
 
             if (qcd.open_container(self.driver) != 1):
@@ -110,13 +121,14 @@ class TC076:
             qcd.check_completeness_on_dataqualityheader(self.driver)
             qcd.check_nullcheck_on_dataqualityheader(self.driver)
             qcd.check_leftspaces_on_dataqualityheader(self.driver)
-            
+
             # execute
             qcd.save_excute_workflow(self.driver, 'TC_076_Morimura')
 
         except Exception as e:
-            
-            qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
+
+            qcd.logger.warning("Exception : {} : {}".format(
+                e, traceback.format_exc()))
             raise Exception(e)
             pass
 
@@ -124,30 +136,33 @@ class TC076:
         try:
             qcd.click_result_close(self.driver)
             qcd.click_action_on_first_flow(self.driver, 1)
-            
+
             # select columns
-            selectcolumns = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component1"]')))
+            selectcolumns = WebDriverWait(self.driver, qcd.WAITDRIVER).until(
+                EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component1"]')))
             if (qcd.open_container(self.driver) != 1):
                 selectcolumns.click()
 
             qcd.select_table(self.driver, "city_name")
             qcd.click_save_on_cp(self.driver)
-            
+
             if (qcd.open_container(self.driver) == 1):
                 selectcolumns.click()
-            
+
             # Column type
-            columntype = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component2"]')))
+            columntype = WebDriverWait(self.driver, qcd.WAITDRIVER).until(
+                EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component2"]')))
             if (qcd.open_container(self.driver) != 1):
                 columntype.click()
-                
+
             qcd.click_save_on_cp(self.driver)
-            
+
             if (qcd.open_container(self.driver) == 1):
                 columntype.click()
-                
+
             # Data Quality
-            data_quality = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component3"]')))
+            data_quality = WebDriverWait(self.driver, qcd.WAITDRIVER).until(
+                EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component3"]')))
             if (qcd.open_container(self.driver) != 1):
                 data_quality.click()
 

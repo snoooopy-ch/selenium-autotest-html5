@@ -32,7 +32,8 @@ class TC009:
             self.workflow()
             self.check_result()
         except Exception as e:
-            qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
+            qcd.logger.warning("Exception : {} : {}".format(
+                e, traceback.format_exc()))
             raise Exception(e)
             pass
 
@@ -42,7 +43,8 @@ class TC009:
             if (qcd.open_workspace(self.driver) != 1):
                 raise Exception('fail to open workspace')
         except Exception as e:
-            qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
+            qcd.logger.warning("Exception : {} : {}".format(
+                e, traceback.format_exc()))
             raise Exception(e)
             pass
 
@@ -54,58 +56,67 @@ class TC009:
                 load_jquery_js = f.read()
 
             self.driver.execute_async_script(load_jquery_js, jquery_url)
-                
+
             with open("js/drag_and_drop.js") as f:
                 drag_and_drop_js = f.read()
-            
+
             # input 1
-            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Source", 300, 0)
-            input1 = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component0"]')))
+            qcd.drop_element_to_position(
+                self.driver, drag_and_drop_js, "Source", 300, 0)
+            input1 = WebDriverWait(self.driver, qcd.WAITDRIVER).until(
+                EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component0"]')))
 
             if (qcd.open_container(self.driver) != 1):
                 input1.click()
 
             qcd.select_dbset_input(self.driver, 'marketing_dev')
-            qcd.select_db(self.driver)
+            qcd.select_db_with_index(self.driver, "demodb")
             qcd.select_table(self.driver, "Patient")
             qcd.click_add_select_btn(self.driver)
 
             # input 2
-            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Target", 300, 160)
-            input2 = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component1"]')))
+            qcd.drop_element_to_position(
+                self.driver, drag_and_drop_js, "Target", 300, 160)
+            input2 = WebDriverWait(self.driver, qcd.WAITDRIVER).until(
+                EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component1"]')))
 
             if (qcd.open_container(self.driver) != 1):
                 input2.click()
 
             qcd.select_dbset_input(self.driver, 'marketing_dev')
-            qcd.select_db(self.driver)
+            qcd.select_db_with_index(self.driver, "demodb")
             qcd.select_table(self.driver, "Patient")
             qcd.click_add_select_btn(self.driver)
 
             # remove duplicates
-            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Remove Duplicates", 600, -200)
-            removeDuplicate = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component2"]')))
+            qcd.drop_element_to_position(
+                self.driver, drag_and_drop_js, "Remove Duplicates", 600, -200)
+            removeDuplicate = WebDriverWait(self.driver, qcd.WAITDRIVER).until(
+                EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component2"]')))
 
             qcd.connect_elements(self.driver, input1, 1, removeDuplicate, 1)
 
             if (qcd.open_container(self.driver) != 1):
                 removeDuplicate.click()
 
-            qcd.click_select_tableitem_for_select_columns(self.driver, "Patient")
+            qcd.click_select_tableitem_for_select_columns(
+                self.driver, "Patient")
 
             qcd.select_item_from_column_type(self.driver, "birth_date")
             qcd.click_save_on_cp(self.driver)
 
             # data compare
-            qcd.drop_element_to_position(self.driver, drag_and_drop_js, "Data Compare", 700, 80)
-            compare1 = WebDriverWait(self.driver, qcd.WAITDRIVER).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component3"]')))
+            qcd.drop_element_to_position(
+                self.driver, drag_and_drop_js, "Data Compare", 700, 80)
+            compare1 = WebDriverWait(self.driver, qcd.WAITDRIVER).until(
+                EC.element_to_be_clickable((By.XPATH, '//div[@id="copy-component3"]')))
 
             qcd.connect_elements(self.driver, removeDuplicate, 2, compare1, 1)
             qcd.connect_elements(self.driver, input2, 1, compare1, 1)
 
             if (qcd.open_container(self.driver) != 1):
                 compare1.click()
-                
+
             qcd.select_datacompare_type(self.driver, 1)
             qcd.select_mapping_tab(self.driver)
 
@@ -115,15 +126,18 @@ class TC009:
             # execute
             qcd.save_excute_workflow(self.driver, 'TC_009_Morimura')
         except Exception as e:
-            qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
+            qcd.logger.warning("Exception : {} : {}".format(
+                e, traceback.format_exc()))
             raise Exception(e)
             pass
 
     def check_result(self):
         try:
-            qcd.check_summary_in_final_result(self.driver, self.__class__.__name__, '')
+            qcd.check_summary_in_final_result(
+                self.driver, self.__class__.__name__, '')
             qcd.click_result_close(self.driver)
         except Exception as e:
-            qcd.logger.warning("Exception : {} : {}".format(e, traceback.format_exc()))
+            qcd.logger.warning("Exception : {} : {}".format(
+                e, traceback.format_exc()))
             raise Exception(e)
             pass

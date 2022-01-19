@@ -151,7 +151,7 @@ class TC025:
             if (qcd.open_container(self.driver) != 1):
                 compare1.click()
             qcd.select_mapping_tab(self.driver)
-            qcd.add_mapping_table_name(self.driver)
+            # qcd.add_mapping_table_name(self.driver)
             qcd.select_key_for_warning_mapping_tableitem(self.driver, 1)
 
             # execute

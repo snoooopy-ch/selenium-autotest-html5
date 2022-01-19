@@ -109,8 +109,8 @@ class TC066:
                 compare1.click()
 
             qcd.click_maximize_for_select_columns(self.driver)
-            qcd.select_datacompare_type(self.driver, 1)
-            qcd.check_data_migration_input(self.driver)
+            qcd.select_datacompare_type(self.driver, 5)
+            # qcd.check_data_migration_input(self.driver)
 
             qcd.select_mapping_tab(self.driver)
             qcd.select_key_for_warning_mapping_tableitem(self.driver, 1)

@@ -86,7 +86,7 @@ class TC023:
                 input2.click()
 
             qcd.select_dbset_input(self.driver, 'demodb_dest')
-            qcd.select_db_with_index(self.driver, 'sampledb_dest')
+            qcd.select_db_with_index(self.driver, 'demodb_dest')
             qcd.select_table(self.driver, "City")
             qcd.click_add_select_btn(self.driver)
             qcd.click_datatab_input(self.driver)

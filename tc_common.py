@@ -354,6 +354,7 @@ def select_db_with_index(driver, db):
 
 
 def click_maximize_for_select_columns(driver):
+    time.sleep(WAIT1)
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable(
         (By.XPATH, '//*[@id="top_panel"]/div/div[1]/header/div/div/*[name()="svg"]')))
     element.click()
@@ -1053,11 +1054,11 @@ def add_columns_in_datacompare_tableitem(driver):
 
 def add_mappingproperties_in_datacompare_selected_table(driver, name1, name2):
     table = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable(
-        (By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[3]/div/div[2]/div/div/div[1]/div[1]/div/div/div[1]')))
+        (By.XPATH, '//*[@id="top_panel"]/div/div[2]/div/div[3]/div/div[2]/div/div/div[1]/div[1]/div/div/div[1]')))
     table.click()
 
     db_value = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable(
-        (By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[3]/div/div[2]/div/div/div[1]/div[1]/div/div[2]/div')))
+        (By.XPATH, '//*[@id="top_panel"]/div/div[2]/div/div[3]/div/div[2]/div/div/div[1]/div[1]/div/div[2]/div')))
     items = db_value.find_elements_by_xpath('./div')
 
     index = 1
@@ -1068,11 +1069,11 @@ def add_mappingproperties_in_datacompare_selected_table(driver, name1, name2):
         index += 1
 
     table = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable(
-        (By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[3]/div/div[2]/div/div/div[1]/div[2]/div/div/div[1]')))
+        (By.XPATH, '//*[@id="top_panel"]/div/div[2]/div/div[3]/div/div[2]/div/div/div[1]/div[2]/div/div/div[1]')))
     table.click()
 
     db_value = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable(
-        (By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[3]/div/div[2]/div/div/div[1]/div[2]/div/div[2]/div')))
+        (By.XPATH, '//*[@id="top_panel"]/div/div[2]/div/div[3]/div/div[2]/div/div/div[1]/div[2]/div/div[2]/div')))
     items = db_value.find_elements_by_xpath('./div')
 
     index = 1
@@ -1083,7 +1084,7 @@ def add_mappingproperties_in_datacompare_selected_table(driver, name1, name2):
         index += 1
 
     plus = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable(
-        (By.XPATH, '//*[@id="top_panel"]/div/div[2]/div[3]/div/div[2]/div/div/div[1]/div[3]/img')))
+        (By.XPATH, '//*[@id="top_panel"]/div/div[2]/div/div[3]/div/div[2]/div/div/div[1]/div[3]/img')))
     plus.click()
     print('adding mapping table')
 
@@ -1445,6 +1446,11 @@ def click_action_on_first_flow(driver, index):
         (By.XPATH, '//*[@id="long-menu"]/div[3]/ul/li[' + str(index) + ']')))
     element.click()
     time.sleep(WAIT5)
+
+    if index == 3:
+        close_btn = driver.find_element_by_xpath(
+            '/html/body/div[3]/div[3]/div/div[3]/button[2]')
+        close_btn.click()
 
 # action to find flow
 
@@ -1884,6 +1890,8 @@ def inputValueAndSaveOnDailog(driver, name):
     last_div = divs[-1]
     name_input = last_div.find_element_by_xpath(
         './div[3]/div/div[2]/div/div/input')
+    name_input.send_keys(Keys.CONTROL + 'a')
+    name_input.send_keys(Keys.DELETE)
     name_input.send_keys(name)
     last_div.find_element_by_xpath('./div[3]/div/div[3]/button[1]').click()
 
@@ -1895,6 +1903,8 @@ def publishFlow(driver):
     last_div.find_element_by_xpath('./div[3]/div/div[2]/button[1]').click()
 
 # check Message and close on Dialog
+
+
 def checkMessageAndClose(driver):
     element = WebDriverWait(driver, WAITDRIVER).until(
         EC.element_to_be_clickable((By.XPATH, alert_text_xpath)))
@@ -1905,18 +1915,24 @@ def checkMessageAndClose(driver):
     element.click()
 
 # select rule on settings page
+
+
 def selectRuleOnSettings(driver):
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable(
         (By.XPATH, '//*[@id="root"]/div/div/div/div[1]/div/div/div/div/div/div/div/ul/div[2]')))
     element.click()
 
 # click add new rule
+
+
 def clickAddNewRuleButton(driver):
     element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable(
         (By.XPATH, new_connection_xpath)))
     element.click()
 
 # add New Rule
+
+
 def addNewRule(driver, ruleName, description, type):
     if ruleName != "":
         element = WebDriverWait(driver, WAITDRIVER).until(EC.element_to_be_clickable(

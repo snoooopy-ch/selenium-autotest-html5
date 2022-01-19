@@ -114,14 +114,14 @@ if __name__ == '__main__':
     if args.user:
         user = args.user
     else:
-        user = "john"
+        user = ""
 
     print(user)
 
     if args.password:
         password = args.password
     else:
-        password = "dataq123"
+        password = ""
 
     print(password)
 
